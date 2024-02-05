@@ -8,6 +8,8 @@ fi
 
 
 ####: Pre-Installation.
+clear
+echo -e "netacbackup-setup.sh\n"
 #: Platform detection.
 while IFS= read -r -p $'Is this a (1)Client or a (2)Server?\n\n' sPLATFORM; do
     case $sPLATFORM in
@@ -32,7 +34,7 @@ done
 
 ####SERVER.
 #: Dependancies.
-aDEPENDS=("gpg" "rsync" "sshfs")
+aDEPENDS=("gpg" "rsync" "sshfs" "nginx" "ufw")
     #: Dependancy Check
 echo -e 'You will need the dependancies: '"${aDEPENDS[*]}"
 	while IFS= read -r -p $'If they are not installed, they will be now. Continue? (y/n)\n\n' sPLATFORM; do
@@ -42,24 +44,26 @@ echo -e 'You will need the dependancies: '"${aDEPENDS[*]}"
         ;;
         n|N|no|No|NO)
         echo "Exiting..."
-        exit
+        exit 0
         ;;
 esac
 done
-apt-get install ${aDEPENDS[*]}
+apt-get install ${aDEPENDS[*]} || echo -e "\n\nDependancy installation failed." && exit 1
 
 
-#: Creating Users.
-echo -e "Creating an admin user: netacbackup"
+#: Creating System User.
+echo -e "\n\nCreating a system user: netacbackup"
 if useradd -m netacbackup; then
     passwd netacbackup
 else
     echo ""
 fi
+echo -e "/n/nThis will be your System account. Be sure to create your own seperate Admin account later." && sleep 4
 
 
 #: Creating Directories.
     #: Configuration Directory.
+echo -e "\n\nCreating Directories."
 mkdir -p /home/netacbackup/.local/share/netacbackup
 sCONFIGDIR="/home/netacbackup/.local/share/netacbackup"
     #: User Files Directory.
@@ -68,10 +72,15 @@ mkdir -p $sCONFIGDIR"/Users"
 mkdir -p $sCONFIGDIR"/Encrypted-Files"
     #: Settings Directory
 mkdir -p $sCONFIGDIR"/Settings"
-mkdir -p $sCONFIGDIR"/Settings/web-files"
 
 
 #: Grouping and Security.
+echo -e "\n\nUpdating Security."
     #: Sudo.
 adduser netacbackup sudo
 echo "netacbackup ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+    #: Firewall.
+sudo ufw allow 'HTTP'
+sudo ufw allow 'HTTPS'
+sudo ufw allow 'OpenSSH'
+yes | sudo ufw enable
