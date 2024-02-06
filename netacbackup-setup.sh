@@ -116,7 +116,7 @@ fi
 #: Web Server Configuration.
 echo -e "Configuring web server..."
     #: Configuration files.
-sed -i "s/@/$vDOMAIN/g"$PWD"/netacbackup-profile"
+sed -i "s/@/$vDOMAIN/g" $PWD"/netacbackup-profile"
 mv $vPWD"/netacbackup-profile" "/etc/nginx/sites-available"
 rm -f /etc/nginx/sites-enabled/default
 ln -v -s /etc/nginx/sites-available/netacbackup-profile /etc/nginx/sites-enabled/
