@@ -66,7 +66,7 @@ fi
 #: Creating System User.
 echo -e "\n\nCreating a System user: netacbackup"
 if useradd -m netacbackup; then
-    echo -e "/n/nThis will be your System account. Be sure to create your own seperate Admin and User accounts later using a Web-Browser or the CLI..."
+    echo -e "This will be your System account. Be sure to create your own seperate Admin and User accounts later using a Web-Browser or the CLI..."
     passwd netacbackup
 else
     echo ""
@@ -109,9 +109,13 @@ else
     echo ""
 fi
 
-#: Configure Web Server
+#: Web Server Configuration.
 echo -e "Configuring web server..."
-sed -i 's/@/$vDOMAIN/' $PWD"/netacbackup-profile"
-mv $vPWD"netacbackup-profile" "/etc/nginx/sites-available"
-rm /etc/nginx/sites-enabled/default
+    #: Configuration files.
+sed -i "s/@/$vDOMAIN/" $PWD"/netacbackup-profile"
+mv $vPWD"/netacbackup-profile" "/etc/nginx/sites-available"
+rm -f /etc/nginx/sites-enabled/default
 ln -v -s /etc/nginx/sites-available/netacbackup-profile /etc/nginx/sites-enabled/
+    #: Web page files.
+
+    #: HTTPS with certbot
