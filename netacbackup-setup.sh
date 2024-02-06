@@ -84,6 +84,8 @@ mkdir -v -p $sCONFIGDIR"/Users"
 mkdir -v -p $sCONFIGDIR"/Encrypted-Files"
     #: Settings Directory
 mkdir -v -p $sCONFIGDIR"/Settings"
+    #: index.html Directory
+mkdir -v -p "/var/www/netacbackup"
 
 
 #: Grouping and Security.
@@ -103,3 +105,6 @@ if grep "PermitRootLogin yes" $sSSHCONFIG | grep -v "#" || grep "PermitRootLogin
 else
     echo ""
 fi
+
+#: Import Git Files
+
