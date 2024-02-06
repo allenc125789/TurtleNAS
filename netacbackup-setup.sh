@@ -23,7 +23,7 @@ while IFS= read -r -p $'Is this a (1)Client or a (2)Server?\n\n' sPLATFORM; do
         echo -e "Installing in Server mode...\n\n"
         break
         ;;
-esac
+    esac
 done
 
 
@@ -39,7 +39,7 @@ done
 aDEPENDS=("gpg" "sudo" "rsync" "sshfs" "nginx" "certbot" "ufw" "git")
     #: Dependancy Check
 echo -e 'You will need the dependancies: '"${aDEPENDS[*]}"
-	while IFS= read -r -p $'If they are not installed, they will be now. Continue? (y/n)\n\n' sPLATFORM; do
+while IFS= read -r -p $'If they are not installed, they will be now. Continue? (y/n)\n\n' sPLATFORM; do
     case $sPLATFORM in
         y|Y|yes|Yes|YES)
         break
@@ -48,9 +48,17 @@ echo -e 'You will need the dependancies: '"${aDEPENDS[*]}"
         echo "Exiting..."
         exit 0
         ;;
-esac
+    esac
 done
-apt-get install ${aDEPENDS[*]} || echo -e $sERROR"\n\nDependancy installation failed." && exit 1
+apt-get install ${aDEPENDS[*]}
+if [[ $? > 0 ]]
+then
+    echo $sERROR"Failed to get dependancies through apt. Exiting."
+    exit
+else
+    echo "The command ran succesfuly, continuing with script."
+fi
+
 
 
 #: Creating System User.
@@ -84,12 +92,11 @@ echo -e "\n\nUpdating Security..."
 adduser netacbackup sudo
 echo "netacbackup ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
     #: Firewall.
-sudo ufw allow 'HTTP'
-sudo ufw allow 'HTTPS'
+sudo ufw allow 'Nginx HTTP'
+sudo ufw allow 'Nginx HTTPS'
 sudo ufw allow 'OpenSSH'
 yes | sudo ufw enable
-
-
+    #: Check if root SSH is enabled.
 sSSHCONFIG="/etc/ssh/sshd_config"
 if grep "PermitRootLogin yes" $sSSHCONFIG | grep -v "#" || grep "PermitRootLogin prohibit-password" $sSSHCONFIG | grep -v "#"; then
     echo -e $sWARNING": This server's root account might be accessible from SSH. Please consider changing it's permissions in "$sSSHCONFIG. & sleep 2
