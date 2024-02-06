@@ -38,7 +38,7 @@ done
 
 ####SERVER.
 #: Dependancies.
-aDEPENDS=("gpg" "sudo" "rsync" "sshfs" "nginx" "certbot" "ufw" "git" "python3" "python3-certbot-nginx")
+aDEPENDS=("gpg" "sudo" "rsync" "sshfs" "nginx" "ufw" "git")
     #: Dependancy Check
 echo -e 'You will need the dependancies: '"${aDEPENDS[*]}"
 while IFS= read -r -p $'If they are not installed, they will be now. Continue? (y/n)\n\n' sPLATFORM; do
@@ -88,6 +88,8 @@ mkdir -v -p $sCONFIGDIR"/Encrypted-Files"
 mkdir -v -p $sCONFIGDIR"/Settings"
     #: index.html Directory
 mkdir -v -p "/var/www/netacbackup"
+    #: index.html Directory
+mkdir -v -p "/etc/nginx/ssl" && chmod 700 "/etc/nginx/ssl"
 
 
 #: Grouping and Security.
