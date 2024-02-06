@@ -1,15 +1,18 @@
 #!/bin/bash
 if [[ $EUID -ne 0 ]]; then
-    echo "This script must be run as root"
+    echo "This script must be run as root."
     exit 1
 fi
 
 
+sWARNING=" ((\033[1;33mWARNING\033[0m)) "
+sERROR=" ((\033[0;31mERROR\033[0m)) "
 
-
+duh()
+{
 ####: Pre-Installation.
 clear
-echo -e "netacbackup-setup.sh\n"
+echo -e "netacbackup-setup.sh...\n"
 #: Platform detection.
 while IFS= read -r -p $'Is this a (1)Client or a (2)Server?\n\n' sPLATFORM; do
     case $sPLATFORM in
@@ -34,7 +37,7 @@ done
 
 ####SERVER.
 #: Dependancies.
-aDEPENDS=("gpg" "rsync" "sshfs" "nginx" "ufw")
+aDEPENDS=("gpg" "rsync" "sshfs" "nginx" "ufw" "git")
     #: Dependancy Check
 echo -e 'You will need the dependancies: '"${aDEPENDS[*]}"
 	while IFS= read -r -p $'If they are not installed, they will be now. Continue? (y/n)\n\n' sPLATFORM; do
@@ -48,34 +51,36 @@ echo -e 'You will need the dependancies: '"${aDEPENDS[*]}"
         ;;
 esac
 done
-apt-get install ${aDEPENDS[*]} || echo -e "\n\nDependancy installation failed." && exit 1
+apt-get install ${aDEPENDS[*]} || echo -e $sERROR"\n\nDependancy installation failed." && exit 1
 
 
 #: Creating System User.
-echo -e "\n\nCreating a system user: netacbackup"
+echo -e "\n\nCreating a System user: netacbackup"
 if useradd -m netacbackup; then
+    echo -e "/n/nThis will be your System account. Be sure to create your own seperate Admin and User accounts later using a Web-Browser or the CLI..."
     passwd netacbackup
 else
     echo ""
 fi
-echo -e "/n/nThis will be your System account. Be sure to create your own seperate Admin account later." && sleep 4
 
 
 #: Creating Directories.
     #: Configuration Directory.
-echo -e "\n\nCreating Directories."
-mkdir -p /home/netacbackup/.local/share/netacbackup
+echo -e "\n\nCreating Directories..."
+mkdir -v -p "/home/netacbackup/Local"
+mkdir -v -p "/home/netacbackup/Remote"
+mkdir -v -p "/home/netacbackup/.local/share/netacbackup"
 sCONFIGDIR="/home/netacbackup/.local/share/netacbackup"
     #: User Files Directory.
-mkdir -p $sCONFIGDIR"/Users"
+mkdir -v -p $sCONFIGDIR"/Users"
     #: Encrypted-files Directory
-mkdir -p $sCONFIGDIR"/Encrypted-Files"
+mkdir -v -p $sCONFIGDIR"/Encrypted-Files"
     #: Settings Directory
-mkdir -p $sCONFIGDIR"/Settings"
+mkdir -v -p $sCONFIGDIR"/Settings"
 
 
 #: Grouping and Security.
-echo -e "\n\nUpdating Security."
+echo -e "\n\nUpdating Security..."
     #: Sudo.
 adduser netacbackup sudo
 echo "netacbackup ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
@@ -84,3 +89,11 @@ sudo ufw allow 'HTTP'
 sudo ufw allow 'HTTPS'
 sudo ufw allow 'OpenSSH'
 yes | sudo ufw enable
+
+}
+sSSHCONFIG="/etc/ssh/sshd_config"
+if grep "PermitRootLogin yes" $sSSHCONFIG | grep -v "#" || grep "PermitRootLogin prohibit-password" $sSSHCONFIG | grep -v "#"; then
+    echo -e $sWARNING": This server's root account might be accessible from SSH. Please consider changing it's permissions in "$sSSHCONFIG. & sleep 2
+else
+    echo ""
+fi
