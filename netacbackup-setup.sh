@@ -107,4 +107,4 @@ else
 fi
 
 #: Import Git Files
-
+rm /etc/nginx/sites-enabled/default
