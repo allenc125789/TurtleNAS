@@ -56,7 +56,7 @@ then
     echo $sERROR"Failed to get dependancies through apt. Exiting."
     exit
 else
-    echo "The command ran succesfuly, continuing with script."
+    echo ""
 fi
 
 
