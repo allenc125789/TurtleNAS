@@ -8,8 +8,7 @@ fi
 sWARNING=" ((\033[1;33mWARNING\033[0m)) "
 sERROR=" ((\033[0;31mERROR\033[0m)) "
 
-duh()
-{
+
 ####: Pre-Installation.
 clear
 echo -e "netacbackup-setup.sh...\n"
@@ -90,7 +89,7 @@ sudo ufw allow 'HTTPS'
 sudo ufw allow 'OpenSSH'
 yes | sudo ufw enable
 
-}
+
 sSSHCONFIG="/etc/ssh/sshd_config"
 if grep "PermitRootLogin yes" $sSSHCONFIG | grep -v "#" || grep "PermitRootLogin prohibit-password" $sSSHCONFIG | grep -v "#"; then
     echo -e $sWARNING": This server's root account might be accessible from SSH. Please consider changing it's permissions in "$sSSHCONFIG. & sleep 2
