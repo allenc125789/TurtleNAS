@@ -8,6 +8,8 @@ fi
 sWARNING=" ((\033[1;33mWARNING\033[0m)) "
 sERROR=" ((\033[0;31mERROR\033[0m)) "
 
+vDOMAIN=$(grep "domain" /etc/resolv.conf | awk '{print $NF}')
+vPWD=$(pwd)
 
 ####: Pre-Installation.
 clear
@@ -94,6 +96,7 @@ echo -e "\n\nUpdating Security..."
 adduser netacbackup sudo
 echo "netacbackup ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
     #: Firewall.
+echo -e "Enabling Firewall..."
 sudo ufw allow 'Nginx HTTP'
 sudo ufw allow 'Nginx HTTPS'
 sudo ufw allow 'OpenSSH'
@@ -106,7 +109,9 @@ else
     echo ""
 fi
 
-#: Import Git Files
-#GIT netacbackup-profile
-
+#: Configure Web Server
+echo -e "Configuring web server..."
+sed -i 's/@/$vDOMAIN/' $PWD"/netacbackup-profile"
+mv $vPWD"netacbackup-profile" "/etc/nginx/sites-available"
 rm /etc/nginx/sites-enabled/default
+ln -v -s /etc/nginx/sites-available/netacbackup-profile /etc/nginx/sites-enabled/
