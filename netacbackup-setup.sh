@@ -80,15 +80,15 @@ mkdir -v -p "/home/netacbackup/Local"
 mkdir -v -p "/home/netacbackup/Remote"
 mkdir -v -p "/home/netacbackup/.local/share/netacbackup"
 sCONFIGDIR="/home/netacbackup/.local/share/netacbackup"
-    #: User Files Directory.
+    #: User Files Dir.
 mkdir -v -p $sCONFIGDIR"/Users"
-    #: Encrypted-files Directory
+    #: Encrypted-files Dir.
 mkdir -v -p $sCONFIGDIR"/Encrypted-Files"
-    #: Settings Directory
+    #: Settings Dir.
 mkdir -v -p $sCONFIGDIR"/Settings"
-    #: index.html Directory
+    #: HTML Dir.
 mkdir -v -p "/var/www/netacbackup"
-    #: index.html Directory
+    #: SSL Dir.
 mkdir -v -p "/etc/nginx/ssl" && chmod 700 "/etc/nginx/ssl"
 
 
@@ -121,3 +121,4 @@ rm -f /etc/nginx/sites-enabled/default
 ln -v -s /etc/nginx/sites-available/netacbackup-profile /etc/nginx/sites-enabled/
     #: Web page files.
 mv $vPWD"/index.html" "/var/www/netacbackup"
+mv $vPWD"/verify.html" "/var/www/netacbackup"
