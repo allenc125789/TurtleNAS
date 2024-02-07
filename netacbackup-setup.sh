@@ -120,4 +120,4 @@ mv $vPWD"/netacbackup-profile" "/etc/nginx/sites-available"
 rm -f /etc/nginx/sites-enabled/default
 ln -v -s /etc/nginx/sites-available/netacbackup-profile /etc/nginx/sites-enabled/
     #: Web page files.
-mv $vPWD"/index.html" "var/www/netacbackup"
+mv $vPWD"/index.html" "/var/www/netacbackup"
