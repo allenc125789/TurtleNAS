@@ -99,7 +99,6 @@ adduser netacbackup sudo
 echo "netacbackup ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
     #: Firewall.
 echo -e "Enabling Firewall..."
-sudo ufw allow 'Nginx HTTP'
 sudo ufw allow 'Nginx HTTPS'
 sudo ufw allow 'OpenSSH'
 yes | sudo ufw enable
@@ -121,3 +120,4 @@ mv $vPWD"/netacbackup-profile" "/etc/nginx/sites-available"
 rm -f /etc/nginx/sites-enabled/default
 ln -v -s /etc/nginx/sites-available/netacbackup-profile /etc/nginx/sites-enabled/
     #: Web page files.
+mv $vPWD"/index.html" "var/www/netacbackup"
