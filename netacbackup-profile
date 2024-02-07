@@ -1,20 +1,16 @@
 server {
-        listen 80;
-        listen [::]:80;
-        server_name @;
-        return 301 https://$server_name$request_url;
-}
-server {
         listen 443 ssl;
-        server_name @;
+        root /var/www/netacbackup;
+        index index.html index.htm index.nginx-debian.html;
+        server_name rezient.com;
         ssl_certificate /etc/nginx/ssl/selfsigned.crt;
         ssl_certificate_key /etc/nginx/ssl/selfsigned.key;
-
+        ssl_protocols       TLSv1 TLSv1.1 TLSv1.2;
+        ssl_ciphers         HIGH:!aNULL:!MD5;
+        ssl_session_tickets off;
         location / {
-                # First attempt to serve request as file, then
-                # as directory, then fall back to displaying a 404.
-                #try_files $uri $uri/ =404;
-                root /var/www/netacbackup;
-                index index.html index.htm index.nginx-debian.html;
+                try_files $uri $uri/ =404;
+
+
         }
 }
