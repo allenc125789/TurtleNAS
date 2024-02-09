@@ -1,4 +1,4 @@
-#!/bin/bash
+">Back to Logihtml>#!/bin/bash
 if [[ $EUID -ne 0 ]]; then
     echo "This script must be run as root."
     exit 1
@@ -88,10 +88,6 @@ mkdir -v -p $sCONFIGDIR"/Encrypted-Files"
 mkdir -v -p $sCONFIGDIR"/Settings"
     #: index.html (root) Dir.
 mkdir -v -p "/var/www/netacbackup"
-    #: HTML Dir.
-mkdir -v -p "/var/www/netacbackup/html"
-    #: JS Dir.
-mkdir -v -p "/var/www/netacbackup/js"
     #: SSL Dir.
 mkdir -v -p "/etc/nginx/ssl" && chmod 700 "/etc/nginx/ssl"
 
@@ -126,5 +122,5 @@ rm -f /etc/nginx/sites-enabled/default
 ln -v -s /etc/nginx/sites-available/netacbackup-profile /etc/nginx/sites-enabled/
     #: Web page files.
 mv $vPWD"/index.html" "/var/www/netacbackup"
-mv $vPWD"/verify.html" "/var/www/netacbackup/html"
-mv $vPWD"/verify.js" "/var/www/netacbackup/js"
+mv $vPWD"/html" "/var/www/netacbackup"
+mv $vPWD"/js" "/var/www/netacbackup"
