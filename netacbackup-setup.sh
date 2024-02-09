@@ -104,6 +104,7 @@ sudo ufw allow 'Nginx HTTPS'
 sudo ufw allow 'OpenSSH'
 yes | sudo ufw enable
     #: SSL Creation.
+echo -e "\n\nCreating self-signed SSL..."
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/selfsigned.key -out /etc/nginx/ssl/selfsigned.crt
     #: Check if root SSH is enabled.
 sSSHCONFIG="/etc/ssh/sshd_config"
