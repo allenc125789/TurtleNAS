@@ -86,10 +86,15 @@ mkdir -v -p $sCONFIGDIR"/Users"
 mkdir -v -p $sCONFIGDIR"/Encrypted-Files"
     #: Settings Dir.
 mkdir -v -p $sCONFIGDIR"/Settings"
-    #: HTML Dir.
+    #: index.html (root) Dir.
 mkdir -v -p "/var/www/netacbackup"
+    #: HTML Dir.
+mkdir -v -p "/var/www/netacbackup/html"
+    #: JS Dir.
+mkdir -v -p "/var/www/netacbackup/js"
     #: SSL Dir.
 mkdir -v -p "/etc/nginx/ssl" && chmod 700 "/etc/nginx/ssl"
+
 
 
 #: Grouping and Security.
@@ -121,4 +126,5 @@ rm -f /etc/nginx/sites-enabled/default
 ln -v -s /etc/nginx/sites-available/netacbackup-profile /etc/nginx/sites-enabled/
     #: Web page files.
 mv $vPWD"/index.html" "/var/www/netacbackup"
-mv $vPWD"/verify.html" "/var/www/netacbackup"
+mv $vPWD"/verify.html" "/var/www/netacbackup/html"
+mv $vPWD"/verify.js" "/var/www/netacbackup/js"
