@@ -9,7 +9,7 @@ sWARNING=" ((\033[1;33mWARNING\033[0m)) "
 sERROR=" ((\033[0;31mERROR\033[0m)) "
 
 vDOMAIN=$(grep "domain" /etc/resolv.conf | awk '{print $NF}')
-vPWD=$(pwd)
+vPWD=$(dirname $0)
 
 ####: Pre-Installation.
 clear
