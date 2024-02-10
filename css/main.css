@@ -1,35 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF=8">
-    <meta name="viewport" content="width==device-width, initial-scale=1.0">
-    <title>Login | ACNetBackup</title>
-    <link rel="stylesheet" href="/css/main.css">
-</head>
+body {
+    --color-primary: #009579;
+    --color-primary-dark: #007f67;
+    --color-secondary: #252c6a;
+    --color-error: #cc3333;
+    --color-success: #4bb544;
+    --border-radius: 4px;
 
-<body>
-    <div class="container">
-        <form class="form" id="login">
-            <h1 class="form__title">Login</h1>
-            <h3 class="form__subtitle">Enter your login credentials</h3>
-            <div class="form__input-group">
-                <label for="uname">Username:</label>
-                <input type="text" class="form__input" id="uname">
-                <div class="form__input-error-message"></div>
-            </div>
-            <div class="form__input-group">
-                <label for="pword">Password:</label>
-                <input type="text" class="form__input" id="pword">
-                <div class="form__input-error-message"></div>
-            </div>
-            <br>
-            <button class="form__button" type="reset">Reset</button>
-            <button class="form__button" type="submit">Submit</button>
-            <br>
-            <br>
-            <div class="form__message form__message--error"></div>
-        </form>
-    </div>
-    <script src="/js/main.js"></script>
-</body>
-</html>
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-size: 19px;
+
+}
+
+.container {
+    width: 400px;
+    max-width:400px;
+    margin: 1rem;
+    padding: 2rem;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
+    border-radius: var(--border-radius);
+    background: #ffffff;
+}
+
+.form__message {
+    text-align: center;
+}
+
+.form__message--success {
+    color: var(--color-success);
+}
+
+.form__message--error {
+    color: var(--color-error);
+}
+
+
+
+.form__input--error {
+    color: var(--color-error);
+}
+
+form__link {
+    cursor: pointer;
+}
