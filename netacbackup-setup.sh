@@ -125,3 +125,5 @@ ln -v -s /etc/nginx/sites-available/netacbackup-profile /etc/nginx/sites-enabled
 mv $vPWD"/index.html" "/var/www/netacbackup"
 mv $vPWD"/html" "/var/www/netacbackup"
 mv $vPWD"/js" "/var/www/netacbackup"
+mv $vPWD"/css" "/var/www/netacbackup"
+
