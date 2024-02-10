@@ -28,6 +28,7 @@ body {
 
 .form__message {
     text-align: center;
+    color: var(--color-error);
 }
 
 .form__message--success {
