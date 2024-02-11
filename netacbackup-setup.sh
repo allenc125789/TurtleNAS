@@ -52,7 +52,7 @@ while IFS= read -r -p $'If they are not installed, they will be now. Continue? (
         ;;
     esac
 done
-apt-get install ${aDEPENDS[*]}
+apt-get -y install ${aDEPENDS[*]}
 if [[ $? > 0 ]]; then
     echo $sERROR"Failed to get dependancies through apt. Exiting."
     exit
