@@ -38,7 +38,7 @@ done
 
 ####SERVER.
 #: Dependancies.
-aDEPENDS=("gpg" "sudo" "rsync" "sshfs" "nginx" "libnginx-mod-http-js" "uwsgi-plugin-php" "ufw" "git")
+aDEPENDS=("gpg" "sudo" "rsync" "sshfs" "nginx" "libnginx-mod-http-js" "ufw" "git")
     #: Dependancy Check
 echo -e 'You will need the dependancies: '"${aDEPENDS[*]}"
 while IFS= read -r -p $'If they are not installed, they will be now. Continue? (y/n)\n\n' sPLATFORM; do
@@ -113,15 +113,16 @@ else
     echo ""
 fi
 
-#:Web-Server Config
+#: Web Server Configuration.
 echo -e "Configuring web server..."
-    #: Web page files.
-aWEBFILES=("/index.html" "/html" "/js" "/css" "/php")
-for sFILE in "${aWEBFILES[*]}"; do
-    mv "$vPWD$sFILE" "/var/www/netacbackup"
-done
     #: Configuration files.
 sed -i "s/@/$vDOMAIN/g" $PWD"/netacbackup-profile"
 mv $vPWD"/netacbackup-profile" "/etc/nginx/sites-available"
 rm -f /etc/nginx/sites-enabled/default
-ln -v -s /etc/nginx/sites-available/netacbackup-profile /etc/nginx/sites-enabled/uwsgi-plugin-php
+ln -v -s /etc/nginx/sites-available/netacbackup-profile /etc/nginx/sites-enabled/
+    #: Web page files.
+mv $vPWD"/index.html" "/var/www/netacbackup"
+mv $vPWD"/html" "/var/www/netacbackup"
+mv $vPWD"/js" "/var/www/netacbackup"
+mv $vPWD"/css" "/var/www/netacbackup"
+
