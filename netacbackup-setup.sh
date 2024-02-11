@@ -113,16 +113,15 @@ else
     echo ""
 fi
 
-#: Web Server Configuration.
+#:Web-Server Config
 echo -e "Configuring web server..."
+    #: Web page files.
+aWEBFILES=("/index.html" "/html" "/js" "/css" "/php")
+for sFILE ${aWEBFILES[*]}; do
+    mv $vPWD$sFILE "/var/www/netacbackup"
+done
     #: Configuration files.
 sed -i "s/@/$vDOMAIN/g" $PWD"/netacbackup-profile"
 mv $vPWD"/netacbackup-profile" "/etc/nginx/sites-available"
 rm -f /etc/nginx/sites-enabled/default
-ln -v -s /etc/nginx/sites-available/netacbackup-profile /etc/nginx/sites-enabled/
-    #: Web page files.
-mv $vPWD"/index.html" "/var/www/netacbackup"
-mv $vPWD"/html" "/var/www/netacbackup"
-mv $vPWD"/js" "/var/www/netacbackup"
-mv $vPWD"/css" "/var/www/netacbackup"
-
+ln -v -s /etc/nginx/sites-available/netacbackup-profile /etc/nginx/sites-enabled/uwsgi-plugin-php
