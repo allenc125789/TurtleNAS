@@ -15,6 +15,7 @@ function setInputError(inputElement, message) {
 function clearInputError(inputElement) {
     inputElement.classList.remove("form__input--error");
     inputElement.parentElement.querySelector(".form__input-error-message").textContent = "";
+
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -30,4 +31,5 @@ document.addEventListener("DOMContentLoaded", () => {
             setFormMessage(loginForm, "error", "");
         });
     });
+
 });
