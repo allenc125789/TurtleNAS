@@ -117,8 +117,8 @@ fi
 echo -e "Configuring web server..."
     #: Web page files.
 aWEBFILES=("/index.html" "/html" "/js" "/css" "/php")
-for sFILE ${aWEBFILES[*]}; do
-    mv $vPWD$sFILE "/var/www/netacbackup"
+for sFILE in "${aWEBFILES[*]}"; do
+    mv "$vPWD$sFILE" "/var/www/netacbackup"
 done
     #: Configuration files.
 sed -i "s/@/$vDOMAIN/g" $PWD"/netacbackup-profile"
