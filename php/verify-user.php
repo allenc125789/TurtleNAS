@@ -1,9 +1,10 @@
 <?php
 
 $_POST['pword'];
+$password = $_POST['pword'];
+$output = shell_exec("openssl passwd -6 -salt xyz $password 2>&1");
 
-print_r($_POST);
+echo "<pre>$output</pre>";
 
-echo hash('sha512', $_POST['pword']);
-
+?>
 
