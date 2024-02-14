@@ -4,6 +4,6 @@ $_POST['pword'];
 
 print_r($_POST);
 
-echo hash('sha256', $_POST['pword']);
+echo hash('sha512', $_POST['pword']);
 
 
