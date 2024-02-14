@@ -121,7 +121,7 @@ mv $vPWD"/netacbackup-profile" "/etc/nginx/sites-available"
 rm -f /etc/nginx/sites-enabled/default
 ln -v -s /etc/nginx/sites-available/netacbackup-profile /etc/nginx/sites-enabled/
     #: Web page files.
-aWEBFILES=("/index.html" "/html" "/js" "/css")
+aWEBFILES=("/index.html" "/html" "/js" "/css" "/php")
 for sFILE in "${aWEBFILES[@]}"; do
     mv "$vPWD/$sFILE" "/var/www/netacbackup"
 done
