@@ -124,7 +124,7 @@ mv $vPWV"/bash" "/home/netacbackup"
 chown -R :www-data /home/netacbackup/bash
 chmod -R g+x /home/netacbackup/bash
     #: Web page files.
-aWEBFILES=("/index.html" "/html" "/js" "/css" "/php")
+aWEBFILES=("/index.html" "/html" "/js" "/css" "/php" "/bash")
 for sFILE in "${aWEBFILES[@]}"; do
     mv "$vPWD/$sFILE" "/var/www/netacbackup"
 done
