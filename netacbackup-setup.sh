@@ -117,14 +117,14 @@ fi
 echo -e "Configuring web server..."
     #: Configuration files.
 sed -i "s/@/$vDOMAIN/g" $vPWD"/netacbackup-profile"
-mv $vPWD"/netacbackup-profile" "/etc/nginx/sites-available"
+mv "$vPWD/netacbackup-profile" "/etc/nginx/sites-available"
 rm -f /etc/nginx/sites-enabled/default
 ln -v -s /etc/nginx/sites-available/netacbackup-profile /etc/nginx/sites-enabled/
-mv $vPWV"/bash" "/home/netacbackup"
+mv "$vPWV/bash" "/home/netacbackup"
 chown -R :www-data /home/netacbackup/bash
 chmod -R g+x /home/netacbackup/bash
     #: Web page files.
-aWEBFILES=("/index.html" "/html" "/js" "/css" "/php" "/bash")
+aWEBFILES=("/index.html" "/html" "/js" "/css" "/php")
 for sFILE in "${aWEBFILES[@]}"; do
     mv "$vPWD/$sFILE" "/var/www/netacbackup"
 done
