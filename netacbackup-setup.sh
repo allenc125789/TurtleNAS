@@ -38,7 +38,7 @@ done
 
 ####SERVER.
 #: Dependancies.
-aDEPENDS=("gpg" "sudo" "rsync" "sshfs" "nginx" "libnginx-mod-http-js" "ufw" "git" "php8.2" "php8.2-fpm" )
+aDEPENDS=("gpg" "sudo" "rsync" "sshfs" "nginx" "libnginx-mod-http-js" "libnginx-mod-http-auth-pam" "ufw" "git" "php8.2" "php8.2-fpm")
     #: Dependancy Check
 echo -e 'You will need the dependancies: '"${aDEPENDS[*]}"
 while IFS= read -r -p $'If they are not installed, they will be now. Continue? (y/n)\n\n' sPLATFORM; do
@@ -116,6 +116,7 @@ fi
 #: Web Server Configuration.
 echo -e "Configuring web server..."
     #: Configuration files.
+usermod -aG shadow www-data 
 sed -i "s/@/$vDOMAIN/g" $vPWD"/netacbackup-profile"
 mv "$vPWD/netacbackup-profile" "/etc/nginx/sites-available"
 rm -f /etc/nginx/sites-enabled/default
