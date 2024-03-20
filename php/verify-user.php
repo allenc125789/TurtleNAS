@@ -1,8 +1,6 @@
 <?php
 
-$_POST['pword'];
 $password = $_POST['pword'];
-$_POST['uname'];
 username = $_POST['uname'];
 $output = shell_exec("bash /var/www/netacbackup/bash/pam-auth.sh $password $username 2>&1");
 echo "<pre>$output</pre>";
