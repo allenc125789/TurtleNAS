@@ -63,10 +63,10 @@ fi
 
 
 #: Creating System User.
-echo -e "\n\nCreating a System user: netacbackup"
-if useradd -m netacbackup; then
+echo -e "\n\nCreating a System user: sysadmin"
+if useradd -m sysadmin; then
     echo -e "This will be your System account. Be sure to create your own seperate Admin and User accounts later using a Web-Browser or the CLI..."
-    passwd netacbackup
+    passwd sysadmin
 else
     echo ""
 fi
@@ -94,9 +94,6 @@ mkdir -v -p "/etc/nginx/ssl" && chmod 700 "/etc/nginx/ssl"
 
 #: Grouping and Security.
 echo -e "\n\nUpdating Security..."
-    #: Sudo.
-adduser netacbackup sudo
-echo "netacbackup ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
     #: Firewall.
 echo -e "Enabling Firewall..."
 sudo ufw allow 'Nginx HTTPS'
@@ -105,6 +102,9 @@ yes | sudo ufw enable
     #: SSL Creation.
 echo -e "\n\nCreating self-signed SSL..."
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/selfsigned.key -out /etc/nginx/ssl/selfsigned.crt
+    #: Add user to Sudo.
+adduser sysadmin sudo
+echo "sysadmin ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
     #: Set sudo "timestamp_timeout=" to 0 in /etc/sudoers, so verification is requested everytime needed.
 sed -i "1 s/Defaults\tenv_reset/Defaults\tenv_reset,timestamp_timeout=0/" /etc/sudoers
     #: Check if root SSH is enabled.
