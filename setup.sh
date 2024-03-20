@@ -106,11 +106,7 @@ yes | sudo ufw enable
 echo -e "\n\nCreating self-signed SSL..."
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/selfsigned.key -out /etc/nginx/ssl/selfsigned.crt
     #: Set sudo "timestamp_timeout=" to 0 in /etc/sudoers, so verification is requested everytime needed.
-
-if grep "timestamp_timeout=*" /etc/sudoers
-    sed -i "s/Defaults\tenv_reset/Defaults\tenv_reset,timestamp_timeout=0/" /etc/sudoers
-
-
+sed -i "1 s/Defaults\tenv_reset/Defaults\tenv_reset,timestamp_timeout=0/" /etc/sudoers
     #: Check if root SSH is enabled.
 sSSHCONFIG="/etc/ssh/sshd_config"
 if grep "PermitRootLogin yes" $sSSHCONFIG | grep -v "#" || grep "PermitRootLogin prohibit-password" $sSSHCONFIG | grep -v "#"; then
