@@ -1,1 +1,1 @@
-printf "%s" "$password" | sudo -n -S -u "$username" true
+printf "%s" "$1" | sudo -n -S -u "$2" true
