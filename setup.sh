@@ -38,7 +38,7 @@ done
 
 ####SERVER.
 #: Dependancies.
-aDEPENDS=("gpg" "sudo" "rsync" "sshfs" "nginx-full" "libnginx-mod-http-js" "ufw" "git" "php8.2" "php8.2-fpm")
+aDEPENDS=("gpg" "sudo" "rsync" "sshfs" "nginx" "libnginx-mod-http-js" "python3-pam" "ufw" "git" "php8.2" "php8.2-fpm")
     #: Dependancy Check
 echo -e 'You will need the dependancies: '"${aDEPENDS[*]}"
 while IFS= read -r -p $'If they are not installed, they will be now. Continue? (y/n)\n\n' sPLATFORM; do
@@ -125,7 +125,7 @@ mv "$vPWD/netacbackup-profile" "/etc/nginx/sites-available"
 rm -f /etc/nginx/sites-enabled/default
 ln -v -s /etc/nginx/sites-available/netacbackup-profile /etc/nginx/sites-enabled/
     #: Web page files.
-aWEBFILES=("/index.html" "/html" "/js" "/css" "/php" "/bash")
+aWEBFILES=("/index.html" "/html" "/js" "/css" "/php" "/bash" "/python3")
 for sFILE in "${aWEBFILES[@]}"; do
     mv "$vPWD/$sFILE" "/var/www/netacbackup"
 done
