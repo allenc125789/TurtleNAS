@@ -20,6 +20,6 @@ Install:
 
 Post-Install:
 
-1) Open the server's IP or Hostname in an alternate browser (exp: https://192.168.0.20), login to the web portal with the sysadmin account with the password you created during install.
+1) Open the server's IP or Hostname in an alternate browser (exp: https://192.168.0.20), login to the web portal with the sysadmin account and the password you created during install.
 2) Create a new admin account for better security. Logout and login to this newly made account.
 
