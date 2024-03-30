@@ -14,7 +14,7 @@ def pam_conv(auth, query_list, userData):
                         val = raw_input(query)
                         resp.append((val, 0))
                 elif type == PAM.PAM_PROMPT_ECHO_OFF:
-                        val = getpass(query)
+                        val = "PASSWORD VAR GOES HERE"
                         resp.append((val, 0))
                 elif type == PAM.PAM_ERROR_MSG or type == PAM.PAM_TEXT_INFO:
                         print(query)
