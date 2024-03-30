@@ -22,6 +22,4 @@ Post-Install:
 
 1) Open the server's IP or Hostname in an alternate browser, login to the web portal with the sysadmin account with the password you created during install.
 2) Create a new admin account for better security. Logout and login to this newly made account.
-3) Create new User accounts that you will host files for. Your guests will login through these accounts.
-4) Connect any servers that you wish to backup files for.
 
