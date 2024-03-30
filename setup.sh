@@ -70,7 +70,7 @@ fi
 echo -e "\n\nUpdating Security..."
     #: File Permissions
 chown -R www-data:www-data /var/www/netacbackupdata
-chmod -R o=rx "$vPWD/python3"
+chmod o=rx "$vPWD/python3/pam-auth.py"
     #: Firewall.
 echo -e "Enabling Firewall..."
 sudo ufw allow 'Nginx HTTPS'
