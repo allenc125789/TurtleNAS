@@ -78,7 +78,9 @@ yes | sudo ufw enable
     #: SSL Creation.
 echo -e "\n\nCreating self-signed SSL..."
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/selfsigned.key -out /etc/nginx/ssl/selfsigned.crt
-    #: Setting System Admin Privliges.
+    #: Setting User Privliges.
+adduser sysadmin sudo
+echo "www-data ALL=(ALL) NOPASSWD: /usr/bin/python3 /var/www/netacbackup/python3/pam-auth.py" >> /etc/sudoers
 adduser sysadmin sudo
 echo "sysadmin ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
     #: Set sudo "timestamp_timeout=" to 0 in /etc/sudoers, so verification is requested everytime needed.
