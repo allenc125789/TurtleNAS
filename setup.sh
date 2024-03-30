@@ -10,66 +10,7 @@ sERROR=" ((\033[0;31mERROR\033[0m)) "
 
 vDOMAIN=$(grep "domain" /etc/resolv.conf | awk '{print $NF}')
 vPWD=$(dirname $0)
-
-####: Pre-Installation.
-clear
-echo -e "netacbackup-setup.sh...\n"
-#: Platform detection.
-while IFS= read -r -p $'Is this a (1)Client or a (2)Server?\n\n' sPLATFORM; do
-    case $sPLATFORM in
-        1|c|C|client|Client|CLIENT)
-        echo -e "Installing in Client mode...\n\n"
-        break
-        ;;
-        2|s|S|server|Server|SERVER)
-        echo -e "Installing in Server mode...\n\n"
-        break
-        ;;
-    esac
-done
-
-
-
-
-####CLIENT.
-
-
-
-
-####SERVER.
-#: Dependancies.
-aDEPENDS=("gpg" "sudo" "rsync" "sshfs" "nginx" "libnginx-mod-http-js" "python3-pam" "ufw" "git" "php8.2" "php8.2-fpm")
-    #: Dependancy Check
-echo -e 'You will need the dependancies: '"${aDEPENDS[*]}"
-while IFS= read -r -p $'If they are not installed, they will be now. Continue? (y/n)\n\n' sPLATFORM; do
-    case $sPLATFORM in
-        y|Y|yes|Yes|YES)
-        break
-        ;;
-        n|N|no|No|NO)
-        echo "Exiting..."
-        exit 0
-        ;;
-    esac
-done
-apt-get -y install ${aDEPENDS[*]}
-if [[ $? > 0 ]]; then
-    echo $sERROR"Failed to get dependancies through apt. Exiting."
-    exit
-else
-    :
-fi
-
-
-
-#: Creating System User.
-echo -e "\n\nCreating a System user: sysadmin"
-if useradd -m sysadmin; then
-    echo -e "This will be your System account. Be sure to create your own seperate Admin and User accounts later using a Web-Browser or the CLI..."
-    passwd sysadmin
-else
-    :
-fi
+vLOGS="/home/netacbackup/Logs"
 
 
 #: Creating Directories.
@@ -77,6 +18,7 @@ fi
 echo -e "\n\nCreating Directories..."
 mkdir -v -p "/home/netacbackup/Local"
 mkdir -v -p "/home/netacbackup/Remote"
+mkdir -v -p $vLOGS
 mkdir -v -p "/home/netacbackup/.local/share/netacbackup"
 sCONFIGDIR="/home/netacbackup/.local/share/netacbackup"
     #: User Files Dir.
@@ -90,6 +32,15 @@ mkdir -v -p "/var/www/netacbackup"
     #: SSL Dir.
 mkdir -v -p "/etc/nginx/ssl" && chmod 700 "/etc/nginx/ssl"
 
+
+#: Creating System User.
+echo -e "\n\nCreating a System user: sysadmin"
+if useradd -m sysadmin; then
+    echo -e "This will be your System account. Be sure to create your own seperate Admin and User accounts later using a Web-Browser or the CLI..."
+    passwd sysadmin
+else
+    :
+fi
 
 
 #: Grouping and Security.
