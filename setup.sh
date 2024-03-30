@@ -50,7 +50,7 @@ mkdir -v -p $sCONFIGDIR"/Users"
 mkdir -v -p $sCONFIGDIR"/Encrypted-Files"
     #: Settings Dir.
 mkdir -v -p $sCONFIGDIR"/Settings"
-    #: index.html (root) Dir.
+    #: Web-server root Dir.
 mkdir -v -p "/var/www/netacbackup"
     #: SSL Dir.
 mkdir -v -p "/etc/nginx/ssl" && chmod 700 "/etc/nginx/ssl"
@@ -69,6 +69,7 @@ fi
 #: Grouping and Security.
 echo -e "\n\nUpdating Security..."
     #: File Permissions
+chown -R www-data:www-data /var/www/netacbackupdata
 chmod -R o=rx "$vPWD/python3"
     #: Firewall.
 echo -e "Enabling Firewall..."
