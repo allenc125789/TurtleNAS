@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+# Requires root privliges.
+
 import sys
 import PAM
 from getpass import getpass
