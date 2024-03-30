@@ -9,7 +9,7 @@ sshfs is utilized over smb and nfs, the direct pro's of this protocol are:
 1) Allowing easier server/client connection configuration for backing up files.
 2) Provides a secure connection through SSH to backup-clients by default.
 
-Tests done to compare the R/W speed between sshfs, nfs, and smb show that while sshfs is not the fastest option, it still has good speed: https://blog.ja-ke.tech/2019/08/27/nas-performance-sshfs-nfs-smb.html. This draw-back is minor in my opinion, when understanding the perks that come in the form of simplicity, usablity, and security.
+Tests done to compare the R/W speed between sshfs, nfs, and smb show that while sshfs is not the fastest option, it still has great speed: https://blog.ja-ke.tech/2019/08/27/nas-performance-sshfs-nfs-smb.html. This draw-back is minor in my opinion, when understanding the perks that come in the form of simplicity, usablity, and security.
 
 Install:
 
