@@ -69,7 +69,7 @@ fi
 #: Grouping and Security.
 echo -e "\n\nUpdating Security..."
     #: File Permissions
-chmod o=rx "$vPWD/python3/*"
+chmod -R o=rx "$vPWD/python3"
     #: Firewall.
 echo -e "Enabling Firewall..."
 sudo ufw allow 'Nginx HTTPS'
