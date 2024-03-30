@@ -15,7 +15,7 @@ Install:
 
 1) Download this program.
 2) Open the terminal and type sudo path/to/files/setup.sh.
-3) Go through the setup options. You'll be asked to setup a password (make it secure and remember it, this should be a mostly passive account) and an SSL cert.
+3) Go through the setup. Packages will be installed. You'll also be asked to setup a password (make it secure and remember it, this should be a mostly passive account) and an SSL cert.
 4) After the setup finishes with no errors, reboot the system.
 
 Post-Install:
