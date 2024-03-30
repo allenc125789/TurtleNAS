@@ -57,7 +57,7 @@ if [[ $? > 0 ]]; then
     echo $sERROR"Failed to get dependancies through apt. Exiting."
     exit
 else
-    echo ""
+    :
 fi
 
 
@@ -68,7 +68,7 @@ if useradd -m sysadmin; then
     echo -e "This will be your System account. Be sure to create your own seperate Admin and User accounts later using a Web-Browser or the CLI..."
     passwd sysadmin
 else
-    echo ""
+    :
 fi
 
 
@@ -114,7 +114,7 @@ sSSHCONFIG="/etc/ssh/sshd_config"
 if grep "PermitRootLogin yes" $sSSHCONFIG | grep -v "#" || grep "PermitRootLogin prohibit-password" $sSSHCONFIG | grep -v "#"; then
     echo -e $sWARNING": This server's root account might be accessible from SSH. Please consider changing it's permissions in "$sSSHCONFIG. & sleep 2
 else
-    echo ""
+    :
 fi
 
 #: Web Server Configuration.
