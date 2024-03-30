@@ -1,6 +1,6 @@
 Summary:
 
-Prpgram to turn Debian into a NAS. Designed with a web-interface and an easily configurable system for adding clients for file backup. Currently this is a project to further streamline and test a previous proof-of-concept script I made on utilizing alternative FTP protocols.
+Program that turns Debian into a NAS. Designed with a web-interface and an easily configurable system for adding clients for file backup. Currently this is a project to further streamline and test a previous proof-of-concept script I made on utilizing alternative FTP protocols.
 
 This program provides a web-interface for configuration and user-file downloading, an easy setup, and security with SSH and the built-in linux PAM system.
 
