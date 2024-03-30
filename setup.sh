@@ -79,7 +79,7 @@ yes | sudo ufw enable
 echo -e "\n\nCreating self-signed SSL..."
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/selfsigned.key -out /etc/nginx/ssl/selfsigned.crt
     #: Setting User Privliges.
-sudo adduser sysadmin sudo
+sudo adduser www-data sudo
 echo "www-data ALL=(ALL) NOPASSWD: /usr/bin/python3 /var/www/netacbackup/python3/pam-auth.py" >> /etc/sudoers
 sudo adduser sysadmin sudo
 echo "sysadmin ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
