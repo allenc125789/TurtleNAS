@@ -4,7 +4,7 @@ Prpgram to turn Debian into a NAS. Designed with a web-interface and an easily c
 
 This program provides a web-interface for configuration and user-file downloading, an easy setup, and security with SSH and the built-in linux PAM system.
 
-This program utilizes sshfs over smb and nfs, the direct pro's of this protocol are:
+sshfs is utilized over smb and nfs, the direct pro's of this protocol are:
 
 1) Allowing easier server/client connection configuration for backing up files.
 2) Provides a secure connection through SSH to backup-clients by default.
