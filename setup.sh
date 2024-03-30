@@ -58,7 +58,7 @@ mkdir -v -p "/etc/nginx/ssl" && chmod 700 "/etc/nginx/ssl"
 
 #: Creating System User.
 echo -e "\n\nCreating a System user: sysadmin"
-if useradd -m sysadmin; then
+if sudo useradd -m sysadmin; then
     echo -e "This will be your System account. Be sure to create your own seperate Admin and User accounts later using a Web-Browser or the CLI..."
     passwd sysadmin
 else
