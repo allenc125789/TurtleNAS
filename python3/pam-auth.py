@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# Requires root privliges.
+# Requires root.
 
 import sys
 import PAM
