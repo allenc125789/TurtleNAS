@@ -7,10 +7,33 @@ fi
 
 sWARNING=" ((\033[1;33mWARNING\033[0m)) "
 sERROR=" ((\033[0;31mERROR\033[0m)) "
-
 vDOMAIN=$(grep "domain" /etc/resolv.conf | awk '{print $NF}')
 vPWD=$(dirname $0)
 vLOGS="/home/netacbackup/Logs"
+
+
+#: Dependancies.
+aDEPENDS=("gpg" "sudo" "rsync" "sshfs" "nginx" "libnginx-mod-http-js" "python3-pam" "ufw" "git" "php8.2" "php8.2-fpm")
+    #: Dependancy Check
+echo -e 'You will need the dependancies: '"${aDEPENDS[*]}"
+while IFS= read -r -p $'If they are not installed, they will be now. Continue? (y/n)\n\n' sPLATFORM; do
+    case $sPLATFORM in
+        y|Y|yes|Yes|YES)
+        break
+        ;;
+        n|N|no|No|NO)
+        echo "Exiting..."
+        exit 0
+        ;;
+    esac
+done
+apt-get -y install ${aDEPENDS[*]}
+if [[ $? > 0 ]]; then
+    echo $sERROR"Failed to get dependancies through apt. Exiting."
+    exit
+else
+    echo ""
+fi
 
 
 #: Creating Directories.
