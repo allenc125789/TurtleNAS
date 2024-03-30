@@ -14,7 +14,7 @@ def pam_conv(auth, query_list, userData):
                         val = raw_input(query)
                         resp.append((val, 0))
                 elif type == PAM.PAM_PROMPT_ECHO_OFF:
-                        val = "PASSWORD VAR GOES HERE"
+                        val = sys.argv[2]
                         resp.append((val, 0))
                 elif type == PAM.PAM_ERROR_MSG or type == PAM.PAM_TEXT_INFO:
                         print(query)
@@ -26,10 +26,7 @@ def pam_conv(auth, query_list, userData):
 
 service = 'passwd'
 
-if len(sys.argv) == 2:
-        user = sys.argv[1]
-else:
-        user = None
+user = sys.argv[1]
 
 auth = PAM.pam()
 auth.start(service)
