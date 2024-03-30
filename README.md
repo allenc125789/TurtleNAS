@@ -16,10 +16,10 @@ Install:
 1) Download this program's zip and Extract the files.
 2) Open the terminal and type sudo path/to/files/setup.sh.
 3) Go through the setup options. You'll be asked to setup a password (make it secure and remember it, this should be a mostly passive account) and an SSL cert.
-4) After the script finishes with no errors, reboot the system.
+4) After the setup finishes with no errors, reboot the system.
 
 Post-Install:
 
-1) Open the server's IP or Hostname in an alternate browser, login to the web portal with the sysadmin account with the password you created during install.
+1) Open the server's IP or Hostname in an alternate browser (exp: https://192.168.0.20), login to the web portal with the sysadmin account with the password you created during install.
 2) Create a new admin account for better security. Logout and login to this newly made account.
 
