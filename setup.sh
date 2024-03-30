@@ -104,9 +104,7 @@ yes | sudo ufw enable
     #: SSL Creation.
 echo -e "\n\nCreating self-signed SSL..."
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/selfsigned.key -out /etc/nginx/ssl/selfsigned.crt
-    #: Add user to Sudo.
-adduser www-data sudo
-echo "www-data ALL=(ALL) NOPASSWD: /usr/bin/python3" >> /etc/sudoers
+    #: Setting System Admin Privliges.
 adduser sysadmin sudo
 echo "sysadmin ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
     #: Set sudo "timestamp_timeout=" to 0 in /etc/sudoers, so verification is requested everytime needed.
