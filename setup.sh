@@ -50,8 +50,6 @@ mkdir -v -p $sCONFIGDIR"/Users"
 mkdir -v -p $sCONFIGDIR"/Encrypted-Files"
     #: Settings Dir.
 mkdir -v -p $sCONFIGDIR"/Settings"
-    #: Web-server root Dir.
-mkdir -v -p "/var/www/netacbackup"
     #: SSL Dir.
 mkdir -v -p "/etc/nginx/ssl" && chmod 700 "/etc/nginx/ssl"
 
