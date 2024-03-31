@@ -39,8 +39,8 @@ try:
         auth.authenticate()
         auth.acct_mgmt()
 except PAM.error as resp:
-        print('Go away! (%s)' % resp)
+        print('0' % resp)
 except:
         print('Internal error')
 else:
-        print('Good to go!')
+        print('1')
