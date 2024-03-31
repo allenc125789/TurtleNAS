@@ -39,7 +39,7 @@ try:
         auth.authenticate()
         auth.acct_mgmt()
 except PAM.error as resp:
-        print('0' % resp)
+        print('0')
 except:
         print('Internal error')
 else:
