@@ -13,7 +13,7 @@ if($output == 1){
 } elseif($output == 0){
     echo "if works, password didnt match";
 } else{
-    $output;
+    echo "<pre>$output2</pre>";
 }
 
 
