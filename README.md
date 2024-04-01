@@ -1,4 +1,4 @@
-new name: sshfs-nas
+new name: sshfs-webnas
 
 Summary:
 
