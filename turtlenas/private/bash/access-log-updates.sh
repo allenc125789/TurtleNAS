@@ -1,3 +1,6 @@
 #!/bin/bash
-while tail -f /var/log/nginx/access.log; do
+while true; do
+    tail -f /var/log/nginx/access.log | tee vIP
+done
+    
     
