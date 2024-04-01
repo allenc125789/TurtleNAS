@@ -1,3 +1,5 @@
+new name: sshfs-nas
+
 Summary:
 
 Program that turns Debian into a NAS. Designed with a web-interface and an easily configurable system for adding clients for file backup. A continuation to my previous script acting as a proof-of-concept in using alternative FTP methods.
