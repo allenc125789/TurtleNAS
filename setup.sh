@@ -94,7 +94,7 @@ fi
 echo -e "Configuring web server..."
     #: Configuration files.
 sed -i "s/@/$vDOMAIN/g" $vPWD"/turtlenas-config"
-mv "$vPWD/turtlenas-config" "/etc/nginx/turtlenas-config"
+mv "$vPWD/turtlenas-config" "/etc/nginx/sites-available/turtlenas-config"
 rm -f /etc/nginx/sites-enabled/default
 ln -v -s /etc/nginx/sites-available/turtlenas-config /etc/nginx/sites-enabled/
     #: Web page files.
