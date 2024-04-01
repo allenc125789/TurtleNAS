@@ -9,8 +9,6 @@ sWARNING=" ((\033[1;33mWARNING\033[0m)) "
 sERROR=" ((\033[0;31mERROR\033[0m)) "
 vDOMAIN=$(grep "domain" /etc/resolv.conf | awk '{print $NF}')
 vPWD=$(dirname $0)
-vLOGS="/home/turtlenas/Logs"
-
 
 #: Dependancies.
 aDEPENDS=("gpg" "sudo" "rsync" "sshfs" "nginx" "libnginx-mod-http-js" "python3-pam" "ufw" "git" "php8.2" "php8.2-fpm")
