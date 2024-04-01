@@ -91,9 +91,8 @@ fi
 echo -e "Configuring web server..."
     #: Configuration files.
 sed -i "s/@/$vDOMAIN/g" $vPWD"/turtlenas-config"
-sed -i '39i \tlog_format upstream_time '$remote_addr';' /etc/nginx/nginx.conf
 mv "$vPWD/turtlenas-config" "/etc/nginx/sites-available/turtlenas-config"
-mv -f "$vPWD/nginx.conf" "/etc/nginx/nginx.conf
+mv -f "$vPWD/nginx.conf" "/etc/nginx/nginx.conf"
 rm -f /etc/nginx/sites-enabled/default
 ln -v -s /etc/nginx/sites-available/turtlenas-config /etc/nginx/sites-enabled/
     #: Web page files.
