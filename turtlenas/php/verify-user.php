@@ -3,7 +3,7 @@
 $password = $_POST['pword'];
 $username = $_POST['uname'];
 
-$command = shell_exec("sudo python3 /var/www/turtlenas/python3/pam-auth.py $username $password 2>&1");
+$command = shell_exec("sudo python3 ../python3/pam-auth.py $username $password 2>&1");
 $output = "$command";
 
 if($output == 1){
