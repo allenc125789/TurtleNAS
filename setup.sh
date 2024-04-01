@@ -9,7 +9,7 @@ sWARNING=" ((\033[1;33mWARNING\033[0m)) "
 sERROR=" ((\033[0;31mERROR\033[0m)) "
 vDOMAIN=$(grep "domain" /etc/resolv.conf | awk '{print $NF}')
 vPWD=$(dirname $0)
-vLOGS="/home/turtleshell/Logs"
+vLOGS="/home/turtlenas/Logs"
 
 
 #: Dependancies.
@@ -39,11 +39,11 @@ fi
 #: Creating Directories.
     #: Configuration Directory.
 echo -e "\n\nCreating Directories..."
-mkdir -v -p "/home/turtleshell/Local"
-mkdir -v -p "/home/turtleshell/Remote"
+mkdir -v -p "/home/turtlenas/Local"
+mkdir -v -p "/home/turtlenas/Remote"
 mkdir -v -p $vLOGS
-mkdir -v -p "/home/turtleshell/.local/share/turtleshell"
-sCONFIGDIR="/home/turtleshell/.local/share/turtleshell"
+mkdir -v -p "/home/turtlenas/.local/share/turtlenas"
+sCONFIGDIR="/home/turtlenas/.local/share/turtlenas"
     #: Settings Dir.
 mkdir -v -p $sCONFIGDIR"/Settings"
     #: SSL Dir.
@@ -72,12 +72,12 @@ echo -e "\n\nCreating self-signed SSL..."
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/selfsigned.key -out /etc/nginx/ssl/selfsigned.crt
     #: File Permissions and Grouping.
 sudo adduser sysadmin www-data
-chown -R sysadmin:www-data "$vPWD/turtleshell"
-chmod -R o=rx "$vPWD/turtleshell"
+chown -R sysadmin:www-data "$vPWD/turtlenas"
+chmod -R o=rx "$vPWD/turtlenas"
     #: Sudo.
 sudo adduser www-data sudo
 echo "www-data ALL=(ALL) !ALL" >> /etc/sudoers
-echo "www-data ALL=(ALL) NOPASSWD: /usr/bin/python3 /var/www/turtleshell/python3/pam-auth.py*" >> /etc/sudoers
+echo "www-data ALL=(ALL) NOPASSWD: /usr/bin/python3 /var/www/turtlenas/python3/pam-auth.py*" >> /etc/sudoers
 sudo adduser sysadmin sudo
 echo "sysadmin ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
     #: Sets sudo "timestamp_timeout=" to 0 in /etc/sudoers, so verification is requested everytime needed.
@@ -93,9 +93,9 @@ fi
 #: Web Server Configuration.
 echo -e "Configuring web server..."
     #: Configuration files.
-sed -i "s/@/$vDOMAIN/g" $vPWD"/turtleshell-config"
-mv "$vPWD/turtleshell-config" "/etc/nginx/turtleshell-config"
+sed -i "s/@/$vDOMAIN/g" $vPWD"/turtlenas-config"
+mv "$vPWD/turtlenas-config" "/etc/nginx/turtlenas-config"
 rm -f /etc/nginx/sites-enabled/default
-ln -v -s /etc/nginx/sites-available/turtleshell-config /etc/nginx/sites-enabled/
+ln -v -s /etc/nginx/sites-available/turtlenas-config /etc/nginx/sites-enabled/
     #: Web page files.
-mv "$vPWD/turtleshell" "/var/www"
+mv "$vPWD/turtlenas" "/var/www"

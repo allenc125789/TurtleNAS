@@ -1,6 +1,6 @@
 server {
         listen 443 ssl;
-        root /var/www/turtleshell;
+        root /var/www/turtlenas;
         index index.html index.htm index.nginx-debian.html;
         server_name @;
         ssl_certificate /etc/nginx/ssl/selfsigned.crt;
