@@ -9,7 +9,7 @@ sWARNING=" ((\033[1;33mWARNING\033[0m)) "
 sERROR=" ((\033[0;31mERROR\033[0m)) "
 vDOMAIN=$(grep "domain" /etc/resolv.conf | awk '{print $NF}')
 vPWD=$(dirname $0)
-vLOGS="/home/netacbackup/Logs"
+vLOGS="/home/turtleshell/Logs"
 
 
 #: Dependancies.
@@ -39,15 +39,11 @@ fi
 #: Creating Directories.
     #: Configuration Directory.
 echo -e "\n\nCreating Directories..."
-mkdir -v -p "/home/netacbackup/Local"
-mkdir -v -p "/home/netacbackup/Remote"
+mkdir -v -p "/home/turtleshell/Local"
+mkdir -v -p "/home/turtleshell/Remote"
 mkdir -v -p $vLOGS
-mkdir -v -p "/home/netacbackup/.local/share/netacbackup"
-sCONFIGDIR="/home/netacbackup/.local/share/netacbackup"
-    #: User Files Dir.
-mkdir -v -p $sCONFIGDIR"/Users"
-    #: Encrypted-files Dir.
-mkdir -v -p $sCONFIGDIR"/Encrypted-Files"
+mkdir -v -p "/home/turtleshell/.local/share/turtleshell"
+sCONFIGDIR="/home/turtleshell/.local/share/turtleshell"
     #: Settings Dir.
 mkdir -v -p $sCONFIGDIR"/Settings"
     #: SSL Dir.
@@ -76,12 +72,12 @@ echo -e "\n\nCreating self-signed SSL..."
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/selfsigned.key -out /etc/nginx/ssl/selfsigned.crt
     #: File Permissions and Grouping.
 sudo adduser sysadmin www-data
-chown -R sysadmin:www-data "$vPWD/netacbackup"
-chmod -R o=rx "$vPWD/netacbackup"
+chown -R sysadmin:www-data "$vPWD/turtleshell"
+chmod -R o=rx "$vPWD/turtleshell"
     #: Sudo.
 sudo adduser www-data sudo
 echo "www-data ALL=(ALL) !ALL" >> /etc/sudoers
-echo "www-data ALL=(ALL) NOPASSWD: /usr/bin/python3 /var/www/netacbackup/python3/pam-auth.py*" >> /etc/sudoers
+echo "www-data ALL=(ALL) NOPASSWD: /usr/bin/python3 /var/www/turtleshell/python3/pam-auth.py*" >> /etc/sudoers
 sudo adduser sysadmin sudo
 echo "sysadmin ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
     #: Sets sudo "timestamp_timeout=" to 0 in /etc/sudoers, so verification is requested everytime needed.
@@ -97,9 +93,9 @@ fi
 #: Web Server Configuration.
 echo -e "Configuring web server..."
     #: Configuration files.
-sed -i "s/@/$vDOMAIN/g" $vPWD"/netacbackup-profile"
-mv "$vPWD/netacbackup-profile" "/etc/nginx/sites-available"
+sed -i "s/@/$vDOMAIN/g" $vPWD"/turtleshell-config"
+mv "$vPWD/turtleshell-config" "/etc/nginx/turtleshell-config"
 rm -f /etc/nginx/sites-enabled/default
-ln -v -s /etc/nginx/sites-available/netacbackup-profile /etc/nginx/sites-enabled/
+ln -v -s /etc/nginx/sites-available/turtleshell-config /etc/nginx/sites-enabled/
     #: Web page files.
-mv "$vPWD/netacbackup" "/var/www"
+mv "$vPWD/turtleshell" "/var/www"
