@@ -64,13 +64,8 @@ else
 fi
 
 
-#: Grouping and Security.
+#: Security Configuration.
 echo -e "\n\nUpdating Security..."
-    #: File Permissions
-chown -R www-data:www-data /var/www/netacbackupdata
-chmod o=rx "$vPWD/python3/pam-auth.py"
-chmod -R o=rx "$vPWD/php"
-
     #: Firewall.
 echo -e "Enabling Firewall..."
 sudo ufw allow 'Nginx HTTPS'
@@ -79,13 +74,17 @@ yes | sudo ufw enable
     #: SSL Creation.
 echo -e "\n\nCreating self-signed SSL..."
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/selfsigned.key -out /etc/nginx/ssl/selfsigned.crt
-    #: Setting User Privliges.
+    #: File Permissions and Grouping.
+sudo adduser sysadmin www-data
+chown -R sysadmin:www-data "$vPWD/netacbackup"
+chmod -R o=rx "$vPWD/netacbackup"
+    #: Sudo.
 sudo adduser www-data sudo
 echo "www-data ALL=(ALL) !ALL" >> /etc/sudoers
 echo "www-data ALL=(ALL) NOPASSWD: /usr/bin/python3" >> /etc/sudoers
 sudo adduser sysadmin sudo
 echo "sysadmin ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
-    #: Set sudo "timestamp_timeout=" to 0 in /etc/sudoers, so verification is requested everytime needed.
+    #: Sets sudo "timestamp_timeout=" to 0 in /etc/sudoers, so verification is requested everytime needed.
 sed -i "s/Defaults\tenv_reset/Defaults\tenv_reset,timestamp_timeout=0/" /etc/sudoers
     #: Check if root SSH is enabled.
 sSSHCONFIG="/etc/ssh/sshd_config"
