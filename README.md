@@ -1,4 +1,4 @@
-new name: sshfs-webnas
+new name: TurtleNAS
 
 Summary:
 
