@@ -13,7 +13,7 @@ Tests done to compare the R/W speed between sshfs, nfs, and smb show that while 
 
 # Install:
 > [!IMPORTANT]
-> <sub>It is recommeneded doing this on a fresh install of latest Debian Stable, with no DE/WM installed.</sub>
+> It is recommeneded doing this on a fresh install of latest Debian Stable, with no DE/WM installed.
 
   1) Download this program. (edit the command here once uploaded officaially.)
   2) Enter root terminal and type `path/to/files/setup.sh`.
