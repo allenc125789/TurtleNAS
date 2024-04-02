@@ -85,9 +85,9 @@ sudo adduser admin sudo
     #: Sets sudo "timestamp_timeout=" to 0 in /etc/sudoers, so verification is requested everytime needed.
 sed -i "s/Defaults\tenv_reset/Defaults\tenv_reset,timestamp_timeout=0/" /etc/sudoers
     #: SSH Access
+sSSHCONFIG="/etc/ssh/sshd_config"
 echo -e "DenyUsers\tsysadmin" >> $sSSHCONFIG
         #: Check if SSH root password access is enabled.
-sSSHCONFIG="/etc/ssh/sshd_config"
 if grep "PermitRootLogin yes" $sSSHCONFIG | grep -v "#" || grep "PermitRootLogin prohibit-password" $sSSHCONFIG | grep -v "#"; then
     echo -e $sWARNING": This server's root account might be accessible from SSH. Please consider changing it's permissions in "$sSSHCONFIG. & sleep 2
 else
