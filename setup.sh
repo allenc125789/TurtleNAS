@@ -60,6 +60,8 @@ fi
 
 #: Security Configuration.
 echo -e "\n\nUpdating Security..."
+    #: Bash History
+export HISTCONTROL=ignorespace
     #: Firewall.
 echo -e "Enabling Firewall..."
 sudo ufw allow 'Nginx HTTPS'
