@@ -13,7 +13,7 @@ Tests done to compare the R/W speed between the three show that while `sshfs` is
 
 # Install:
 > [!IMPORTANT]
-> Recommeneded on fresh install of latest Debian Stable, with no Desktop Environement installed. While this program may work on other configurations, i'll only be maintaining it from Debian (Stable) 12.5.0 and up.
+> Recommeneded on fresh install of latest Debian Stable, with no Desktop Environment installed. While this program may work on other configurations, i'll only be maintaining it from Debian (Stable) 12.5.0 and up.
 
   1) Download this program. (edit the command here once uploaded officaially.)
   2) Enter root terminal and type `bash path/to/files/setup.sh`.
