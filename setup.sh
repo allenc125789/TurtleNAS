@@ -49,7 +49,7 @@ mkdir -v -p "/etc/nginx/ssl" && chmod 700 "/etc/nginx/ssl"
 
 
 #: Creating System Admin User.
-sudo useradd -m sysadmin
+sudo useradd sysadmin
 
 #: Creating Admin User.
 if sudo useradd -m admin; then
