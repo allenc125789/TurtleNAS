@@ -1,6 +1,6 @@
 # Summary:
 
-TurtleNAS turns Debian into a NAS, to deliver files securley in it's shell! 
+TurtleNAS turns Debian into a NAS, to deliver files securely in it's shell! 
 
 Designed with a web-interface and an easily configurable system for adding clients for file backup and restoration. This program provides user-file downloading from the web, an easy setup, and security with SSH/HTTPS connections and the built-in linux PAM system for account management.
 
