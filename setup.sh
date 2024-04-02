@@ -81,9 +81,12 @@ echo "www-data ALL=(ALL) !ALL" >> /etc/sudoers
 echo "www-data ALL=(ALL) NOPASSWD: /usr/bin/python3 ../python3/pam-auth.py*" >> /etc/sudoers
 sudo adduser sysadmin sudo
 echo "sysadmin ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+sudo adduser admin sudo
     #: Sets sudo "timestamp_timeout=" to 0 in /etc/sudoers, so verification is requested everytime needed.
 sed -i "s/Defaults\tenv_reset/Defaults\tenv_reset,timestamp_timeout=0/" /etc/sudoers
-    #: Check if root SSH is enabled.
+    #: SSH Access
+echo -e "DenyUsers\tsysadmin" >> $sSSHCONFIG
+        #: Check if SSH root password access is enabled.
 sSSHCONFIG="/etc/ssh/sshd_config"
 if grep "PermitRootLogin yes" $sSSHCONFIG | grep -v "#" || grep "PermitRootLogin prohibit-password" $sSSHCONFIG | grep -v "#"; then
     echo -e $sWARNING": This server's root account might be accessible from SSH. Please consider changing it's permissions in "$sSSHCONFIG. & sleep 2
