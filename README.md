@@ -2,7 +2,7 @@
 
 TurtleNAS turns Debian into a NAS, to deliver files securley in it's shell! 
 
-Designed with a web-interface and an easily configurable system for adding clients for file backup. A continuation to my previous script acting as a proof-of-concept in using alternative FTP methods. This program provides a web-interface for configuration and user-file downloading, an easy setup, and security with SSH, HTTPS connections and the built-in linux PAM system for account management.
+Designed with a web-interface and an easily configurable system for adding clients for file backup and restoration. A continuation to my previous script acting as a proof-of-concept in using alternative FTP methods. This program provides a web-interface for configuration and user-file downloading, an easy setup, and security with SSH, HTTPS connections and the built-in linux PAM system for account management.
 
 `sshfs` is utilized over `smb` and `nfs`, the direct pro's of this protocol are:
 
