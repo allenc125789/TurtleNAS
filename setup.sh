@@ -48,10 +48,12 @@ mkdir -v -p $sCONFIGDIR"/Settings"
 mkdir -v -p "/etc/nginx/ssl" && chmod 700 "/etc/nginx/ssl"
 
 
-#: Creating System User.
-echo -e "\n\nCreating a System user: sysadmin"
-if sudo useradd -m sysadmin; then
-    echo -e "This will be your System account. Be sure to create your own seperate Admin and User accounts later using a Web-Browser or the CLI..."
+#: Creating System Admin User.
+sudo useradd -m sysadmin
+
+#: Creating Admin User.
+if sudo useradd -m admin; then
+    echo -e "This will be your Admin account. You can login with this to the web-browser, make new users, and add new connections. Make a secure password and remember it.
     passwd sysadmin
 else
     :
