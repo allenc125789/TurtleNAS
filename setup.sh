@@ -54,7 +54,7 @@ sudo useradd sysadmin
 #: Creating Admin User.
 if sudo useradd -m admin; then
     echo -e "This will be your Admin account. You can login with this to the web-browser, make new users, and add new connections. Make your password secure and remember it for later."
-    passwd sysadmin
+    passwd admin
 else
     :
 fi
