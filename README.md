@@ -22,6 +22,6 @@ Tests done to compare the R/W speed between sshfs, nfs, and smb show that while 
 
 # Post-Install & Usage:
 
-Open the server's IP or Hostname in an alternate browser (example: https://192.168.0.20), login to the web portal with the admin account using the password you created during install. You may use this to create/delete new users, edit permissions, and add connections.
+Open the server's IP or Hostname in an alternate browser (example: https://192.168.0.20), login to the web portal with the admin account using the password you created during install. You may use this to create/delete new users, edit permissions, and add connections. You may also access it directly from SSH to configure.
 
 https://softpanorama.org/Access_control/Sudo/sudoer_file_examples.shtml
