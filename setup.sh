@@ -30,7 +30,7 @@ if [[ $? > 0 ]]; then
     echo $sERROR"Failed to get dependancies through apt. Exiting."
     exit
 else
-    echo ""
+    :
 fi
 
 
