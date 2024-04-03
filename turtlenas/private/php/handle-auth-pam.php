@@ -1,3 +1,6 @@
+<?php
+
+// Run bash to pass command.
 $command = shell_exec(" bash ../private/bash/handle-pam-auth.sh $username $password' 2>&1");
 $output = "$command";
 
@@ -10,3 +13,5 @@ if($output){
 } else{
     echo "<pre>$output</pre>";
 }
+
+?>
