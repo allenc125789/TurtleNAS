@@ -30,7 +30,7 @@ This draw-back is minor in my opinion, when understanding the perks that come in
 
 # Post-Install & Usage:
 
-Open the server's IP or Hostname in an alternate browser (*example:* https://192.168.0.20), login to the web portal with the admin account using the password you created during install. You may use this to create/delete new users, edit permissions, add connections, and more!
+Open the server's IP or Hostname in an alternate browser (*example:* https://192.168.0.20), login to the web portal with the password you made on install. Username `admin`. You may use this to create/delete new users, edit permissions, add connections, and more!
 
 You may also login directly from SSH.
 
