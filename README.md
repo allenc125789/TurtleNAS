@@ -1,6 +1,3 @@
-> [!NOTE]
-> I developed this project by myself, while I have taken the time to deeply research various forms of computer secuirty and structure, I AM NOT A SECURITY ANALYST. If you enjoy this project, please take the time to review the code and suggest any vulnrabilities or security flaws you may find.
-
 # Summary:
 
 TurtleNAS turns Debian into a NAS, to help deliver files in it's secure shell!‎
