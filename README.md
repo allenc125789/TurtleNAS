@@ -26,7 +26,7 @@ This draw-back is minor in my opinion, when understanding the perks that come in
   1) Download this program. (edit the command here once uploaded officaially.)
   2) `su` to root in terminal and type `bash path/to/files/setup.sh`.
   3) Go through the setup. Packages will be ask to install and configuartion will take place. You'll also be asked to setup a password for the admin account **(make it secure and remember it, you'll log in to the browser with this.)** and sign an SSL cert.
-  4) After the setup finishes with no errors, reboot the system.
+  4) After the setup finishes with no errors, enter `/usr/sbin/reboot` and wait for the system to reboot.
 
 # Post-Install & Usage:
 
