@@ -3,7 +3,7 @@
 
 # Summary:
 
-TurtleNAS turns Debian into a NAS, to deliver files in it's secure shell!‎
+TurtleNAS turns Debian into a NAS, to help deliver files in it's secure shell!‎
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ❤
 
