@@ -14,7 +14,7 @@ Designed with a web GUI and an easily configurable system for adding clients for
 `sshfs` is utilized over `smb` and `nfs`, the direct pro's of this protocol are:
 
   1) Allowing easier server/client connection configuration for backing up files.
-  2) Provides a secure connection through SSH with key access to backup-clients by default.
+  2) Provides a secure connection through SSH with key access to backup-clients, by default.
   3) Fastest form of Encrypted file transfer protocols
 
 Tests done to compare the R/W speed between the three show that while `sshfs` is not the fastest option (in plaintext comparison), it still has [great speeds!](https://blog.ja-ke.tech/2019/08/27/nas-performance-sshfs-nfs-smb.html): 
