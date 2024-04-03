@@ -14,7 +14,7 @@ Designed with a web GUI and an easily configurable system for adding clients for
 
   - Allowing easier server/client connection configuration for backing up files.
   - Provides a secure connection through SSH with key access to backup-clients, by default.
-  - Fastest form of Encrypted file transfer protocols
+  - Fastest option of encrypted file transfer protocols.
 
 ### Tests (SSHFS, NFS, SMB):
 
