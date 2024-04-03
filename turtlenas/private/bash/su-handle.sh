@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# edit /etc/pam.d/su to allow no password when running command as user
+# edit /etc/pam.d/su to allow no password for www-data when running an su command for user
 
 #auth  [success=ignore default=1] pam_succeed_if.so user = sys-admin
 #auth  sufficient                 pam_succeed_if.so use_uid user = www-data
