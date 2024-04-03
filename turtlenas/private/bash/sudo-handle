@@ -1,3 +1,5 @@
+#! /bin/bash
+
 # edit /etc/pam.d/su to allow no password when running command as user
 
 #auth  [success=ignore default=1] pam_succeed_if.so user = sys-admin
