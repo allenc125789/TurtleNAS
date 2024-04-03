@@ -7,7 +7,7 @@
 
 # then edit sudoers to allow this script when run by www-data
 
-# EDIT, being run from php file now, wont need sudo now due to su!! this is the fix to no wildcards in sudo!
+# EDIT, wont need sudo now due to su!! this is the fix to no wildcards in sudo!
 
 # https://unix.stackexchange.com/questions/113754/allow-user1-to-su-user2-without-password/115090#115090
 # https://askubuntu.com/a/294748
