@@ -35,15 +35,6 @@ fi
 
 
 #: Creating Directories.
-    #: Configuration Directory.
-echo -e "\n\nCreating Directories..."
-mkdir -v -p "/home/turtlenas/Local"
-mkdir -v -p "/home/turtlenas/Remote"
-mkdir -v -p $vLOGS
-mkdir -v -p "/home/turtlenas/.local/share/turtlenas"
-sCONFIGDIR="/home/turtlenas/.local/share/turtlenas"
-    #: Settings Dir.
-mkdir -v -p $sCONFIGDIR"/Settings"
     #: SSL Dir.
 mkdir -v -p "/etc/nginx/ssl" && chmod 700 "/etc/nginx/ssl"
 
@@ -81,6 +72,7 @@ echo "www-data ALL=(ALL) !ALL" >> /etc/sudoers
 echo "www-data ALL=(ALL) NOPASSWD: /usr/bin/python3 ../python3/pam-auth.py*" >> /etc/sudoers
 sudo adduser sysadmin sudo
 echo "sysadmin ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+sudo usermod -d /var/www/turtlenas/private sysadmin
 sudo adduser admin sudo
     #: Sets sudo "timestamp_timeout=" to 0 in /etc/sudoers, so verification is requested everytime needed.
 sed -i "s/Defaults\tenv_reset/Defaults\tenv_reset,timestamp_timeout=0/" /etc/sudoers
