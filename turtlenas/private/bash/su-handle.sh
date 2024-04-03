@@ -10,4 +10,4 @@
 # https://unix.stackexchange.com/questions/113754/allow-user1-to-su-user2-without-password/115090#115090
 # https://askubuntu.com/a/294748
 
-su sysadmin -c 'python3 /var/www/turtlenas/private/python3/pam-auth.py $username $password'
+su sysadmin -c ' python3 /var/www/turtlenas/private/python3/pam-auth.py $username $password'
