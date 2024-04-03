@@ -1,23 +1,31 @@
 # Summary:
 
-TurtleNAS turns Debian into a NAS, to deliver files securely in it's shell!‎&nbsp;&nbsp; :turtle:
+TurtleNAS turns Debian into a NAS, to help deliver files in it's secure shell!‎
 
-Designed with a web GUI and an easily configurable system for adding clients for file backup and restoration. This program provides user-file downloading from a Web-Interface, an easy to use setup and configuration menu, and security with SSH/HTTPS connections and the built-in linux PAM system for account management.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ❤
+
+:desktop_computer:. . .:turtle:. . .:desktop_computer:
+
+Designed with a web GUI and an easily configurable system for adding clients for file backup and restoration. This program provides user-file downloading from a Web-Interface, an easy to use setup and configuration menu, security with SSH/HTTPS connections, and the built-in linux PAM system for account management.
 
 `sshfs` is utilized over `smb` and `nfs`, the direct pro's of this protocol are:
 
   1) Allowing easier server/client connection configuration for backing up files.
-  2) Provides a secure connection through SSH with key access to backup-clients by default.
+  2) Provides a secure connection through SSH with key access to backup-clients, by default.
+  3) Fastest form of Encrypted file transfer protocols
 
-Tests done to compare the R/W speed between the three show that while `sshfs` is not the fastest option, it still has great speed!: https://blog.ja-ke.tech/2019/08/27/nas-performance-sshfs-nfs-smb.html. This draw-back is minor in my opinion, when understanding the perks that come in the form of simplicity, usablity, and security.
+Tests done to compare the R/W speed between the three show that while `sshfs` is not the fastest option (plaintext comparison), it still has [great speeds!](https://blog.ja-ke.tech/2019/08/27/nas-performance-sshfs-nfs-smb.html): 
+![](https://github.com/allenc125789/TurtleNAS/blob/main/extra/Screenshot%20from%202024-04-02%2023-37-15.png)
+
+This draw-back is minor in my opinion, when understanding the perks that come in the form of simplicity, usablity, and security.
 
 # Install:
 > [!IMPORTANT]
-> Recommeneded on fresh install of latest Debian Stable, with no Desktop Environment installed. While this program may work on other configurations, i'll only be maintaining it from Debian (Stable) 12.5.0 and up.
+> **Recommeneded on fresh install of latest Debian Stable, with no Desktop Environment installed.** While this program may work on other configurations, i'll only be maintaining it from Debian (Stable) 12.5.0 and up.
 
   1) Download this program. (edit the command here once uploaded officaially.)
   2) Enter root terminal and type `bash path/to/files/setup.sh`.
-  3) Go through the setup. Packages will be ask to install and configuartion will take place. You'll also be asked to setup a password for the admin account (make it secure and remember it, you'll log in to the browser with this.) and sign an SSL cert.
+  3) Go through the setup. Packages will be ask to install and configuartion will take place. You'll also be asked to setup a password for the admin account **(make it secure and remember it, you'll log in to the browser with this.)** and sign an SSL cert.
   4) After the setup finishes with no errors, reboot the system.
 
 # Post-Install & Usage:
