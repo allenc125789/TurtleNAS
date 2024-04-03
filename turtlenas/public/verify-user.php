@@ -3,7 +3,7 @@
 $password = $_POST['pword'];
 $username = $_POST['uname'];
 
-$command = shell_exec("sudo python3 ../private/python3/pam-auth.py $username $password 2>&1");
+$command = shell_exec("sudo bash ../private/bash/handle-auth-pam.sh");
 $output = "$command";
 
 if($output){
