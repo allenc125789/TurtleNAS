@@ -3,9 +3,11 @@
 $password = $_POST['pword'];
 $username = $_POST['uname'];
 
+// Handle for verification.
 $command = shell_exec("sudo bash ../private/bash/handle-auth-pam.sh");
 $output = "$command";
 
+// Deny/Allow Access.
 if($output){
     echo "if statement working";
 } elseif(!$output){
