@@ -4,7 +4,7 @@ $password = $_POST['pword'];
 $username = $_POST['uname'];
 
 // Handle for verification.
-$command = shell_exec("sudo bash ../private/bash/handle-auth-pam.sh");
+$command = shell_exec(" sudo bash ../private/bash/handle-auth-pam.sh $username $password");
 $output = "$command";
 
 // Deny/Allow Access.
