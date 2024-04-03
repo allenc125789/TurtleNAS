@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 
 # edit /etc/pam.d/su to allow no password when running command as user
 
