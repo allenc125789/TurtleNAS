@@ -20,7 +20,7 @@ Designed with a web GUI and an easily configurable system for adding clients for
 
 Tests done to compare the R/W speed between the three show that while `sshfs` (Blue) is not the fastest option (plaintext comparison), it still has [great speeds](https://blog.ja-ke.tech/2019/08/27/nas-performance-sshfs-nfs-smb.html)! 
 
-!(https://github.com/allenc125789/TurtleNAS/blob/main/extra/Screenshot%20from%202024-04-02%2023-37-15.png)
+![](https://github.com/allenc125789/TurtleNAS/blob/main/extra/Screenshot%20from%202024-04-02%2023-37-15.png)
 
 This draw-back is minor in my opinion, when understanding the perks that come in the form of simplicity, usablity, and security.
 
