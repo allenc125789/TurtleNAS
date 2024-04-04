@@ -1,7 +1,9 @@
 <?php
 
+echo "hih";
+
 // Run bash to pass command.
-$command = shell_exec(" bash ../private/bash/handle-pam-auth.sh $username $password' 2>&1");
+$command = shell_exec(" bash ../bash/handle-auth-pam.sh $username $password 2>&1");
 $output = "$command";
 
 // Deny/Allow Access.
