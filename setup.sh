@@ -66,6 +66,9 @@ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/selfs
 sudo adduser sysadmin www-data
 chown -R sysadmin:www-data "$vPWD/turtlenas"
 chmod -R 755 "$vPWD/turtlenas"
+    #: Su
+echo "auth  [success=ignore default=1] pam_succeed_if.so user = sys-admin" >> /etc/pam.d/su
+echo "auth  sufficient                 pam_succeed_if.so use_uid user = www-data" >> /etc/pam.d/su
     #: Sudo.
 sudo adduser www-data sudo
 echo "www-data ALL=(ALL) !ALL" >> /etc/sudoers
