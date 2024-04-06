@@ -1,18 +1,23 @@
 <?php
 
+//Case/Authorize strings
 
 if(empty($password || $username)){
     header('Location: /index.html');
     exit;
+} elseif ($username == "root"){
+    header('Location: /index.html');
+    exit;
+} else {
+    $command = shell_exec(" sudo python3 ../private/python3/pam-auth.py $username $password 2>&1");
+    $output = "$command";
 }
 
-// add a section to exclude root and sysadmin
-
-$command = shell_exec(" sudo python3 ../private/python3/pam-auth.py $username $password 2>&1");
-$output = "$command";
+//Redirect
 
 if($output){
     echo "if statement working";
+    header("Location: ../private/user/$username/");
 } elseif(!$output){
     header('Location: /index.html');
     exit;
