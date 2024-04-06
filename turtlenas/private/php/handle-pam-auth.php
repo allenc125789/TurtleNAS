@@ -6,7 +6,7 @@ if(empty($password || $username)){
     exit;
 }
 
-$command = shell_exec("sudo python3 ../private/python3/pam-auth.py $username $password 2>&1");
+$command = shell_exec(" sudo python3 ../private/python3/pam-auth.py $username $password 2>&1");
 $output = "$command";
 
 if($output){
