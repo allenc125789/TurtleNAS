@@ -5,7 +5,7 @@ if(empty($password || $username)){
     header('Location: /index.html');
     exit;
 // Restrict user
-} elseif ($username == "root"){
+} elseif ($username == "root" || "sysadmin"){
     header('Location: /index.html');
     exit;
 } else {
