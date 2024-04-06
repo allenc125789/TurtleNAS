@@ -12,7 +12,7 @@ server {
                 try_files $uri $uri/ =404;
         }
         location /private {
-        root /var/www/turtlenas/private;
+                root /var/www/turtlenas/private;
         }
         location ~ \.php$ {
                 include snippets/fastcgi-php.conf;
