@@ -1,6 +1,6 @@
 <?php
 
-//Case/Authorize empty strings
+// Case/Authorize empty strings
 if(empty($password || $username)){
     header('Location: /index.html');
     exit;
@@ -13,7 +13,7 @@ if(empty($password || $username)){
     $output = "$command";
 }
 
-//Redirect
+// Redirect
 
 if($output){
     echo "if statement working";
