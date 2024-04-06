@@ -1,10 +1,10 @@
 <?php
 
-//Case/Authorize strings
-
+//Case/Authorize empty strings
 if(empty($password || $username)){
     header('Location: /index.html');
     exit;
+// Restrict user
 } elseif ($username == "root"){
     header('Location: /index.html');
     exit;
