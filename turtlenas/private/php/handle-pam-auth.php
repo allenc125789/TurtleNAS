@@ -2,7 +2,7 @@
 
 
 if(empty($password || $username)){
-//    header('Location: /index.html');
+    header('Location: /index.html');
     exit;
 }
 
