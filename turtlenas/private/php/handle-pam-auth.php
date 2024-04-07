@@ -1,13 +1,13 @@
 <?php
 
 // Restrict user
-$Restricted = array("root", "sysadmin");
+$restricted = array("root", "sysadmin");
 
 // Case/Authorize empty strings
 if(empty($password || $username)){
     header('Location: /index.html');
     exit;
-} elseif(in_array($username, $Restricted)){
+} elseif(in_array($username, $restricted)){
     header('Location: /index.html');
     exit;
 } else {
