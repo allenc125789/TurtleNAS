@@ -35,23 +35,14 @@ fi
 
 
 #: Creating Directories.
-    #: Configuration Directory.
-echo -e "\n\nCreating Directories..."
-mkdir -v -p "/home/turtlenas/Local"
-mkdir -v -p "/home/turtlenas/Remote"
-mkdir -v -p $vLOGS
-mkdir -v -p "/home/turtlenas/.local/share/turtlenas"
-sCONFIGDIR="/home/turtlenas/.local/share/turtlenas"
-    #: Settings Dir.
-mkdir -v -p $sCONFIGDIR"/Settings"
     #: SSL Dir.
 mkdir -v -p "/etc/nginx/ssl" && chmod 700 "/etc/nginx/ssl"
 
 
-#: Creating System Admin User.
+#: Creating Users.
+    #: System Admin.
 sudo useradd sysadmin
-
-#: Creating Admin User.
+    #: Admin.
 if sudo useradd -m admin; then
     echo -e "This will be your Admin account. You can login with this to the web-browser, make new users, and add new connections. Make your password secure and remember it for later."
     passwd admin
@@ -74,13 +65,14 @@ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/selfs
     #: File Permissions and Grouping.
 sudo adduser sysadmin www-data
 chown -R sysadmin:www-data "$vPWD/turtlenas"
-chmod -R o=rx "$vPWD/turtlenas"
+chmod -R 755 "$vPWD/turtlenas"
     #: Sudo.
 sudo adduser www-data sudo
 echo "www-data ALL=(ALL) !ALL" >> /etc/sudoers
-echo "www-data ALL=(ALL) NOPASSWD: /usr/bin/python3 ../python3/pam-auth.py*" >> /etc/sudoers
+echo "www-data ALL=(ALL) NOPASSWD: /usr/bin/python3 ../private/python3/pam-auth.py*" >> /etc/sudoers
 sudo adduser sysadmin sudo
 echo "sysadmin ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+sudo usermod -d /var/www/turtlenas/private sysadmin
 sudo adduser admin sudo
     #: Sets sudo "timestamp_timeout=" to 0 in /etc/sudoers, so verification is requested everytime needed.
 sed -i "s/Defaults\tenv_reset/Defaults\tenv_reset,timestamp_timeout=0/" /etc/sudoers
