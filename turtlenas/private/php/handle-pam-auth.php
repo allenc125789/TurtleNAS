@@ -4,19 +4,18 @@
 $password = $_POST['pword'];
 $username = $_POST['uname'];
 
-// Session user tagging
+// Session Start & Tag.
 session_start();
 $_SESSION['sessuser'] = $_POST['uname'];
-$id = session_id();
 
 // Restricted users.
 $restricted = array("root", "sysadmin");
 
-// Case empty strings.
+// Deny empty strings.
 if(empty($password || $username)){
     header('Location: /index.html');
     exit;
-// Case restricted users.
+// Deny restricted users.
 } elseif(in_array($username, $restricted)){
     header('Location: /index.html');
     exit;
@@ -26,14 +25,15 @@ if(empty($password || $username)){
     $output = "$command";
 }
 
-
-// Tag & Redirect
+// Successful Auth.
 if($output){
-    echo "$id". $_SESSION['sessuser'];
-// header("Location: /handle-user.php");
+    $_SESSION['allowed'] = 1;
+//    header("Location: /handle-user.php");
+// Failed Auth.
 } elseif(!$output){
     header('Location: /index.html');
     exit;
+// Error
 } else{
     echo "<pre>$output</pre>";
 }
