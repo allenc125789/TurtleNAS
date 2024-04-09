@@ -1,26 +1,36 @@
 <?php
 
-// Restrict user
+//POST creds.
+$password = $_POST['pword'];
+$username = $_POST['uname'];
+
+// Session user tagging
+session_start();
+$_SESSION['sessuser'] = $_POST['uname'];
+$id = session_id();
+
+// Restricted users.
 $restricted = array("root", "sysadmin");
 
-// Case/Authorize empty strings
+// Case empty strings.
 if(empty($password || $username)){
     header('Location: /index.html');
     exit;
+// Case restricted users.
 } elseif(in_array($username, $restricted)){
     header('Location: /index.html');
     exit;
+// Allow all else.
 } else {
     $command = shell_exec(" sudo python3 ../private/python3/pam-auth.py $username $password 2>&1");
     $output = "$command";
 }
 
 
-// Redirect
-
+// Tag & Redirect
 if($output){
-    echo "if statement working";
-    header("Location: ../private/user/$username/");
+    echo "$id". $_SESSION['sessuser'];
+// header("Location: /handle-user.php");
 } elseif(!$output){
     header('Location: /index.html');
     exit;
