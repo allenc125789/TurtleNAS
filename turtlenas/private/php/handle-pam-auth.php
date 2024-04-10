@@ -41,11 +41,13 @@ if($output){
 // Set Privlige.
 $command2 = shell_exec(" bash ../private/bash/admin-check.sh $username 2>&1");
 $output2 = "$command2";
+
 // Admin True
-if ($output2){
+if ($output2 == "1"){
     $_SESSION['admin'] = 1;
 // Admin False
 } else{
     $_SESSION['admin'] = 0;
 }
+
 ?>
