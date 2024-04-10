@@ -35,7 +35,17 @@ if($output){
 // Error
 } else{
     echo "<pre>$output</pre>";
+    exit;
 }
 
-
+// Set Privlige.
+$command2 = shell_exec(" bash ../private/bash/admins.sh $username 2>&1");
+$output2 = "$command2";
+// Admin True
+if ($output2){
+    $_SESSION['admin'] = 1;
+// Admin False
+} else{
+    $_SESSION['admin'] = 0;
+}
 ?>
