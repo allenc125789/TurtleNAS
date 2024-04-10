@@ -25,7 +25,7 @@ switch ($validated) {
         echo "Success!";
         break;
     default:
-        header('Location: /index.html');
+        echo "not admin";
         break;
 }
 
