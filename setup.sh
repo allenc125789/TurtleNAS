@@ -41,7 +41,7 @@ mkdir -v -p "/etc/nginx/ssl" && chmod 700 "/etc/nginx/ssl"
 
 #: Creating Users.
     #: System Admin.
-sudo useradd -L -M sysadmin
+sudo useradd -M sysadmin
     #: Admin.
 if sudo useradd -m admin; then
     echo -e "This will be your Admin account. You can login with this to the web-browser, make new users, and add new connections. Make your password secure and remember it for later."
