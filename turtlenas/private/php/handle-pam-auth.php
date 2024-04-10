@@ -39,7 +39,7 @@ if($output){
 }
 
 // Set Privlige.
-$command2 = shell_exec(" bash ../private/bash/admins.sh $username 2>&1");
+$command2 = shell_exec(" bash ../private/bash/admin-check.sh $username 2>&1");
 $output2 = "$command2";
 // Admin True
 if ($output2){
