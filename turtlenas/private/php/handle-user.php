@@ -20,7 +20,7 @@ switch ($validated) {
 
 // Verify Privlige.
 $privlige = $_SESSION['admin'];
-switch ($validated) {
+switch ($privlige) {
     case 1:
         echo "Success!";
         break;
