@@ -9,7 +9,7 @@ admins=( $spaces )
 
 if [[ ${admins[@]} =~ $1 ]]
 then
-    true
+    echo "1"
 else
-    false
+    echo "0"
 fi
