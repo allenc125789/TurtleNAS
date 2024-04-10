@@ -1,8 +1,8 @@
 <?php
 
 session_start();
-$id = session_id();
 
+$id = session_id();
 $command = shell_exec("cat /var/lib/php/sessions/sess_$id 2>&1");
 $output = "$command";
 
