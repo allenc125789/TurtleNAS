@@ -1,13 +1,28 @@
 <?php
 
 $id = session_id();
-$command = shell_exec("cat /var/lib/php/sessions/sess_$id 2>&1");
-$output = "$command";
 
-// Verify Session
-switch (true) {
-    case strstr($output, 'allowed|i:1'):
-        echo "<pre>$output</pre>";
+$command1 = shell_exec("bash /var/www/turtlenas/private/bash/mapped-drives.sh 2>&1");
+$output = "$command2";
+
+
+
+// Verify Session.
+$validated = $_SESSION['allowed'];
+switch ($validated) {
+    case 1:
+        echo "Success!";
+        break;
+    default:
+        header('Location: /index.html');
+        break;
+}
+
+// Verify Privlige.
+$privlige = $_SESSION['admin'];
+switch ($validated) {
+    case 1:
+        echo "Success!";
         break;
     default:
         header('Location: /index.html');
