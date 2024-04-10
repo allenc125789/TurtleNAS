@@ -19,7 +19,6 @@ function scanDirAndSubdir($dir, &$out = []) {
 
 $afiles = (scanDirAndSubdir("/media/Local/local/$username"));
 
-$link = filelink();
 foreach ($afiles as $a2) {
     echo "<a href='$a2'>$a2</a><br>";
 }
