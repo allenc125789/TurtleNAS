@@ -38,7 +38,7 @@ fi
     #: SSL Dir.
 mkdir -v -p '/etc/nginx/ssl' && chmod 700 '/etc/nginx/ssl'
 mkdir -v '/media/Remote'
-mkdir -v -p '/media/Local/local'
+mkdir -v -p '/media/Local/local/admin'
 
 
 #: Creating Users.
