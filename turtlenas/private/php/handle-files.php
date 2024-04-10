@@ -17,6 +17,10 @@ function scanDirAndSubdir($dir, &$out = []) {
     return $out;
 }
 
-print_r (scanDirAndSubdir("/media/Local/local/$username"));
+$afiles = (scanDirAndSubdir("/media/Local/local/$username"));
+
+foreach ($afiles as $a2) {
+    echo "$a2 <br>";
+}
 
 ?>
