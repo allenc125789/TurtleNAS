@@ -36,7 +36,9 @@ fi
 
 #: Creating Directories.
     #: SSL Dir.
-mkdir -v -p "/etc/nginx/ssl" && chmod 700 "/etc/nginx/ssl"
+mkdir -v -p '/etc/nginx/ssl' && chmod 700 '/etc/nginx/ssl'
+mkdir -v '/media/Remote'
+mkdir -v -p '/media/Local/local'
 
 
 #: Creating Users.
