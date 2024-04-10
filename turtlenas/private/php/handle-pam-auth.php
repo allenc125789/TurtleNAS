@@ -28,7 +28,7 @@ if(empty($password || $username)){
 // Successful Auth.
 if($output){
     $_SESSION['allowed'] = 1;
-    header("Location: /handle-user.php");
+    header("Location: /backup-list.php");
 // Failed Auth.
 } elseif(!$output){
     header('Location: /index.html');
