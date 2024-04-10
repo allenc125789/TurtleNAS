@@ -12,7 +12,7 @@ switch (true) {
         echo "<pre>$output</pre>";
         break;
     default:
-        echo "not a valid session";
+        header('Location: /index.html');
         break;
 }
 
