@@ -25,8 +25,8 @@ switch ($privlige) {
         echo "Success!";
         break;
     default:
-        echo "not admin";
         break;
 }
+
 
 ?>
