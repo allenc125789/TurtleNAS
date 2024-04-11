@@ -20,7 +20,7 @@ function scanDirAndSubdir($dir, &$out = []) {
 $afiles = (scanDirAndSubdir("/media/Local/local/$username"));
 
 foreach ($afiles as $a2) {
-    echo "<a href='$a2'>$a2</a><br>";
+    echo "<a href='/download.php?$a2'>$a2</a><br>";
 }
 
 
