@@ -35,7 +35,7 @@ if($output){
     exit;
 // Error
 } else{
-    echo "<pre>$output</pre>";
+    header('Location: /index.html');
     exit;
 }
 
