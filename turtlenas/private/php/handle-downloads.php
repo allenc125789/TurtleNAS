@@ -2,6 +2,7 @@
 
 session_start();
 
+// Verify User.
 $validated = $_SESSION['allowed'];
 switch ($validated) {
     case 1:
@@ -11,6 +12,9 @@ switch ($validated) {
         header('Location: /index.html');
         break;
 }
+
+
+// Download file.
 $file = $_SERVER['QUERY_STRING'];
 header('Content-Description: File Transfer');
 header('Content-Disposition: attachment; filename=' . basename($file));
