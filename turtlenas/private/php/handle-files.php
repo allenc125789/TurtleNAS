@@ -1,6 +1,6 @@
 <?php
 
-// Fetch file list from directory.
+// Function to fetch file list from directory.
 function scanDirAndSubdir($dir, &$out = []) {
     $sun = scandir($dir);
 
