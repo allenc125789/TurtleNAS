@@ -33,7 +33,7 @@ if($output){
 } elseif(!$output){
     header('Location: /index.html');
     exit;
-// Error
+// Error (Add logs)
 } else{
     header('Location: /index.html');
     exit;
