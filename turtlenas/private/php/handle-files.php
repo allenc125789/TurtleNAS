@@ -1,6 +1,6 @@
 <?php
 
-
+// Fetch file list from directory.
 function scanDirAndSubdir($dir, &$out = []) {
     $sun = scandir($dir);
 
@@ -17,6 +17,7 @@ function scanDirAndSubdir($dir, &$out = []) {
     return $out;
 }
 
+// Directory to fetch. (make path variables "/media/$vDRIVE/
 $afiles = (scanDirAndSubdir("/media/Local/local/$username"));
 
 foreach ($afiles as $a2) {
