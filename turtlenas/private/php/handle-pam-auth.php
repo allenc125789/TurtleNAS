@@ -25,6 +25,7 @@ if(empty($password || $username)){
     $output = "$command";
 }
 
+// Run Python3 code through Bash.
 // Successful Auth.
 if($output){
     $_SESSION['allowed'] = 1;
