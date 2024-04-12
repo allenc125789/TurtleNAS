@@ -9,7 +9,7 @@ rules=$(echo "$string" | sed "s/admin:.*://g")
 spaces=$(echo "$rules" | sed "s/,/ /g")
 admins=( $spaces )
 
-# Compare to Admin Group
+# Compare to Admin Group.
 if [[ ${admins[@]} =~ $1 ]]
 then
     echo "1"
