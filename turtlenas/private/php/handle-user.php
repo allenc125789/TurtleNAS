@@ -2,10 +2,6 @@
 
 $id = session_id();
 
-$command1 = shell_exec("bash ../private/bash/mapped-drives.sh 2>&1");
-$output = "$command2";
-
-
 
 // Verify Session.
 $validated = $_SESSION['allowed'];
