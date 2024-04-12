@@ -17,7 +17,7 @@ function scanDirAndSubdir($dir, &$out = []) {
     return $out;
 }
 
-// Directory to fetch. (make path variables "/media/$vDRIVE/
+// Directory to fetch. (edit path with variables "/media/$vLOCATION/$vDRIVE/$vUSER" for better reference by databases
 $afiles = (scanDirAndSubdir("/media/Local/local/$username"));
 
 foreach ($afiles as $a2) {
