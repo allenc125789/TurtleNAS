@@ -2,7 +2,7 @@
 
 session_start();
 
-// Verify User.
+// Verify Session and download.
 $validated = $_SESSION['allowed'];
 switch ($validated) {
     case 1:
