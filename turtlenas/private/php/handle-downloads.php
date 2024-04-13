@@ -24,7 +24,4 @@ switch ($validated) {
         break;
 }
 
-
-// Download file from query string.
-
 ?>
