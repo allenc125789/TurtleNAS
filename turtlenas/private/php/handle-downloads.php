@@ -14,7 +14,7 @@ switch ($validated) {
 }
 
 
-// Download file.
+// Download file from query string.
 $file = $_SERVER['QUERY_STRING'];
 header('Content-Description: File Transfer');
 header('Content-Disposition: attachment; filename=' . basename($file));
