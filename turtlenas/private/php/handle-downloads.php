@@ -18,7 +18,6 @@ switch ($validated) {
         flush();
         readfile($file);
         exit;
-        break;
     default:
         header('Location: /index.html');
         break;
