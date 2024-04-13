@@ -13,19 +13,7 @@ vPWD=$(dirname $0)
 #: Dependancies.
 aDEPENDS=("gpg" "sudo" "rsync" "sshfs" "nginx" "libnginx-mod-http-js" "python3-pam" "ufw" "git" "php8.2" "php8.2-fpm")
     #: Dependancy Check
-echo -e 'You will need the dependancies: '"${aDEPENDS[*]}"
-while IFS= read -r -p $'If they are not installed, they will be now. Continue? (y/n)\n\n' sCONF; do
-    case $sCONF in
-        y|Y|yes|Yes|YES)
-        break
-        ;;
-        n|N|no|No|NO)
-        echo "Exiting..."
-        exit 0
-        ;;
-    esac
-done
-apt-get -y install ${aDEPENDS[*]}
+apt-get install ${aDEPENDS[*]}
 if [[ $? > 0 ]]; then
     echo $sERROR"Failed to get dependancies through apt. Exiting."
     exit
