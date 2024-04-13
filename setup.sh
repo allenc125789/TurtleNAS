@@ -13,19 +13,7 @@ vPWD=$(dirname $0)
 #: Dependancies.
 aDEPENDS=("gpg" "sudo" "rsync" "sshfs" "nginx" "libnginx-mod-http-js" "python3-pam" "ufw" "git" "php8.2" "php8.2-fpm")
     #: Dependancy Check
-echo -e 'You will need the dependancies: '"${aDEPENDS[*]}"
-while IFS= read -r -p $'If they are not installed, they will be now. Continue? (y/n)\n\n' sCONF; do
-    case $sCONF in
-        y|Y|yes|Yes|YES)
-        break
-        ;;
-        n|N|no|No|NO)
-        echo "Exiting..."
-        exit 0
-        ;;
-    esac
-done
-apt-get -y install ${aDEPENDS[*]}
+apt-get install ${aDEPENDS[*]}
 if [[ $? > 0 ]]; then
     echo $sERROR"Failed to get dependancies through apt. Exiting."
     exit
@@ -36,12 +24,14 @@ fi
 
 #: Creating Directories.
     #: SSL Dir.
-mkdir -v -p "/etc/nginx/ssl" && chmod 700 "/etc/nginx/ssl"
+mkdir -v -p '/etc/nginx/ssl' && chmod 700 '/etc/nginx/ssl'
+mkdir -v '/media/Remote'
+mkdir -v -p '/media/Local/local/admin'
 
 
 #: Creating Users.
     #: System Admin.
-sudo useradd sysadmin
+sudo useradd -M sysadmin
     #: Admin.
 if sudo useradd -m admin; then
     echo -e "This will be your Admin account. You can login with this to the web-browser, make new users, and add new connections. Make your password secure and remember it for later."
@@ -63,7 +53,9 @@ yes | sudo ufw enable
     #: SSL Creation.
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/selfsigned.key -out /etc/nginx/ssl/selfsigned.crt
     #: File Permissions and Grouping.
+sudo groupadd admin
 sudo adduser sysadmin www-data
+sudo adduser admin admin
 chown -R sysadmin:www-data "$vPWD/turtlenas"
 chmod -R 755 "$vPWD/turtlenas"
     #: Sudo.
