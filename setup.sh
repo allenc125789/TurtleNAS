@@ -11,7 +11,8 @@ vDOMAIN=$(grep "domain" /etc/resolv.conf | awk '{print $NF}')
 vPWD=$(dirname $0)
 
 #: Dependancies.
-aDEPENDS=("gpg" "sudo" "rsync" "sshfs" "nginx" "libnginx-mod-http-js" "python3-pam" "ufw" "git" "default-mysql-server" "php8.2" "php8.2-fpm")
+aDEPENDS=("gpg" "sudo" "rsync" "sshfs" "nginx" "libnginx-mod-http-js" \
+    "python3-pam" "ufw" "git" "default-mysql-server" "php8.2" "php8.2-fpm")
     #: Dependancy Check
 apt-get install ${aDEPENDS[*]}
 if [[ $? > 0 ]]; then
@@ -77,6 +78,11 @@ if grep "PermitRootLogin yes" $sSSHCONFIG | grep -v "#" || grep "PermitRootLogin
 else
     :
 fi
+
+#: SQL
+vFILESYSTEM=$(df -P . | sed -n '$s/[[:blank:]].*//p')
+mariadb -e "CREATE DATABASE usermapping; USE usermapping; CREATE TABLE drives (user VARCHAR(50) PRIMARY KEY, type VARCHAR(6), disk VARCHAR(10) );"
+mariadb -e "INSERT INTO drives (user, type, disk, disk_uuid) VALUES('admin', 'LOCAL', '$vFILESYSTEM');"
 
 #: Web Server Configuration.
 echo -e "Configuring web server..."
