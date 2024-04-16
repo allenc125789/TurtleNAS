@@ -11,7 +11,8 @@ vDOMAIN=$(grep "domain" /etc/resolv.conf | awk '{print $NF}')
 vPWD=$(dirname $0)
 
 #: Dependancies.
-aDEPENDS=("gpg" "sudo" "rsync" "sshfs" "nginx" "libnginx-mod-http-js" "python3-pam" "ufw" "git" "php8.2" "php8.2-fpm")
+aDEPENDS=("gpg" "sudo" "rsync" "sshfs" "git" "nginx" "libnginx-mod-http-js" \
+    "python3-pam" "ufw" "default-mysql-server" "php8.2" "php8.2-fpm" "php-mysql")
     #: Dependancy Check
 apt-get install ${aDEPENDS[*]}
 if [[ $? > 0 ]]; then
@@ -25,8 +26,8 @@ fi
 #: Creating Directories.
     #: SSL Dir.
 mkdir -v -p '/etc/nginx/ssl' && chmod 700 '/etc/nginx/ssl'
-mkdir -v '/media/Remote'
-mkdir -v -p '/media/Local/local/admin'
+mkdir -v '/media/REMOTE'
+mkdir -v -p '/media/LOCAL/local/admin'
 
 
 #: Creating Users.
@@ -77,6 +78,19 @@ if grep "PermitRootLogin yes" $sSSHCONFIG | grep -v "#" || grep "PermitRootLogin
 else
     :
 fi
+
+#: SQL.
+vFILESYSTEM=$(df -P . | sed -n '$s/[[:blank:]].*//p')
+    #: Create DB.
+mariadb -e "CREATE DATABASE turtlenas;"
+    #: Create table for Mapped Drive Locations.
+mariadb -e "USE turtlenas; CREATE TABLE drives (user VARCHAR(50) PRIMARY KEY, type VARCHAR(6), disk VARCHAR(10) );"
+mariadb -e "USE turtlenas; INSERT INTO drives (user, type, disk) VALUES('admin', 'LOCAL', '$vFILESYSTEM');"
+    #: Create table for the admin user.
+mariadb -e "USE turtlenas; CREATE TABLE files_admin (dir VARCHAR(100) PRIMARY KEY, file VARCHAR(100) );"
+    #: Create table for a Command Qeue to be executed by the sysadmin user.
+mariadb -e "USE turtlenas; CREATE TABLE command_qeue (user VARCHAR(50) PRIMARY KEY, command VARCHAR(6), auth INT );"
+
 
 #: Web Server Configuration.
 echo -e "Configuring web server..."
