@@ -82,7 +82,7 @@ fi
 #: SQL.
 vFILESYSTEM=$(df -P . | sed -n '$s/[[:blank:]].*//p')
     #: Create DB.
-mariadb -e "CREATE DATABASE turtlenas; USE turtlenas;"
+mariadb -e "CREATE DATABASE turtlenas;"
     #: Create table for Mapped Drive Locations.
 mariadb -e "USE turtlenas; CREATE TABLE drives (user VARCHAR(50) PRIMARY KEY, type VARCHAR(6), disk VARCHAR(10) );"
 mariadb -e "USE turtlenas; INSERT INTO drives (user, type, disk, disk_uuid) VALUES('admin', 'LOCAL', '$vFILESYSTEM');"
