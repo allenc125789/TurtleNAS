@@ -81,10 +81,10 @@ fi
 
 #: SQL.
 vFILESYSTEM=$(df -P . | sed -n '$s/[[:blank:]].*//p')
-#: Drive Locations
+    #: Drive Locations
 mariadb -e "CREATE DATABASE turtlenas; USE turtlenas; CREATE TABLE drives (user VARCHAR(50) PRIMARY KEY, type VARCHAR(6), disk VARCHAR(10) );"
 mariadb -e "INSERT INTO drives (user, type, disk, disk_uuid) VALUES('admin', 'LOCAL', '$vFILESYSTEM');"
-# Command Qeue.
+    # Command Qeue.
 mariadb -e "USE turtlenas; CREATE TABLE command_qeue (user VARCHAR(50) PRIMARY KEY, command VARCHAR(6), auth INT );"
 
 
