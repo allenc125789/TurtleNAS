@@ -12,7 +12,7 @@ function scanDirAndSubdir($dir, &$out = []) {
 // List Directories.
         } else if ($filename != "." && $filename != "..") {
             scanDirAndSubdir($way, $out);
-            $out[] = $way;
+            $out[] = ("$way/");
         }
     }
 
