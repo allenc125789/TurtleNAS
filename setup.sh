@@ -85,7 +85,7 @@ vFILESYSTEM=$(df -P . | sed -n '$s/[[:blank:]].*//p')
 mariadb -e "CREATE DATABASE turtlenas;"
     #: Create table for Mapped Drive Locations.
 mariadb -e "USE turtlenas; CREATE TABLE drives (user VARCHAR(50) PRIMARY KEY, type VARCHAR(6), disk VARCHAR(10) );"
-mariadb -e "USE turtlenas; INSERT INTO drives (user, type, disk, disk_uuid) VALUES('admin', 'LOCAL', '$vFILESYSTEM');"
+mariadb -e "USE turtlenas; INSERT INTO drives (user, type, disk) VALUES('admin', 'LOCAL', '$vFILESYSTEM');"
     #: Create table for the admin user.
 mariadb -e "USE turtlenas; CREATE TABLE files_admin (dir VARCHAR(100) PRIMARY KEY, file VARCHAR(100) );"
     #: Create table for a Command Qeue to be executed by the sysadmin user.
