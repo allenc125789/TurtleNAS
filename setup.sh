@@ -26,8 +26,8 @@ fi
 #: Creating Directories.
     #: SSL Dir.
 mkdir -v -p '/etc/nginx/ssl' && chmod 700 '/etc/nginx/ssl'
-mkdir -v '/media/Remote'
-mkdir -v -p '/media/Local/local/admin'
+mkdir -v '/media/REMOTE'
+mkdir -v -p '/media/LOCAL/local/admin'
 
 
 #: Creating Users.
@@ -81,10 +81,14 @@ fi
 
 #: SQL.
 vFILESYSTEM=$(df -P . | sed -n '$s/[[:blank:]].*//p')
-    #: Drive Locations
-mariadb -e "CREATE DATABASE turtlenas; USE turtlenas; CREATE TABLE drives (user VARCHAR(50) PRIMARY KEY, type VARCHAR(6), disk VARCHAR(10) );"
-mariadb -e "INSERT INTO drives (user, type, disk, disk_uuid) VALUES('admin', 'LOCAL', '$vFILESYSTEM');"
-    # Command Qeue.
+    #: Create DB.
+mariadb -e "CREATE DATABASE turtlenas; USE turtlenas;"
+    #: Create table for Mapped Drive Locations.
+mariadb -e "CREATE TABLE drives (user VARCHAR(50) PRIMARY KEY, type VARCHAR(6), disk VARCHAR(10) );"
+mariadb -e "USE turtlenas; INSERT INTO drives (user, type, disk, disk_uuid) VALUES('admin', 'LOCAL', '$vFILESYSTEM');"
+    #: Create table for the admin user.
+mariadb -e "USE turtlenas; CREATE TABLE files_admin (dir VARCHAR(100) PRIMARY KEY, file VARCHAR(100) );"
+    #: Create table for a Command Qeue to be executed by the sysadmin user.
 mariadb -e "USE turtlenas; CREATE TABLE command_qeue (user VARCHAR(50) PRIMARY KEY, command VARCHAR(6), auth INT );"
 
 
