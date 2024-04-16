@@ -9,6 +9,8 @@ sWARNING=" ((\033[1;33mWARNING\033[0m)) "
 sERROR=" ((\033[0;31mERROR\033[0m)) "
 vDOMAIN=$(grep "domain" /etc/resolv.conf | awk '{print $NF}')
 vPWD=$(dirname $0)
+vFILESYSTEM=$(df -P . | sed -n '$s/[[:blank:]].*//p')
+
 
 #: Dependancies.
 aDEPENDS=("gpg" "sudo" "rsync" "sshfs" "git" "nginx" "libnginx-mod-http-js" \
@@ -23,11 +25,11 @@ else
 fi
 
 
-#: Creating Directories.
-    #: SSL Dir.
+    #: Create SSL Dir.
 mkdir -v -p '/etc/nginx/ssl' && chmod 700 '/etc/nginx/ssl'
+    #: Create media Dir. 
 mkdir -v '/media/REMOTE'
-mkdir -v -p '/media/LOCAL/local/admin'
+mkdir -v -p "/media/LOCAL/$vFILESYSTEM/admin"
 
 
 #: Creating Users.
@@ -80,7 +82,6 @@ else
 fi
 
 #: SQL.
-vFILESYSTEM=$(df -P . | sed -n '$s/[[:blank:]].*//p')
     #: Create DB.
 mariadb -e "CREATE DATABASE turtlenas;"
     #: Create table for Mapped Drive Locations.
