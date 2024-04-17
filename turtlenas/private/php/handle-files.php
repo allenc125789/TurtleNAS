@@ -1,5 +1,7 @@
 <?php
 
+include "../private/php/DBcontrol.php"
+
 // Directory to fetch. (edit path with variables "/media/$vLOCATION/$vDRIVE/$vUSER" for better reference by databases)
 $afiles = (scanDirAndSubdir("/media/Local/local/$username"));
 
