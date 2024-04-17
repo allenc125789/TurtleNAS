@@ -9,23 +9,14 @@ sWARNING=" ((\033[1;33mWARNING\033[0m)) "
 sERROR=" ((\033[0;31mERROR\033[0m)) "
 vDOMAIN=$(grep "domain" /etc/resolv.conf | awk '{print $NF}')
 vPWD=$(dirname $0)
+vFILESYSTEM=$(df -P . | sed -n '$s/[[:blank:]].*//p')
+
 
 #: Dependancies.
-aDEPENDS=("gpg" "sudo" "rsync" "sshfs" "nginx" "libnginx-mod-http-js" "python3-pam" "ufw" "git" "php8.2" "php8.2-fpm")
+aDEPENDS=("gpg" "sudo" "rsync" "sshfs" "git" "nginx" "libnginx-mod-http-js" \
+    "python3-pam" "ufw" "default-mysql-server" "php8.2" "php8.2-fpm" "php-mysql")
     #: Dependancy Check
-echo -e 'You will need the dependancies: '"${aDEPENDS[*]}"
-while IFS= read -r -p $'If they are not installed, they will be now. Continue? (y/n)\n\n' sCONF; do
-    case $sCONF in
-        y|Y|yes|Yes|YES)
-        break
-        ;;
-        n|N|no|No|NO)
-        echo "Exiting..."
-        exit 0
-        ;;
-    esac
-done
-apt-get -y install ${aDEPENDS[*]}
+apt-get install ${aDEPENDS[*]}
 if [[ $? > 0 ]]; then
     echo $sERROR"Failed to get dependancies through apt. Exiting."
     exit
@@ -34,24 +25,17 @@ else
 fi
 
 
-#: Creating Directories.
-    #: Configuration Directory.
-echo -e "\n\nCreating Directories..."
-mkdir -v -p "/home/turtlenas/Local"
-mkdir -v -p "/home/turtlenas/Remote"
-mkdir -v -p $vLOGS
-mkdir -v -p "/home/turtlenas/.local/share/turtlenas"
-sCONFIGDIR="/home/turtlenas/.local/share/turtlenas"
-    #: Settings Dir.
-mkdir -v -p $sCONFIGDIR"/Settings"
-    #: SSL Dir.
-mkdir -v -p "/etc/nginx/ssl" && chmod 700 "/etc/nginx/ssl"
+    #: Create SSL Dir.
+mkdir -v -p '/etc/nginx/ssl' && chmod 700 '/etc/nginx/ssl'
+    #: Create media Dir. 
+mkdir -v '/media/REMOTE'
+mkdir -v -p "/media/LOCAL/$vFILESYSTEM/admin"
 
 
-#: Creating System Admin User.
-sudo useradd sysadmin
-
-#: Creating Admin User.
+#: Creating Users.
+    #: System Admin.
+sudo useradd -M sysadmin
+    #: Admin.
 if sudo useradd -m admin; then
     echo -e "This will be your Admin account. You can login with this to the web-browser, make new users, and add new connections. Make your password secure and remember it for later."
     passwd admin
@@ -72,15 +56,18 @@ yes | sudo ufw enable
     #: SSL Creation.
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/selfsigned.key -out /etc/nginx/ssl/selfsigned.crt
     #: File Permissions and Grouping.
+sudo groupadd admin
 sudo adduser sysadmin www-data
+sudo adduser admin admin
 chown -R sysadmin:www-data "$vPWD/turtlenas"
-chmod -R o=rx "$vPWD/turtlenas"
+chmod -R 755 "$vPWD/turtlenas"
     #: Sudo.
 sudo adduser www-data sudo
 echo "www-data ALL=(ALL) !ALL" >> /etc/sudoers
-echo "www-data ALL=(ALL) NOPASSWD: /usr/bin/python3 ../python3/pam-auth.py*" >> /etc/sudoers
+echo "www-data ALL=(ALL) NOPASSWD: /usr/bin/python3 ../private/python3/pam-auth.py*" >> /etc/sudoers
 sudo adduser sysadmin sudo
 echo "sysadmin ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+sudo usermod -d /var/www/turtlenas/private sysadmin
 sudo adduser admin sudo
     #: Sets sudo "timestamp_timeout=" to 0 in /etc/sudoers, so verification is requested everytime needed.
 sed -i "s/Defaults\tenv_reset/Defaults\tenv_reset,timestamp_timeout=0/" /etc/sudoers
@@ -93,6 +80,18 @@ if grep "PermitRootLogin yes" $sSSHCONFIG | grep -v "#" || grep "PermitRootLogin
 else
     :
 fi
+
+#: SQL.
+    #: Create DB.
+mariadb -e "CREATE DATABASE turtlenas;"
+    #: Create table for Mapped Drive Locations.
+mariadb -e "USE turtlenas; CREATE TABLE drives (user VARCHAR(50) PRIMARY KEY, type VARCHAR(6), disk VARCHAR(10) );"
+mariadb -e "USE turtlenas; INSERT INTO drives (user, type, disk) VALUES('admin', 'LOCAL', '$vFILESYSTEM');"
+    #: Create table for the admin user.
+mariadb -e "USE turtlenas; CREATE TABLE files_admin (dir VARCHAR(100) PRIMARY KEY, file VARCHAR(100) );"
+    #: Create table for a Command Qeue to be executed by the sysadmin user.
+mariadb -e "USE turtlenas; CREATE TABLE command_qeue (user VARCHAR(50) PRIMARY KEY, command VARCHAR(6), auth INT );"
+
 
 #: Web Server Configuration.
 echo -e "Configuring web server..."
