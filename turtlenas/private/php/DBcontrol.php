@@ -1,7 +1,7 @@
 <?php
 
 class DBcontrol {
-    function user_auth($username, $password) {
+    public function user_auth($username, $password) {
         
         // Session Start & Tag.
         session_start();
@@ -36,8 +36,7 @@ class DBcontrol {
         } else{
             header('Location: /index.html');
             exit;
-        }
-        
+        }   
         // Set Privlige through Bash.
         $command2 = shell_exec(" bash ../private/bash/admin-check.sh $username 2>&1");
         $output2 = "$command2";
@@ -50,6 +49,31 @@ class DBcontrol {
         }
     }
 
-    function user_verify
+    
+    // Verify Session.
+    public function validate_auth() {
+        $validated = $_SESSION['allowed'];
+        switch ($validated) {
+            case 1:
+                return true;
+                break;
+            default:
+                header('Location: /login.html');
+                break;
+        }
+    }
+    // Verify Privlige.
+    public function validate_priv() {
+        $privlige = $_SESSION['admin'];
+        switch ($privlige) {
+            case 1:
+                return true;
+                break;
+            default:
+                header('Location: /login.html');
+                break;
+        }
+    }
+}
 
 ?>
