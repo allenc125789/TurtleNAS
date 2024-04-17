@@ -10,6 +10,7 @@ sERROR=" ((\033[0;31mERROR\033[0m)) "
 vDOMAIN=$(grep "domain" /etc/resolv.conf | awk '{print $NF}')
 vPWD=$(dirname $0)
 vFILESYSTEM=$(df -P . | sed -n '$s/[[:blank:]].*//p')
+vUUID=$(sudo blkid -s UUID -o value "$vFILESYSTEM")
 
 
 #: Dependancies.
@@ -29,7 +30,7 @@ fi
 mkdir -v -p '/etc/nginx/ssl' && chmod 700 '/etc/nginx/ssl'
     #: Create media Dir. 
 mkdir -v '/media/REMOTE'
-mkdir -v -p "/media/LOCAL/$vFILESYSTEM/admin"
+mkdir -v -p "/media/LOCAL/$vUUID/admin"
 
 
 #: Creating Users.
@@ -85,8 +86,8 @@ fi
     #: Create DB.
 mariadb -e "CREATE DATABASE turtlenas;"
     #: Create table for Mapped Drive Locations.
-mariadb -e "USE turtlenas; CREATE TABLE drives (user VARCHAR(50) PRIMARY KEY, type VARCHAR(6), disk VARCHAR(10) );"
-mariadb -e "USE turtlenas; INSERT INTO drives (user, type, disk) VALUES('admin', 'LOCAL', '$vFILESYSTEM');"
+mariadb -e "USE turtlenas; CREATE TABLE drives (user VARCHAR(50) PRIMARY KEY, type VARCHAR(6), disk VARCHAR(10), uuid CHAR(38) );"
+mariadb -e "USE turtlenas; INSERT INTO drives (user, type, disk) VALUES('admin', 'LOCAL', '$vFILESYSTEM', '$vUUID');"
     #: Create table for the admin user.
 mariadb -e "USE turtlenas; CREATE TABLE files_admin (dir VARCHAR(100) PRIMARY KEY, file VARCHAR(100) );"
     #: Create table for a Command Qeue to be executed by the sysadmin user.
