@@ -1,7 +1,7 @@
 <?php
 
 // Verify Session.
-function validate_session() {
+function validate_auth() {
     $validated = $_SESSION['allowed'];
     switch ($validated) {
         case 1:
@@ -15,7 +15,7 @@ function validate_session() {
 
 
 // Verify Privlige.
-function validate_privlige() {
+function validate_priv() {
     $privlige = $_SESSION['admin'];
     switch ($privlige) {
         case 1:
