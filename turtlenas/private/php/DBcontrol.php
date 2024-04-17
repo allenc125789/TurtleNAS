@@ -1,10 +1,7 @@
 <?php
 
 class DBcontrol {
-    function authourize_user() {
-        //POST creds.
-        $password = $_POST['pword'];
-        $username = $_POST['uname'];
+    function user_auth($username, $password) {
         
         // Session Start & Tag.
         session_start();
@@ -52,4 +49,7 @@ class DBcontrol {
             $_SESSION['admin'] = 0;
         }
     }
+
+    function user_verify
+
 ?>
