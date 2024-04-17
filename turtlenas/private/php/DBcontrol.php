@@ -1,12 +1,14 @@
 <?php
 
+session_start();
+
+
 class DBcontrol {
     public function redirect_login() {
         header('/login.html')
 
     public function user_auth($username, $password) {
         // Session Start & Tag.
-        session_start();
         $_SESSION['sessuser'] = $username;
         
         // Restricted users.
