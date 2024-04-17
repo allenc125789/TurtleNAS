@@ -5,7 +5,7 @@ class DBcontrol {
         
         // Session Start & Tag.
         session_start();
-        $_SESSION['sessuser'] = $_POST['uname'];
+        $_SESSION['sessuser'] = $username;
         
         // Restricted users.
         $restricted = array("root", "sysadmin");
