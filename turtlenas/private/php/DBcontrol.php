@@ -74,6 +74,25 @@ class DBcontrol {
                 break;
         }
     }
+
+    // Function to fetch file list from directory.
+    function scanDirAndSubdir($dir, &$out = []) {
+        $sun = scandir($dir);
+    
+        foreach ($sun as $a => $filename) {
+            $way = realpath($dir . DIRECTORY_SEPARATOR . $filename);
+    // List Files.
+            if (!is_dir($way)) {
+                $out[] = $way;
+    // List Directories.
+            } else if ($filename != "." && $filename != "..") {
+                scanDirAndSubdir($way, $out);
+                $out[] = ("$way/");
+            }
+        }
+    
+        return $out;
+    }
 }
 
 ?>
