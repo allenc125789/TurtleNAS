@@ -1,6 +1,6 @@
 <?php
 
-class DBcontrol
+class DBcontrol {
     function authourize_user() {
         //POST creds.
         $password = $_POST['pword'];
