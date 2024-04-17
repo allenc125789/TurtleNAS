@@ -76,7 +76,7 @@ class DBcontrol {
     }
 
     // Function to fetch file list from directory.
-    function scanDirAndSubdir($dir, &$out = []) {
+    public function scanDirAndSubdir($dir, &$out = []) {
         $sun = scandir($dir);
     
         foreach ($sun as $a => $filename) {
