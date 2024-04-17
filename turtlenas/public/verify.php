@@ -7,6 +7,7 @@ $password = $_POST['pword'];
 $username = $_POST['uname'];
 
 user_auth($username, $password);
+
 validate_priv();
 
 if(validate_auth()) {
