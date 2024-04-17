@@ -23,7 +23,6 @@ class DBcontrol {
             $command = shell_exec(" sudo python3 ../private/python3/pam-auth.py $username $password 2>&1");
             $output = "$command";
         }
-        
         // Run Python3 code through Bash.
         // Successful Auth.
         if($output){
