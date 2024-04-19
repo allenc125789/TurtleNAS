@@ -4,7 +4,7 @@ session_start();
 
 
 class DBcontrol {
-    function redirect_login() {
+    public function redirect_login() {
         header('Location: /login.html');
     }
     public function user_auth($username, $password) {
@@ -16,11 +16,11 @@ class DBcontrol {
 
         // Deny empty strings.
         if(empty($password || $username)){
-            redirect_login();
+            $this->redirect_login();
             exit;
         // Deny restricted users.
         } elseif(in_array($username, $restricted)){
-            redirect_login();
+            $this->redirect_login();
             exit;
         // Allow all else.
         } else {
@@ -33,11 +33,11 @@ class DBcontrol {
             $_SESSION['allowed'] = 1;
         // Failed Auth.
         } elseif(!$output){
-            redirect_login();
+            $this->redirect_login();
             exit;
         // Error (Add logs)
         } else{
-            redirect_login();
+            $this->redirect_login();
             exit;
         }
         // Set Privlige through Bash.
@@ -60,7 +60,7 @@ class DBcontrol {
                 return true;
                 break;
             default:
-                redirect_login();
+                $this->redirect_login();
                 break;
         }
     }
@@ -72,7 +72,7 @@ class DBcontrol {
                 return true;
                 break;
             default:
-                redirect_login();
+                $this->redirect_login();
                 break;
         }
     }
@@ -93,5 +93,6 @@ class DBcontrol {
         }
         return $out;
     }
+
 }
 ?>
