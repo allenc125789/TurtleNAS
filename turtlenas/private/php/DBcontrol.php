@@ -4,16 +4,16 @@ session_start();
 
 
 class DBcontrol {
-    public function redirect_login() {
-        header('/login.html')
-
+    function redirect_login() {
+        header('Location: /login.html');
+    }
     public function user_auth($username, $password) {
         // Session Start & Tag.
         $_SESSION['sessuser'] = $username;
-        
+
         // Restricted users.
         $restricted = array("root", "sysadmin");
-        
+
         // Deny empty strings.
         if(empty($password || $username)){
             redirect_login();
@@ -39,7 +39,7 @@ class DBcontrol {
         } else{
             redirect_login();
             exit;
-        }   
+        }
         // Set Privlige through Bash.
         $command2 = shell_exec(" bash ../private/bash/admin-check.sh $username 2>&1");
         $output2 = "$command2";
@@ -52,9 +52,8 @@ class DBcontrol {
         }
     }
 
-    
     // Verify Session.
-    public function validate_auth() {
+/*    public function validate_auth() {
         $validated = $_SESSION['allowed'];
         switch ($validated) {
             case 1:
@@ -81,7 +80,6 @@ class DBcontrol {
     // Function to fetch file list from directory.
     public function scanDirAndSubdir($dir, &$out = []) {
         $sun = scandir($dir);
-    
         foreach ($sun as $a => $filename) {
             $way = realpath($dir . DIRECTORY_SEPARATOR . $filename);
     // List Files.
@@ -93,9 +91,8 @@ class DBcontrol {
                 $out[] = ("$way/");
             }
         }
-    
         return $out;
     }
+*/
 }
-
 ?>
