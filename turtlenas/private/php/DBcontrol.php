@@ -46,9 +46,11 @@ class DBcontrol {
         // Admin True
         if ($output2 == "1"){
             $_SESSION['admin'] = 1;
+            exit;
         // Admin False
         } else{
             $_SESSION['admin'] = 0;
+            exit;
         }
     }
 
