@@ -1,6 +1,4 @@
 <?php
-
-// Call DBcontrol and declare it's class.
 require_once("../private/php/DBcontrol.php");
 $control = new DBcontrol;
 
