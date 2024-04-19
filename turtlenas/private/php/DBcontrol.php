@@ -53,7 +53,7 @@ class DBcontrol {
     }
 
     // Verify Session.
-/*    public function validate_auth() {
+    public function validate_auth() {
         $validated = $_SESSION['allowed'];
         switch ($validated) {
             case 1:
@@ -93,6 +93,5 @@ class DBcontrol {
         }
         return $out;
     }
-*/
 }
 ?>
