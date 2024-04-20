@@ -10,8 +10,10 @@ class DBcontrol {
     public function user_auth($username, $password) {
         // Session Start & Tag.
         $_SESSION['sessuser'] = $username;
+
         // Restricted users.
         $restricted = array("root", "sysadmin");
+
         // Deny empty strings.
         if(empty($password || $username)){
             $this->redirect_login();
@@ -44,11 +46,9 @@ class DBcontrol {
         // Admin True
         if ($output2 == "1"){
             $_SESSION['admin'] = 1;
-            exit;
         // Admin False
         } else{
             $_SESSION['admin'] = 0;
-            exit;
         }
     }
 
@@ -64,7 +64,6 @@ class DBcontrol {
                 break;
         }
     }
-    
     // Verify Privlige.
     public function validate_priv() {
         $privlige = $_SESSION['admin'];
@@ -94,5 +93,6 @@ class DBcontrol {
         }
         return $out;
     }
+
 }
 ?>
