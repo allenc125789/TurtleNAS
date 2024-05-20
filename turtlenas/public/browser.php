@@ -10,8 +10,9 @@ if($verify){
     // List files in a browser format.
     foreach ($afiles as $a2) {
         //echo "<a href='/download.php?$a2'>$a2</a><br>";
-        $control->getPathBySQL();
-    }
+//    }
+    $control->getPathBySQL();
+
 }
 
 
