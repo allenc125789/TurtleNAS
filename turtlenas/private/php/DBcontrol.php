@@ -7,6 +7,7 @@ class DBcontrol {
     public function redirect_login() {
         header('Location: /login.html');
     }
+
     public function get_connection(){
         $servername = "localhost";
         $username = "www-data";
@@ -32,10 +33,8 @@ class DBcontrol {
     public function user_auth($username, $password) {
         // Session Start & Tag.
         $_SESSION['sessuser'] = $username;
-
         // Restricted users.
         $restricted = array("root", "sysadmin");
-
         // Deny empty strings.
         if(empty($password || $username)){
             $this->redirect_login();
@@ -86,6 +85,7 @@ class DBcontrol {
                 break;
         }
     }
+
     // Verify Privlige.
     public function validate_priv() {
         $privlige = $_SESSION['admin'];
