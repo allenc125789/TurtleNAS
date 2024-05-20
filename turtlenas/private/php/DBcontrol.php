@@ -27,7 +27,7 @@ class DBcontrol {
         $result = $conn->query($sql); // First parameter is just return of "mysqli_connec>
         $row = $result->fetch_assoc();
         $path = "/media/".$row['type']. "/".$row['uuid']. "/".$row['user'];
-        echo $path;
+        return $path;
     }
 
     public function user_auth($username, $password) {
