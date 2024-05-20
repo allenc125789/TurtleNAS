@@ -37,7 +37,7 @@ mkdir -v -p "/media/LOCAL/$vUUID/admin"
     #: System Admin.
 sudo useradd -M sysadmin
     #: Admin.
-if sudo useradd -m admin; then
+if sudo useradd -M admin; then
     echo -e "This will be your Admin account. You can login with this to the web-browser, make new users, and add new connections. Make your password secure and remember it for later."
     passwd admin
 else
