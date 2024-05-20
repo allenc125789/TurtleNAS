@@ -1,7 +1,5 @@
 <?php
-
 session_start();
-
 
 class DBcontrol {
     public function redirect_login() {
@@ -25,10 +23,11 @@ class DBcontrol {
         $conn = $this->get_connection();
         $username = $_SESSION['sessuser'];
         $sql = "SELECT * FROM drives WHERE user = '$username'";
-        $result = $conn->query($sql); // First parameter is just return of "mysqli_connec>
+        $result = $conn->query($sql);
         $row = $result->fetch_assoc();
         $path = "/media/".$row['type']. "/".$row['uuid']. "/".$row['user'];
-        echo $path;
+        return $path;
+        $conn->close();
     }
 
     public function user_auth($username, $password) {
@@ -116,5 +115,14 @@ class DBcontrol {
         return $out;
     }
 
+    // Directory to fetch. (edit path with variables "/media/$vLOCATION/$vDRIVE/$vU>
+    public function listDirAndSubdir() {
+        $path = $this->getPathByUser();
+        $afiles = $this->scanDirAndSubdir($path);
+        // List files in a browser format.
+        foreach ($afiles as $a2) {
+            echo "<a href='/download.php?$a2'>$a2</a><br>";
+        }
+    }
 }
 ?>
