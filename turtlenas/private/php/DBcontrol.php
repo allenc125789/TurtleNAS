@@ -7,6 +7,28 @@ class DBcontrol {
     public function redirect_login() {
         header('Location: /login.html');
     }
+    public function get_connection(){
+        $servername = "localhost";
+        $username = "www-data";
+        $password = "";
+        $db = "turtlenas";
+        $conn = new mysqli($servername, $username, $password, $db);
+        //Error check.
+        if($conn->connect_error){
+            die("Connection failed. ".$conn->connect_error);
+        }
+        return $conn;
+    }
+
+    public function getPathBySQL(){
+        $conn = $this->get_connection();
+        $sql = "SELECT * FROM drives WHERE user = 'admin'";
+        $result = $conn->query($sql); // First parameter is just return of "mysqli_connec>
+        $row = $result->fetch_assoc();
+        $path = "/media/".$row['type']. "/".$row['uuid']. "/".$row['user'];
+        echo $path;
+    }
+
     public function user_auth($username, $password) {
         // Session Start & Tag.
         $_SESSION['sessuser'] = $username;
@@ -92,17 +114,6 @@ class DBcontrol {
             }
         }
         return $out;
-    }
-
-    public function listDirAndSubdir() {
-        $verify = $this->validate_auth();
-        if($verify){
-            // Directory to fetch. (edit path with variables "/media/$vLOCATION/$vDRIVE/$vUSER" for better reference by databases)
-            $afiles = $this->scanDirAndSubdir("/media/LOCAL/5d2aee01-0ecd-4ac4-b2ca-796b24be7e34/admin");
-            // List files in a browser format.
-            foreach ($afiles as $a2) {
-                echo "<a href='/download.php?$a2'>$a2</a><br>";
-        }
     }
 
 }
