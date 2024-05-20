@@ -21,13 +21,14 @@ class DBcontrol {
         return $conn;
     }
 
-    public function getPathBySQL(){
+    public function getPathByUser(){
         $conn = $this->get_connection();
-        $sql = "SELECT * FROM drives WHERE user = 'admin'";
+        $username = $_SESSION['sessuser'];
+        $sql = "SELECT * FROM drives WHERE user = '$username'";
         $result = $conn->query($sql); // First parameter is just return of "mysqli_connec>
         $row = $result->fetch_assoc();
         $path = "/media/".$row['type']. "/".$row['uuid']. "/".$row['user'];
-        return $path;
+        echo $path;
     }
 
     public function user_auth($username, $password) {
