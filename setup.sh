@@ -85,7 +85,7 @@ fi
 #: SQL.
     #: Create DB.
 mariadb -e "CREATE DATABASE turtlenas;"
-mariadb -e "CREATE USER 'www-data'@'localhost'"
+mariadb -e "CREATE USER 'www-data'@'localhost' IDENTIFIED BY ''"
 mariadb -e "GRANT ALL PRIVILEGES ON turtlenas.drives TO 'www-data'@'localhost' WITH GRANT OPTION"
     #: Create table for Mapped Drive Locations.
 mariadb -e "USE turtlenas; CREATE TABLE drives (user VARCHAR(50) PRIMARY KEY, type VARCHAR(6), disk VARCHAR(10), uuid CHAR(36) );"
