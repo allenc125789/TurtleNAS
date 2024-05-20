@@ -94,7 +94,7 @@ class DBcontrol {
         return $out;
     }
 
-    public function scanDirAndSubdir() {
+    public function listDirAndSubdir() {
         $verify = $this->validate_auth();
         if($verify){
             // Directory to fetch. (edit path with variables "/media/$vLOCATION/$vDRIVE/$vUSER" for better reference by databases)
