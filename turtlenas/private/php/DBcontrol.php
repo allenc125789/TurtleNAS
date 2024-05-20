@@ -95,6 +95,7 @@ class DBcontrol {
     }
 
     public function scanDirAndSubdir() {
+        $verify = $this->validate_auth();
         if($verify){
             // Directory to fetch. (edit path with variables "/media/$vLOCATION/$vDRIVE/$vUSER" for better reference by databases)
             $afiles = $this->scanDirAndSubdir("/media/LOCAL/5d2aee01-0ecd-4ac4-b2ca-796b24be7e34/admin");
