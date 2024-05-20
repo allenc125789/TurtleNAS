@@ -31,8 +31,6 @@ class DBcontrol {
     }
 
     public function user_auth($username, $password) {
-        // Session Start & Tag.
-        $_SESSION['sessuser'] = $username;
         // Restricted users.
         $restricted = array("root", "sysadmin");
         // Deny empty strings.
@@ -52,6 +50,7 @@ class DBcontrol {
         // Successful Auth.
         if($output){
             $_SESSION['allowed'] = 1;
+            $_SESSION['sessuser'] = $username;
         // Failed Auth.
         } elseif(!$output){
             $this->redirect_login();
@@ -66,10 +65,10 @@ class DBcontrol {
         $output2 = "$command2";
         // Admin True
         if ($output2 == "1"){
-            $_SESSION['admin'] = 1;
+            $_SESSION['admin_status'] = 1;
         // Admin False
         } else{
-            $_SESSION['admin'] = 0;
+            $_SESSION['admin_status'] = 0;
         }
     }
 
@@ -88,7 +87,7 @@ class DBcontrol {
 
     // Verify Privlige.
     public function validate_priv() {
-        $privlige = $_SESSION['admin'];
+        $privlige = $_SESSION['admin_status'];
         switch ($privlige) {
             case 1:
                 return true;
