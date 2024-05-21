@@ -19,6 +19,18 @@ class DBcontrol {
         return $conn;
     }
 
+    public function getAllByUser(){
+        $conn = $this->get_connection();
+        $username = $_SESSION['sessuser'];
+        $sql = "SELECT * FROM drives WHERE user = '$username'";
+        $result = $conn->query($sql);
+        $row = $result->fetch_assoc();
+        $allrow = $row['type']. " ".$row['uuid']. " ".$row['disk']. " ".$row['user'];
+        $data = explode(' ', $allrow);
+        var_dump($data);
+        $conn->close();
+    }
+
     public function getPathByUser(){
         $conn = $this->get_connection();
         $username = $_SESSION['sessuser'];
@@ -115,7 +127,6 @@ class DBcontrol {
         return $out;
     }
 
-    // Directory to fetch. (edit path with variables "/media/$vLOCATION/$vDRIVE/$vU>
     public function listDirAndSubdir() {
         $path = $this->getPathByUser();
         $afiles = $this->scanDirAndSubdir($path);
