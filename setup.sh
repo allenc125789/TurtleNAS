@@ -83,14 +83,15 @@ else
 fi
 
 #: SQL.
-    #: Create DB Users.
-mariadb -e "CREATE DATABASE turtlenas;"
-mariadb -e "CREATE USER 'www-data'@'localhost' IDENTIFIED BY ''"
-mariadb -e "GRANT ALL PRIVILEGES ON turtlenas.drives TO 'www-data'@'localhost' WITH GRANT OPTION"
     #: Create DB tables.
 mariadb -e "USE turtlenas; CREATE TABLE drives (user VARCHAR(36) PRIMARY KEY, type VARCHAR(6), disk VARCHAR(255), uuid CHAR(36) );"
 mariadb -e "USE turtlenas; CREATE TABLE files_dirs (user VARCHAR(36) PRIMARY KEY, folder VARCHAR(255), file VARCHAR(255) );"
 mariadb -e "USE turtlenas; INSERT INTO drives (user, type, disk, uuid) VALUES('admin', 'LOCAL', '$vFILESYSTEM', '$vUUID');"
+    #: Create DB Users.
+mariadb -e "CREATE DATABASE turtlenas;"
+mariadb -e "CREATE USER 'www-data'@'localhost' IDENTIFIED BY ''"
+mariadb -e "GRANT ALL PRIVILEGES ON turtlenas.drives TO 'www-data'@'localhost' WITH GRANT OPTION"
+mariadb -e "GRANT ALL PRIVILEGES ON turtlenas.files_dirs TO 'www-data'@'localhost' WITH GRANT OPTION"
 
 #: Web Server Configuration.
 echo -e "Configuring web server..."
