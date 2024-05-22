@@ -34,7 +34,7 @@ class DBcontrol {
         while ($row = $stmt->fetch()){
             $allrow = $row['type']. " ".$row['uuid']. " ".$row['disk']. " ".$row['user'];
             $data = explode(' ', $allrow);
-            return($data);
+            return $data;
         }
     }
 
@@ -47,16 +47,14 @@ class DBcontrol {
         }
     }
 
-    public function insertFileRecord($data=[]){
-//        echo $data;
-        $conn = $this->get_connection();
+    public function insertFileRecord($vname, $vfolder, $vfile){
         $username = $_SESSION['sessuser'];
-        $sql = "INSERT INTO files_dirs (user, folder, file) VALUES (?)";
-        if ($conn->query($sql) === TRUE) {
-            echo "new record recorded";
-        } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
-        }
+        $stmt = $this->get_connection()->prepare("INSERT INTO files_dirs (user, folder, file) VALUES (:vuser, :vfolder, :vfile)");
+        $stmt->execute([
+            'vuser' => $vname,
+            'vfolder' => $vfolder,
+            'vfile' => $vfile,
+        ]);
     }
 
 //    public function save_to_file_manager($data=[]){
