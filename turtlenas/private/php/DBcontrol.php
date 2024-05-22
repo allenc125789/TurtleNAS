@@ -1,19 +1,50 @@
 <?php
-
 session_start();
-
 
 class DBcontrol {
     public function redirect_login() {
         header('Location: /login.html');
     }
-    public function user_auth($username, $password) {
-        // Session Start & Tag.
-        $_SESSION['sessuser'] = $username;
 
+    public function get_connection(){
+        $servername = "localhost";
+        $username = "www-data";
+        $password = "";
+        $db = "turtlenas";
+        $conn = new mysqli($servername, $username, $password, $db);
+        //Error check.
+        if($conn->connect_error){
+            die("Connection failed. ".$conn->connect_error);
+        }
+        return $conn;
+    }
+
+    public function getAllByUser(){
+        $conn = $this->get_connection();
+        $username = $_SESSION['sessuser'];
+        $sql = "SELECT * FROM drives WHERE user = '$username'";
+        $result = $conn->query($sql);
+        $row = $result->fetch_assoc();
+        $allrow = $row['type']. " ".$row['uuid']. " ".$row['disk']. " ".$row['user'];
+        $data = explode(' ', $allrow);
+        var_dump($data);
+        $conn->close();
+    }
+
+    public function getPathByUser(){
+        $conn = $this->get_connection();
+        $username = $_SESSION['sessuser'];
+        $sql = "SELECT * FROM drives WHERE user = '$username'";
+        $result = $conn->query($sql);
+        $row = $result->fetch_assoc();
+        $path = "/media/".$row['type']. "/".$row['uuid']. "/".$row['user'];
+        return $path;
+        $conn->close();
+    }
+
+    public function user_auth($username, $password) {
         // Restricted users.
         $restricted = array("root", "sysadmin");
-
         // Deny empty strings.
         if(empty($password || $username)){
             $this->redirect_login();
@@ -31,6 +62,7 @@ class DBcontrol {
         // Successful Auth.
         if($output){
             $_SESSION['allowed'] = 1;
+            $_SESSION['sessuser'] = $username;
         // Failed Auth.
         } elseif(!$output){
             $this->redirect_login();
@@ -45,10 +77,10 @@ class DBcontrol {
         $output2 = "$command2";
         // Admin True
         if ($output2 == "1"){
-            $_SESSION['admin'] = 1;
+            $_SESSION['admin_status'] = 1;
         // Admin False
         } else{
-            $_SESSION['admin'] = 0;
+            $_SESSION['admin_status'] = 0;
         }
     }
 
@@ -64,9 +96,10 @@ class DBcontrol {
                 break;
         }
     }
+
     // Verify Privlige.
     public function validate_priv() {
-        $privlige = $_SESSION['admin'];
+        $privlige = $_SESSION['admin_status'];
         switch ($privlige) {
             case 1:
                 return true;
@@ -94,5 +127,13 @@ class DBcontrol {
         return $out;
     }
 
+    public function listDirAndSubdir() {
+        $path = $this->getPathByUser();
+        $afiles = $this->scanDirAndSubdir($path);
+        // List files in a browser format.
+        foreach ($afiles as $a2) {
+            echo "<a href='/download.php?$a2'>$a2</a><br>";
+        }
+    }
 }
 ?>

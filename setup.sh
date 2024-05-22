@@ -15,7 +15,7 @@ vUUID=$(/usr/sbin/blkid -s UUID -o value "$vFILESYSTEM")
 
 #: Dependancies.
 aDEPENDS=("gpg" "sudo" "rsync" "sshfs" "git" "nginx" "libnginx-mod-http-js" \
-    "python3-pam" "ufw" "default-mysql-server" "php8.2" "php8.2-fpm" "php-mysql")
+    "python3-pam" "ufw" "default-mysql-server" "php8.2" "php8.2-fpm" "php8.2-mysql")
     #: Dependancy Check
 apt-get install ${aDEPENDS[*]}
 if [[ $? > 0 ]]; then
@@ -37,7 +37,7 @@ mkdir -v -p "/media/LOCAL/$vUUID/admin"
     #: System Admin.
 sudo useradd -M sysadmin
     #: Admin.
-if sudo useradd -m admin; then
+if sudo useradd -M admin; then
     echo -e "This will be your Admin account. You can login with this to the web-browser, make new users, and add new connections. Make your password secure and remember it for later."
     passwd admin
 else
@@ -83,16 +83,15 @@ else
 fi
 
 #: SQL.
-    #: Create DB.
-mariadb -e "CREATE DATABASE turtlenas;"
-    #: Create table for Mapped Drive Locations.
-mariadb -e "USE turtlenas; CREATE TABLE drives (user VARCHAR(50) PRIMARY KEY, type VARCHAR(6), disk VARCHAR(10), uuid CHAR(36) );"
+    #: Create DB tables.
+mariadb -e "USE turtlenas; CREATE TABLE drives (user VARCHAR(36) PRIMARY KEY, type VARCHAR(6), disk VARCHAR(255), uuid CHAR(36) );"
+mariadb -e "USE turtlenas; CREATE TABLE files_dirs (user VARCHAR(36) PRIMARY KEY, folder VARCHAR(255), file VARCHAR(255) );"
 mariadb -e "USE turtlenas; INSERT INTO drives (user, type, disk, uuid) VALUES('admin', 'LOCAL', '$vFILESYSTEM', '$vUUID');"
-    #: Create table for the admin user.
-mariadb -e "USE turtlenas; CREATE TABLE files_admin (dir VARCHAR(100) PRIMARY KEY, file VARCHAR(100) );"
-    #: Create table for a Command Qeue to be executed by the sysadmin user.
-mariadb -e "USE turtlenas; CREATE TABLE command_qeue (user VARCHAR(50) PRIMARY KEY, command VARCHAR(6), auth INT );"
-
+    #: Create DB Users.
+mariadb -e "CREATE DATABASE turtlenas;"
+mariadb -e "CREATE USER 'www-data'@'localhost' IDENTIFIED BY ''"
+mariadb -e "GRANT ALL PRIVILEGES ON turtlenas.drives TO 'www-data'@'localhost' WITH GRANT OPTION"
+mariadb -e "GRANT ALL PRIVILEGES ON turtlenas.files_dirs TO 'www-data'@'localhost' WITH GRANT OPTION"
 
 #: Web Server Configuration.
 echo -e "Configuring web server..."
