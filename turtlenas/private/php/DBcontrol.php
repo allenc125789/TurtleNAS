@@ -2,8 +2,38 @@
 session_start();
 
 class DBcontrol {
-    public function redirect_login() {
+    private $host;
+    private $dbname;
+    private $user;
+    private $pass;
+    private $charset;
+
+    public function redirect_login(){
         header('Location: /login.html');
+    }
+
+    public function get_connection2(){
+        $this->host = "localhost";
+        $this->dbname = "turtlenas";
+        $this->user = "www-data";
+        $this->pass = "";
+        $this->charset = "utf8mb4";
+        try{
+            $dsn = "mysql:host=".$this->host.";dbname=".$this->dbname.";charset=".$this->charset;
+            $pdo = new PDO($dsn, $this->user, $this->pass);
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            return $pdo;
+        } catch (PDOException $e){
+            echo "Connection failed: ".$e->getMessage();
+        }
+    }
+
+    public function getAllUsers(){
+        $stmt = $this->get_connection2()->query("SELECT * FROM drives");
+        while ($row = $stmt->fetch()){
+            $uuid = $row['user'];
+            echo $uuid;
+        }
     }
 
     public function get_connection(){
@@ -41,6 +71,21 @@ class DBcontrol {
         return $path;
         $conn->close();
     }
+
+    public function insertFileRecord($data=[]){
+//        echo $data;
+        $conn = $this->get_connection();
+        $username = $_SESSION['sessuser'];
+        $sql = "INSERT INTO files_dirs (user, folder, file) VALUES (?)";
+        if ($conn->query($sql) === TRUE) {
+            echo "new record recorded";
+        } else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
+    }
+
+//    public function save_to_file_manager($data=[]){
+
 
     public function user_auth($username, $password) {
         // Restricted users.
@@ -118,6 +163,7 @@ class DBcontrol {
     // List Files.
             if (!is_dir($way)) {
                 $out[] = $way;
+//                $this->insertRecord($out);
     // List Directories.
             } else if ($filename != "." && $filename != "..") {
                 scanDirAndSubdir($way, $out);
