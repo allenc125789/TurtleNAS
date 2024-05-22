@@ -12,7 +12,7 @@ class DBcontrol {
         header('Location: /login.html');
     }
 
-    public function get_connection2(){
+    public function get_connection(){
         $this->host = "localhost";
         $this->dbname = "turtlenas";
         $this->user = "www-data";
@@ -28,48 +28,23 @@ class DBcontrol {
         }
     }
 
-    public function getAllUsers(){
-        $stmt = $this->get_connection2()->query("SELECT * FROM drives");
-        while ($row = $stmt->fetch()){
-            $uuid = $row['user'];
-            echo $uuid;
-        }
-    }
-
-    public function get_connection(){
-        $servername = "localhost";
-        $username = "www-data";
-        $password = "";
-        $db = "turtlenas";
-        $conn = new mysqli($servername, $username, $password, $db);
-        //Error check.
-        if($conn->connect_error){
-            die("Connection failed. ".$conn->connect_error);
-        }
-        return $conn;
-    }
-
     public function getAllByUser(){
-        $conn = $this->get_connection();
         $username = $_SESSION['sessuser'];
-        $sql = "SELECT * FROM drives WHERE user = '$username'";
-        $result = $conn->query($sql);
-        $row = $result->fetch_assoc();
-        $allrow = $row['type']. " ".$row['uuid']. " ".$row['disk']. " ".$row['user'];
-        $data = explode(' ', $allrow);
-        var_dump($data);
-        $conn->close();
+        $stmt = $this->get_connection()->query("SELECT * FROM drives WHERE user = '$username'");
+        while ($row = $stmt->fetch()){
+            $allrow = $row['type']. " ".$row['uuid']. " ".$row['disk']. " ".$row['user'];
+            $data = explode(' ', $allrow);
+            return($data);
+        }
     }
 
     public function getPathByUser(){
-        $conn = $this->get_connection();
         $username = $_SESSION['sessuser'];
-        $sql = "SELECT * FROM drives WHERE user = '$username'";
-        $result = $conn->query($sql);
-        $row = $result->fetch_assoc();
-        $path = "/media/".$row['type']. "/".$row['uuid']. "/".$row['user'];
-        return $path;
-        $conn->close();
+        $stmt = $this->get_connection()->query("SELECT * FROM drives WHERE user = '$username'");
+        while ($row = $stmt->fetch()){
+            $path = "/media/".$row['type']. "/".$row['uuid']. "/".$row['user'];
+            return $path;
+        }
     }
 
     public function insertFileRecord($data=[]){
