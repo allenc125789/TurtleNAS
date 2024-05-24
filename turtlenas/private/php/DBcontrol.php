@@ -130,18 +130,24 @@ class DBcontrol {
 
     // Function to fetch file list from directory.
     public function scanDirAndSubdir($dir, &$out = []) {
+        $sqlfolder = '';
+        $sqlfile = '';
         $username = $_SESSION['sessuser'];
+        $path = $this->getPathByUser();
         $sun = scandir($dir);
         foreach ($sun as $a => $filename) {
             $way = realpath($dir . DIRECTORY_SEPARATOR . $filename);
     // List Files.
             if (!is_dir($way)) {
+                $sqlfile = $filename;
                 $out[] = $way;
     // List Directories.
             } else if ($filename != "." && $filename != "..") {
                 $this->scanDirAndSubdir($way, $out);
+                $sqlfolder = ("$filename/");
                 $out[] = ("$way/");
             }
+            $this->insertFileRecord($username, $sqlfolder, $sqlfile);
         }
         return $out;
     }
