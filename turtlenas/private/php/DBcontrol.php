@@ -139,6 +139,7 @@ class DBcontrol {
                 $out[] = $way;
     // List Directories.
             } else if ($filename != "." && $filename != "..") {
+                $this->scanDirAndSubdir($way, $out);
                 $out[] = ("$way/");
             }
         }
