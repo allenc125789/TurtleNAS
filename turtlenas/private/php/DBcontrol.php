@@ -150,8 +150,11 @@ class DBcontrol {
                 $sqlhash = hash_file('sha224', "$way/");
                 $sqlfolder = ("$filename/");
                 $out[] = ("$way/");
+            } else if (empty($sqlhash)) {
+                continue;
             }
             $this->insertFileRecord($username, $sqlfolder, $sqlfile, $sqlhash);
+            echo ("$username, $sqlfolder, $sqlfile, $sqlhash");
         }
         return $out;
     }
