@@ -141,13 +141,13 @@ class DBcontrol {
             $way = realpath($dir . DIRECTORY_SEPARATOR . $filename);
     // List Files.
             if (!is_dir($way)) {
-                $sqlhash = hash_file('sha256', "$way");
+                $sqlhash = hash_file('sha224', "$way");
                 $sqlfile = $filename;
                 $out[] = $way;
     // List Directories.
             } else if ($filename != "." && $filename != "..") {
                 $this->scanDirAndSubdir($way, $out);
-                $sqlhash = hash_file('sha256', "$way/");
+                $sqlhash = hash_file('sha224', "$way/");
                 $sqlfolder = ("$filename/");
                 $out[] = ("$way/");
             }
