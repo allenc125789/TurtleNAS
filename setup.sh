@@ -86,7 +86,7 @@ fi
     #: Create DB tables.
 mariadb -e "CREATE DATABASE turtlenas;"
 mariadb -e "USE turtlenas; CREATE TABLE drives (user VARCHAR(36) PRIMARY KEY, type VARCHAR(6), disk VARCHAR(255), uuid CHAR(36) );"
-mariadb -e "USE turtlenas; CREATE TABLE files_dirs (user VARCHAR(36), folder VARCHAR(255), file VARCHAR(255),hash char(224) PRIMARY KEY );"
+mariadb -e "USE turtlenas; CREATE TABLE files_dirs (user VARCHAR(36), folder VARCHAR(255), file VARCHAR(255),hash char(224) );"
 mariadb -e "USE turtlenas; INSERT INTO drives (user, type, disk, uuid) VALUES('admin', 'LOCAL', '$vFILESYSTEM', '$vUUID');"
     #: Create DB Users.
 mariadb -e "CREATE USER 'www-data'@'localhost' IDENTIFIED BY ''"
