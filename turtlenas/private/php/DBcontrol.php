@@ -147,10 +147,9 @@ class DBcontrol {
     // List Directories.
             } else if ($filename != "." && $filename != "..") {
                 $this->scanDirAndSubdir($way, $out);
-                $sqlhash = '';
                 $sqlfolder = ("$filename/");
                 $out[] = ("$way/");
-            } else if (empty($sqlfolder)) {
+            } else if (empty($sqlhash)) {
                 continue;
             }
             $this->insertFileRecord($username, $sqlfolder, $sqlfile, $sqlhash);
