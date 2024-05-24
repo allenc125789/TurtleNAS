@@ -130,16 +130,15 @@ class DBcontrol {
 
     // Function to fetch file list from directory.
     public function scanDirAndSubdir($dir, &$out = []) {
+        $username = $_SESSION['sessuser'];
         $sun = scandir($dir);
         foreach ($sun as $a => $filename) {
             $way = realpath($dir . DIRECTORY_SEPARATOR . $filename);
     // List Files.
             if (!is_dir($way)) {
                 $out[] = $way;
-//                $this->insertRecord($out);
     // List Directories.
             } else if ($filename != "." && $filename != "..") {
-                scanDirAndSubdir($way, $out);
                 $out[] = ("$way/");
             }
         }
