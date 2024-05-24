@@ -47,10 +47,11 @@ class DBcontrol {
         }
     }
 
-    public function insertFileRecord($vname, $vfolder, $vfile){
+    public function insertFileRecord($vname, $vfolder, $vfile, $vhash){
         $username = $_SESSION['sessuser'];
-        $stmt = $this->get_connection()->prepare("INSERT INTO files_dirs (user, folder, file) VALUES (:vuser, :vfolder, :vfile)");
+        $stmt = $this->get_connection()->prepare("INSERT INTO files_dirs (user, folder, file, hash) VALUES (:vuser, :vfolder, :vfile, :vhash)");
         $stmt->execute([
+            'vhash' => $vhash,
             'vuser' => $vname,
             'vfolder' => $vfolder,
             'vfile' => $vfile,
@@ -130,6 +131,7 @@ class DBcontrol {
 
     // Function to fetch file list from directory.
     public function scanDirAndSubdir($dir, &$out = []) {
+        $sqlhash = '';
         $sqlfolder = '';
         $sqlfile = '';
         $username = $_SESSION['sessuser'];
@@ -139,15 +141,17 @@ class DBcontrol {
             $way = realpath($dir . DIRECTORY_SEPARATOR . $filename);
     // List Files.
             if (!is_dir($way)) {
+                $sqlhash = hash_file('sha256', "$way");
                 $sqlfile = $filename;
                 $out[] = $way;
     // List Directories.
             } else if ($filename != "." && $filename != "..") {
                 $this->scanDirAndSubdir($way, $out);
+                $sqlhash = hash_file('sha256', "$way/");
                 $sqlfolder = ("$filename/");
                 $out[] = ("$way/");
             }
-            $this->insertFileRecord($username, $sqlfolder, $sqlfile);
+            $this->insertFileRecord($username, $sqlfolder, $sqlfile, $sqlhash);
         }
         return $out;
     }
