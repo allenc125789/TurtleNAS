@@ -9,7 +9,7 @@ ini_set('display_startup_errors', 1); // display faires that didn't born
 $verify = $control->validate_auth();
 if($verify){
     // Directory to fetch. (edit path with variables "/media/$vLOCATION/$vDRIVE/$vUSER" for better reference by databases)
-    $control->listDirAndSubdir();
+    $control->updateFileRecord();
 }
 
 
