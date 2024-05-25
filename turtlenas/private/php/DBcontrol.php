@@ -47,13 +47,13 @@ class DBcontrol {
         }
     }
 
-    public function insertFileRecord($vparent, $vfullpath, $vname){
+    public function insertFileRecord($vfullpath, $vparent, $vname){
         $username = $_SESSION['sessuser'];
-        $stmt = $this->get_connection()->prepare("INSERT INTO files_$username (parent, fullpath, name) VALUES (:vparent, :vfullpath, :vname");
+        $stmt = $this->get_connection()->prepare("INSERT INTO files_$username (fullpath, parent, name) VALUES (:vfullpath, :vparent, :vname)");
         $stmt->execute([
-            'vparent' => $vhash,
-            'vfullpath' => $vname,
-            'vname' => $vfolder,
+            'vfullpath' => $vfullpath,
+            'vparent' => $vparent,
+            'vname' => $vname,
         ]);
     }
 
@@ -153,12 +153,15 @@ class DBcontrol {
         // List files in a browser format.
         foreach ($afiles as $fullpath) {
             $filename = strrchr($fullpath, "/");
-            $parent = dirname($fullpath);
-            try {
-                $this->insertFileRecords($fullpath, $parent, $filename);
-            } catch (Exception $e) {
-            continue
-            }
+            $parse = dirname($fullpath, 2) . "/";
+            $parse2 = dirname($fullpath);
+            $parent = str_replace($parse, "", $parse2) . "/";
+            echo "$parent, $fullpath";
+//            try {
+            $this->insertFileRecord($fullpath, $parent, $filename);
+//            } catch (PDOException $e) {
+//                continue;
+//            }
         }
     }
 }
