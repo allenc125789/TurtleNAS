@@ -47,14 +47,13 @@ class DBcontrol {
         }
     }
 
-    public function insertFileRecord($vname, $vfolder, $vfile, $vhash){
+    public function insertFileRecord($vparent, $vfullpath, $vname){
         $username = $_SESSION['sessuser'];
-        $stmt = $this->get_connection()->prepare("INSERT INTO files_dirs (user, folder, file, hash) VALUES (:vuser, :vfolder, :vfile, :vhash)");
+        $stmt = $this->get_connection()->prepare("INSERT INTO files_dirs (parent, fullpath, name) VALUES (:vparent, :vfullpath, :vname");
         $stmt->execute([
-            'vhash' => $vhash,
-            'vuser' => $vname,
-            'vfolder' => $vfolder,
-            'vfile' => $vfile,
+            'vparent' => $vhash,
+            'vfullpath' => $vname,
+            'vname' => $vfolder,
         ]);
     }
 
@@ -131,9 +130,6 @@ class DBcontrol {
 
     // Function to fetch file list from directory.
     public function scanDirAndSubdir($dir, &$out = []) {
-        $sqlhash = '';
-        $sqlfolder = '';
-        $sqlfile = '';
         $username = $_SESSION['sessuser'];
         $path = $this->getPathByUser();
         $sun = scandir($dir);
@@ -141,19 +137,12 @@ class DBcontrol {
             $way = realpath($dir . DIRECTORY_SEPARATOR . $filename);
     // List Files.
             if (!is_dir($way)) {
-                $sqlhash = hash_file('sha224', "$way");
-                $sqlfile = $filename;
                 $out[] = $way;
     // List Directories.
             } else if ($filename != "." && $filename != "..") {
                 $this->scanDirAndSubdir($way, $out);
-                $sqlfolder = ("$filename/");
                 $out[] = ("$way/");
-            } else if (empty($sqlhash)) {
-                continue;
             }
-            $this->insertFileRecord($username, $sqlfolder, $sqlfile, $sqlhash);
-            echo ("$username, $sqlfolder, $sqlfile, $sqlhash");
         }
         return $out;
     }
@@ -162,8 +151,14 @@ class DBcontrol {
         $path = $this->getPathByUser();
         $afiles = $this->scanDirAndSubdir($path);
         // List files in a browser format.
-        foreach ($afiles as $a2) {
-            echo "<a href='/download.php?$a2'>$a2</a><br>";
+        foreach ($afiles as $fullpath) {
+            $filename = strrchr($fullpath, "/");
+            $parent = dirname($fullpath);
+            try {
+                $this->insertFileRecords($fullpath, $parent, $filename);
+            } catch (Exception $e) {
+            continue
+            }
         }
     }
 }
