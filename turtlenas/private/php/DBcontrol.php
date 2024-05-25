@@ -146,7 +146,6 @@ class DBcontrol {
         }
         return $out;
     }
-
     public function listDirAndSubdir() {
         $path = $this->getPathByUser();
         $afiles = $this->scanDirAndSubdir($path);
@@ -155,12 +154,7 @@ class DBcontrol {
             $parse = dirname($fullpath, 2) . "/";
             $parse2 = dirname($fullpath);
             $parent = str_replace($parse, "", $parse2) . "/";
-            if (!is_dir($fullpath)) {
-                $filename = str_replace("$parse2/", "", $fullpath);
-                echo $filename;
-            } else if (is_dir($fullpath)) {
-                $filename = str_replace("$parse2/", "", $fullpath);
-            }
+            $filename = str_replace("$parse2/", "", $fullpath);
             echo "$parent, $fullpath";
             try {
                 $this->insertFileRecord($fullpath, $parent, $filename);
@@ -170,4 +164,5 @@ class DBcontrol {
         }
     }
 }
+
 ?>
