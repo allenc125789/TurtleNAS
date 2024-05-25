@@ -85,7 +85,7 @@ fi
 #: SQL.
     #: Create DB tables.
 mariadb -e "CREATE DATABASE turtlenas;"
-mariadb -e "USE turtlenas; CREATE TABLE drives (user VARCHAR(36) PRIMARY KEY, type VARCHAR(6), disk VARCHAR(255), uuid CHAR(36) );"
+mariadb -e "USE turtlenas; CREATE TABLE drives (user VARCHAR(36), type VARCHAR(6), disk VARCHAR(255), uuid CHAR(36) );"
 mariadb -e "USE turtlenas; CREATE TABLE files_admin (parent VARCHAR(255), fullpath VARCHAR(255), name VARCHAR(255) );"
 mariadb -e "USE turtlenas; INSERT INTO drives (user, type, disk, uuid) VALUES('admin', 'LOCAL', '$vFILESYSTEM', '$vUUID');"
     #: Create DB Users.
