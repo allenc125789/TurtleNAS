@@ -47,7 +47,7 @@ class DBcontrol {
         }
     }
 
-    public function insertFileRecord($vfullpath, $vparent, $vname){
+    public function getInsertFileRecord($vfullpath, $vparent, $vname){
         $username = $_SESSION['sessuser'];
         $stmt = $this->get_connection()->prepare("INSERT INTO files_$username (fullpath, parent, name) VALUES (:vfullpath, :vparent, :vname)");
         $stmt->execute([
@@ -146,7 +146,7 @@ class DBcontrol {
         }
         return $out;
     }
-    public function listDirAndSubdir() {
+    public function updateFileRecord() {
         $path = $this->getPathByUser();
         $afiles = $this->scanDirAndSubdir($path);
         // List files in a browser format.
@@ -157,7 +157,7 @@ class DBcontrol {
             $filename = str_replace("$parse2/", "", $fullpath);
             echo "$parent, $fullpath";
             try {
-                $this->insertFileRecord($fullpath, $parent, $filename);
+                $this->getInsertFileRecord($fullpath, $parent, $filename);
             } catch (PDOException $e) {
                 continue;
             }
