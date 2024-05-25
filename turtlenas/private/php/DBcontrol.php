@@ -49,7 +49,7 @@ class DBcontrol {
 
     public function insertFileRecord($vparent, $vfullpath, $vname){
         $username = $_SESSION['sessuser'];
-        $stmt = $this->get_connection()->prepare("INSERT INTO files_dirs (parent, fullpath, name) VALUES (:vparent, :vfullpath, :vname");
+        $stmt = $this->get_connection()->prepare("INSERT INTO files_$username (parent, fullpath, name) VALUES (:vparent, :vfullpath, :vname");
         $stmt->execute([
             'vparent' => $vhash,
             'vfullpath' => $vname,
