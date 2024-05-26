@@ -8,12 +8,27 @@ ini_set('display_startup_errors', 1); // display faires that didn't born
 
 $verify = $control->validate_auth();
 if($verify){
-    // Directory to fetch. (edit path with variables "/media/$vLOCATION/$vDRIVE/$vUSER" for better reference by databases)
     $control->updateFileRecord();
+    $fObject = $control->getFilesForDisplay();
 }
 
-
-
-
-// Authentication.
 ?>
+
+<html>
+<tbody>
+    <table>
+        <tr>
+            <th>File Name</th>
+            <th>Last Modified</th>
+            <th>File Size</th>
+        </tr>
+        <?php foreach($fObject as $row);?>
+        <?php $data = explode('|', $row)?>
+        <tr>
+            <td><?php echo $data[0];?></td>
+            <td><?php echo $data[1];?></td>
+            <td><?php echo $data[2];?></td>
+        </tr>
+
+</tbody>
+</html>
