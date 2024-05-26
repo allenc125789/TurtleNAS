@@ -36,13 +36,13 @@ class DBcontrol {
             return number_format($size/(1<<20),2)."MB";
         } if( (!$unit && $size >= 1<<10) || $unit == "KB"){
             return number_format($size/(1<<10),2)."KB";
-        return number_format($size)." bytes";
         }
+        return number_format($size)."B";
     }
 
     public function prepFileDate($fullpath){
         if (file_exists($fullpath)) {
-            return date("m/d/y,H:i:s", filemtime($fullpath));
+            return date("m/d/y (H:i:s)", filemtime($fullpath));
         }
     }
 
@@ -81,8 +81,8 @@ class DBcontrol {
         $stmt = $this->get_connection()->query("SELECT fullpath FROM files_$username");
         while ($row = $stmt->fetch()){
             $newpath = $row['fullpath'];
-            $data .= ("$newpath ");
-            $sqlpaths = explode(' ', $data);
+            $data .= ("$newpath|");
+            $sqlpaths = explode('|', $data);
         }
         return $sqlpaths;
     }
@@ -101,8 +101,8 @@ class DBcontrol {
             'vfullpath' => $vfullpath,
             'vparent' => $vparent,
             'vname' => $vname,
-            'date' => $vdate,
-            'size' => $vsize,
+            'vdate' => $vdate,
+            'vsize' => $vsize,
         ]);
     }
 
