@@ -28,7 +28,7 @@ class DBcontrol {
         }
     }
 
-    public function getAllByUser(){
+    public function getDiskByUser(){
         $username = $_SESSION['sessuser'];
         $stmt = $this->get_connection()->query("SELECT * FROM drives WHERE user = '$username'");
         while ($row = $stmt->fetch()){
@@ -36,6 +36,39 @@ class DBcontrol {
             $data = explode(' ', $allrow);
             return $data;
         }
+    }
+
+    public function get_fullpath_ByUser(){
+        $username = $_SESSION['sessuser'];
+        $sfullpath = '';
+        $stmt = $this->get_connection()->query("SELECT * FROM files_$username");
+        while ($row = $stmt->fetch()){
+            $sfullpath .= $row['fullpath']. " ";
+            $fullpath = explode (' ', $sfullpath);
+        }
+        return $fullpath;
+    }
+
+    public function get_parent_ByUser(){
+        $username = $_SESSION['sessuser'];
+        $sparent = '';
+        $stmt = $this->get_connection()->query("SELECT * FROM files_$username");
+        while ($row = $stmt->fetch()){
+            $sparent .= $row['parent']. " ";
+            $parent = explode (' ', $sparent);
+        }
+            return $parent;
+    }
+
+    public function get_name_ByUser(){
+        $username = $_SESSION['sessuser'];
+        $sfilename = '';
+        $stmt = $this->get_connection()->query("SELECT * FROM files_$username");
+        while ($row = $stmt->fetch()){
+            $sfilename .= $row['name']. " ";
+            $filename = explode (' ', $sfilename);
+        }
+            return $filename;
     }
 
     public function getRootByUser(){
@@ -64,7 +97,6 @@ class DBcontrol {
         $stmt = $this->get_connection()->prepare("DELETE FROM files_$username WHERE fullpath = :vfullpath");
         $stmt->bindParam(':vfullpath', $vfullpath, PDO::PARAM_STR);
         $stmt->execute(['vfullpath' => $vfullpath]);
-        echo $vfullpath;
     }
 
     public function getInsertFileRecord($vfullpath, $vparent, $vname){
@@ -168,19 +200,18 @@ class DBcontrol {
     }
 
     public function updateFileRecord() {
-        echo "test";
         $root = $this->getRootByUser();
         $afiles = $this->scanDirAndSubdir($root);
         $sqlcheck = $this->getPathByPath();
+        // Remove old files from database.
         foreach ($sqlcheck as $sqlpath) {
             if (!file_exists($sqlpath)) {
                 $this->deleteRecordByPath($sqlpath);
-//                echo $sqlpath;
             } else {
                 continue;
             }
         }
-        // List files in a browser format.
+        // Insert new files into database.
         foreach ($afiles as $fullpath) {
             $parse = dirname($fullpath, 2) . "/";
             $parse2 = dirname($fullpath);
