@@ -22,13 +22,13 @@ if($verify){
             <th>Last Modified</th>
             <th>File Size</th>
         </tr>
-        <?php foreach($fObject as $row);?>
-        <?php $data = explode('|', $row)?>
+        <?php foreach($fObject as $row):?>
+        <?php $data = explode('|', $row);?>
         <tr>
             <td><?php echo $data[0];?></td>
             <td><?php echo $data[1];?></td>
             <td><?php echo $data[2];?></td>
+            <?php endforeach;?>
         </tr>
-
 </tbody>
 </html>
