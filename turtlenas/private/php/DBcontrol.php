@@ -50,21 +50,31 @@ class DBcontrol {
         $username = $_SESSION['sessuser'];
         $stmt = $this->get_connection()->query("SELECT * FROM drives WHERE user = '$username'");
         while ($row = $stmt->fetch()){
-            $allrow = $row['type']. "|".$row['uuid']. "|".$row['disk']. "|".$row['user'];
-            $data = explode('|', $allrow);
-            return $data;
+            $allrows = $row['type']. "|".$row['uuid']. "|".$row['disk']. ";|".$row['user'];
+            $data[] = $allrows;
         }
+        return $data;
     }
 
     public function getFilesForDisplay(){
         $username = $_SESSION['sessuser'];
         $stmt = $this->get_connection()->query("SELECT * FROM files_$username");
         while ($row = $stmt->fetch()){
-            $allrow = $row['name']. "|".$row['modified']. "|".$row['size'];
-            $data = explode('|', $allrow);
-            return $data;
+//            foreach ($row as $a){
+            $allrows = $row['name']. "|".$row['date']. "|".$row['size']. "|".$row['fullpath'];
+            $data[] = $allrows;
+//            }
+//            return $allrows;
         }
+        return $data;
     }
+
+//    public function displayFiles(){
+//        $records = $this->getFilesForDisplay();
+//        foreach($records as $file){
+//            echo ($file);
+//        }
+//    }
 
     public function getRootByUser(){
         $username = $_SESSION['sessuser'];
