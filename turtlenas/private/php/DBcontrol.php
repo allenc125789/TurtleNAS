@@ -44,8 +44,9 @@ class DBcontrol {
         $stmt = $this->get_connection()->query("SELECT * FROM files_$username");
         while ($row = $stmt->fetch()){
             $sfullpath .= $row['fullpath']. " ";
-            $fullpath = explode (' ', $sfullpath);
         }
+        $trim = rtrim($sfullpath);
+        $fullpath = explode (' ', $trim);
         return $fullpath;
     }
 
@@ -57,7 +58,9 @@ class DBcontrol {
             $sparent .= $row['parent']. " ";
             $parent = explode (' ', $sparent);
         }
-            return $parent;
+        $trim = rtrim($sparent);
+        $fullpath = explode (' ', $trim);
+        return $parent;
     }
 
     public function get_name_ByUser(){
@@ -68,7 +71,9 @@ class DBcontrol {
             $sfilename .= $row['name']. " ";
             $filename = explode (' ', $sfilename);
         }
-            return $filename;
+        $trim = rtrim($sfilename);
+        $fullpath = explode (' ', $trim);
+        return $filename;
     }
 
     public function getRootByUser(){
