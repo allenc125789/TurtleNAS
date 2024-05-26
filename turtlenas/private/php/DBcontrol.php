@@ -54,17 +54,18 @@ class DBcontrol {
         while ($row = $stmt->fetch()){
             $newpath = $row['fullpath'];
             $data .= ("$newpath ");
+            $sqlpaths = explode(' ', $data);
         }
-        return $data;
+        return $sqlpaths;
     }
 
-//    public function getDeleteRecordByPath($fullpath){
-//        $username = $_SESSION['sessuser'];
-//        $stmt = $this->get_connection()->prepare("DELETE FROM files_$username WHERE fullpath = :vfullpath");
-//        $stmt->bindParam(':vfullpath', $fullpath, PDO::PARAM_STR);
-//        $stmt->execute();
-//        echo $fullpath;
-//    }
+    public function deleteRecordByPath($vfullpath){
+        $username = $_SESSION['sessuser'];
+        $stmt = $this->get_connection()->prepare("DELETE FROM files_$username WHERE fullpath = :vfullpath");
+        $stmt->bindParam(':vfullpath', $vfullpath, PDO::PARAM_STR);
+        $stmt->execute(['vfullpath' => $vfullpath]);
+        echo $vfullpath;
+    }
 
     public function getInsertFileRecord($vfullpath, $vparent, $vname){
         $username = $_SESSION['sessuser'];
@@ -165,11 +166,20 @@ class DBcontrol {
         }
         return $out;
     }
+
     public function updateFileRecord() {
+        echo "test";
         $root = $this->getRootByUser();
         $afiles = $this->scanDirAndSubdir($root);
         $sqlcheck = $this->getPathByPath();
-        var_dump($sqlcheck);
+        foreach ($sqlcheck as $sqlpath) {
+            if (!file_exists($sqlpath)) {
+                $this->deleteRecordByPath($sqlpath);
+//                echo $sqlpath;
+            } else {
+                continue;
+            }
+        }
         // List files in a browser format.
         foreach ($afiles as $fullpath) {
             $parse = dirname($fullpath, 2) . "/";
