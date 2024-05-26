@@ -28,50 +28,42 @@ class DBcontrol {
         }
     }
 
+    public function prepFileSize($fullpath, $unit=''){
+        $size = filesize($fullpath);
+        if( (!$unit && $size >= 1<<30) || $unit == "GB"){
+            return number_format($size/(1<<30),2)."GB";
+        } if( (!$unit && $size >= 1<<20) || $unit == "MB"){
+            return number_format($size/(1<<20),2)."MB";
+        } if( (!$unit && $size >= 1<<10) || $unit == "KB"){
+            return number_format($size/(1<<10),2)."KB";
+        return number_format($size)." bytes";
+        }
+    }
+
+    public function prepFileDate($fullpath){
+        if (file_exists($fullpath)) {
+            return date("m/d/y,H:i:s", filemtime($fullpath));
+        }
+    }
+
     public function getDiskByUser(){
         $username = $_SESSION['sessuser'];
         $stmt = $this->get_connection()->query("SELECT * FROM drives WHERE user = '$username'");
         while ($row = $stmt->fetch()){
-            $allrow = $row['type']. " ".$row['uuid']. " ".$row['disk']. " ".$row['user'];
-            $data = explode(' ', $allrow);
+            $allrow = $row['type']. "|".$row['uuid']. "|".$row['disk']. "|".$row['user'];
+            $data = explode('|', $allrow);
             return $data;
         }
     }
 
-    public function get_fullpath_ByUser(){
+    public function getFilesForDisplay(){
         $username = $_SESSION['sessuser'];
-        $sfullpath = '';
         $stmt = $this->get_connection()->query("SELECT * FROM files_$username");
         while ($row = $stmt->fetch()){
-            $sfullpath .= $row['fullpath']. " ";
+            $allrow = $row['name']. "|".$row['modified']. "|".$row['size'];
+            $data = explode('|', $allrow);
+            return $data;
         }
-        $trim = rtrim($sfullpath);
-        $fullpath = explode (' ', $trim);
-        return $fullpath;
-    }
-
-    public function get_parent_ByUser(){
-        $username = $_SESSION['sessuser'];
-        $sparent = '';
-        $stmt = $this->get_connection()->query("SELECT * FROM files_$username");
-        while ($row = $stmt->fetch()){
-            $sparent .= $row['parent']. " ";
-        }
-        $trim = rtrim($sparent);
-        $parent = explode (' ', $trim);
-        return $parent;
-    }
-
-    public function get_name_ByUser(){
-        $username = $_SESSION['sessuser'];
-        $sfilename = '';
-        $stmt = $this->get_connection()->query("SELECT * FROM files_$username");
-        while ($row = $stmt->fetch()){
-            $sfilename .= $row['name']. " ";
-        }
-        $trim = rtrim($sfilename);
-        $filename = explode (' ', $trim);
-        return $filename;
     }
 
     public function getRootByUser(){
@@ -102,13 +94,15 @@ class DBcontrol {
         $stmt->execute(['vfullpath' => $vfullpath]);
     }
 
-    public function getInsertFileRecord($vfullpath, $vparent, $vname){
+    public function getInsertFileRecord($vfullpath, $vparent, $vname, $vdate, $vsize){
         $username = $_SESSION['sessuser'];
-        $stmt = $this->get_connection()->prepare("INSERT INTO files_$username (fullpath, parent, name) VALUES (:vfullpath, :vparent, :vname)");
+        $stmt = $this->get_connection()->prepare("INSERT INTO files_$username (fullpath, parent, name, date, size) VALUES (:vfullpath, :vparent, :vname, :vdate, :vsize)");
         $stmt->execute([
             'vfullpath' => $vfullpath,
             'vparent' => $vparent,
             'vname' => $vname,
+            'date' => $vdate,
+            'size' => $vsize,
         ]);
     }
 
@@ -220,8 +214,11 @@ class DBcontrol {
             $parse2 = dirname($fullpath);
             $parent = str_replace($parse, "", $parse2) . "/";
             $filename = str_replace("$parse2/", "", $fullpath);
+        // need to make the following functions.
+            $date = $this->prepFileDate($fullpath);
+            $size = $this->prepFileSize($fullpath);
             try {
-                $this->getInsertFileRecord($fullpath, $parent, $filename);
+                $this->getInsertFileRecord($fullpath, $parent, $filename, $date, $size);
             } catch (PDOException $e) {
                 continue;
             }
