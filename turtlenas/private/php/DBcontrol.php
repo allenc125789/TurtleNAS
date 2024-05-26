@@ -104,6 +104,16 @@ class DBcontrol {
         return $sqlpaths;
     }
 
+    public function getHashByPath($fullpath){
+        $data = '';
+        $username = $_SESSION['sessuser'];
+        $stmt = $this->get_connection()->query("SELECT fullpath FROM files_$username");
+        while ($row = $stmt->fetch()){
+            $sqlhash = $row['hash'];
+        }
+        return $sqlhash;
+    }
+
     public function deleteRecordByPath($vfullpath){
         $username = $_SESSION['sessuser'];
         $stmt = $this->get_connection()->prepare("DELETE FROM files_$username WHERE fullpath = :vfullpath");
@@ -217,10 +227,14 @@ class DBcontrol {
     public function updateFileRecord() {
         $root = $this->getRootByUser();
         $afiles = $this->scanDirAndSubdir($root);
-        $sqlcheck = $this->getPathByPath();
+        $sqlpathcheck = $this->getPathByPath();
         // Remove old files from database.
         foreach ($sqlcheck as $sqlpath) {
+            $sqlhashcheck = $this->getHashByPath($sqlpath);
+            $realhash = $this->prepFileHash($sqlpath);
             if (!file_exists($sqlpath)) {
+                $this->deleteRecordByPath($sqlpath);
+            } elseif ($sqlhashcheck == $realhash) {
                 $this->deleteRecordByPath($sqlpath);
             } else {
                 continue;
@@ -232,7 +246,7 @@ class DBcontrol {
             $filename = str_replace($parent, "", $fullpath);
             $date = $this->prepFileDate($fullpath);
             $size = $this->prepFileSize($fullpath);
-            $hash = $this->prepFilehash($fullpath);
+            $hash = $this->prepFileHash($fullpath);
             try {
                 $this->getInsertFileRecord($fullpath, $parent, $filename, $date, $size, $hash);
             } catch (PDOException $e) {
