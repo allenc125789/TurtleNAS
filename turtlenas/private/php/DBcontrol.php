@@ -38,14 +38,33 @@ class DBcontrol {
         }
     }
 
-    public function getPathByUser(){
+    public function getRootByUser(){
         $username = $_SESSION['sessuser'];
         $stmt = $this->get_connection()->query("SELECT * FROM drives WHERE user = '$username'");
         while ($row = $stmt->fetch()){
-            $path = "/media/".$row['type']. "/".$row['uuid']. "/".$row['user'];
-            return $path;
+            $root = "/media/".$row['type']. "/".$row['uuid']. "/".$row['user'];
+            return $root;
         }
     }
+
+    public function getPathByPath(){
+        $data = '';
+        $username = $_SESSION['sessuser'];
+        $stmt = $this->get_connection()->query("SELECT fullpath FROM files_$username");
+        while ($row = $stmt->fetch()){
+            $newpath = $row['fullpath'];
+            $data .= ("$newpath ");
+        }
+        return $data;
+    }
+
+//    public function getDeleteRecordByPath($fullpath){
+//        $username = $_SESSION['sessuser'];
+//        $stmt = $this->get_connection()->prepare("DELETE FROM files_$username WHERE fullpath = :vfullpath");
+//        $stmt->bindParam(':vfullpath', $fullpath, PDO::PARAM_STR);
+//        $stmt->execute();
+//        echo $fullpath;
+//    }
 
     public function getInsertFileRecord($vfullpath, $vparent, $vname){
         $username = $_SESSION['sessuser'];
@@ -131,7 +150,7 @@ class DBcontrol {
     // Function to fetch file list from directory.
     public function scanDirAndSubdir($dir, &$out = []) {
         $username = $_SESSION['sessuser'];
-        $path = $this->getPathByUser();
+        $root = $this->getRootByUser();
         $sun = scandir($dir);
         foreach ($sun as $a => $filename) {
             $way = realpath($dir . DIRECTORY_SEPARATOR . $filename);
@@ -147,15 +166,16 @@ class DBcontrol {
         return $out;
     }
     public function updateFileRecord() {
-        $path = $this->getPathByUser();
-        $afiles = $this->scanDirAndSubdir($path);
+        $root = $this->getRootByUser();
+        $afiles = $this->scanDirAndSubdir($root);
+        $sqlcheck = $this->getPathByPath();
+        var_dump($sqlcheck);
         // List files in a browser format.
         foreach ($afiles as $fullpath) {
             $parse = dirname($fullpath, 2) . "/";
             $parse2 = dirname($fullpath);
             $parent = str_replace($parse, "", $parse2) . "/";
             $filename = str_replace("$parse2/", "", $fullpath);
-            echo "$parent, $fullpath";
             try {
                 $this->getInsertFileRecord($fullpath, $parent, $filename);
             } catch (PDOException $e) {
