@@ -56,10 +56,9 @@ class DBcontrol {
         $stmt = $this->get_connection()->query("SELECT * FROM files_$username");
         while ($row = $stmt->fetch()){
             $sparent .= $row['parent']. " ";
-            $parent = explode (' ', $sparent);
         }
         $trim = rtrim($sparent);
-        $fullpath = explode (' ', $trim);
+        $parent = explode (' ', $trim);
         return $parent;
     }
 
@@ -69,10 +68,9 @@ class DBcontrol {
         $stmt = $this->get_connection()->query("SELECT * FROM files_$username");
         while ($row = $stmt->fetch()){
             $sfilename .= $row['name']. " ";
-            $filename = explode (' ', $sfilename);
         }
         $trim = rtrim($sfilename);
-        $fullpath = explode (' ', $trim);
+        $filename = explode (' ', $trim);
         return $filename;
     }
 
