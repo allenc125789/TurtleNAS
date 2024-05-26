@@ -214,7 +214,6 @@ class DBcontrol {
             $parse2 = dirname($fullpath);
             $parent = str_replace($parse, "", $parse2) . "/";
             $filename = str_replace("$parse2/", "", $fullpath);
-        // need to make the following functions.
             $date = $this->prepFileDate($fullpath);
             $size = $this->prepFileSize($fullpath);
             try {
