@@ -210,10 +210,8 @@ class DBcontrol {
         }
         // Insert new files into database.
         foreach ($afiles as $fullpath) {
-            $parse = dirname($fullpath, 2) . "/";
-            $parse2 = dirname($fullpath);
-            $parent = str_replace($parse, "", $parse2) . "/";
-            $filename = str_replace("$parse2/", "", $fullpath);
+            $parent = dirname($fullpath) . "/";
+            $filename = str_replace($parent, "", $fullpath);
             $date = $this->prepFileDate($fullpath);
             $size = $this->prepFileSize($fullpath);
             try {
