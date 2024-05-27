@@ -106,8 +106,9 @@ class DBcontrol {
 
     public function getHashByPath($fullpath){
         $data = '';
+        $sqlhash = '';
         $username = $_SESSION['sessuser'];
-        $stmt = $this->get_connection()->query("SELECT fullpath FROM files_$username");
+        $stmt = $this->get_connection()->query("SELECT hash FROM files_$username WHERE fullpath = '$fullpath'");
         while ($row = $stmt->fetch()){
             $sqlhash = $row['hash'];
         }
@@ -121,7 +122,7 @@ class DBcontrol {
         $stmt->execute(['vfullpath' => $vfullpath]);
     }
 
-    public function getInsertFileRecord($vfullpath, $vparent, $vname, $vdate, $vsize){
+    public function getInsertFileRecord($vfullpath, $vparent, $vname, $vdate, $vsize, $vhash){
         $username = $_SESSION['sessuser'];
         $stmt = $this->get_connection()->prepare("INSERT INTO files_$username (fullpath, parent, name, date, size, hash) VALUES (:vfullpath, :vparent, :vname, :vdate, :vsize, :vhash)");
         $stmt->execute([
@@ -229,12 +230,12 @@ class DBcontrol {
         $afiles = $this->scanDirAndSubdir($root);
         $sqlpathcheck = $this->getPathByPath();
         // Remove old files from database.
-        foreach ($sqlcheck as $sqlpath) {
+        foreach ($sqlpathcheck as $sqlpath) {
             $sqlhashcheck = $this->getHashByPath($sqlpath);
             $realhash = $this->prepFileHash($sqlpath);
             if (!file_exists($sqlpath)) {
                 $this->deleteRecordByPath($sqlpath);
-            } elseif ($sqlhashcheck == $realhash) {
+            } elseif ($sqlhashcheck !== $realhash) {
                 $this->deleteRecordByPath($sqlpath);
             } else {
                 continue;
