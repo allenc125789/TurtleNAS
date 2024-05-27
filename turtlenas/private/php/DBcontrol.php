@@ -68,22 +68,11 @@ class DBcontrol {
         $username = $_SESSION['sessuser'];
         $stmt = $this->get_connection()->query("SELECT * FROM files_$username");
         while ($row = $stmt->fetch()){
-//            foreach ($row as $a){
             $allrows = $row['name']. "|".$row['date']. "|".$row['size']. "|".$row['fullpath'];
             $data[] = $allrows;
-//            }
-//            return $allrows;
         }
         return $data;
     }
-
-//    public function displayFiles(){
-//        $records = $this->getFilesForDisplay();
-//        foreach($records as $file){
-//            echo ($file);
-//        }
-//    }
-
 
     public function getRootByUser(){
         $username = $_SESSION['sessuser'];
@@ -235,9 +224,7 @@ class DBcontrol {
         foreach ($sqlpathcheck as $sqlpath) {
             $sqlhashcheck = $this->getHashByPath($sqlpath);
             $realhash = $this->prepFileHash($sqlpath);
-            if (!file_exists($sqlpath)) {
-                $this->deleteRecordByPath($sqlpath);
-            } elseif ($sqlhashcheck !== $realhash) {
+            if ((!file_exists($sqlpath)) && ($sqlhashcheck !== $realhash)) {
                 $this->deleteRecordByPath($sqlpath);
             } else {
                 continue;
