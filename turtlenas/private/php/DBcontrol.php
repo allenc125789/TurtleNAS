@@ -47,8 +47,10 @@ class DBcontrol {
     }
 
     public function prepFileHash($fullpath){
-        if (file_exists($fullpath)) {
+        if ((file_exists($fullpath)) && (!is_dir($fullpath))) {
             return hash_file('sha224', "$fullpath");
+        } else {
+            return '';
         }
     }
 
