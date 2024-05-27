@@ -25,7 +25,7 @@ if($verify){
         <?php foreach($fObject as $row):?>
         <?php $data = explode('|', $row);?>
         <tr>
-            <td><?php echo $data[0];?></td>
+            <td><?php echo "<a href='/download.php?$data[3]'>$data[0]";?></td>
             <td><?php echo $data[1];?></td>
             <td><?php echo $data[2];?></td>
             <?php endforeach;?>
