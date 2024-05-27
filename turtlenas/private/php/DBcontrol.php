@@ -224,7 +224,7 @@ class DBcontrol {
         foreach ($sqlpathcheck as $sqlpath) {
             $sqlhashcheck = $this->getHashByPath($sqlpath);
             $realhash = $this->prepFileHash($sqlpath);
-            if ((!file_exists($sqlpath)) && ($sqlhashcheck !== $realhash)) {
+            if ((!file_exists($sqlpath)) || ($sqlhashcheck !== $realhash)) {
                 $this->deleteRecordByPath($sqlpath);
             } else {
                 continue;
