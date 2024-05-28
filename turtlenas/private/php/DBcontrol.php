@@ -78,7 +78,7 @@ class DBcontrol {
 
     public function getFullPath($shortpath){
         $root = $this->getRootByUser();
-        $filename = str_replace($root . $shortpath);
+        $filename = ($root . $shortpath);
         return $filename;
     }
 
