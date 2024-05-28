@@ -64,16 +64,6 @@ class DBcontrol {
         return $data;
     }
 
-    public function switchWorkingDir($newparent){
-        $newparent = $_SERVER['QUERY_STRING'];
-        $root = $this->getRootByUser();
-        if(!is_null($newparent)){
-            $_SESSION['cwd'] = $newparent;
-        } else{
-            $_SESSION['cwd'] = $root;
-        }
-    }
-
     public function getShortPath($fullpath){
         $root = $this->getRootByUser();
         $parse = dirname($fullpath). '/';
