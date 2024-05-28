@@ -64,11 +64,40 @@ class DBcontrol {
         return $data;
     }
 
+    public function switchWorkingDir($newparent){
+        $newparent = $_SERVER['QUERY_STRING'];
+        $root = $this->getRootByUser();
+        if(!is_null($newparent)){
+            $_SESSION['cwd'] = $newparent;
+        } else{
+            $_SESSION['cwd'] = $root;
+        }
+    }
+
+    public function getShortPath($fullpath){
+        $root = $this->getRootByUser();
+        $parse = dirname($fullpath). '/';
+        $parent = str_replace($root,'',$fullpath);
+        $filename = str_replace($parse, '', $fullpath);
+        if(is_dir($fullpath)){
+            return $parent;
+        } else{
+            return $filename;
+        }
+    }
+
+    public function getFullPath($shortpath){
+        $root = $this->getRootByUser();
+        $filename = str_replace($root . $shortpath);
+        return $filename;
+    }
+
     public function getFilesForDisplay(){
         $username = $_SESSION['sessuser'];
-        $stmt = $this->get_connection()->query("SELECT * FROM files_$username");
+        $parent = $_SERVER['QUERY_STRING'];
+        $stmt = $this->get_connection()->query("SELECT * FROM files_$username WHERE parent = '$parent'");
         while ($row = $stmt->fetch()){
-            $allrows = $row['name']. "|".$row['date']. "|".$row['size']. "|".$row['fullpath'];
+            $allrows = $row['fullpath']. "|".$row['name']. "|".$row['date']. "|".$row['size']. "|".$row['parent'];
             $data[] = $allrows;
         }
         return $data;
@@ -78,7 +107,7 @@ class DBcontrol {
         $username = $_SESSION['sessuser'];
         $stmt = $this->get_connection()->query("SELECT * FROM drives WHERE user = '$username'");
         while ($row = $stmt->fetch()){
-            $root = "/media/".$row['type']. "/".$row['uuid']. "/".$row['user'];
+            $root = "/media/".$row['type']. "/".$row['uuid']. "/".$row['user']. "/";
             return $root;
         }
     }
@@ -127,7 +156,6 @@ class DBcontrol {
     }
 
 //    public function save_to_file_manager($data=[]){
-
 
     public function user_auth($username, $password) {
         // Restricted users.
@@ -232,8 +260,9 @@ class DBcontrol {
         }
         // Insert new files into database.
         foreach ($afiles as $fullpath) {
-            $parent = dirname($fullpath) . "/";
-            $filename = str_replace($parent, "", $fullpath);
+            $parse = dirname($fullpath). '/';
+            $parent = str_replace($root, '/', $parse);
+            $filename = str_replace($parse, '', $fullpath);
             $date = $this->prepFileDate($fullpath);
             $size = $this->prepFileSize($fullpath);
             $hash = $this->prepFileHash($fullpath);
