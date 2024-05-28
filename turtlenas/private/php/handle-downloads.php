@@ -1,12 +1,13 @@
 <?php
-
-session_start();
+include "../private/php/DBcontrol.php";
+$control = new DBcontrol;
 
 // Verify Session and download.
 $validated = $_SESSION['allowed'];
 switch ($validated) {
     case 1:
-        $file = $_SERVER['QUERY_STRING'];
+        $query = $_SERVER['QUERY_STRING'];
+        $file = $control->getFullPath($query);
         header('Content-Description: File Transfer');
         header('Content-Disposition: attachment; filename=' . basename($file));
         header('Content-Transfer-Encoding: binary');
