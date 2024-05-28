@@ -10,6 +10,7 @@ $verify = $control->validate_auth();
 if($verify){
     $control->updateFileRecord();
     $fObject = $control->getFilesForDisplay();
+//    $control->switchWorkingDir();
 }
 
 ?>
@@ -25,7 +26,11 @@ if($verify){
         <?php foreach($fObject as $row):?>
         <?php $data = explode('|', $row);?>
         <tr>
-            <td><?php echo "<a href='/download.php?$data[3]'>$data[0]";?></td>
+            <?php if (is_dir($data[0])):?>
+                <td><?php echo "<a href='/browser.php?/$data[1]'>$data[1]";?></td>
+            <?php else :?>
+                <td><?php echo "<a href='/download.php?$data[1]'>$data[1]";?></td>
+            <?php endif; ?>
             <td><?php echo $data[1];?></td>
             <td><?php echo $data[2];?></td>
             <?php endforeach;?>
