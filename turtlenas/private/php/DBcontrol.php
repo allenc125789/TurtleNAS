@@ -65,14 +65,14 @@ class DBcontrol {
     }
 
     public function getShortPath($fullpath){
+        $username = $_SESSION['sessuser'];
         $root = $this->getRootByUser();
-        $parse = dirname($fullpath). '/';
         $parent = str_replace($root,'',$fullpath);
-        $filename = str_replace($parse, '', $fullpath);
-        if(is_dir($fullpath)){
+        if ("$fullpath/" == $root){
+            $parent = '/';
             return $parent;
-        } else{
-            return $filename;
+        } else {
+            return "/$parent/";
         }
     }
 
@@ -91,6 +91,7 @@ class DBcontrol {
             $data[] = $allrows;
         }
         return $data;
+//        var_dump($data);
     }
 
     public function getRootByUser(){
@@ -102,15 +103,26 @@ class DBcontrol {
         }
     }
 
+
+// need to use filename, grab parent. session passes current folder.
     public function getParentByQuery(){
         $username = $_SESSION['sessuser'];
         $query = $_SERVER['QUERY_STRING'];
-        $parse = ltrim($query, '/');
-        $stmt = $this->get_connection()->query("SELECT parent FROM files_$username WHERE name = '$parse'");
+        $root = $this->getRootByUser();
+        if ($query !== "/"){
+            $query = ltrim($query, '/');
+            $query = $this->getFullPath($query);
+            $query = dirname($query);
+            $query = $this->getShortPath($query);
+            return $query;
+        }
+        $stmt = $this->get_connection()->query("SELECT parent FROM files_$username WHERE name = '$query'");
         while ($row = $stmt->fetch()){
             $parent = $row['parent'];
             return $parent;
+
         }
+//        return $query;
     }
 
     public function getPathByPath(){
@@ -240,6 +252,8 @@ class DBcontrol {
             } else if ($filename != "." && $filename != "..") {
                 $this->scanDirAndSubdir($way, $out);
                 $out[] = ("$way/");
+//            } else if ($filename == "..") {
+//                $out[] = ("$way/");
             }
         }
         return $out;
@@ -273,6 +287,13 @@ class DBcontrol {
             } catch (PDOException $e) {
                 continue;
             }
+//            if ($filename == "../"){
+//                try {
+//                    $this->getInsertFileRecord($fullpath, $parent, $filename, '', '', '');
+//                } catch (PDOException $e) {
+//                    continue;
+//                }
+//            }
         }
     }
 
