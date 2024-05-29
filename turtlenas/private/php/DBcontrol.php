@@ -61,7 +61,7 @@ class DBcontrol {
             $allrows = $row['type']. "|".$row['uuid']. "|".$row['disk']. ";|".$row['user'];
             $data[] = $allrows;
         }
-        return $data;
+        return $username;
     }
 
     public function getShortPath($fullpath){
@@ -99,6 +99,17 @@ class DBcontrol {
         while ($row = $stmt->fetch()){
             $root = "/media/".$row['type']. "/".$row['uuid']. "/".$row['user']. "/";
             return $root;
+        }
+    }
+
+    public function getParentByQuery(){
+        $username = $_SESSION['sessuser'];
+        $query = $_SERVER['QUERY_STRING'];
+        $parse = ltrim($query, '/');
+        $stmt = $this->get_connection()->query("SELECT parent FROM files_$username WHERE name = '$parse'");
+        while ($row = $stmt->fetch()){
+            $parent = $row['parent'];
+            return $parent;
         }
     }
 
@@ -219,7 +230,7 @@ class DBcontrol {
     public function scanDirAndSubdir($dir, &$out = []) {
         $username = $_SESSION['sessuser'];
         $root = $this->getRootByUser();
-        $sun = scandir($dir);
+        $sun = scandir(($dir));
         foreach ($sun as $a => $filename) {
             $way = realpath($dir . DIRECTORY_SEPARATOR . $filename);
     // List Files.
@@ -235,6 +246,7 @@ class DBcontrol {
     }
 
     public function updateFileRecord() {
+        $username = $_SESSION['sessuser'];
         $root = $this->getRootByUser();
         $afiles = $this->scanDirAndSubdir($root);
         $sqlpathcheck = $this->getPathByPath();
@@ -263,6 +275,7 @@ class DBcontrol {
             }
         }
     }
+
 }
 
 ?>
