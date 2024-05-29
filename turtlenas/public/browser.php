@@ -13,9 +13,6 @@ if($verify){
     $query = $control->getParentByQuery();
     $username = $_SESSION['sessuser'];
 }
-
-var_dump($query);
-
 ?>
 
 <html>
