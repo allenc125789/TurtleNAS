@@ -34,8 +34,8 @@ if($verify){
             <?php else:?>
                 <td><?php echo "<a href='/download.php?$data[1]'>$data[1]";?></td>
             <?php endif;?>
-            <td><?php echo $data[1];?></td>
             <td><?php echo $data[2];?></td>
+            <td><?php echo $data[3];?></td>
             <?php endforeach;?>
         </tr>
 </tbody>
