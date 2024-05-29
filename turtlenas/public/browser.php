@@ -10,8 +10,12 @@ $verify = $control->validate_auth();
 if($verify){
     $control->updateFileRecord();
     $fObject = $control->getFilesForDisplay();
-    $query = $control->getParentByQuery();
+    $query = $_SERVER['QUERY_STRING'];
+    $queryparent = $control->getParentByQuery();
     $username = $_SESSION['sessuser'];
+}
+if ($query == NULL){
+    header('Location: /browser.php?/');
 }
 ?>
 
@@ -23,8 +27,8 @@ if($verify){
             <th>Last Modified</th>
             <th>File Size</th>
         </tr>
-        <?php if (!is_null($query)):?>
-        <td><?php echo "<a href='/browser.php?$query'>../";?></td>
+        <?php if (!is_null($queryparent)):?>
+        <td><?php echo "<a href='/browser.php?$queryparent'>../";?></td>
         <?php endif;?>
         <?php foreach($fObject as $row):?>
         <?php $data = explode('|', $row);?>
