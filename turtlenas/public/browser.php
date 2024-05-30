@@ -14,8 +14,9 @@ if($verify){
     $queryparent = $control->getParentByQuery();
     $username = $_SESSION['sessuser'];
 }
-if ($query == NULL){
+if ($query == NULL || $username == NULL){
     header('Location: /browser.php?/');
+    header('Location: /login.html');
 }
 ?>
 
@@ -27,16 +28,18 @@ if ($query == NULL){
             <th>Last Modified</th>
             <th>File Size</th>
         </tr>
-        <?php if (!is_null($queryparent)):?>
-        <td><?php echo "<a href='/browser.php?$queryparent'>../";?></td>
-        <?php endif;?>
-        <?php foreach($fObject as $row):?>
-        <?php $data = explode('|', $row);?>
+        <tr>
+            <?php if (!is_null($queryparent)):?>
+            <td><?php echo "<a href='/browser.php?$queryparent'>../";?></td>
+            <?php endif;?>
+            <?php foreach($fObject as $row):?>
+            <?php $data = explode('|', $row);?>
+        </tr>
         <tr>
             <?php if (is_dir($data[0])):?>
-                <td><?php echo "<a href='/browser.php?$data[4]$data[1]'>$data[1]";?></td>
+            <td><?php echo "<a href='/browser.php?$data[4]$data[1]'>$data[1]";?></td>
             <?php else:?>
-                <td><?php echo "<a href='/download.php?$data[1]'>$data[1]";?></td>
+            <td><?php echo "<a href='/download.php?$data[1]'>$data[1]";?></td>
             <?php endif;?>
             <td><?php echo $data[2];?></td>
             <td><?php echo $data[3];?></td>
