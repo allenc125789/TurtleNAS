@@ -235,7 +235,7 @@ class DBcontrol {
     }
 
     // Function to fetch file list from directory.
-    public function scanDirAndSubdir($dir, $_FilesOnly = FALSE &$out = []) {
+    public function scanDirAndSubdir($dir, $_FilesOnly = FALSE, &$out = []) {
         $username = $_SESSION['sessuser'];
         $root = $this->getRootByUser();
         $sun = scandir(($dir));
