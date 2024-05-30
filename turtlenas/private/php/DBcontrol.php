@@ -28,8 +28,16 @@ class DBcontrol {
         }
     }
 
-    public function prepFileSize($fullpath, $unit=''){
-        $size = filesize($fullpath);
+    public function prepFileSize($fullpath, $size='0', $unit=''){
+        if (is_dir($fullpath)){
+            $scandir = $this->scanDirAndSubdir($fullpath, $_FilesOnly = TRUE);
+            foreach ($scandir as $files){
+                $sfiles = filesize($files);
+                $size += $sfiles;
+            }
+        } else{
+            $size = filesize($fullpath);
+        }
         if( (!$unit && $size >= 1<<30) || $unit == "GB"){
             return number_format($size/(1<<30),2)."GB";
         } if( (!$unit && $size >= 1<<20) || $unit == "MB"){
@@ -46,11 +54,15 @@ class DBcontrol {
         }
     }
 
-    public function prepFileHash($fullpath){
+    public function prepFileHash($fullpath, $hfile = ''){
         if ((file_exists($fullpath)) && (!is_dir($fullpath))) {
             return hash_file('sha224', "$fullpath");
-        } else {
-            return '';
+        } elseif (file_exists($fullpath)) {
+            $scandir = $this->scanDirAndSubdir($fullpath, $_FilesOnly = TRUE);
+            foreach ($scandir as $file){
+                $hfile .= hash_file('sha224', "$file");
+            }
+            return hash('sha224', "$hfile");
         }
     }
 
@@ -92,7 +104,7 @@ class DBcontrol {
         }
         return $data;
     }
-    
+
     public function getRootByUser(){
         $username = $_SESSION['sessuser'];
         $stmt = $this->get_connection()->query("SELECT * FROM drives WHERE user = '$username'");
