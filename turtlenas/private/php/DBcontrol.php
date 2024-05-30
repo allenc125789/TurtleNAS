@@ -92,7 +92,7 @@ class DBcontrol {
         }
         return $data;
     }
-
+    
     public function getRootByUser(){
         $username = $_SESSION['sessuser'];
         $stmt = $this->get_connection()->query("SELECT * FROM drives WHERE user = '$username'");
@@ -121,8 +121,7 @@ class DBcontrol {
         }
     }
 
-    public function getPathByPath(){
-        $data = '';
+    public function getPathByPath($data = ''){
         $username = $_SESSION['sessuser'];
         $stmt = $this->get_connection()->query("SELECT fullpath FROM files_$username");
         while ($row = $stmt->fetch()){
@@ -133,9 +132,7 @@ class DBcontrol {
         return $sqlpaths;
     }
 
-    public function getHashByPath($fullpath){
-        $data = '';
-        $sqlhash = '';
+    public function getHashByPath($fullpath, $data = '', $sqlhash = ''){
         $username = $_SESSION['sessuser'];
         $stmt = $this->get_connection()->query("SELECT hash FROM files_$username WHERE fullpath = '$fullpath'");
         while ($row = $stmt->fetch()){
