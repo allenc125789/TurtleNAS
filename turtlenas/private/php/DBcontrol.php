@@ -96,7 +96,8 @@ class DBcontrol {
 
     public function getFilesForDisplay(){
         $username = $_SESSION['sessuser'];
-        $parent = $_SERVER['QUERY_STRING'];
+        $query = $_SERVER['QUERY_STRING'];
+        $parent = str_replace("$username:", '', "$query");
         $stmt = $this->get_connection()->query("SELECT * FROM files_$username WHERE parent = '$parent'");
         while ($row = $stmt->fetch()){
             $allrows = $row['fullpath']. "|".$row['name']. "|".$row['date']. "|".$row['size']. "|".$row['parent'];
@@ -117,15 +118,16 @@ class DBcontrol {
     public function getParentByQuery(){
         $username = $_SESSION['sessuser'];
         $query = $_SERVER['QUERY_STRING'];
+        $path = str_replace("$username:", '', "$query");
         $root = $this->getRootByUser();
-        if ($query !== "/"){
-            $query = ltrim($query, '/');
-            $query = $this->getFullPath($query);
-            $query = dirname($query);
-            $query = $this->getShortPath($query);
-            return $query;
+        if ($path !== "/"){
+            $path = ltrim($path, '/');
+            $path = $this->getFullPath($path);
+            $path = dirname($path);
+            $path = $this->getShortPath($path);
+            return $path;
         }
-        $stmt = $this->get_connection()->query("SELECT parent FROM files_$username WHERE name = '$query'");
+        $stmt = $this->get_connection()->query("SELECT parent FROM files_$username WHERE name = '$path'");
         while ($row = $stmt->fetch()){
             $parent = $row['parent'];
             return $parent;
