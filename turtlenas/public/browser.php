@@ -15,7 +15,7 @@ if($verify){
     $username = $_SESSION['sessuser'];
 }
 if ($query == NULL || $username == NULL){
-    header('Location: /browser.php?/');
+    header("Location: /browser.php?$username:/");
     header('Location: /login.html');
 }
 ?>
@@ -37,7 +37,7 @@ if ($query == NULL || $username == NULL){
         <tr>
             <td style="font-size: 20"><?php echo "<a href='/browser.php?/'>⟲</a>";?>
             <?php if (!is_null($queryparent)):?>
-            <?php echo "<a href='/browser.php?$queryparent'>↩</a>";?></td>
+            <?php echo "<a href='/browser.php?$username:$queryparent'>↩</a>";?></td>
             <?php endif;?>
 
             <td colspan=2><?php echo $query;?></td>
@@ -47,9 +47,9 @@ if ($query == NULL || $username == NULL){
         </tr>
         <tr bgcolor="lightgrey">
             <?php if (is_dir($data[0])):?>
-            <td><?php echo "<a href='/browser.php?$data[4]$data[1]'>$data[1]";?></td>
+            <td><?php echo "<a href='/browser.php?$username:$data[4]$data[1]'>$data[1]";?></td>
             <?php else:?>
-            <td><?php echo "<a href='/download.php?$data[1]'>$data[1]";?></td>
+            <td><?php echo "<a href='/download.php?$username:$data[1]'>$data[1]";?></td>
             <?php endif;?>
             <td><?php echo $data[2];?></td>
             <td><?php echo $data[3];?></td>
