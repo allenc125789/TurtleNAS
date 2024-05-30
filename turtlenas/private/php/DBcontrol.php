@@ -91,7 +91,6 @@ class DBcontrol {
             $data[] = $allrows;
         }
         return $data;
-//        var_dump($data);
     }
 
     public function getRootByUser(){
@@ -103,8 +102,6 @@ class DBcontrol {
         }
     }
 
-
-// need to use filename, grab parent. session passes current folder.
     public function getParentByQuery(){
         $username = $_SESSION['sessuser'];
         $query = $_SERVER['QUERY_STRING'];
@@ -122,7 +119,6 @@ class DBcontrol {
             return $parent;
 
         }
-//        return $query;
     }
 
     public function getPathByPath(){
@@ -252,8 +248,6 @@ class DBcontrol {
             } else if ($filename != "." && $filename != "..") {
                 $this->scanDirAndSubdir($way, $out);
                 $out[] = ("$way/");
-//            } else if ($filename == "..") {
-//                $out[] = ("$way/");
             }
         }
         return $out;
@@ -287,13 +281,6 @@ class DBcontrol {
             } catch (PDOException $e) {
                 continue;
             }
-//            if ($filename == "../"){
-//                try {
-//                    $this->getInsertFileRecord($fullpath, $parent, $filename, '', '', '');
-//                } catch (PDOException $e) {
-//                    continue;
-//                }
-//            }
         }
     }
 
