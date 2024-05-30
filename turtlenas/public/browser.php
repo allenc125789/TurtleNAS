@@ -10,11 +10,12 @@ $verify = $control->validate_auth();
 if($verify){
     $control->updateFileRecord();
     $fObject = $control->getFilesForDisplay();
-    $query = $_SERVER['QUERY_STRING'];
-    $queryparent = $control->getParentByQuery();
     $username = $_SESSION['sessuser'];
+    $query = $_SERVER['QUERY_STRING'];
+    $casequery = str_starts_with("$username:", $query);
+    $queryparent = $control->getParentByQuery();
 }
-if ($query == NULL || $username == NULL){
+if($casequery || $query == NULL || $username == NULL){
     header("Location: /browser.php?$username:/");
     header('Location: /login.html');
 }
@@ -35,12 +36,11 @@ if ($query == NULL || $username == NULL){
             <th>File Size</th>
         </tr>
         <tr>
-            <td style="font-size: 20"><?php echo "<a href='/browser.php?/'>⟲</a>";?>
+            <td style="font-size: 20"><?php echo "<a href='/browser.php?$username:/'>⟲</a>";?>
             <?php if (!is_null($queryparent)):?>
             <?php echo "<a href='/browser.php?$username:$queryparent'>↩</a>";?></td>
             <?php endif;?>
-
-            <td colspan=2><?php echo $query;?></td>
+            <td colspan=2 style="font-size:12"><?php echo $query;?></td>
 
             <?php foreach($fObject as $row):?>
             <?php $data = explode('|', $row);?>
