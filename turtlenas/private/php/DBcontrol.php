@@ -97,8 +97,8 @@ class DBcontrol {
     public function getFilesForDisplay(){
         $username = $_SESSION['sessuser'];
         $query = $_SERVER['QUERY_STRING'];
-        $parent = str_replace("$username:", '', "$query");
-        $stmt = $this->get_connection()->query("SELECT * FROM files_$username WHERE parent = '$parent'");
+        $path = str_replace("$username:", '', "$query");
+        $stmt = $this->get_connection()->query("SELECT * FROM files_$username WHERE parent = '$path'");
         while ($row = $stmt->fetch()){
             $allrows = $row['fullpath']. "|".$row['name']. "|".$row['date']. "|".$row['size']. "|".$row['parent'];
             $data[] = $allrows;
