@@ -7,7 +7,8 @@ $validated = $_SESSION['allowed'];
 switch ($validated) {
     case 1:
         $query = $_SERVER['QUERY_STRING'];
-        $path = str_replace("$username:", '', "$query");
+        $username = $_SESSION['sessuser'];
+        $path = str_replace("$username:", '', $query);
         $file = $control->getFullPath($path);
         header('Content-Description: File Transfer');
         header('Content-Disposition: attachment; filename=' . basename($file));
@@ -24,5 +25,4 @@ switch ($validated) {
         header('Location: /login.html');
         break;
 }
-
 ?>
