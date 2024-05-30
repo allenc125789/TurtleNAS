@@ -21,24 +21,31 @@ if ($query == NULL || $username == NULL){
 ?>
 
 <html>
+<head>
+    <meta charset="UTF=8">
+    <meta name="viewport" content="width==device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+
 <tbody>
-    <table>
-        <tr>
+    <table border=2px>
+        <tr bgcolor="grey">
             <th>File Name</th>
             <th>Last Modified</th>
             <th>File Size</th>
         </tr>
         <tr>
-            <td><?php echo "<a href='/browser.php?/'>⟲";?></td>
-        </tr>
-        <tr>
+            <td style="font-size: 20"><?php echo "<a href='/browser.php?/'>⟲</a>";?>
             <?php if (!is_null($queryparent)):?>
-            <td><?php echo "<a href='/browser.php?$queryparent'>↩";?></td>
+            <?php echo "<a href='/browser.php?$queryparent'>↩</a>";?></td>
             <?php endif;?>
+
+            <td colspan=2><?php echo $query;?></td>
+
             <?php foreach($fObject as $row):?>
             <?php $data = explode('|', $row);?>
         </tr>
-        <tr>
+        <tr bgcolor="lightgrey">
             <?php if (is_dir($data[0])):?>
             <td><?php echo "<a href='/browser.php?$data[4]$data[1]'>$data[1]";?></td>
             <?php else:?>
