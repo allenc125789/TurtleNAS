@@ -29,8 +29,11 @@ if ($query == NULL || $username == NULL){
             <th>File Size</th>
         </tr>
         <tr>
+            <td><?php echo "<a href='/browser.php?/'>⟲";?></td>
+        </tr>
+        <tr>
             <?php if (!is_null($queryparent)):?>
-            <td><?php echo "<a href='/browser.php?$queryparent'>../";?></td>
+            <td><?php echo "<a href='/browser.php?$queryparent'>↩";?></td>
             <?php endif;?>
             <?php foreach($fObject as $row):?>
             <?php $data = explode('|', $row);?>
