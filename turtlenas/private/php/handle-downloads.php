@@ -20,7 +20,7 @@ switch ($validated) {
         readfile($file);
         exit;
     default:
-        header('Location: /index.html');
+        header('Location: /login.html');
         break;
 }
 
