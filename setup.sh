@@ -31,8 +31,7 @@ mkdir -v -p '/etc/nginx/ssl' && chmod 700 '/etc/nginx/ssl'
     #: Create media Dir. 
 mkdir -v '/media/REMOTE'
 
-mkdir -v -p "/media/LOCAL/$vUUID/admin"
-chown "/media/LOCAL/$vUUID/admin"
+mkdir -v -p "/media/LOCAL/$vUUID/admin" && chown www-data "/media/LOCAL/$vUUID/admin"
 
 
     #: Create tmp Dir.
