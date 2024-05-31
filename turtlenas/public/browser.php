@@ -25,8 +25,9 @@ if($casequery || $query == NULL || $username == NULL){
 <head>
     <meta charset="UTF=8">
     <meta name="viewport" content="width==device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet">
 </head>
+
 
 <tbody>
     <table border=2px>
@@ -55,5 +56,12 @@ if($casequery || $query == NULL || $username == NULL){
             <td><?php echo $data[3];?></td>
             <?php endforeach;?>
         </tr>
+
+
 </tbody>
+<?php echo "<form action='/upload.php?$query' method='POST' enctype='multipart/form-data'>"?>
+    <input type="file" name="file" multiple>
+    <button type="submit" name="submit">Upload Files...</button
+
+
 </html>
