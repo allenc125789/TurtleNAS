@@ -41,7 +41,7 @@ if($casequery || $query == NULL || $username == NULL){
             <?php if (!is_null($queryparent)):?>
             <?php echo "<a href='/browser.php?$username:$queryparent'>↩</a>";?></td>
             <?php endif;?>
-            <td colspan=2 style="font-size:12"><?php echo $query;?></td>
+            <td colspan=2 style="font-size:12" style="color:white" style="background-color:black"><?php echo $query;?></td>
 
             <?php foreach($fObject as $row):?>
             <?php $data = explode('|', $row);?>
