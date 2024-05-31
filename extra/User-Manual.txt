@@ -1,1 +1,1 @@
-
+/etc/nginx.conf contains a hardcap filesize limit for what can be uploaded to the server "client_max_body_size 500G;".
