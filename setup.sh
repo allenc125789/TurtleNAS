@@ -30,9 +30,12 @@ fi
 mkdir -v -p '/etc/nginx/ssl' && chmod 700 '/etc/nginx/ssl'
     #: Create media Dir. 
 mkdir -v '/media/REMOTE'
-    #: Create tmp Dir.
+
 mkdir -v -p "/media/LOCAL/$vUUID/admin"
+
+    #: Create tmp Dir.
 mkdir -v -p '/tmp/turtlenas' && chmown www-data '/tmp/turtlenas'
+mv /extra/php.ini /etc/php/8.2/cli
 
 
 #: Creating Users.
