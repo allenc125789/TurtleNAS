@@ -60,7 +60,7 @@ if($casequery || $query == NULL || $username == NULL){
 
 </tbody>
 <?php echo "<form action='/upload.php?$query' method='POST' enctype='multipart/form-data'>"?>
-    <input type="file" name="file" multiple>
+    <input type="file" name="file[]" multiple="">
     <button type="submit" name="submit">Upload Files...</button
 
 
