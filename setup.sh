@@ -101,8 +101,8 @@ mariadb -e "GRANT ALL PRIVILEGES ON turtlenas.files_admin TO 'www-data'@'localho
 echo -e "Configuring web server..."
     #: Configuration files.
 sed -i "s/@/$vDOMAIN/g" $vPWD"/turtlenas-config"
-mv "$vPWD/turtlenas-config" "/etc/nginx/sites-available/turtlenas-config"
-mv -f "$vPWD/nginx.conf" "/etc/nginx/nginx.conf"
+mv "$vPWD/extra/turtlenas-config" "/etc/nginx/sites-available/turtlenas-config"
+mv -f "$vPWD/extra/nginx.conf" "/etc/nginx/nginx.conf"
 mv "$vPWD/extra/User-Manual.txt" "/media/LOCAL/$vUUID/admin"
 mv "$vPWD/extra/php.ini" "/etc/php/8.2/fpm"
 rm -f /etc/nginx/sites-enabled/default
