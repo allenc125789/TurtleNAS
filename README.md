@@ -1,3 +1,8 @@
++multiple files can be uploaded.
+-need function for deleting files. possibly by assigning the array key needed to a checkbox id
+-need function to upload multiple files.
+
+
 # Summary:
 
 *TurtleNAS for Debian, to help deliver files in it's secure shell!‎*
