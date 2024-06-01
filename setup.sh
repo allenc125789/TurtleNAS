@@ -104,6 +104,7 @@ sed -i "s/@/$vDOMAIN/g" $vPWD"/turtlenas-config"
 mv "$vPWD/turtlenas-config" "/etc/nginx/sites-available/turtlenas-config"
 mv -f "$vPWD/nginx.conf" "/etc/nginx/nginx.conf"
 mv "$vPWD/extra/User-Manual.txt" "/media/LOCAL/$vUUID/admin"
+mv "$vPWD/extra/php.ini" "/etc/php/8.2/fpm"
 rm -f /etc/nginx/sites-enabled/default
 ln -v -s /etc/nginx/sites-available/turtlenas-config /etc/nginx/sites-enabled/
     #: Web page files.
