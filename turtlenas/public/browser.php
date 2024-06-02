@@ -25,43 +25,46 @@ if($casequery || $query == NULL || $username == NULL){
 <head>
     <meta charset="UTF=8">
     <meta name="viewport" content="width==device-width, initial-scale=1.0">
-    <link rel="stylesheet">
+    <link rel="stylesheet" href="/css/browser.css">
 </head>
 
 
 <tbody>
-    <table border=2px>
+    <table class="fileTables"border=2px>
         <tr bgcolor="grey">
-            <th>File Name</th>
+            <th colspan=2>File Name</th>
             <th>Last Modified</th>
             <th>File Size</th>
         </tr>
         <tr>
+            <td></td>
             <td style="font-size: 20"><?php echo "<a href='/browser.php?$username:/'>⟲</a>";?>
             <?php if (!is_null($queryparent)):?>
             <?php echo "<a href='/browser.php?$username:$queryparent'>↩</a>";?></td>
             <?php endif;?>
             <td colspan=2 style="font-size:12" bgcolor="black"><font style="color:white;"><?php echo $query;?></font></td>
-
-            <?php foreach($fObject as $row):?>
-            <?php $data = explode('|', $row);?>
         </tr>
+        <?php foreach($fObject as $row):?>
+        <?php $data = explode('|', $row);?>
+        <?php $arrkey = array_search($row, $fObject);?>
         <tr bgcolor="lightgrey">
+            <td class="checks"><?php echo "<input type=\"checkbox\" id=\"$arrkey\" name=\"$arrkey\" value=\"$arrkey\">";?></td>
             <?php if (is_dir($data[0])):?>
-            <td><?php echo "<a href='/browser.php?$username:$data[4]$data[1]'>$data[1]";?></td>
+            <td class="files"><?php echo "<a href='/browser.php?$username:$data[4]$data[1]'>$data[1]";?></td>
             <?php else:?>
-            <td><?php echo "<a href='/download.php?$username:$data[1]'>$data[1]";?></td>
+            <td class="files"><?php echo "<a href='/download.php?$username:$data[1]'>$data[1]";?></td>
             <?php endif;?>
-            <td><?php echo $data[2];?></td>
-            <td><?php echo $data[3];?></td>
+            <td class="dates"><?php echo $data[2];?></td>
+            <td class="size"><?php echo $data[3];?></td>
             <?php endforeach;?>
         </tr>
-
-
+    </table>
 </tbody>
-<?php echo "<form action='/upload.php?$query' method='POST' enctype='multipart/form-data'>"?>
-    <input type="file" name="file[]" multiple="">
-    <button type="submit" name="submit">Upload Files...</button
 
+<div class="upload">
+    <?php echo "<form action='/upload.php?$query' method='POST' enctype='multipart/form-data'>"?>
+    <input type="file" name="file[]" multiple="">
+    <button type="submit" name="submit">Upload Files...</button>
+</div>
 
 </html>
