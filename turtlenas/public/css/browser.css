@@ -1,0 +1,17 @@
+.fileTables {
+    position: relative;
+    width: 99%;
+}
+
+.checks {
+    width: 1%;
+    text-align: center
+}
+.dates {
+    width: 15%;
+    text-align: center
+}
+.size {
+    width: 4%;
+    text-align: center
+}
