@@ -63,8 +63,7 @@ if($casequery || $query == NULL || $username == NULL){
 
 <div class="upload">
     <?php echo "<form action='/upload.php?$query' method='POST' enctype='multipart/form-data'>"?>
-    <input type="file" name="file[]" multiple="">
-    <button type="submit" name="submit">Upload Files...</button>
+    <input type="file" name="file[]" multiple="" onchange="this.form.submit()">
 </div>
 
 </html>
