@@ -2,7 +2,13 @@
 
 -need function for deleting files. possibly by assigning the array key needed to a checkbox id
 
+    -learn javascript (AJAX) to create a true dynamic website, with dropdown menus and checkbox actions
+
 -need function to upload folders
+
+-fix problem when uploading hidden files ".extension"
+
+
 
 
 # Summary:
