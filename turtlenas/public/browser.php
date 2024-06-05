@@ -54,10 +54,11 @@ if($casequery || $query == NULL || $username == NULL){
             <?php if (is_dir($data[0])):?>
             <td class="files"><?php echo "<a href='/browser.php?$username:$data[4]$data[1]'>$data[1]";?></td>
             <?php else:?>
-            <td class="files"><?php echo "<a href='/download.php?$username:$data[1]'>$data[1]";?></td>
+            <td class="files"><?php echo "<a href='/download.php?$username:$data[4]$data[1]'>$data[1]";?></td>
             <?php endif;?>
             <td class="dates"><?php echo $data[2];?></td>
             <td class="size"><?php echo $data[3];?></td>
+            <?php echo "$data[4]$data[1]";?>
             <?php endforeach;?>
         </tr>
     </table>
