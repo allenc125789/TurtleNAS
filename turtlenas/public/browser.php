@@ -48,7 +48,7 @@ if($casequery || $query == NULL || $username == NULL){
         <?php $data = explode('|', $row);?>
         <?php $arrkey = array_search($row, $fObject);?>
         <tr bgcolor="lightgrey">
-            <td class="checks"><?php echo "<input type=\"checkbox\" id=\"$arrkey\" name=\"$arrkey\" value=\"$arrkey\">";?></td>
+            <td class="checks"><?php echo "<input type=\"checkbox\" class=\"filechecks\" id=\"filechecks\" name=\"$arrkey\" value=\"$arrkey\">";?></td>
             <?php if (is_dir($data[0])):?>
             <td class="files"><?php echo "<a href='/browser.php?$username:$data[4]$data[1]'>$data[1]";?></td>
             <?php else:?>
@@ -61,9 +61,24 @@ if($casequery || $query == NULL || $username == NULL){
     </table>
 </tbody>
 
+<button id="delete">Delete</button>
+
+<br>
+
 <div class="upload">
     <?php echo "<form action='/upload.php?$query' method='POST' enctype='multipart/form-data'>"?>
     <input type="file" name="file[]" multiple="" onchange="this.form.submit()">
 </div>
+
+<script>
+    document.getElementById('delete').disabled = true;
+        var results = document.getElementsByClassName("filechecks");
+        Array.prototype.forEach.call(results, function(checks) {
+            console.log('test');
+            checks.addEventListener('change', function(e) {
+                console.log(checks.checked);
+            });
+        });
+</script>
 
 </html>
