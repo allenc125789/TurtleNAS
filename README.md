@@ -1,5 +1,7 @@
 +multiple files can be uploaded.
 
++-files with spaces can be uploaded and downloaded, folders with spaces can be browsed, however uploading to subdirs fails
+
 -need function for deleting files. possibly by assigning the array key needed to a checkbox id
 
 --learn javascript (AJAX) to create a true dynamic website, with dropdown menus and checkbox actions
