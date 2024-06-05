@@ -66,9 +66,14 @@ if($casequery || $query == NULL || $username == NULL){
 <button id="delete">Delete</button>
 <br>
 
-<div class="upload">
+<div class="uploadFiles">
     <?php echo "<form action='/upload.php?$query' method='POST' enctype='multipart/form-data'>"?>
     <input type="file" name="file[]" multiple="" onchange="this.form.submit()">
+</div>
+
+<div class="uploadFolders">
+    <?php echo "<form action='/upload.php?$query' method='POST' enctype='multipart/form-data'>"?>
+    <input type="file" name="file[]" multiple="" webkitdirectory onchange="this.form.submit()">
 </div>
 
 <script src="/js/browser.js"></script>
