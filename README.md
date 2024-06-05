@@ -8,6 +8,8 @@
 
 -fix problem when uploading hidden files ".extension"
 
+-fix problem when browsing folders with spaces in them.
+
 
 
 
