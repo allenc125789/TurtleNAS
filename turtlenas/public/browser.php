@@ -70,15 +70,7 @@ if($casequery || $query == NULL || $username == NULL){
     <input type="file" name="file[]" multiple="" onchange="this.form.submit()">
 </div>
 
-<script>
-    document.getElementById('delete').disabled = true;
-        var results = document.getElementsByClassName("filechecks");
-        Array.prototype.forEach.call(results, function(checks) {
-            console.log('test');
-            checks.addEventListener('change', function(e) {
-                console.log(checks.checked);
-            });
-        });
-</script>
+<script src="/js/browser.js"></script>
+
 
 </html>
