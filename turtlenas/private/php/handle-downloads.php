@@ -10,7 +10,7 @@ switch ($validated) {
         $username = $_SESSION['sessuser'];
         $path = str_replace("$username:", '', $query);
         $file = $control->getFullPath($path);
-        header('Content-Description: File Transfer');
+        header('Content-Type: application/octet-stream');
         header('Content-Disposition: attachment; filename=' . basename($file));
         header('Content-Transfer-Encoding: binary');
         header('Expires: 0');
