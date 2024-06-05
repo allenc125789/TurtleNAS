@@ -1,6 +1,6 @@
 +multiple files can be uploaded.
 
-+-files with spaces can be uploaded and downloaded, folders with spaces can be browsed, however uploading to subdirs fails
++files with spaces can be uploaded and downloaded, folders with spaces can be browsed
 
 -need function for deleting files. possibly by assigning the array key needed to a checkbox id
 
