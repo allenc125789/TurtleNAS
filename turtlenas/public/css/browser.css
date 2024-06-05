@@ -1,6 +1,13 @@
+
 .fileTables {
     width: 80%;
     float: right;
+}
+
+.hotbar {
+    position: sticky;
+    margin: 100;
+    top: 0%;
 }
 
 .buttonDivs {
@@ -20,4 +27,3 @@
     width: 4%;
     text-align: center
 }
-
