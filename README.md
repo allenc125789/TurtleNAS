@@ -6,9 +6,9 @@
 
 -need function to upload folders
 
--fix problem when uploading hidden files ".extension"
+-fix problem when uploading hidden files ".extension" (i forget what the problem was exactly). Downloading also has a similar problem; downloading files without extensions will return with .html extensions
 
--fix problem when browsing folders with spaces in them.
+-fix problem when browsing folders with spaces in them. they wont upload to sub directories
 
 
 
