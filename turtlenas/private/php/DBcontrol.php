@@ -88,10 +88,11 @@ class DBcontrol {
         }
     }
 
-    public function getFullPath($shortpath){
+      public function getFullPath($shortpath){
         $root = $this->getRootByUser();
         $filename = ($root . $shortpath);
-        return $filename;
+        $fullpath = str_replace("%20", " ", $filename);
+        return $fullpath;
     }
 
     public function getFilesForDisplay(){
