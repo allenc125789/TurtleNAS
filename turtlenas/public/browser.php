@@ -32,7 +32,7 @@ if($casequery || $query == NULL || $username == NULL){
 
 
 <tbody>
-    <table class="fileTables"border=2px>
+    <table class="fileTables" border=2px>
         <tr bgcolor="grey">
             <th colspan=2>File Name</th>
             <th>Last Modified</th>
@@ -63,17 +63,16 @@ if($casequery || $query == NULL || $username == NULL){
     </table>
 </tbody>
 
-<button id="delete">Delete</button>
-<br>
+<div class="buttonDivs">
+<button class="buttonDivs" id="delete">Delete</button>
+<br><br>
 
-<div class="uploadFiles">
     <?php echo "<form action='/upload.php?$query' method='POST' enctype='multipart/form-data'>"?>
     <input type="file" name="file[]" multiple="" onchange="this.form.submit()">
-</div>
+<br><br>
 
-<div class="uploadFolders">
     <?php echo "<form action='/upload.php?$query' method='POST' enctype='multipart/form-data'>"?>
-    <input type="file" name="file[]" multiple="" webkitdirectory onchange="this.form.submit()">
+    <input type="file" name="file[]" multiple="" webkitdirectory directory onchange="this.form.submit()">
 </div>
 
 <script src="/js/browser.js"></script>
