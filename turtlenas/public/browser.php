@@ -58,7 +58,6 @@ if($casequery || $query == NULL || $username == NULL){
             <?php endif;?>
             <td class="dates"><?php echo $data[2];?></td>
             <td class="size"><?php echo $data[3];?></td>
-            <?php echo "$data[4]$data[1]";?>
             <?php endforeach;?>
         </tr>
     </table>
