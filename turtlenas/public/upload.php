@@ -24,6 +24,7 @@ function reArrayFiles(&$file_post) {
 }
 
 $query = $_SERVER['QUERY_STRING'];
+$query = str_replace("%20", " ", $query);
 $username = $_SESSION['sessuser'];
 $path = str_replace("$username:/", '', $query);
 $fullpath = $control->getFullPath($path);
