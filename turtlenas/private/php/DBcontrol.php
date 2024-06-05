@@ -88,7 +88,7 @@ class DBcontrol {
         }
     }
 
-      public function getFullPath($shortpath){
+    public function getFullPath($shortpath){
         $root = $this->getRootByUser();
         $filename = ($root . $shortpath);
         $fullpath = str_replace("%20", " ", $filename);
@@ -98,6 +98,7 @@ class DBcontrol {
     public function getFilesForDisplay(){
         $username = $_SESSION['sessuser'];
         $query = $_SERVER['QUERY_STRING'];
+        $query = str_replace("%20", " ", $query);
         $path = str_replace("$username:", '', "$query");
         $stmt = $this->get_connection()->query("SELECT * FROM files_$username WHERE parent = '$path'");
         while ($row = $stmt->fetch()){
@@ -119,6 +120,7 @@ class DBcontrol {
     public function getParentByQuery(){
         $username = $_SESSION['sessuser'];
         $query = $_SERVER['QUERY_STRING'];
+        $query = str_replace("%20", " ", $query);
         $path = str_replace("$username:", '', "$query");
         $root = $this->getRootByUser();
         if ($path !== "/"){
