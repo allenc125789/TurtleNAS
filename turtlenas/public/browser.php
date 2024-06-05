@@ -12,9 +12,11 @@ if($verify){
     $fObject = $control->getFilesForDisplay();
     $username = $_SESSION['sessuser'];
     $query = $_SERVER['QUERY_STRING'];
+    $query = str_replace("%20", " ", $query);
     $casequery = str_starts_with("$username:", $query);
     $queryparent = $control->getParentByQuery();
 }
+
 if($casequery || $query == NULL || $username == NULL){
     header("Location: /browser.php?$username:/");
     header('Location: /login.html');
@@ -48,7 +50,7 @@ if($casequery || $query == NULL || $username == NULL){
         <?php $data = explode('|', $row);?>
         <?php $arrkey = array_search($row, $fObject);?>
         <tr bgcolor="lightgrey">
-            <td class="checks"><?php echo "<input type=\"checkbox\" class=\"filechecks\" id=\"filechecks\" name=\"$arrkey\" value=\"$arrkey\">";?></td>
+            <td class="checks"><?php echo "<input type=\"checkbox\" class=\"filechecks\" id=\"filechecks\" name=\"$arrkey\" value=\"$data[1]\">";?></td>
             <?php if (is_dir($data[0])):?>
             <td class="files"><?php echo "<a href='/browser.php?$username:$data[4]$data[1]'>$data[1]";?></td>
             <?php else:?>
@@ -62,7 +64,6 @@ if($casequery || $query == NULL || $username == NULL){
 </tbody>
 
 <button id="delete">Delete</button>
-
 <br>
 
 <div class="upload">
@@ -71,6 +72,5 @@ if($casequery || $query == NULL || $username == NULL){
 </div>
 
 <script src="/js/browser.js"></script>
-
 
 </html>
