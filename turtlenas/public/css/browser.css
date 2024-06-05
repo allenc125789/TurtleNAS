@@ -1,6 +1,11 @@
 .fileTables {
-    position: relative;
-    width: 99%;
+    width: 80%;
+    float: right;
+}
+
+.buttonDivs {
+    position: fixed;
+    left: 0%;
 }
 
 .checks {
@@ -8,10 +13,11 @@
     text-align: center
 }
 .dates {
-    width: 15%;
+    width: 20%;
     text-align: center
 }
 .size {
     width: 4%;
     text-align: center
 }
+
