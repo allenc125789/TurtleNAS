@@ -10,6 +10,8 @@
 
 -fix problem when uploading hidden files ".extension" (i forget what the problem was exactly). Downloading also has a similar problem; downloading files without extensions will return with .html extensions
 
+-might need to replace some functions with pathinfo() (returns an array of path structure)
+
 
 
 
