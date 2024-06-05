@@ -16,3 +16,9 @@ Array.prototype.forEach.call(results, function(checks) {
     });
 });
 
+var results = document.getElementsByClassName("filechecks");
+Array.prototype.forEach.call(results, function(checks) {
+    console.log(checks);
+});
+
+
