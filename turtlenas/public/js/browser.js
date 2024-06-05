@@ -1,8 +1,18 @@
 document.getElementById('delete').disabled = true;
 var results = document.getElementsByClassName("filechecks");
+let count = 0;
 Array.prototype.forEach.call(results, function(checks) {
-    console.log('test');
     checks.addEventListener('change', function(e) {
-        console.log(checks.checked);
+        if (checks.checked == true) {
+            count += 1;
+        } else {
+            count -= 1;
+        }
+        if (count == 0) {
+            document.getElementById('delete').disabled = true;
+        } else {
+            document.getElementById('delete').disabled = false;
+        }
     });
 });
+
