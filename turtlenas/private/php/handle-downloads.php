@@ -25,4 +25,5 @@ switch ($validated) {
         header('Location: /login.html');
         break;
 }
+
 ?>
