@@ -38,9 +38,9 @@ if($casequery || $query == NULL || $username == NULL){
             <th>Last Modified</th>
             <th>File Size</th>
         </tr>
-        <tr>
-            <td></td>
-            <td style="font-size: 20"><?php echo "<a href='/browser.php?$username:/'>⟲</a>";?>
+        <tr class="hotbar">
+            <td bgcolor="white"></td>
+            <td style="font-size: 20" bgcolor="white"><?php echo "<a href='/browser.php?$username:/'>⟲</a>";?>
             <?php if (!is_null($queryparent)):?>
             <?php echo "<a href='/browser.php?$username:$queryparent'>↩</a>";?></td>
             <?php endif;?>
