@@ -2,11 +2,9 @@
 
 +files with spaces can be uploaded and downloaded, folders with spaces can be browsed
 
--need function for deleting files. possibly by assigning the array key needed to a checkbox id
+-need function for deleting files. possibly by assigning the array key needed to a checkbox id (this is done, but still need to add function to get/revieve that data and delete the files.)
 
---learn javascript (AJAX) to create a true dynamic website, with dropdown menus and checkbox actions
-
--need function to upload folders
+-need function to upload folders. Due to limitations with php, this function must be written with js. 
 
 -fix problem when uploading hidden files ".extension" (i forget what the problem was exactly). Downloading also has a similar problem; downloading files without extensions will return with .html extensions
 
