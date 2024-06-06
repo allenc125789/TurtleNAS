@@ -1,17 +1,22 @@
 .fileTables {
+    position: absolute;
     width: 80%;
     float: right;
+    right: 0%;
 }
 
 .hotbar {
     position: sticky;
-    margin: 100;
     top: 0%;
 }
 
 .buttonDivs {
     position: fixed;
-    left: 0%;
+    top: 10%;
+    left: 5px;
+    border: 4px solid black;
+    padding-top: 14px;
+    padding-left: 20px;
 }
 
 .checks {
