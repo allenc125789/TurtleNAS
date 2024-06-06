@@ -158,6 +158,26 @@ class DBcontrol {
         return $sqlhash;
     }
 
+    public function deleteFile(){
+        $post = $_POST['fileToDelete'];
+        $username = $_SESSION['sessuser'];
+        $query = $_SERVER['QUERY_STRING'];
+        $parent = str_replace("$username:/", '', "$query");
+        $root = $this->getRootByUser();
+        foreach ($post as $filename){
+            $filename = $root . $parent . $filename;
+            $filename = str_replace("%20", " ", $filename);
+            if (is_dir($filename)){
+                rmdir($filename);
+            } else{
+                unlink($filename);
+                echo $filename;
+            }
+        }
+        $_POST = array();
+        header("Location: /browser.php?$query");
+    }
+
     public function deleteRecordByPath($vfullpath){
         $username = $_SESSION['sessuser'];
         $stmt = $this->get_connection()->prepare("DELETE FROM files_$username WHERE fullpath = :vfullpath");
