@@ -46,11 +46,12 @@ if($casequery || $query == NULL || $username == NULL){
             <?php endif;?>
             <td colspan=2 style="font-size:12" bgcolor="black"><font style="color:white;"><?php echo $query;?></font></td>
         </tr>
+        <?php echo "<form action='/delete.php?$query' method='post'>";?>
         <?php foreach($fObject as $row):?>
         <?php $data = explode('|', $row);?>
         <?php $arrkey = array_search($row, $fObject);?>
         <tr bgcolor="lightgrey">
-            <td class="checks"><?php echo "<input type=\"checkbox\" class=\"filechecks\" id=\"filechecks\" name=\"$arrkey\" value=\"$data[1]\">";?></td>
+            <td class="checks"><?php echo "<input type=\"checkbox\" class=\"filechecks\" id=\"filechecks\" name=\"fileToDelete[]\" value=\"$data[1]\">";?></td>
             <?php if (is_dir($data[0])):?>
             <td class="files"><?php echo "<a href='/browser.php?$username:$data[4]$data[1]'>$data[1]";?></td>
             <?php else:?>
@@ -64,15 +65,18 @@ if($casequery || $query == NULL || $username == NULL){
 </tbody>
 
 <div class="buttonDivs">
-<button class="buttonDivs" id="delete">Delete</button>
+
+<input type="submit" value="Delete" class="buttonDivs" id="delete">
+</form>
 <br><br>
 
-    <?php echo "<form action='/upload.php?$query' method='POST' enctype='multipart/form-data'>"?>
+    <?php echo "<form action='/delete.php?$query' method='POST' enctype='multipart/form-data'>"?>
     <input type="file" name="file[]" multiple="" onchange="this.form.submit()">
 <br><br>
 
     <?php echo "<form action='/upload.php?$query' method='POST' enctype='multipart/form-data'>"?>
-    <input type="file" name="file[]" multiple="" webkitdirectory directory onchange="this.form.submit()">
+    <input type="file" id="filepicker" name="fileList" webkitdirectory multiple />
+
 </div>
 
 <script src="/js/browser.js"></script>
