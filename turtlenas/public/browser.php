@@ -70,7 +70,7 @@ if($casequery || $query == NULL || $username == NULL){
 </form>
 <br><br>
 
-    <?php echo "<form action='/delete.php?$query' method='POST' enctype='multipart/form-data'>"?>
+    <?php echo "<form action='/upload.php?$query' method='POST' enctype='multipart/form-data'>"?>
     <input type="file" name="file[]" multiple="" onchange="this.form.submit()">
 <br><br>
 
