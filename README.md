@@ -2,9 +2,11 @@
 
 +files with spaces can be uploaded and downloaded, folders with spaces can be browsed
 
--need to add checkbox to uncheck/check all other chekboxes
++files and empty folders can be deleted
 
--need function for deleting files. possibly by assigning the array key needed to a checkbox id (this is done, but still need to add function to get/revieve that data and delete the files.)
+-folders with files inside can not be deleted yet. that needs work
+
+-need to add checkbox to uncheck/check all other chekboxes
 
 -need function to upload folders. Due to limitations with php, this function must be written with js. 
 
