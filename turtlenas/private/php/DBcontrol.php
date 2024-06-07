@@ -178,6 +178,20 @@ class DBcontrol {
         header("Location: /browser.php?$query");
     }
 
+    public function createDir(){
+        $post = $_POST['createDir'];
+        $username = $_SESSION['sessuser'];
+        $query = $_SERVER['QUERY_STRING'];
+        $parent = str_replace("$username:/", '', "$query");
+        $root = $this->getRootByUser();
+        $pos = strpos($post, $query);
+        if ($pos === false){
+            mkdir($root . $parent . $post);
+//            echo ($root . $parent . $post);
+        }
+        header("Location: /browser.php?$query");
+    }
+
     public function deleteRecordByPath($vfullpath){
         $username = $_SESSION['sessuser'];
         $stmt = $this->get_connection()->prepare("DELETE FROM files_$username WHERE fullpath = :vfullpath");
