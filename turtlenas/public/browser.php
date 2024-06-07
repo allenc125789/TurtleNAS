@@ -68,18 +68,23 @@ if ($casequery || $query == NULL || $username == NULL){
 </tbody>
 
 <div class="buttonDivs">
-
 <input type="submit" value="Delete" id="delete">
-</form>
 <br><br>
+
+</form>
 
     <?php echo "<form action='/upload.php?$query' method='POST' enctype='multipart/form-data'>"?>
     <input type="file" id="button" name="file[]" multiple="" onchange="this.form.submit()">
-<br><br>
+    </form>
 
     <?php echo "<form action='/upload.php?$query' method='POST' enctype='multipart/form-data'>"?>
     <input type="file" id="filepicker" name="fileList" webkitdirectory multiple />
+    </form>
 
+    <?php echo "<form action='/mkdir.php?$query' method='POST'>"?>
+    <button type="submit" id="mkdir">Create Folder...</button>
+    <input type="text" id="createDir" name="createDir" required minlength="1" maxlength="255" size="10" />
+    </form>
 </div>
 
 
