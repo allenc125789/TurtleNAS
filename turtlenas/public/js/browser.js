@@ -1,5 +1,5 @@
 document.getElementById('delete').disabled = true;
-var results = document.getElementsByClassName("filechecks");
+var results = document.getElementsByClassName("cb");
 let count = 0;
 Array.prototype.forEach.call(results, function(checks) {
     checks.addEventListener('change', function(e) {
@@ -16,7 +16,7 @@ Array.prototype.forEach.call(results, function(checks) {
     });
 });
 
-var results = document.getElementsByClassName("filechecks");
+var results = document.getElementsByClassName("cb");
 Array.prototype.forEach.call(results, function(checks) {
     console.log(checks);
 });
@@ -37,3 +37,21 @@ Array.prototype.forEach.call(results, function(checks) {
 //);
 
 //console.log(arr);
+
+ function checkAll(ele) {
+     var checkboxes = document.getElementsByTagName('input');
+  	   if (ele.checked) {
+         for (var i = 0; i < checkboxes.length; i++) {
+             if (checkboxes[i].type == 'checkbox') {
+                 checkboxes[i].checked = true;
+             }
+         }
+     } else {
+         for (var i = 0; i < checkboxes.length; i++) {
+             console.log(i)
+             if (checkboxes[i].type == 'checkbox') {
+                 checkboxes[i].checked = false;
+             }
+         }
+     }
+ }
