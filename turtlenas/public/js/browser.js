@@ -41,6 +41,7 @@ function checkAll(ele) {
             if (checkboxes[i].type == 'checkbox' && checkboxes[i].checked == false) {
                 checkboxes[i].checked = true;
                 count += 1;
+                document.getElementById('delete').disabled = false;
             }
         }
     } else {
