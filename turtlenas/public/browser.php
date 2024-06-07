@@ -7,7 +7,7 @@ ini_set('display_errors', 1);  // ensure that faires will be seen
 ini_set('display_startup_errors', 1); // display faires that didn't born
 
 $verify = $control->validate_auth();
-if($verify){
+if ($verify){
     $control->updateFileRecord();
     $fObject = $control->getFilesForDisplay();
     $username = $_SESSION['sessuser'];
@@ -17,7 +17,7 @@ if($verify){
     $queryparent = $control->getParentByQuery();
 }
 
-if($casequery || $query == NULL || $username == NULL){
+if ($casequery || $query == NULL || $username == NULL){
     header("Location: /browser.php?$username:/");
     header('Location: /login.html');
 }
@@ -60,6 +60,9 @@ if($casequery || $query == NULL || $username == NULL){
             <td id="dates"><?php echo $data[2];?></td>
             <td id="size"><?php echo $data[3];?></td>
             <?php endforeach;?>
+            <?php if ($fObject == NULL):?>
+            <?php echo "<td></td><td>No files to display...</td><td></td><td></td>";?>
+            <?php endif;?>
         </tr>
     </table>
 </tbody>
@@ -79,7 +82,6 @@ if($casequery || $query == NULL || $username == NULL){
 
 </div>
 
-<div class='empty'></div>
 
 <script src="/js/browser.js"></script>
 
