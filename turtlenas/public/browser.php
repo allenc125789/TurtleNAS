@@ -50,15 +50,15 @@ if($casequery || $query == NULL || $username == NULL){
         <?php foreach($fObject as $row):?>
         <?php $data = explode('|', $row);?>
         <?php $arrkey = array_search($row, $fObject);?>
-        <tr bgcolor="lightgrey">
-            <td class="checks"><?php echo "<input type=\"checkbox\" class=\"cb\" id=\"filechecks\" name=\"fileToDelete[]\" value=\"$data[1]\" onchange='cbChange(this)'>";?></td>
+        <tr class="tableItems" bgcolor="lightgrey">
+            <td id="checks"><?php echo "<input type=\"checkbox\" class=\"cb\" id=\"filechecks\" name=\"fileToDelete[]\" value=\"$data[1]\" onchange='cbChange(this)'>";?></td>
             <?php if (is_dir($data[0])):?>
-            <td class="files"><?php echo "<a href='/browser.php?$username:$data[4]$data[1]'>$data[1]";?></td>
+            <td id="files"><?php echo "<a href='/browser.php?$username:$data[4]$data[1]'>$data[1]";?></td>
             <?php else:?>
-            <td class="files"><?php echo "<a href='/download.php?$username:$data[4]$data[1]'>$data[1]";?></td>
+            <td id="files"><?php echo "<a href='/download.php?$username:$data[4]$data[1]'>$data[1]";?></td>
             <?php endif;?>
-            <td class="dates"><?php echo $data[2];?></td>
-            <td class="size"><?php echo $data[3];?></td>
+            <td id="dates"><?php echo $data[2];?></td>
+            <td id="size"><?php echo $data[3];?></td>
             <?php endforeach;?>
         </tr>
     </table>
