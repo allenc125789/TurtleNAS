@@ -13,9 +13,10 @@
     position: fixed;
     top: 8px;
     left: 5px;
-    border: 4px solid black;
+    border: 4px outset grey;
     padding-top: 14px;
     padding-left: 20px;
+    background-color: lightgrey;
 }
 
 #checks {
