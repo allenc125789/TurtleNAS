@@ -168,6 +168,11 @@ class DBcontrol {
             $filename = $root . $parent . $filename;
             $filename = str_replace("%20", " ", $filename);
             if (is_dir($filename)){
+                $arr = $this->scanDirAndSubdir($filename);
+                foreach ($arr as $file){
+                    unlink($file);
+                    rmdir($file);
+                }
                 rmdir($filename);
             } else{
                 unlink($filename);
@@ -182,6 +187,7 @@ class DBcontrol {
         $post = $_POST['createDir'];
         $username = $_SESSION['sessuser'];
         $query = $_SERVER['QUERY_STRING'];
+        $query = str_replace("%20", " ", $query);
         $parent = str_replace("$username:/", '', "$query");
         $root = $this->getRootByUser();
         $pos = strpos($post, $query);
