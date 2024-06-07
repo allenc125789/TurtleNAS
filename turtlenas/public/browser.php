@@ -39,7 +39,7 @@ if($casequery || $query == NULL || $username == NULL){
             <th>File Size</th>
         </tr>
         <tr class="hotbar">
-            <td bgcolor="white"></td>
+            <td bgcolor="white"><input class="cb" type="checkbox" name="massSelect[]" id="massSelect" onchange="checkAll(this)"/></td>
             <td style="font-size: 20" bgcolor="white"><?php echo "<a href='/browser.php?$username:/'>⟲</a>";?>
             <?php if (!is_null($queryparent)):?>
             <?php echo "<a href='/browser.php?$username:$queryparent'>↩</a>";?></td>
@@ -51,7 +51,7 @@ if($casequery || $query == NULL || $username == NULL){
         <?php $data = explode('|', $row);?>
         <?php $arrkey = array_search($row, $fObject);?>
         <tr bgcolor="lightgrey">
-            <td class="checks"><?php echo "<input type=\"checkbox\" class=\"filechecks\" id=\"filechecks\" name=\"fileToDelete[]\" value=\"$data[1]\">";?></td>
+            <td class="checks"><?php echo "<input type=\"checkbox\" class=\"cb\" id=\"filechecks\" name=\"fileToDelete[]\" value=\"$data[1]\" onchange='cbChange(this)'>";?></td>
             <?php if (is_dir($data[0])):?>
             <td class="files"><?php echo "<a href='/browser.php?$username:$data[4]$data[1]'>$data[1]";?></td>
             <?php else:?>
