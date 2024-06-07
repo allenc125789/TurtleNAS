@@ -39,7 +39,7 @@ if($casequery || $query == NULL || $username == NULL){
             <th>File Size</th>
         </tr>
         <tr class="hotbar">
-            <td bgcolor="white"><input class="cb" type="checkbox" name="massSelect[]" id="massSelect" onchange="checkAll(this)"/></td>
+            <td bgcolor="white"><input type="checkbox" name="massSelect[]" id="massSelect" onchange="checkAll(this)"/></td>
             <td style="font-size: 20" bgcolor="white"><?php echo "<a href='/browser.php?$username:/'>⟲</a>";?>
             <?php if (!is_null($queryparent)):?>
             <?php echo "<a href='/browser.php?$username:$queryparent'>↩</a>";?></td>
