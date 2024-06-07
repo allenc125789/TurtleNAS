@@ -6,11 +6,11 @@
 
 +files without extensions can seemingly be uploaded/downloaded
 
++added checkbox to uncheck/check all other chekboxes
+
 -need to be able to create empty folders
 
 -folders with files inside can not be deleted yet. that needs work
-
--need to add checkbox to uncheck/check all other chekboxes
 
 -need function to upload folders. Due to limitations with php, this function must be written with js. 
 
