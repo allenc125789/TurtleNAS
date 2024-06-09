@@ -4,17 +4,16 @@
 
 +files and empty folders can be deleted
 
++able to create empty folders
+
 +files without extensions can seemingly be uploaded/downloaded
 
 +added checkbox to uncheck/check all other chekboxes
 
--+ uploading directories maybe working, but there may be issues due to how windows allow files to be named (single quotes in filenames cause sql errors)
++folders with files inside can be deleted
 
--need to be able to create empty folders
+-+ uploading directories maybe working, but there may be issues due to how I can not travel into, or create inside a directory with a single quote. Might have to redisgn the program to work around urlencoded queries, maybe hash file names upon upload? Something to make the processing between special characters for windows, and linux php easier.
 
--folders with files inside can not be deleted yet. that needs work
-
--need function to upload folders. Due to limitations with php, this function must be written with js. 
 
 
 
