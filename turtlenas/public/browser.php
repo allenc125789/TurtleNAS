@@ -12,7 +12,7 @@ if ($verify){
     $fObject = $control->getFilesForDisplay();
     $username = $_SESSION['sessuser'];
     $query = $_SERVER['QUERY_STRING'];
-    $query = str_replace("%20", " ", $query);
+    $query = urldecode(str_replace("%20", " ", $query));
     $casequery = str_starts_with("$username:", $query);
     $queryparent = $control->getParentByQuery();
 }
@@ -53,7 +53,7 @@ if ($casequery || $query == NULL || $username == NULL){
         <tr class="tableItems" bgcolor="lightgrey">
             <td id="checks"><?php echo "<input type=\"checkbox\" class=\"cb\" id=\"filechecks\" name=\"fileToDelete[]\" value=\"$data[1]\">";?></td>
             <?php if (is_dir(stripslashes($data[0]))):?>
-            <td id="files"><?php $dir = (urlencode("$data[4]$data[1]")); echo ($dir); echo "<a href='/browser.php?$username:$dir'>$data[1]";?></td>
+            <td id="files"><?php $dir = (urlencode("$data[4]$data[1]")); echo "<a href='/browser.php?$username:$dir'>$data[1]";?></td>
             <?php else:?>
             <td id="files"><?php echo "<a href='/download.php?$username:$data[5]'>$data[1]";?></td>
             <?php endif;?>
