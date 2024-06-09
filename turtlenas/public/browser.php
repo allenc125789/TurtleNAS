@@ -52,10 +52,10 @@ if ($casequery || $query == NULL || $username == NULL){
         <?php $arrkey = array_search($row, $fObject);?>
         <tr class="tableItems" bgcolor="lightgrey">
             <td id="checks"><?php echo "<input type=\"checkbox\" class=\"cb\" id=\"filechecks\" name=\"fileToDelete[]\" value=\"$data[1]\">";?></td>
-            <?php if (is_dir($data[0])):?>
-            <td id="files"><?php echo "<a href='/browser.php?$username:$data[4]$data[1]'>$data[1]";?></td>
+            <?php if (is_dir(stripslashes($data[0]))):?>
+            <td id="files"><?php $dir = (urlencode("$data[4]$data[1]")); echo ($dir); echo "<a href='/browser.php?$username:$dir'>$data[1]";?></td>
             <?php else:?>
-            <td id="files"><?php echo "<a href='/download.php?$username:$data[4]$data[1]'>$data[1]";?></td>
+            <td id="files"><?php echo "<a href='/download.php?$username:$data[5]'>$data[1]";?></td>
             <?php endif;?>
             <td id="dates"><?php echo $data[2];?></td>
             <td id="size"><?php echo $data[3];?></td>
