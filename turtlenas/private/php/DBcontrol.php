@@ -195,7 +195,8 @@ class DBcontrol {
     public function createDir($post){
         $username = $_SESSION['sessuser'];
         $query = $_SERVER['QUERY_STRING'];
-        $query = str_replace("%20", " ", $query);
+        $query = urldecode(str_replace("%20", " ", $query));
+        $query = str_replace("'", "\\'", "$query");
         $parent = str_replace("$username:/", '', "$query");
         $root = $this->getRootByUser();
         foreach ($post as $dir){
@@ -203,13 +204,11 @@ class DBcontrol {
             if ($pos === false && str_contains($dir, $root)){
                 $newdir = str_replace("$root$parent", '', $dir);
                 mkdir($root . $parent . $newdir, 0777, true);
-//                echo "$root$parent$newdir ";
             } elseif (!str_contains($dir, $root)){
                 mkdir($root . $parent . $dir);
-//                echo $dir;
-//        header("Location: /browser.php?$query");
             }
         }
+        header("Location: /browser.php?$query");
     }
 
     public function deleteRecordByPath($vfullpath){
