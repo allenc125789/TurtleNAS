@@ -183,19 +183,24 @@ class DBcontrol {
         header("Location: /browser.php?$query");
     }
 
-    public function createDir(){
-        $post = $_POST['createDir'];
+    public function createDir($post){
         $username = $_SESSION['sessuser'];
         $query = $_SERVER['QUERY_STRING'];
         $query = str_replace("%20", " ", $query);
         $parent = str_replace("$username:/", '', "$query");
         $root = $this->getRootByUser();
-        $pos = strpos($post, $query);
-        if ($pos === false){
-            mkdir($root . $parent . $post);
-//            echo ($root . $parent . $post);
+        foreach ($post as $dir){
+            $pos = strpos($dir, $query);
+            if ($pos === false && str_contains($dir, $root)){
+                $newdir = str_replace("$root$parent", '', $dir);
+                mkdir($root . $parent . $newdir, 0777, true);
+//                echo "$root$parent$newdir ";
+            } elseif (!str_contains($dir, $root)){
+                mkdir($root . $parent . $dir);
+//                echo $dir;
+//        header("Location: /browser.php?$query");
+            }
         }
-        header("Location: /browser.php?$query");
     }
 
     public function deleteRecordByPath($vfullpath){
