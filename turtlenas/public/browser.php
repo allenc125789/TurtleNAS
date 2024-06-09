@@ -77,8 +77,8 @@ if ($casequery || $query == NULL || $username == NULL){
     <input type="file" id="button" name="file[]" multiple="" onchange="this.form.submit()">
     </form>
 
-    <?php echo "<form action='/upload.php?$query' method='POST' enctype='multipart/form-data'>"?>
-    <input type="file" id="filepicker" name="fileList" webkitdirectory multiple />
+    <?php echo "<form action='/uploadDir.php?$query' method='POST' enctype='multipart/form-data'>"?>
+    <input type="file" id="filepicker" name="dir[]" onchange="this.form.submit()" webkitdirectory mozdirectory multiple />
     </form>
 
     <?php echo "<form action='/mkdir.php?$query' method='POST'>"?>
