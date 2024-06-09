@@ -208,7 +208,6 @@ class DBcontrol {
                 mkdir($root . $parent . $dir);
             }
         }
-        header("Location: /browser.php?$query");
     }
 
     public function deleteRecordByPath($vfullpath){
