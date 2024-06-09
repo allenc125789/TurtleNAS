@@ -8,6 +8,8 @@
 
 +added checkbox to uncheck/check all other chekboxes
 
+-+ uploading directories maybe working, but there may be issues due to how windows allow files to be named (single quotes in filenames cause sql errors)
+
 -need to be able to create empty folders
 
 -folders with files inside can not be deleted yet. that needs work
