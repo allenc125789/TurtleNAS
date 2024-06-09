@@ -70,7 +70,7 @@ class DBcontrol {
         $username = $_SESSION['sessuser'];
         $stmt = $this->get_connection()->query("SELECT * FROM drives WHERE user = '$username'");
         while ($row = $stmt->fetch()){
-            $allrows = $row['type']. "|".$row['uuid']. "|".$row['disk']. ";|".$row['user'];
+            $allrows = $row['type']. "|".$row['uuid']. "|".$row['disk']. "|".$row['user'];
             $data[] = $allrows;
         }
         return $username;
@@ -95,6 +95,15 @@ class DBcontrol {
         return $fullpath;
     }
 
+    public function getFullPathByHash($hash){
+        $username = $_SESSION['sessuser'];
+        $stmt = $this->get_connection()->query("SELECT fullpath FROM files_$username WHERE hash = '$hash'");
+        while ($row = $stmt->fetch()){
+            $fullpath = $row['fullpath'];
+            return $fullpath;
+        }
+    }
+
     public function getFilesForDisplay(){
         $username = $_SESSION['sessuser'];
         $query = $_SERVER['QUERY_STRING'];
@@ -102,7 +111,7 @@ class DBcontrol {
         $path = str_replace("$username:", '', "$query");
         $stmt = $this->get_connection()->query("SELECT * FROM files_$username WHERE parent = '$path'");
         while ($row = $stmt->fetch()){
-            $allrows = $row['fullpath']. "|".$row['name']. "|".$row['date']. "|".$row['size']. "|".$row['parent'];
+            $allrows = $row['fullpath']. "|".$row['name']. "|".$row['date']. "|".$row['size']. "|".$row['parent']. "|".$row['hash'];
             $data[] = $allrows;
         }
         return $data;
@@ -214,7 +223,7 @@ class DBcontrol {
         $username = $_SESSION['sessuser'];
         $stmt = $this->get_connection()->prepare("INSERT INTO files_$username (fullpath, parent, name, date, size, hash) VALUES (:vfullpath, :vparent, :vname, :vdate, :vsize, :vhash)");
         $stmt->execute([
-            'vfullpath' => $vfullpath,
+            'vfullpath' => addslashes($vfullpath),
             'vparent' => $vparent,
             'vname' => $vname,
             'vdate' => $vdate,
