@@ -32,12 +32,10 @@ if (isset($_FILES['file'])){
     $file_array = reArrayFiles($_FILES['file']);
     for ($i=0;$i<count($file_array);$i++){
         move_uploaded_file($file_array[$i]['tmp_name'], $fullpath . $file_array[$i]['name']);
-        echo $fullpath . $file_array[$i]['name'];
     }
 }
+
 header("Location: /browser.php?$query");
-
-
 
 
 ?>
