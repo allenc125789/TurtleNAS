@@ -8,10 +8,11 @@ switch ($validated) {
     case 1:
         $query = $_SERVER['QUERY_STRING'];
         $username = $_SESSION['sessuser'];
-        $path = str_replace("$username:", '', $query);
-        $file = $control->getFullPath($path);
+        $hash = str_replace("$username:", '', $query);
+        $file = $control->getFullPathByHash($hash);
+        echo basename(stripslashes($file));
         header('Content-Type: application/octet-stream');
-        header('Content-Disposition: attachment; filename=' . basename($file));
+        header('Content-Disposition: attachment; filename=' . basename(stripslashes($file)));
         header('Content-Transfer-Encoding: binary');
         header('Expires: 0');
         header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
@@ -19,7 +20,7 @@ switch ($validated) {
         header('Content-Length: ' . filesize($file));
         ob_clean();
         flush();
-        readfile($file);
+        readfile(stripslashes($file));
         exit;
     default:
         header('Location: /login.html');
