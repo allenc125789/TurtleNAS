@@ -16,11 +16,11 @@
 
 organizing what data is sent where-
 
-Query: Folder/file Path
+Query: Folder/file Path (for directory traversing, and sending data to php files)
 
-Post:
+Post: form data (selections and data requests)
 
-SQL:
+SQL: 
 
 
 
