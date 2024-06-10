@@ -14,7 +14,13 @@
 
 -+ uploading directories maybe working, but there may be issues due to how I can not travel into, or create inside a directory with a single quote. Might have to redisgn the program to work around urlencoded queries, maybe hash file names upon upload? Something to make the processing between special characters for windows, and linux php easier.
 
+organizing what data is sent where-
 
+Query: Folder/file Path
+
+Post:
+
+SQL:
 
 
 
