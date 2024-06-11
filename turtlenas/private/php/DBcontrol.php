@@ -106,7 +106,7 @@ class DBcontrol {
 
     public function getFilesForDisplay(){
         $username = $_SESSION['sessuser'];
-        $query = urldecode($_SERVER['QUERY_STRING']);
+        $query = $_SERVER['QUERY_STRING'];
         $query = str_replace("'", "\\'", "$query");
         $path = str_replace("$username:", '', "$query");
         $stmt = $this->get_connection()->query("SELECT * FROM files_$username WHERE parent = '$path'");
@@ -129,7 +129,6 @@ class DBcontrol {
     public function getParentByQuery(){
         $username = $_SESSION['sessuser'];
         $query = $_SERVER['QUERY_STRING'];
-        $query = urldecode($query);
         $path = str_replace("$username:", '', "$query");
         $root = $this->getRootByUser();
         if ($path !== "/"){
@@ -195,7 +194,7 @@ class DBcontrol {
     public function createDir($post){
         $username = $_SESSION['sessuser'];
         $query = $_SERVER['QUERY_STRING'];
-        $query = urldecode(str_replace("%20", " ", $query));
+        $query = str_replace("%20", " ", $query);
         $query = str_replace("'", "\\'", "$query");
         $parent = str_replace("$username:/", '', "$query");
         $root = $this->getRootByUser();
@@ -207,6 +206,52 @@ class DBcontrol {
             } elseif (!str_contains($dir, $root)){
                 mkdir($root . $parent . $dir);
             }
+        }
+    }
+
+    function reArrayFiles(&$file_post) {
+        $file_ary = array();
+        $file_count = count($file_post['name']);
+        $file_keys = array_keys($file_post);
+        for ($i=0; $i<$file_count; $i++) {
+            foreach ($file_keys as $key) {
+                $file_ary[$i][$key] = $file_post[$key][$i];
+            }
+        }
+        return $file_ary;
+    }
+
+    public function uploadFile(){
+        $query = $_SERVER['QUERY_STRING'];
+        $query = str_replace("%20", " ", $query);
+        $username = $_SESSION['sessuser'];
+        $path = str_replace("$username:/", '', $query);
+        $fullpath = $this->getFullPath($path);
+        if (isset($_FILES['file'])){
+            $file_array = $this->reArrayFiles($_FILES['file']);
+            for ($i=0;$i<count($file_array);$i++){
+                move_uploaded_file($file_array[$i]['tmp_name'], $fullpath . $file_array[$i]['name']);
+            }
+        }
+    }
+
+    public function uploadDir(){
+        $query = $_SERVER['QUERY_STRING'];
+        $query = str_replace("%20", " ", $query);
+        $username = $_SESSION['sessuser'];
+        $path = str_replace("$username:/", '', $query);
+        $fullpath = $this->getFullPath($path);
+        if (isset($_FILES['dir'])){
+            $file_array = $this->reArrayFiles($_FILES['dir']);
+            for ($i=0;$i<count($file_array);$i++){
+                $directory[] = pathinfo($fullpath . $file_array[$i]['full_path'], PATHINFO_DIRNAME);
+            }
+            $uniqueDir = array_unique($directory, SORT_STRING);
+            $this->createDir($uniqueDir);
+                for ($i=0;$i<count($file_array);$i++){
+                    $parent = pathinfo($file_array[$i]['full_path']);
+                    move_uploaded_file($file_array[$i]['tmp_name'], $fullpath . $file_array[$i]['full_path']);
+                }
         }
     }
 
