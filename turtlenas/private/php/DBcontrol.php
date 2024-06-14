@@ -104,6 +104,25 @@ class DBcontrol {
         }
     }
 
+    public function getNameByHash($hash){
+        $username = $_SESSION['sessuser'];
+        $stmt = $this->get_connection()->query("SELECT name FROM files_$username WHERE hash = '$hash'");
+        while ($row = $stmt->fetch()){
+            $fullpath = $row['fullpath'];
+            return $fullpath;
+        }
+    }
+
+    public function getParentByHash($hash){
+        $username = $_SESSION['sessuser'];
+        $stmt = $this->get_connection()->query("SELECT parent FROM files_$username WHERE hash = '$hash'");
+        while ($row = $stmt->fetch()){
+            $fullpath = $row['fullpath'];
+            return $fullpath;
+        }
+    }
+
+
     public function getFilesForDisplay(){
         $username = $_SESSION['sessuser'];
         $query = $_SERVER['QUERY_STRING'];
