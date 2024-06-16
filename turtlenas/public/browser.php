@@ -46,7 +46,7 @@ if ($casequery || $query == NULL || $username == NULL){
             <?php endif;?>
             <td colspan=2 style="font-size:12" bgcolor="black"><font style="color:white;"><?php echo $query;?></font></td>
         </tr>
-        <?php echo "<form action='/delete.php?$query' method='post'>";?>
+        <?php echo "<form action='/delete.php?$queryen' method='post'>";?>
         <?php foreach($fObject as $row):?>
         <?php $data = explode('|', $row);?>
         <?php $arrkey = array_search($row, $fObject);?>
