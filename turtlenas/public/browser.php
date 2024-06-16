@@ -40,7 +40,7 @@ if ($casequery || $query == NULL || $username == NULL){
         </tr>
         <tr class="hotbar">
             <td bgcolor="white"><input type="checkbox" name="massSelect[]" id="massSelect" onchange="checkAll(this)"/></td>
-            <td style="font-size: 20" bgcolor="white"><?php echo "<a href='/browser.php?$username:/'>⟲</a>";?>
+            <td style="font-size: 20" bgcolor="white"><?php echo "<a href='/browser.php?$username:%2F'>⟲</a>";?>
             <?php if (!is_null($queryparent)):?>
             <?php echo "<a href='/browser.php?$username:". urlencode($queryparent) ."'>↩</a>";?></td>
             <?php endif;?>
