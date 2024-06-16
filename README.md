@@ -14,7 +14,9 @@
 
 +compatible with Window's name formatting.
 
-- downloading hidden files removes the inital dot(.)
+-downloading hidden files removes the inital dot(.)
+
+-upload bandwidth needs to be limited. DDOS risk
 
 
 # Summary:
