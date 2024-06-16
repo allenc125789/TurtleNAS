@@ -14,6 +14,8 @@
 
 +compatible with Window's name formatting.
 
++can download files without an extension
+
 -downloading hidden files removes the inital dot(.)
 
 -upload bandwidth needs to be limited. DDOS risk
