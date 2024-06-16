@@ -3,4 +3,5 @@
 + Contains a hardcap filesize limit for what can be uploaded to the server "client_max_body_size 1000G;".
 + Contains a bandwidth limit nginx "limit_rate 10k;".
 
-(/etc/php/8.2/fpm/php.ini) contains a hardcap filesize limit for what can be uploaded to the server "max_file_uploads;", "upload_max_filesize;", "post_max_size;", "max_file_uploads;"
+(/etc/php/8.2/fpm/php.ini) 
++ Contains a hardcap filesize limit for what can be uploaded to the server "max_file_uploads;", "upload_max_filesize;", "post_max_size;", "max_file_uploads;"
