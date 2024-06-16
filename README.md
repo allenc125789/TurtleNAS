@@ -12,15 +12,7 @@
 
 +folders with files inside can be deleted
 
--+ uploading directories maybe working, but there may be issues due to how I can not travel into, or create inside a directory with a single quote. Might have to redisgn the program to work around urlencoded queries, maybe hash file names upon upload? Something to make the processing between special characters for windows, and linux php easier.
-
--organizing what data is sent where-
-
-Query (urlencode): Folder/file Path (for directory traversing, and sending data to php files)
-
-Post (): form data (selections requests and data for processing)
-
-SQL (): 
++compatible with Window's name formatting.
 
 
 
