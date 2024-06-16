@@ -91,8 +91,8 @@ class DBcontrol {
     public function getFullPath($shortpath){
         $root = $this->getRootByUser();
         $filename = ($root . $shortpath);
-        $fullpath = str_replace("%20", " ", $filename);
-        return $fullpath;
+//        $fullpath = str_replace("\'", "\\'", $filename);
+        return $filename;
     }
 
     public function getFullPathByHash($hash){
@@ -123,9 +123,8 @@ class DBcontrol {
     }
 
 
-    public function getFilesForDisplay(){
+    public function getFilesForDisplay($query){
         $username = $_SESSION['sessuser'];
-        $query = $_SERVER['QUERY_STRING'];
         $query = str_replace("'", "\\'", "$query");
         $path = str_replace("$username:", '', "$query");
         $stmt = $this->get_connection()->query("SELECT * FROM files_$username WHERE parent = '$path'");
@@ -145,9 +144,8 @@ class DBcontrol {
         }
     }
 
-    public function getParentByQuery(){
+    public function getParentByQuery($query){
         $username = $_SESSION['sessuser'];
-        $query = $_SERVER['QUERY_STRING'];
         $path = str_replace("$username:", '', "$query");
         $root = $this->getRootByUser();
         if ($path !== "/"){
@@ -212,9 +210,7 @@ class DBcontrol {
 
     public function createDir($post){
         $username = $_SESSION['sessuser'];
-        $query = $_SERVER['QUERY_STRING'];
-        $query = str_replace("%20", " ", $query);
-        $query = str_replace("'", "\\'", "$query");
+        $query = urldecode($_SERVER['QUERY_STRING']);
         $parent = str_replace("$username:/", '', "$query");
         $root = $this->getRootByUser();
         foreach ($post as $dir){
@@ -223,7 +219,8 @@ class DBcontrol {
                 $newdir = str_replace("$root$parent", '', $dir);
                 mkdir($root . $parent . $newdir, 0777, true);
             } elseif (!str_contains($dir, $root)){
-                mkdir($root . $parent . $dir);
+                mkdir($root . $parent . $dir, 0777);
+//                echo ($root . $parent . $dir ."/");
             }
         }
     }
@@ -241,21 +238,28 @@ class DBcontrol {
     }
 
     public function uploadFile(){
-        $query = $_SERVER['QUERY_STRING'];
+        error_reporting(-1); // display all faires
+        ini_set('display_errors', 1);  // ensure that faires will be seen
+        ini_set('display_startup_errors', 1); // display faires that didn't born
+        $query = urldecode($_SERVER['QUERY_STRING']);
         $query = str_replace("%20", " ", $query);
         $username = $_SESSION['sessuser'];
         $path = str_replace("$username:/", '', $query);
         $fullpath = $this->getFullPath($path);
+
+
         if (isset($_FILES['file'])){
             $file_array = $this->reArrayFiles($_FILES['file']);
             for ($i=0;$i<count($file_array);$i++){
                 move_uploaded_file($file_array[$i]['tmp_name'], $fullpath . $file_array[$i]['name']);
+                echo ($fullpath . $file_array[$i]['name']);
+
             }
         }
     }
 
     public function uploadDir(){
-        $query = $_SERVER['QUERY_STRING'];
+        $query = urldecode($_SERVER['QUERY_STRING']);
         $query = str_replace("%20", " ", $query);
         $username = $_SESSION['sessuser'];
         $path = str_replace("$username:/", '', $query);
