@@ -9,12 +9,12 @@ ini_set('display_startup_errors', 1); // display faires that didn't born
 $verify = $control->validate_auth();
 if ($verify){
     $control->updateFileRecord();
-    $fObject = $control->getFilesForDisplay();
     $username = $_SESSION['sessuser'];
-    $query = $_SERVER['QUERY_STRING'];
-    $query = urldecode(str_replace("%20", " ", $query));
+    $queryen = $_SERVER['QUERY_STRING'];
+    $query = urldecode($queryen);
+    $fObject = $control->getFilesForDisplay($query);
     $casequery = str_starts_with("$username:", $query);
-    $queryparent = $control->getParentByQuery();
+    $queryparent = $control->getParentByQuery($query);
 }
 
 if ($casequery || $query == NULL || $username == NULL){
@@ -42,7 +42,7 @@ if ($casequery || $query == NULL || $username == NULL){
             <td bgcolor="white"><input type="checkbox" name="massSelect[]" id="massSelect" onchange="checkAll(this)"/></td>
             <td style="font-size: 20" bgcolor="white"><?php echo "<a href='/browser.php?$username:/'>⟲</a>";?>
             <?php if (!is_null($queryparent)):?>
-            <?php echo "<a href='/browser.php?$username:$queryparent'>↩</a>";?></td>
+            <?php echo "<a href='/browser.php?$username:". urlencode($queryparent) ."'>↩</a>";?></td>
             <?php endif;?>
             <td colspan=2 style="font-size:12" bgcolor="black"><font style="color:white;"><?php echo $query;?></font></td>
         </tr>
@@ -73,15 +73,15 @@ if ($casequery || $query == NULL || $username == NULL){
 
 </form>
 
-    <?php echo "<form action='/upload.php?$query' method='POST' enctype='multipart/form-data'>"?>
+    <?php echo "<form action='/upload.php?$queryen' method='POST' enctype='multipart/form-data'>"?>
     <input type="file" id="button" name="file[]" multiple="" onchange="this.form.submit()">
     </form>
 
-    <?php echo "<form action='/uploadDir.php?$query' method='POST' enctype='multipart/form-data'>"?>
+    <?php echo "<form action='/uploadDir.php?$queryen' method='POST' enctype='multipart/form-data'>"?>
     <input type="file" id="filepicker" name="dir[]" onchange="this.form.submit()" webkitdirectory mozdirectory multiple />
     </form>
 
-    <?php echo "<form action='/mkdir.php?$query' method='POST'>"?>
+    <?php echo "<form action='/mkdir.php?$queryen' method='POST'>"?>
     <button type="submit" id="mkdir">Create Folder...</button>
     <input type="text" id="createDir" name="createDir" required minlength="1" maxlength="255" size="10" />
     </form>
