@@ -14,6 +14,9 @@
 
 +compatible with Window's name formatting.
 
+- downloading hidden files removes the inital dot(.)
+
+- downloading files without an extensions will rename the file with .html at the end
 
 
 # Summary:
