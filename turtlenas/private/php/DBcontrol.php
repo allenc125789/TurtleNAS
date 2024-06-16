@@ -186,7 +186,7 @@ class DBcontrol {
     public function deleteFile(){
         $post = $_POST['fileToDelete'];
         $username = $_SESSION['sessuser'];
-        $query = $_SERVER['QUERY_STRING'];
+        $query = urldecode($_SERVER['QUERY_STRING']);
         $parent = str_replace("$username:/", '', "$query");
         $root = $this->getRootByUser();
         foreach ($post as $filename){
