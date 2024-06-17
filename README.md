@@ -18,7 +18,7 @@
 
 -downloading hidden files removes the inital dot(.)
 
--upload problems are based around the time it takes when hashing files to compare for file size differences. I will need to implement JS to load folder content asynchrounously, and probably have most of the file hashing done in the background.
+-upload problems are based around the time it takes when hashing many files (test was 1,000) to compare for file size differences. I will need to implement JS to load folder content asynchrounously, and probably have most of the file hashing done in the background.
 
 # Summary:
 
