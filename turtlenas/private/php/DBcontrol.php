@@ -397,7 +397,6 @@ class DBcontrol {
         $sqlpathcheck = $this->getPathByPath();
         $roothash = $this->prepFileHash($root);
         if ($roothash == $this->getHashByPath($root)) {
-            var_dump($this->getHashByPath($root));
             return;
         }
         // Remove old files from database.
