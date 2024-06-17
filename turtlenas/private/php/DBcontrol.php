@@ -401,21 +401,25 @@ class DBcontrol {
             if ((!file_exists($sqlpath)) || ($sqlhashcheck !== $realhash)) {
                 $this->deleteRecordByPath($sqlpath);
             } else {
+                $skipFiles[] = $sqlpath;
                 continue;
             }
         }
         // Insert new files into database.
         foreach ($afiles as $fullpath) {
-            $parse = dirname($fullpath). '/';
-            $parent = str_replace($root, '/', $parse);
-            $filename = str_replace($parse, '', $fullpath);
-            $date = $this->prepFileDate($fullpath);
-            $size = $this->prepFileSize($fullpath);
-            $hash = $this->prepFileHash($fullpath);
-            try {
-                $this->getInsertFileRecord($fullpath, $parent, $filename, $date, $size, $hash);
-            } catch (PDOException $e) {
-                continue;
+            if (!in_array($fullpath, $skipFiles)) {
+                $parse = dirname($fullpath). '/';
+                $parent = str_replace($root, '/', $parse);
+                $filename = str_replace($parse, '', $fullpath);
+                $date = $this->prepFileDate($fullpath);
+                $size = $this->prepFileSize($fullpath);
+                $hash = $this->prepFileHash($fullpath);
+                try {
+                    $this->getInsertFileRecord($fullpath, $parent, $filename, $date, $size, $hash);
+                } catch (PDOException $e) {
+                    continue;
+                }
+
             }
         }
     }
