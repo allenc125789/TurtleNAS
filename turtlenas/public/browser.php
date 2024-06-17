@@ -47,10 +47,10 @@ if ($casequery || $query == NULL || $username == NULL){
             <td colspan=2 style="font-size:12" bgcolor="black"><font style="color:white;"><?php echo $query;?></font></td>
         </tr>
         <?php echo "<form action='/delete.php?$queryen' method='post'>";?>
+        <?php foreach($fObject as $row):?>
+        <?php $data = explode('|', $row);?>
+        <?php $arrkey = array_search($row, $fObject);?>
         <tr class="tableItems" bgcolor="lightgrey">
-            <?php foreach($fObject as $row):?>
-            <?php $data = explode('|', $row);?>
-            <?php $arrkey = array_search($row, $fObject);?>
             <td id="checks"><?php echo "<input type=\"checkbox\" class=\"cb\" id=\"filechecks\" name=\"fileToDelete[]\" value=\"$data[1]\">";?></td>
             <?php if (is_dir(stripslashes($data[0]))):?>
             <td id="dirs"><?php $dir = (urlencode("$data[4]$data[1]")); echo "<a href='/browser.php?$username:$dir'>$data[1]";?></td>
