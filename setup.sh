@@ -62,8 +62,9 @@ yes | sudo ufw enable
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/selfsigned.key -out /etc/nginx/ssl/selfsigned.crt
     #: File Permissions and Grouping.
 sudo groupadd admin
-sudo adduser sysadmin www-data
 sudo adduser admin admin
+sudo adduser admin www-data
+sudo adduser sysadmin www-data
 chown -R sysadmin:www-data "$vPWD/turtlenas"
 chmod -R 755 "$vPWD/turtlenas"
     #: Sudo.
