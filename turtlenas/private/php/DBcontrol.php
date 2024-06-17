@@ -57,6 +57,8 @@ class DBcontrol {
     public function prepFileHash($fullpath, $hfile = ''){
         if ((file_exists($fullpath)) && (!is_dir($fullpath))) {
             return hash_file('sha224', "$fullpath");
+        } elseif (is_dir($fullpath)) {
+            return hash('sha224', "$fullpath");
         } elseif (file_exists($fullpath)) {
             $scandir = $this->scanDirAndSubdir($fullpath, $_FilesOnly = TRUE);
             foreach ($scandir as $file){
@@ -390,29 +392,30 @@ class DBcontrol {
     }
 
     public function updateFileRecord() {
-        $skipFiles = [];
+        $skipFiles = array();
         $username = $_SESSION['sessuser'];
         $root = $this->getRootByUser();
         $roothash = $this->prepFileHash($root);
         $afiles = $this->scanDirAndSubdir($root);
         $sqlpathcheck = $this->getPathByPath();
         if ($this->getHashByPath($root) == $roothash) {
+            var_dump($this->getHashByPath($root));
             return;
         }
         // Remove old files from database.
         foreach ($sqlpathcheck as $sqlpath) {
             $sqlhashcheck = $this->getHashByPath($sqlpath);
             $realhash = $this->prepFileHash($sqlpath);
-            if ((!file_exists($sqlpath)) || ($sqlhashcheck !== $realhash) || $sqlpath !== $root) {
-                $this->deleteRecordByPath($sqlpath);
-            } else {
+            if ((file_exists($sqlpath) || $sqlhashcheck == $realhash || $sqlpath == $root)) {
                 $skipFiles[] = $sqlpath;
                 continue;
+            } else {
+                $this->deleteRecordByPath($sqlpath);
             }
         }
         // Insert new files into database.
         foreach ($afiles as $fullpath) {
-            if (!in_array($fullpath, $skipFiles) && (!is_null($skipFiles))) {
+            if (!in_array($fullpath, $skipFiles)/* && (!is_null($skipFiles))*/) {
                 $parse = dirname($fullpath). '/';
                 $parent = str_replace($root, '/', $parse);
                 $filename = str_replace($parse, '', $fullpath);
@@ -425,7 +428,6 @@ class DBcontrol {
                 } catch (PDOException $e) {
                     continue;
                 }
-
             }
         }
     }
