@@ -393,17 +393,17 @@ class DBcontrol {
         $skipFiles = [];
         $username = $_SESSION['sessuser'];
         $root = $this->getRootByUser();
+        $roothash = $this->prepFileHash($root);
         $afiles = $this->scanDirAndSubdir($root);
         $sqlpathcheck = $this->getPathByPath();
-        $roothash = $this->prepFileHash($root);
-        if ($roothash == $this->getHashByPath($root)) {
+        if ($this->getHashByPath($root) == $roothash) {
             return;
         }
         // Remove old files from database.
         foreach ($sqlpathcheck as $sqlpath) {
             $sqlhashcheck = $this->getHashByPath($sqlpath);
             $realhash = $this->prepFileHash($sqlpath);
-            if ((!file_exists($sqlpath)) || ($sqlhashcheck !== $realhash) && $sqlpath !== $root) {
+            if ((!file_exists($sqlpath)) || ($sqlhashcheck !== $realhash) || $sqlpath !== $root) {
                 $this->deleteRecordByPath($sqlpath);
             } else {
                 $skipFiles[] = $sqlpath;
