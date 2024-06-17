@@ -18,7 +18,7 @@
 
 -downloading hidden files removes the inital dot(.)
 
--upload problems are based around the time it takes when hashing many files (test was 1,000) to compare for file size differences. I will need to implement JS to load folder content asynchrounously, and probably have most of the file hashing done in the background... In order to do that i'll need to revamp how content loads (reloading the page with a "query" --> "???")
+-upload problems are based around the time it takes when hashing many files (test was 1,000) to compare for file size differences. I will need to seperate the fileupdate function in control, from the browser file. Instead, I will need to activate it outside web functions.
 
 # Summary:
 
