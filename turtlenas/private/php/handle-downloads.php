@@ -8,8 +8,8 @@ switch ($validated) {
     case 1:
         $query = $_SERVER['QUERY_STRING'];
         $username = $_SESSION['sessuser'];
-        $hash = str_replace("$username:", '', $query);
-        $file = $control->getFullPathByHash($hash);
+        $shortpath = urldecode("$username:", '', $query);
+        $file = $control->getRootByUser($username) . $shortpath;
         echo basename(stripslashes($file));
         header('Content-Type: application/octet-stream');
         header('Content-Disposition: attachment; filename=' . basename(stripslashes($file)));
