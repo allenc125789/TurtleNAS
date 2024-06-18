@@ -1,6 +1,12 @@
 <?php
 session_start();
 
+error_reporting(-1); // display all faires
+ini_set('display_errors', 1);  // ensure that faires will be seen
+ini_set('display_startup_errors', 1); // display faires that didn't born
+
+
+
 class DBcontrol {
     private $host;
     private $dbname;
@@ -399,34 +405,43 @@ class DBcontrol {
     }
 
     public function updateFileRecord() {
+        $skipFiles = array();
+        $mtime = '';
         $username = $_SESSION['sessuser'];
         $root = $this->getRootByUser();
         $afiles = $this->scanDirAndSubdir($root);
         $sqlpathcheck = $this->getPathByPath();
         // Remove old files from database.
         foreach ($sqlpathcheck as $sqlpath) {
-            $mtime = stat($sqlpath)
             $sqlmtime = $this->getFTimeByPath($sqlpath);
+            try {
+                $mtime = stat($sqlpath);
+            } catch (Exception $e) {
+                continue;
+            }
 //            $sqlhashcheck = $this->getHashByPath($sqlpath);
 //            $realhash = $this->prepFileHash($sqlpath);
-            if ((!file_exists($sqlpath)) || ($mtime !== $sqlmtime)) {
+            if (!file_exists($sqlpath)) {
                 $this->deleteRecordByPath($sqlpath);
-            } else {
-                continue;
+            } elseif ($mtime !== $sqlmtime) {
+//                $this->deleteRecordByPath($sqlpath);
+                $skipFiles[] = $sqlpath;
             }
         }
         // Insert new files into database.
         foreach ($afiles as $fullpath) {
-            $parse = dirname($fullpath). '/';
-            $parent = str_replace($root, '/', $parse);
-            $filename = str_replace($parse, '', $fullpath);
-            $date = $this->prepFileDate($fullpath);
-            $size = $this->prepFileSize($fullpath);
-            $mtime = $stat($fullpath);
-            try {
-                $this->getInsertFileRecord($fullpath, $parent, $filename, $date, $size, $mtime['mtime']);
-            } catch (PDOException $e) {
-                continue;
+            if (in_array($fullpath, $afiles)) {
+                $parse = dirname($fullpath). '/';
+                $parent = str_replace($root, '/', $parse);
+                $filename = str_replace($parse, '', $fullpath);
+                $date = $this->prepFileDate($fullpath);
+                $size = $this->prepFileSize($fullpath);
+                $mtime = stat($fullpath);
+                try {
+                    $this->getInsertFileRecord($fullpath, $parent, $filename, $date, $size, $mtime['mtime']);
+                } catch (PDOException $e) {
+                    continue;
+                }
             }
         }
     }
