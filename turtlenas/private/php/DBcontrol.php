@@ -123,13 +123,22 @@ class DBcontrol {
     }
 
 
+    public function getFTimeByPath($fullpath){
+        $username = $_SESSION['sessuser'];
+        $stmt = $this->get_connection()->query("SELECT mtime FROM files_$username WHERE fullpath = '$fullpath'");
+        while ($row = $stmt->fetch()){
+            $fullpath = $row['mtime'];
+            return $fullpath;
+        }
+    }
+
     public function getFilesForDisplay($query){
         $username = $_SESSION['sessuser'];
         $query = str_replace("'", "\\'", "$query");
         $path = str_replace("$username:", '', "$query");
         $stmt = $this->get_connection()->query("SELECT * FROM files_$username WHERE parent = '$path'");
         while ($row = $stmt->fetch()){
-            $allrows = $row['fullpath']. "|".$row['name']. "|".$row['date']. "|".$row['size']. "|".$row['parent']. "|".$row['hash'];
+            $allrows = $row['fullpath']. "|".$row['name']. "|".$row['date']. "|".$row['size']. "|".$row['parent']. "|".$row['mtime'];
             $data[] = $allrows;
         }
         return $data;
@@ -285,16 +294,16 @@ class DBcontrol {
         $stmt->execute(['vfullpath' => $vfullpath]);
     }
 
-    public function getInsertFileRecord($vfullpath, $vparent, $vname, $vdate, $vsize, $vhash){
+    public function getInsertFileRecord($vfullpath, $vparent, $vname, $vdate, $vsize, $vmtime){
         $username = $_SESSION['sessuser'];
-        $stmt = $this->get_connection()->prepare("INSERT INTO files_$username (fullpath, parent, name, date, size, hash) VALUES (:vfullpath, :vparent, :vname, :vdate, :vsize, :vhash)");
+        $stmt = $this->get_connection()->prepare("INSERT INTO files_$username (fullpath, parent, name, date, size, mtime) VALUES (:vfullpath, :vparent, :vname, :vdate, :vsize, :vmtime)");
         $stmt->execute([
             'vfullpath' => addslashes($vfullpath),
             'vparent' => $vparent,
             'vname' => $vname,
             'vdate' => $vdate,
             'vsize' => $vsize,
-            'vhash' => $vhash,
+            'vmtime' => $vmtime,
         ]);
     }
 
@@ -396,9 +405,11 @@ class DBcontrol {
         $sqlpathcheck = $this->getPathByPath();
         // Remove old files from database.
         foreach ($sqlpathcheck as $sqlpath) {
-            $sqlhashcheck = $this->getHashByPath($sqlpath);
-            $realhash = $this->prepFileHash($sqlpath);
-            if ((!file_exists($sqlpath)) || ($sqlhashcheck !== $realhash)) {
+            $mtime = stat($sqlpath)
+            $sqlmtime = $this->getFTimeByPath($sqlpath);
+//            $sqlhashcheck = $this->getHashByPath($sqlpath);
+//            $realhash = $this->prepFileHash($sqlpath);
+            if ((!file_exists($sqlpath)) || ($mtime !== $sqlmtime)) {
                 $this->deleteRecordByPath($sqlpath);
             } else {
                 continue;
@@ -411,9 +422,9 @@ class DBcontrol {
             $filename = str_replace($parse, '', $fullpath);
             $date = $this->prepFileDate($fullpath);
             $size = $this->prepFileSize($fullpath);
-            $hash = $this->prepFileHash($fullpath);
+            $mtime = $stat($fullpath);
             try {
-                $this->getInsertFileRecord($fullpath, $parent, $filename, $date, $size, $hash);
+                $this->getInsertFileRecord($fullpath, $parent, $filename, $date, $size, $mtime['mtime']);
             } catch (PDOException $e) {
                 continue;
             }
