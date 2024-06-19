@@ -206,12 +206,14 @@ class DBcontrol {
         $root = $this->getRootByUser();
         foreach ($post as $filename){
             $filename = $root . $parent . $filename;
-            $filename = str_replace("%20", " ", $filename);
             if (is_dir($filename)){
                 $arr = $this->scanDirAndSubdir($filename);
                 foreach ($arr as $file){
-                    unlink($file);
-                    rmdir($file);
+                    if (is_dir($file)) {
+                        rmdir($file);
+                    } else {
+                        unlink($file);
+                    }
                 }
                 rmdir($filename);
             } else{
@@ -415,7 +417,7 @@ class DBcontrol {
         foreach ($sqlpathcheck as $sqlpath) {
             $sqlmtime = $this->getFTimeByPath($sqlpath);
             try {
-                $mtime = stat($sqlpath);
+//                $mtime = stat($sqlpath);
             } catch (Exception $e) {
                 continue;
             }
@@ -423,14 +425,14 @@ class DBcontrol {
 //            $realhash = $this->prepFileHash($sqlpath);
             if (!file_exists($sqlpath)) {
                 $this->deleteRecordByPath($sqlpath);
-            } elseif ($mtime !== $sqlmtime) {
+            } elseif (stat($sqlpath) !== $sqlmtime) {
 //                $this->deleteRecordByPath($sqlpath);
                 $skipFiles[] = $sqlpath;
             }
         }
         // Insert new files into database.
         foreach ($afiles as $fullpath) {
-            if (in_array($fullpath, $afiles)) {
+            if (!in_array($fullpath, $skipFiles)) {
                 $parse = dirname($fullpath). '/';
                 $parent = str_replace($root, '/', $parse);
                 $filename = str_replace($parse, '', $fullpath);
