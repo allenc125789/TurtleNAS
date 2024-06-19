@@ -259,7 +259,6 @@ class DBcontrol {
         ini_set('display_errors', 1);  // ensure that faires will be seen
         ini_set('display_startup_errors', 1); // display faires that didn't born
         $query = urldecode($_SERVER['QUERY_STRING']);
-        $query = str_replace("%20", " ", $query);
         $username = $_SESSION['sessuser'];
         $path = str_replace("$username:/", '', $query);
         $fullpath = $this->getFullPath($path);
@@ -426,7 +425,6 @@ class DBcontrol {
             if (!file_exists($sqlpath)) {
                 $this->deleteRecordByPath($sqlpath);
             } elseif (stat($sqlpath) == $sqlmtime) {
-//                $this->deleteRecordByPath($sqlpath);
                 $skipFiles[] = $sqlpath;
             }
         }
