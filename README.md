@@ -20,6 +20,8 @@
 
 -downloading hidden files removes the inital dot(.) (possibly due to browsers santitizing the filename?)
 
+-lots of unused code needs to be trimmed. especially relating to the old hashing system.
+
 
 # Summary:
 
