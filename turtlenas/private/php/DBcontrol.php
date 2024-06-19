@@ -425,7 +425,7 @@ class DBcontrol {
 //            $realhash = $this->prepFileHash($sqlpath);
             if (!file_exists($sqlpath)) {
                 $this->deleteRecordByPath($sqlpath);
-            } elseif (stat($sqlpath) !== $sqlmtime) {
+            } elseif (stat($sqlpath) == $sqlmtime) {
 //                $this->deleteRecordByPath($sqlpath);
                 $skipFiles[] = $sqlpath;
             }
