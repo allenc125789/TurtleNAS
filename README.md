@@ -16,9 +16,10 @@
 
 +can download files without an extension
 
++program runs effeiciently enough. changing directories is seamless, and multiple gigs of files can be uploaded without major impact on performance. Need to test with uploads from multiple users.
+
 -downloading hidden files removes the inital dot(.)
 
--upload problems are based around the time it takes when hashing many files (test was 1,000) to compare for file size differences. I will need to seperate the fileupdate function in control, from the browser file. Instead, I will need to activate it outside web functions.
 
 # Summary:
 
