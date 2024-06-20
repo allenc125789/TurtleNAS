@@ -1,4 +1,7 @@
-----File Upload Limits----
+__Bugs__
++ Downloading files through a browser will append the filename if starting with a (.) dot. (Example: ".bashrc" --href--> "bashrc")
+
+__File Upload Limits__
 (/etc/nginx.conf)
 + Contains a hardcap filesize limit for what can be uploaded to the server "client_max_body_size 1000G;".
 + Contains a bandwidth limit nginx "limit_rate 10k;".
