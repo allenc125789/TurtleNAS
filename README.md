@@ -18,7 +18,7 @@
 
 +program runs effeiciently enough. changing directories is seamless, and multiple gigs of files can be uploaded without major impact on performance. Need to test with uploads from multiple users.
 
--downloading hidden files removes the inital dot(.) (possibly due to browsers santitizing the filename?)
+-need to add a button to download the current folder as a zip, and another for encrypted zip.
 
 -lots of unused code needs to be trimmed. especially relating to the old hashing system.
 
