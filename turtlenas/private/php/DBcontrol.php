@@ -232,8 +232,8 @@ class DBcontrol {
         $root = $this->getRootByUser();
         foreach ($post as $dir){
             $pos = strpos($dir, $query);
-            if ($pos === false && str_contains($dir, $root)){
-                $newdir = str_replace("$root$parent", '', $dir);
+            $newdir = str_replace("$root$parent", '', $dir);
+            if ($pos === false && str_contains($dir, $root) && !file_exists($root . $parent . $newdir)){
                 mkdir($root . $parent . $newdir, 0777, true);
             } elseif (!str_contains($dir, $root)){
                 mkdir($root . $parent . $dir, 0777);
