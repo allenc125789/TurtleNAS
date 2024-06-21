@@ -422,9 +422,10 @@ class DBcontrol {
             }
 //            $sqlhashcheck = $this->getHashByPath($sqlpath);
 //            $realhash = $this->prepFileHash($sqlpath);
+            $stat = stat($sqlpath);
             if (!file_exists($sqlpath)) {
                 $this->deleteRecordByPath($sqlpath);
-            } elseif (stat($sqlpath) == $sqlmtime) {
+            } elseif ($stat['mtime'] == $sqlmtime) {
                 $skipFiles[] = $sqlpath;
             }
         }
