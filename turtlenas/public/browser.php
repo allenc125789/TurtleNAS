@@ -72,7 +72,7 @@ if ($casequery || $query == NULL || $username == NULL){
 
 
 
-<script src="/js/browser.js" type='text/javascript'></script>
+<script type='text/javascript'></script>
 
 <script>
 function getCookie(cname) {
