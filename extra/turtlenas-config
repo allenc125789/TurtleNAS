@@ -2,7 +2,7 @@ server {
         listen 443 ssl;
         root /var/www/turtlenas/public;
         index index.php login.html index.html index.htm index.nginx-debian.html;
-        server_name @;
+        server_name rezient.com;
         ssl_certificate /etc/nginx/ssl/selfsigned.crt;
         ssl_certificate_key /etc/nginx/ssl/selfsigned.key;
         ssl_protocols       TLSv1 TLSv1.1 TLSv1.2;
@@ -17,5 +17,8 @@ server {
         location ~ \.php$ {
                 include snippets/fastcgi-php.conf;
                 fastcgi_pass unix:/var/run/php/php8.2-fpm.sock;
+                fastcgi_pass_header          Authorization;          
+                fastcgi_hide_header          X-Accel-Redirect;
+                fastcgi_hide_header          X-Sendfile;
         }
 }

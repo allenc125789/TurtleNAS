@@ -1,14 +1,18 @@
 <?php
-
-session_start();
+include "../private/php/DBcontrol.php";
+$control = new DBcontrol;
 
 // Verify Session and download.
 $validated = $_SESSION['allowed'];
 switch ($validated) {
     case 1:
-        $file = $_SERVER['QUERY_STRING'];
-        header('Content-Description: File Transfer');
-        header('Content-Disposition: attachment; filename=' . basename($file));
+        $query = urldecode($_SERVER['QUERY_STRING']);
+        $username = $_SESSION['sessuser'];
+        $shortpath = str_replace("$username:", '', $query);
+        $file = $control->getRootByUser($username) . $shortpath;
+        echo basename(stripslashes($file));
+        header('Content-Type: application/octet-stream');
+        header('Content-Disposition: attachment; filename=' . basename(stripslashes($file)));
         header('Content-Transfer-Encoding: binary');
         header('Expires: 0');
         header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
@@ -16,10 +20,10 @@ switch ($validated) {
         header('Content-Length: ' . filesize($file));
         ob_clean();
         flush();
-        readfile($file);
+        readfile(stripslashes($file));
         exit;
     default:
-        header('Location: /index.html');
+        header('Location: /login.html');
         break;
 }
 

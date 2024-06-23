@@ -1,3 +1,28 @@
++multiple files can be uploaded.
+
++files with spaces can be uploaded and downloaded, folders with spaces can be browsed
+
++files and empty folders can be deleted
+
++able to create empty folders
+
++files without extensions can seemingly be uploaded/downloaded
+
++added checkbox to uncheck/check all other chekboxes
+
++folders with files inside can be deleted
+
++compatible with Window's name formatting.
+
++can download files without an extension
+
++program runs effeiciently enough. changing directories is seamless, and multiple gigs of files can be uploaded without major impact on performance. Need to test with uploads from multiple users.
+
+-need to add a button to download the current folder as a zip, and another for encrypted zip.
+
+-lots of unused code needs to be trimmed. especially relating to the old hashing system.
+
+
 # Summary:
 
 *TurtleNAS for Debian, to help deliver files in it's secure shell!‎*
@@ -18,7 +43,7 @@ Designed with a web GUI and an easily configurable system for adding clients for
 
 ### Tests (SSHFS, NFS, SMB):
 
-Tests done to compare the R/W speed between the three show that while `sshfs` (Blue) is not the fastest option (plaintext comparison), it still has [great speeds](https://blog.ja-ke.tech/2019/08/27/nas-performance-sshfs-nfs-smb.html)! 
+Tests done by a user named "Jake" to compare the R/W speed between the three show that while `sshfs` (Blue) is not the fastest option (plaintext comparison), it still has [great speeds](https://blog.ja-ke.tech/2019/08/27/nas-performance-sshfs-nfs-smb.html)! 
 
 ![](https://github.com/allenc125789/TurtleNAS/blob/main/extra/Screenshot%20from%202024-04-02%2023-37-15.png)
 

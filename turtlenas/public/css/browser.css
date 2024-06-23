@@ -1,0 +1,35 @@
+.fileTables {
+    position: absolute;
+    left: 273px;
+}
+
+.hotbar {
+    position: sticky;
+    z-axis: 2;
+    top: 0%;
+}
+
+.buttonDivs {
+    position: fixed;
+    top: 8px;
+    left: 5px;
+    border: 4px outset grey;
+    padding-top: 14px;
+    padding-left: 20px;
+    background-color: lightgrey;
+}
+
+#checks {
+    width: 1%;
+    text-align: center
+}
+#dates {
+    width: 18%;
+    text-align: center
+}
+#size {
+    width: 10%;
+    text-align: center
+}
+
+.tableItems:hover {background-color:  #e5e5e5;}

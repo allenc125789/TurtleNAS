@@ -9,10 +9,13 @@ sWARNING=" ((\033[1;33mWARNING\033[0m)) "
 sERROR=" ((\033[0;31mERROR\033[0m)) "
 vDOMAIN=$(grep "domain" /etc/resolv.conf | awk '{print $NF}')
 vPWD=$(dirname $0)
+vFILESYSTEM=$(df -P . | sed -n '$s/[[:blank:]].*//p')
+vUUID=$(/usr/sbin/blkid -s UUID -o value "$vFILESYSTEM")
+
 
 #: Dependancies.
-aDEPENDS=("gpg" "sudo" "rsync" "sshfs" "git" "nginx" "libnginx-mod-http-js" \
-    "python3-pam" "ufw" "default-mysql-server" "php8.2" "php8.2-fpm" "php-mysql")
+aDEPENDS=("gpg" "sudo" "rsync" "sshfs" "git" "nginx" "libnginx-mod-http-js" "libjs-jquery"\
+    "python3-pam" "ufw" "default-mysql-server" "php8.2" "php8.2-fpm" "php8.2-mysql")
     #: Dependancy Check
 apt-get install ${aDEPENDS[*]}
 if [[ $? > 0 ]]; then
@@ -23,18 +26,22 @@ else
 fi
 
 
-#: Creating Directories.
-    #: SSL Dir.
+    #: Create SSL Dir.
 mkdir -v -p '/etc/nginx/ssl' && chmod 700 '/etc/nginx/ssl'
+    #: Create media Dir. 
 mkdir -v '/media/REMOTE'
-mkdir -v -p '/media/LOCAL/local/admin'
+
+mkdir -v -p "/media/LOCAL/$vUUID/admin" && chown www-data "/media/LOCAL/$vUUID/admin"
+
+
+    #: Create tmp Dir.
 
 
 #: Creating Users.
     #: System Admin.
 sudo useradd -M sysadmin
     #: Admin.
-if sudo useradd -m admin; then
+if sudo useradd -M admin; then
     echo -e "This will be your Admin account. You can login with this to the web-browser, make new users, and add new connections. Make your password secure and remember it for later."
     passwd admin
 else
@@ -55,8 +62,9 @@ yes | sudo ufw enable
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/selfsigned.key -out /etc/nginx/ssl/selfsigned.crt
     #: File Permissions and Grouping.
 sudo groupadd admin
-sudo adduser sysadmin www-data
 sudo adduser admin admin
+sudo adduser admin www-data
+sudo adduser sysadmin www-data
 chown -R sysadmin:www-data "$vPWD/turtlenas"
 chmod -R 755 "$vPWD/turtlenas"
     #: Sudo.
@@ -80,24 +88,24 @@ else
 fi
 
 #: SQL.
-vFILESYSTEM=$(df -P . | sed -n '$s/[[:blank:]].*//p')
-    #: Create DB.
+    #: Create DB tables.
 mariadb -e "CREATE DATABASE turtlenas;"
-    #: Create table for Mapped Drive Locations.
-mariadb -e "USE turtlenas; CREATE TABLE drives (user VARCHAR(50) PRIMARY KEY, type VARCHAR(6), disk VARCHAR(10) );"
-mariadb -e "USE turtlenas; INSERT INTO drives (user, type, disk) VALUES('admin', 'LOCAL', '$vFILESYSTEM');"
-    #: Create table for the admin user.
-mariadb -e "USE turtlenas; CREATE TABLE files_admin (dir VARCHAR(100) PRIMARY KEY, file VARCHAR(100) );"
-    #: Create table for a Command Qeue to be executed by the sysadmin user.
-mariadb -e "USE turtlenas; CREATE TABLE command_qeue (user VARCHAR(50) PRIMARY KEY, command VARCHAR(6), auth INT );"
-
+mariadb -e "USE turtlenas; CREATE TABLE drives (user VARCHAR(36), type VARCHAR(6), disk VARCHAR(255), uuid CHAR(36) );"
+mariadb -e "USE turtlenas; CREATE TABLE files_admin (fullpath NVARCHAR(255) PRIMARY KEY, parent NVARCHAR(255), name NVARCHAR(255),date VARCHAR(224), size VARCHAR(255), mtime VARCHAR(244) );"
+mariadb -e "USE turtlenas; INSERT INTO drives (user, type, disk, uuid) VALUES('admin', 'LOCAL', '$vFILESYSTEM', '$vUUID');"
+    #: Create DB Users.
+mariadb -e "CREATE USER 'www-data'@'localhost' IDENTIFIED BY ''"
+mariadb -e "GRANT ALL PRIVILEGES ON turtlenas.drives TO 'www-data'@'localhost' WITH GRANT OPTION"
+mariadb -e "GRANT ALL PRIVILEGES ON turtlenas.files_admin TO 'www-data'@'localhost' WITH GRANT OPTION"
 
 #: Web Server Configuration.
 echo -e "Configuring web server..."
     #: Configuration files.
-sed -i "s/@/$vDOMAIN/g" $vPWD"/turtlenas-config"
-mv "$vPWD/turtlenas-config" "/etc/nginx/sites-available/turtlenas-config"
-mv -f "$vPWD/nginx.conf" "/etc/nginx/nginx.conf"
+sed -i "s/@/$vDOMAIN/g" $vPWD"/extra/turtlenas-config"
+mv "$vPWD/extra/turtlenas-config" "/etc/nginx/sites-available"
+mv -f "$vPWD/extra/nginx.conf" "/etc/nginx"
+mv "$vPWD/extra/User-Manual.txt" "/media/LOCAL/$vUUID/admin"
+mv -f "$vPWD/extra/php.ini" "/etc/php/8.2/fpm"
 rm -f /etc/nginx/sites-enabled/default
 ln -v -s /etc/nginx/sites-available/turtlenas-config /etc/nginx/sites-enabled/
     #: Web page files.
