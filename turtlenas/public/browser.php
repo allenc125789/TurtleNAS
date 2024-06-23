@@ -101,6 +101,7 @@ function removeElementsByClass(className){
 function displayFiles (parent){
     var jArray = <?php echo json_encode($fObject); ?>;
     var userName = <?php echo json_encode($username); ?>;
+    countReset();
     removeElementsByClass('tableItems');
     console.log(parent);
     for (var i=0; i<jArray.length; i++){
@@ -129,28 +130,63 @@ function displayFiles (parent){
             row.className = "tableItems"
         }
     }
+    deleteItems();
 }
-//removeElementsByClass('tableItems');
 
-displayFiles("/");
 
-document.getElementById('delete').disabled = true;
-var results = document.getElementsByClassName("cb");
-var count = 0;
-Array.prototype.forEach.call(results, function(checks) {
-    checks.addEventListener('change', function(e) {
-        if (checks.checked == true) {
-            count += 1;
-        } else {
-            count -= 1;
+function countReset(){
+    count = 0;
+    document.getElementById('delete').disabled = true;
+    document.getElementById('massSelect').checked = false;
+}
+
+
+function checkAll(ele) {
+    var checkboxes = document.getElementsByClassName('cb');
+    if (ele.checked) {
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i].type == 'checkbox' && checkboxes[i].checked == false) {
+                checkboxes[i].checked = true;
+                count += 1;
+                document.getElementById('delete').disabled = false;
+            }
         }
-        if (count == 0) {
-            document.getElementById('delete').disabled = true;
-        } else {
-            document.getElementById('delete').disabled = false;
+    } else {
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i].type == 'checkbox' && checkboxes[i].checked == true) {
+                checkboxes[i].checked = false;
+                count -= 1;
+                document.getElementById('delete').disabled = true;
+            }
         }
+    }
+}
+
+
+function deleteItems() {
+   var results = document.getElementsByClassName("cb");
+//   var count = 0;
+    Array.prototype.forEach.call(results, function(checks) {
+        checks.addEventListener('change', function(e) {
+            if (checks.checked == true) {
+                count += 1;
+            } else {
+                count -= 1;
+            }
+            if (count == 0) {
+                document.getElementById('delete').disabled = true;
+            } else {
+                document.getElementById('delete').disabled = false;
+            }
+        });
     });
-});
+}
+
+
+
+let count = 0;
+displayFiles("/");
+document.getElementById('delete').disabled = true;
 
 
 </script>
