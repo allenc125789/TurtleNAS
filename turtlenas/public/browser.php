@@ -97,9 +97,10 @@ function removeElementsByClass(className){
     }
 }
 
-function displayFiles (parent){
+function displayFiles (parentURI){
     var jArray = <?php echo json_encode($fObject); ?>;
     var userName = <?php echo json_encode($username); ?>;
+    parent = decodeURIComponent(parentURI);
     countReset();
     removeElementsByClass('tableItems');
     console.log(parent);
@@ -119,7 +120,7 @@ function displayFiles (parent){
             if (!dir.endsWith("/")){
                 cell1.insertAdjacentHTML('beforeEnd', "<a href='download.php?"+userName+":"+dirURI+"'>"+fileArray[1]);
             } else {
-                cell1.insertAdjacentHTML('beforeEnd', "<a href=javascript:displayFiles('"+dir+"')>"+fileArray[1]);
+                cell1.insertAdjacentHTML('beforeEnd', "<a href=javascript:displayFiles('"+dirURI+"')>"+fileArray[1]);
             }
             cell2.innerHTML = fileArray[3];
             cell3.innerHTML = fileArray[2];
