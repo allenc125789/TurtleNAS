@@ -142,7 +142,7 @@ class DBcontrol {
         $username = $_SESSION['sessuser'];
         $query = str_replace("'", "\\'", "$query");
         $path = str_replace("$username:", '', "$query");
-        $stmt = $this->get_connection()->query("SELECT * FROM files_$username WHERE parent = '$path'");
+        $stmt = $this->get_connection()->query("SELECT * FROM files_$username");
         while ($row = $stmt->fetch()){
             $allrows = $row['fullpath']. "|".$row['name']. "|".$row['date']. "|".$row['size']. "|".$row['parent']. "|".$row['mtime'];
             $data[] = $allrows;
