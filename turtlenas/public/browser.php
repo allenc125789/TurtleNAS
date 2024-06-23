@@ -32,7 +32,7 @@ if ($casequery || $query == NULL || $username == NULL){
 
 
 <tbody>
-    <table class="fileTables" border=2px>
+    <table id="fileTables" class="fileTables" border=2px>
         <tr bgcolor="grey">
             <th colspan=2>File Name</th>
             <th>Last Modified</th>
@@ -47,23 +47,6 @@ if ($casequery || $query == NULL || $username == NULL){
             <td colspan=2 style="font-size:12" bgcolor="black"><font style="color:white;"><?php echo $query;?></font></td>
         </tr>
         <?php echo "<form action='/delete.php?$queryen' method='post'>";?>
-        <?php foreach($fObject as $row):?>
-        <?php $data = explode('|', $row);?>
-        <?php $arrkey = array_search($row, $fObject);?>
-        <tr class="tableItems" bgcolor="lightgrey">
-            <td id="checks"><?php echo "<input type=\"checkbox\" class=\"cb\" id=\"filechecks\" name=\"fileToDelete[]\" value=\"$data[1]\">";?></td>
-            <?php if (is_dir(stripslashes($data[0]))):?>
-            <td id="dirs"><?php $dir = (urlencode("$data[4]$data[1]")); echo "<a href='/browser.php?$username:$dir'>$data[1]";?></td>
-            <?php else:?>
-            <td id="files"><?php $dir = (urlencode("$data[4]$data[1]")); echo "<a href='/download.php?$username:$dir'>$data[1]";?></td>
-            <?php endif;?>
-            <td id="dates"><?php echo $data[2];?></td>
-            <td id="size"><?php echo $data[3];?></td>
-            <?php endforeach;?>
-            <?php if ($fObject == NULL):?>
-            <?php echo "<td></td><td>No files to display...</td><td></td><td></td>";?>
-            <?php endif;?>
-        </tr>
     </table>
 </tbody>
 
@@ -88,6 +71,88 @@ if ($casequery || $query == NULL || $username == NULL){
 </div>
 
 
-<script src="/js/browser.js"></script>
+
+<script src="/js/browser.js" type='text/javascript'></script>
+
+<script>
+function getCookie(cname) {
+  let name = cname + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(';');
+  for(let i = 0; i <ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
+function removeElementsByClass(className){
+    const elements = document.getElementsByClassName(className);
+    while(elements.length > 0){
+        elements[0].parentNode.removeChild(elements[0]);
+    }
+}
+
+function displayFiles (parent){
+    var jArray = <?php echo json_encode($fObject); ?>;
+    var userName = <?php echo json_encode($username); ?>;
+    removeElementsByClass('tableItems');
+    console.log(parent);
+    for (var i=0; i<jArray.length; i++){
+        const fileArray = jArray[i].split("|");
+        console.log("1");
+        if (parent == fileArray[4]){
+
+            console.log(fileArray[4]);
+            var table = document.getElementById("fileTables");
+            var row = table.insertRow(-1);
+            var cell0 = row.insertCell(0);
+            var cell1 = row.insertCell(1);
+            var cell2 = row.insertCell(2);
+            var cell3 = row.insertCell(2);
+
+            var dir = fileArray[4].concat(fileArray[1]);
+            var dirURI = encodeURIComponent(dir);
+            cell0.insertAdjacentHTML('beforeEnd', "<input id='filechecks' class='cb' name='fileToDelete[]' value='"+fileArray[1]+"' type='checkbox' />");
+            if (!dir.endsWith("/")){
+                cell1.insertAdjacentHTML('beforeEnd', "<a href='download.php?"+userName+":"+dirURI+"'>"+fileArray[1]);
+            } else {
+                cell1.insertAdjacentHTML('beforeEnd', "<a href=javascript:displayFiles('"+dir+"')>"+fileArray[1]);
+            }
+            cell2.innerHTML = fileArray[3];
+            cell3.innerHTML = fileArray[2];
+            row.className = "tableItems"
+        }
+    }
+}
+//removeElementsByClass('tableItems');
+
+displayFiles("/");
+
+document.getElementById('delete').disabled = true;
+var results = document.getElementsByClassName("cb");
+var count = 0;
+Array.prototype.forEach.call(results, function(checks) {
+    checks.addEventListener('change', function(e) {
+        if (checks.checked == true) {
+            count += 1;
+        } else {
+            count -= 1;
+        }
+        if (count == 0) {
+            document.getElementById('delete').disabled = true;
+        } else {
+            document.getElementById('delete').disabled = false;
+        }
+    });
+});
+
+
+</script>
 
 </html>
