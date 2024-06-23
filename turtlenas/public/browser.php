@@ -72,9 +72,8 @@ if ($casequery || $query == NULL || $username == NULL){
 
 
 
-<script type='text/javascript'></script>
+<script src="/js/browser.js" type='text/javascript'>
 
-<script>
 function getCookie(cname) {
   let name = cname + "=";
   let decodedCookie = decodeURIComponent(document.cookie);
@@ -108,15 +107,12 @@ function displayFiles (parent){
         const fileArray = jArray[i].split("|");
         console.log("1");
         if (parent == fileArray[4]){
-
-            console.log(fileArray[4]);
             var table = document.getElementById("fileTables");
             var row = table.insertRow(-1);
             var cell0 = row.insertCell(0);
             var cell1 = row.insertCell(1);
             var cell2 = row.insertCell(2);
             var cell3 = row.insertCell(2);
-
             var dir = fileArray[4].concat(fileArray[1]);
             var dirURI = encodeURIComponent(dir);
             cell0.insertAdjacentHTML('beforeEnd', "<input id='filechecks' class='cb' name='fileToDelete[]' value='"+fileArray[1]+"' type='checkbox' />");
