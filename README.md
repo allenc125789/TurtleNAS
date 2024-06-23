@@ -16,12 +16,17 @@
 
 +can download files without an extension
 
-+program runs effeiciently enough. changing directories is seamless, and multiple gigs of files can be uploaded without major impact on performance. Need to test with uploads from multiple users.
-
 -need to add a button to download the current folder as a zip, and another for encrypted zip.
 
--lots of unused code needs to be trimmed. especially relating to the old hashing system.
+-code is not actually running effienctly enough. converting much of the php to javascript. current things to convert:
 
+    -form action to submit checked boxes to delete
+
+    -current directory text
+
+    -move back a directory
+
+    -reload button only goes back to root. leave the actual page reloading to the browsers button.
 
 # Summary:
 
