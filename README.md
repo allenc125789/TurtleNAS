@@ -28,8 +28,8 @@
 
     -reload button only goes back to root. leave the actual page reloading to the browsers button.
 
-    -change the load script from running at the start, to run by javascript at the start, or at some designated period... and needs to have a lock in
-    -place to prevent it from being run by the same user more than once.
+    -change the loadsqlupdate script from running at the start, to run by javascript at the start, or at some designated period... and needs to have a
+    -lock in place to prevent it from being run by the same user more than once.
 
 # Summary:
 
