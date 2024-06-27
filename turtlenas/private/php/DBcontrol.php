@@ -388,7 +388,7 @@ class DBcontrol {
     public function scanDirAndSubdir($dir, $_FilesOnly = FALSE, &$out = []) {
         $username = $_SESSION['sessuser'];
         $root = $this->getRootByUser();
-        $sun = scandir(($dir));
+        $sun = scandir($dir);
         foreach ($sun as $a => $filename) {
             $way = realpath($dir . DIRECTORY_SEPARATOR . $filename);
     // List Files.
@@ -406,9 +406,18 @@ class DBcontrol {
     }
 
     public function updateFileRecord() {
+        $username = $_SESSION['sessuser'];
+        $lockfile = '../private/php/Locks/updatefileRecords.lock';
+        $writeLock = fopen($lockfile, 'a+');
+        while(false !== ($line = fgets($writeLock))) {
+            if (trim($line) === "$username=1"){
+                exit();
+            }
+        }
+        fwrite($writeLock, "$username=1");
+        fclose($writeLock);
         $skipFiles = array();
         $mtime = '';
-        $username = $_SESSION['sessuser'];
         $root = $this->getRootByUser();
         $afiles = $this->scanDirAndSubdir($root);
         $sqlpathcheck = $this->getPathByPath();
@@ -446,7 +455,6 @@ class DBcontrol {
             }
         }
     }
-
 }
 
 ?>
