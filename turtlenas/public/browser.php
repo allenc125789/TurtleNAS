@@ -1,3 +1,6 @@
+                    getRequest();
+                    getRequest();
+                    getRequest();
 <?php
 include "../private/php/DBcontrol.php";
 $control = new DBcontrol;
@@ -229,9 +232,10 @@ displayFiles('Loading Files...');
         window.onload = function () {
             setTimeout(function () {
                     let count = 0;
-//                    displayFiles("/");
-                    document.getElementById('delete').disabled = true;
                     getRequest();
+                    getRequest();
+                    displayFiles("/");
+                    document.getElementById('delete').disabled = true;
 
             }, 5000); // Delay of 5 seconds
         };
