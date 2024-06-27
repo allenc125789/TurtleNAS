@@ -103,14 +103,15 @@ function displayFiles (parentURI){
     countReset();
     removeElementsByClass('tableItems');
     console.log(parent);
+            var table = document.getElementById("fileTables");
+            var form0 = document.createElement('form');
+            table.append(form0);
     for (var i=0; i<jArray.length; i++){
         const fileArray = jArray[i].split("|");
         console.log("1");
         if (parent == fileArray[4]){
-            var form0 = document.getElementById('formDelete');
-            var form = document.createElement('form');
-            var table = document.getElementById("fileTables");
             var row = table.insertRow(-1);
+            var form = document.getElementById('deleteForm');
             var cell0 = row.insertCell(0);
             var cell1 = row.insertCell(1);
             var cell2 = row.insertCell(2);
@@ -118,13 +119,13 @@ function displayFiles (parentURI){
             var dir = fileArray[4].concat(fileArray[1]);
             var dirURI = encodeURIComponent(dir);
             var checkboxes = document.createElement("INPUT");
+//            document.body.append(form0);
             checkboxes.setAttribute("type", "checkbox");
             checkboxes.setAttribute("class", "cb");
             checkboxes.setAttribute("name", "fileToDelete[]");
+            checkboxes.setAttribute("id", fileArray[1]);
             checkboxes.setAttribute("value", fileArray[1]);
-//            document.body.appendChild(form);
             cell0.appendChild(checkboxes);
-//            form.appendChild(row);
             if (!dir.endsWith("/")){
                 cell1.insertAdjacentHTML('beforeEnd', "<a href='download.php?"+userName+":"+dirURI+"'>"+fileArray[1]);
             } else {
@@ -132,12 +133,13 @@ function displayFiles (parentURI){
             }
             cell2.innerHTML = fileArray[3];
             cell3.innerHTML = fileArray[2];
-            row.className = "tableItems"
+            row.className = "tableItems";
         }
     }
     deleteItems();
+//    var items = document.getElementsByClassName('tableItems');
+//    form0.appendChild(items);
 }
-
 
 
 
@@ -151,14 +153,19 @@ function countReset(){
 
 
 function checkAll(ele) {
+   var form = document.getElementById('deleteForm');
     var checkboxes = document.getElementsByClassName('cb');
     if (ele.checked) {
         for (var i = 0; i < checkboxes.length; i++) {
             if (checkboxes[i].type == 'checkbox' && checkboxes[i].checked == false) {
                 checkboxes[i].checked = true;
                 count += 1;
+                let p = checkboxes[i].cloneNode(true);
+                form.appendChild(p)
+                console.log(count);
                 document.getElementById('delete').disabled = false;
             }
+
         }
     } else {
         for (var i = 0; i < checkboxes.length; i++) {
@@ -168,22 +175,27 @@ function checkAll(ele) {
                 document.getElementById('delete').disabled = true;
             }
         }
+                form.textContent = '';
     }
 }
 
 
 function deleteItems() {
-   var form0 = document.getElementById('deleteForm');
+   var form = document.getElementById('deleteForm');
    var results = document.getElementsByClassName("cb");
     Array.prototype.forEach.call(results, function(checks) {
         checks.addEventListener('change', function(e) {
             if (checks.checked == true) {
-                let p = checks.cloneNode(true);
                 count += 1;
+                let p = checks.cloneNode(true);
                 console.log(count);
-                form0.appendChild(p)
+                form.appendChild(p)
             } else {
                 count -= 1;
+                var p = checks.value;
+                var old = document.getElementById(p)
+                console.log(checks);
+                form.removeChild(old);
             }
             if (count == 0) {
                 document.getElementById('delete').disabled = true;
@@ -193,6 +205,8 @@ function deleteItems() {
         });
     });
 }
+
+
 
 
 let count = 0;
