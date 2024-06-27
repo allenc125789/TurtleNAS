@@ -103,9 +103,9 @@ function displayFiles (parentURI){
     countReset();
     removeElementsByClass('tableItems');
     console.log(parent);
-            var table = document.getElementById("fileTables");
-            var form0 = document.createElement('form');
-            table.append(form0);
+    var table = document.getElementById("fileTables");
+    var form0 = document.createElement('form');
+    table.append(form0);
     for (var i=0; i<jArray.length; i++){
         const fileArray = jArray[i].split("|");
         console.log("1");
@@ -136,6 +136,7 @@ function displayFiles (parentURI){
             row.className = "tableItems";
         }
     }
+    form.textContent = '';
     deleteItems();
 //    var items = document.getElementsByClassName('tableItems');
 //    form0.appendChild(items);
@@ -175,7 +176,7 @@ function checkAll(ele) {
                 document.getElementById('delete').disabled = true;
             }
         }
-                form.textContent = '';
+        form.textContent = '';
     }
 }
 
