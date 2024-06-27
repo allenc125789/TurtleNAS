@@ -178,9 +178,10 @@ function deleteItems() {
     Array.prototype.forEach.call(results, function(checks) {
         checks.addEventListener('change', function(e) {
             if (checks.checked == true) {
+                let p = checks.cloneNode(true);
                 count += 1;
                 console.log(count);
-                form0.appendChild(checks)
+                form0.appendChild(p)
             } else {
                 count -= 1;
             }
