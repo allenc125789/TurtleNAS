@@ -43,7 +43,8 @@ if ($casequery || $query == NULL || $username == NULL){
             <td style="font-size: 20" bgcolor="white"><?php echo "<a href='/browser.php?$username:%2F'>⟲</a>";?>
             <a id='wayBack' href='#'>↩</a>
             </td>
-            <td colspan=2 style="font-size:12" bgcolor="black"><font style="color:white;"><?php echo $query;?></font></td>
+            <td colspan=2 style="font-size:12" bgcolor="black"><font id='displayCwd' style="color:white;"></font>
+            </td>
         </tr>
         <?php echo "<form action='/delete.php?$queryen' id='deleteForm'  method='post'>";?>
     </table>
@@ -145,6 +146,7 @@ function displayFiles (cwdURI){
         wayBack.setAttribute("hidden", "true");
     }
     deleteItems();
+    document.getElementById('displayCwd').textContent = userName+":"+cwd;
 }
 
 
