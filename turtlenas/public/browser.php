@@ -1,6 +1,3 @@
-                    getRequest();
-                    getRequest();
-                    getRequest();
 <?php
 include "../private/php/DBcontrol.php";
 $control = new DBcontrol;
@@ -228,11 +225,10 @@ function getRequest (){
 }
 
 
-displayFiles('Loading Files...');
+displayFiles(' ...Loading Files...');
         window.onload = function () {
             setTimeout(function () {
                     let count = 0;
-                    getRequest();
                     getRequest();
                     displayFiles("/");
                     document.getElementById('delete').disabled = true;
