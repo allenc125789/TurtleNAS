@@ -314,6 +314,31 @@ class DBcontrol {
         ]);
     }
 
+    public function getInsertLockRecord($vusername, $vstate){
+        $stmt = $this->get_connection()->prepare("INSERT INTO locks (user, state) VALUES (:vuser, :vstate)");
+        $stmt->execute([
+            'vusername' => $vusername,
+            'vstate' => $vstate,
+        ]);
+    }
+
+    public function getdeleteLockRecordByName(){
+        $vusername = $_SESSION['sessuser'];
+        $stmt = $this->get_connection()->prepare("DELETE FROM locks WHERE user = :vusername");
+        $stmt->bindParam(':vusername', $vusername, PDO::PARAM_STR);
+        $stmt->execute(['vusername' => $vusername]);
+    }
+
+    public function getLockByName(){
+        $username = $_SESSION['sessuser'];
+        $stmt = $this->get_connection()->query("SELECT user FROM locks WHERE user = '$username'");
+        while ($row = $stmt->fetch()){
+            $sqlhash = $row['state'];
+        }
+        return $sqlhash;
+    }
+
+
 //    public function save_to_file_manager($data=[]){
 
     public function user_auth($username, $password) {
@@ -388,7 +413,7 @@ class DBcontrol {
     public function scanDirAndSubdir($dir, $_FilesOnly = FALSE, &$out = []) {
         $username = $_SESSION['sessuser'];
         $root = $this->getRootByUser();
-        $sun = scandir($dir);
+        $sun = scandir(($dir));
         foreach ($sun as $a => $filename) {
             $way = realpath($dir . DIRECTORY_SEPARATOR . $filename);
     // List Files.
@@ -407,15 +432,12 @@ class DBcontrol {
 
     public function updateFileRecord() {
         $username = $_SESSION['sessuser'];
-        $lockfile = '../private/php/Locks/updatefileRecords.lock';
-        $writeLock = fopen($lockfile, 'a+');
-        while(false !== ($line = fgets($writeLock))) {
-            if (trim($line) === "$username=1"){
-                exit();
-            }
+        $lock = $this->getLockByName();
+        if ($lock === "0" || $lock === null){
+            $this->getInsertLockRecord($username, "1");
+        } else {
+            exit();
         }
-        fwrite($writeLock, "$username=1");
-        fclose($writeLock);
         $skipFiles = array();
         $mtime = '';
         $root = $this->getRootByUser();
@@ -454,7 +476,14 @@ class DBcontrol {
                 }
             }
         }
+        if ($lock === "1" || $lock === null){
+            $this->getInsertLockRecord($username, "0");
+        } else {
+            exit();
+        }
+
     }
+
 }
 
 ?>
