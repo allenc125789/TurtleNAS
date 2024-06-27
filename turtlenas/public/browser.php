@@ -8,7 +8,7 @@ ini_set('display_startup_errors', 1); // display faires that didn't born
 
 $verify = $control->validate_auth();
 if ($verify){
-    $control->updateFileRecord();
+//    $control->updateFileRecord();
     $username = $_SESSION['sessuser'];
     $queryen = $_SERVER['QUERY_STRING'];
     $query = urldecode($queryen);
@@ -40,7 +40,8 @@ if ($casequery || $query == NULL || $username == NULL){
         </tr>
         <tr class="hotbar">
             <td bgcolor="white"><input type="checkbox" name="massSelect[]" id="massSelect" onchange="checkAll(this)"/></td>
-            <td style="font-size: 20" bgcolor="white"><?php echo "<a href='/browser.php?$username:%2F'>⟲</a>";?>
+            <td style="font-size: 20" bgcolor="white">
+            <a id='refresh' href='#'>⟲</a>
             <a id='wayBack' href='#'>↩</a>
             </td>
             <td colspan=2 style="font-size:12" bgcolor="black"><font id='displayCwd' style="color:white;"></font>
@@ -68,7 +69,6 @@ if ($casequery || $query == NULL || $username == NULL){
     <input type="text" id="createDir" name="createDir" required minlength="1" maxlength="255" size="10" />
     </form>
 </div>
-
 
 
 <script type='text/javascript'>
@@ -109,7 +109,6 @@ function displayFiles (cwdURI){
     table.append(form0);
     for (var i=0; i<jArray.length; i++){
         const fileArray = jArray[i].split("|");
-        console.log("1");
         if (cwd == fileArray[4]){
             var row = table.insertRow(-1);
             var cell0 = row.insertCell(0);
@@ -137,6 +136,7 @@ function displayFiles (cwdURI){
         }
     }
     var wayBack = document.getElementById('wayBack');
+    var refresh = document.getElementById('refresh');
     if (cwd !== "/"){
         var i = cwd.substring(0, cwd.lastIndexOf("/"));
         var o = i.substring(0, i.lastIndexOf("/") + 1);
@@ -145,8 +145,9 @@ function displayFiles (cwdURI){
     } else{
         wayBack.setAttribute("hidden", "true");
     }
-    deleteItems();
+    refresh.setAttribute("onclick", "javascript:displayFiles('%2F');return false;");
     document.getElementById('displayCwd').textContent = userName+":"+cwd;
+    deleteItems();
 }
 
 
@@ -216,9 +217,31 @@ function deleteItems() {
 
 
 
-let count = 0;
-displayFiles("/");
-document.getElementById('delete').disabled = true;
+
+function getRequest (){
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "/updateRecords.php", true);
+    xhttp.send();
+}
+
+
+displayFiles('Loading Files...');
+        window.onload = function () {
+            setTimeout(function () {
+                    let count = 0;
+//                    displayFiles("/");
+                    document.getElementById('delete').disabled = true;
+                    getRequest();
+
+            }, 5000); // Delay of 5 seconds
+        };
+
+//window.onload = function (){
+//    displayFiles("/");
+//    document.getElementById('delete').disabled = true;
+//    getRequest();
+//};
+
 
 
 </script>
