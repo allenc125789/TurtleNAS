@@ -98,6 +98,8 @@ mariadb -e "USE turtlenas; INSERT INTO drives (user, type, disk, uuid) VALUES('a
 mariadb -e "CREATE USER 'www-data'@'localhost' IDENTIFIED BY ''"
 mariadb -e "GRANT ALL PRIVILEGES ON turtlenas.drives TO 'www-data'@'localhost' WITH GRANT OPTION"
 mariadb -e "GRANT ALL PRIVILEGES ON turtlenas.files_admin TO 'www-data'@'localhost' WITH GRANT OPTION"
+mariadb -e "GRANT ALL PRIVILEGES ON turtlenas.locks TO 'www-data'@'localhost' WITH GRANT OPTION"
+
 
 #: Web Server Configuration.
 echo -e "Configuring web server..."
