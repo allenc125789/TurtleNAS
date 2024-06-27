@@ -317,7 +317,7 @@ class DBcontrol {
     public function getInsertLockRecord($vusername, $vstate){
         $stmt = $this->get_connection()->prepare("INSERT INTO locks (user, state) VALUES (:vuser, :vstate)");
         $stmt->execute([
-            'vusername' => $vusername,
+            'vuser' => $vusername,
             'vstate' => $vstate,
         ]);
     }
@@ -433,6 +433,7 @@ class DBcontrol {
     public function updateFileRecord() {
         $username = $_SESSION['sessuser'];
         $lock = $this->getLockByName();
+        $this->getdeleteLockRecordByName();
         if ($lock === "0" || $lock === null){
             $this->getInsertLockRecord($username, "1");
         } else {
@@ -477,6 +478,7 @@ class DBcontrol {
             }
         }
         if ($lock === "1" || $lock === null){
+            $this->getdeleteLockRecordByName();
             $this->getInsertLockRecord($username, "0");
         } else {
             exit();
