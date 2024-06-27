@@ -41,9 +41,8 @@ if ($casequery || $query == NULL || $username == NULL){
         <tr class="hotbar">
             <td bgcolor="white"><input type="checkbox" name="massSelect[]" id="massSelect" onchange="checkAll(this)"/></td>
             <td style="font-size: 20" bgcolor="white"><?php echo "<a href='/browser.php?$username:%2F'>⟲</a>";?>
-            <?php if (!is_null($queryparent)):?>
-            <?php echo "<a href='/browser.php?$username:". urlencode($queryparent) ."'>↩</a>";?></td>
-            <?php endif;?>
+            <a id='wayBack' href='#'>↩</a>
+            </td>
             <td colspan=2 style="font-size:12" bgcolor="black"><font style="color:white;"><?php echo $query;?></font></td>
         </tr>
         <?php echo "<form action='/delete.php?$queryen' id='deleteForm'  method='post'>";?>
@@ -96,22 +95,22 @@ function removeElementsByClass(className){
     }
 }
 
-function displayFiles (parentURI){
+function displayFiles (cwdURI){
     var jArray = <?php echo json_encode($fObject); ?>;
     var userName = <?php echo json_encode($username); ?>;
-    parent = decodeURIComponent(parentURI);
+    cwd = decodeURIComponent(cwdURI);
     countReset();
     removeElementsByClass('tableItems');
-    console.log(parent);
     var table = document.getElementById("fileTables");
     var form0 = document.createElement('form');
+    var form = document.getElementById('deleteForm');
+    form.textContent = '';
     table.append(form0);
     for (var i=0; i<jArray.length; i++){
         const fileArray = jArray[i].split("|");
         console.log("1");
-        if (parent == fileArray[4]){
+        if (cwd == fileArray[4]){
             var row = table.insertRow(-1);
-            var form = document.getElementById('deleteForm');
             var cell0 = row.insertCell(0);
             var cell1 = row.insertCell(1);
             var cell2 = row.insertCell(2);
@@ -119,7 +118,6 @@ function displayFiles (parentURI){
             var dir = fileArray[4].concat(fileArray[1]);
             var dirURI = encodeURIComponent(dir);
             var checkboxes = document.createElement("INPUT");
-//            document.body.append(form0);
             checkboxes.setAttribute("type", "checkbox");
             checkboxes.setAttribute("class", "cb");
             checkboxes.setAttribute("name", "fileToDelete[]");
@@ -131,17 +129,23 @@ function displayFiles (parentURI){
             } else {
                 cell1.insertAdjacentHTML('beforeEnd', "<a href=javascript:displayFiles('"+dirURI+"')>"+fileArray[1]);
             }
+            console.log(cwd);
             cell2.innerHTML = fileArray[3];
             cell3.innerHTML = fileArray[2];
             row.className = "tableItems";
         }
     }
-    form.textContent = '';
+    var wayBack = document.getElementById('wayBack');
+    if (cwd !== "/"){
+        var i = cwd.substring(0, cwd.lastIndexOf("/"));
+        var o = i.substring(0, i.lastIndexOf("/") + 1);
+        wayBack.setAttribute("onclick", "javascript:displayFiles('"+encodeURIComponent(o)+"');return false;");
+        wayBack.removeAttribute("hidden");
+    } else{
+        wayBack.setAttribute("hidden", "true");
+    }
     deleteItems();
-//    var items = document.getElementsByClassName('tableItems');
-//    form0.appendChild(items);
 }
-
 
 
 
