@@ -97,7 +97,7 @@ function removeElementsByClass(className){
 }
 
 function displayFiles (cwdURI){
-    var jArray = <?php echo json_encode($fObject); ?>;
+    var jArray = <?php while (!is_null($fObject)){ sleep(3);} echo json_encode($fObject);?>;
     var userName = <?php echo json_encode($username); ?>;
     cwd = decodeURIComponent(cwdURI);
     countReset();
@@ -225,7 +225,7 @@ function getRequest (){
 }
 
 
-displayFiles(' ...Loading Files...');
+displayFiles(' Loading Files...');
         window.onload = function () {
             setTimeout(function () {
                     let count = 0;
