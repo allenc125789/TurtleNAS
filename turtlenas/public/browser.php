@@ -230,12 +230,11 @@ let jArray = <?php echo json_encode($fObject); ?>;
 displayFiles(' Loading Files...');
 document.getElementById('delete').disabled = true;
 getRequest();
+displayFiles("/");
         window.onload = function () {
             setTimeout(function () {
                 if (jArray === null){
                     location.reload();
-                } else {
-                    displayFiles("/");
                 }
             }, 5000); // Delay of 5 seconds
         };
