@@ -97,7 +97,6 @@ function removeElementsByClass(className){
 }
 
 function displayFiles (cwdURI){
-    let jArray = <?php echo json_encode($fObject); ?>;
     var userName = <?php echo json_encode($username); ?>;
     cwd = decodeURIComponent(cwdURI);
     countReset();
@@ -226,14 +225,18 @@ function getRequest (){
     xhttp.send();
 }
 
-getRequest();
+let count = 0;
+let jArray = <?php echo json_encode($fObject); ?>;
 displayFiles(' Loading Files...');
+document.getElementById('delete').disabled = true;
+getRequest();
         window.onload = function () {
             setTimeout(function () {
-                    let count = 0;
+                if (jArray !== null){
+                    location.reload();
+                } else {
                     displayFiles("/");
-                    document.getElementById('delete').disabled = true;
-
+                }
             }, 5000); // Delay of 5 seconds
         };
 
