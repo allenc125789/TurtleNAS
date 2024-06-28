@@ -232,7 +232,7 @@ document.getElementById('delete').disabled = true;
 getRequest();
         window.onload = function () {
             setTimeout(function () {
-                if (jArray !== null){
+                if (jArray === null){
                     location.reload();
                 } else {
                     displayFiles("/");
