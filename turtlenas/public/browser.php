@@ -227,7 +227,7 @@ function getRequest (){
 }
 
 getRequest();
-displayFiles(' ...Loading Files...');
+displayFiles(' Loading Files...');
         window.onload = function () {
             setTimeout(function () {
                     let count = 0;
