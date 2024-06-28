@@ -97,7 +97,7 @@ function removeElementsByClass(className){
 }
 
 function displayFiles (cwdURI){
-    var jArray = <?php echo json_encode($fObject); ?>;
+    let jArray = <?php echo json_encode($fObject); ?>;
     var userName = <?php echo json_encode($username); ?>;
     cwd = decodeURIComponent(cwdURI);
     countReset();
@@ -107,32 +107,34 @@ function displayFiles (cwdURI){
     var form = document.getElementById('deleteForm');
     form.textContent = '';
     table.append(form0);
-    for (var i=0; i<jArray.length; i++){
-        const fileArray = jArray[i].split("|");
-        if (cwd == fileArray[4]){
-            var row = table.insertRow(-1);
-            var cell0 = row.insertCell(0);
-            var cell1 = row.insertCell(1);
-            var cell2 = row.insertCell(2);
-            var cell3 = row.insertCell(2);
-            var dir = fileArray[4].concat(fileArray[1]);
-            var dirURI = encodeURIComponent(dir);
-            var checkboxes = document.createElement("INPUT");
-            checkboxes.setAttribute("type", "checkbox");
-            checkboxes.setAttribute("class", "cb");
-            checkboxes.setAttribute("name", "fileToDelete[]");
-            checkboxes.setAttribute("id", fileArray[1]);
-            checkboxes.setAttribute("value", fileArray[1]);
-            cell0.appendChild(checkboxes);
-            if (!dir.endsWith("/")){
-                cell1.insertAdjacentHTML('beforeEnd', "<a href='download.php?"+userName+":"+dirURI+"'>"+fileArray[1]);
-            } else {
-                cell1.insertAdjacentHTML('beforeEnd', "<a href=javascript:displayFiles('"+dirURI+"')>"+fileArray[1]);
+    if (jArray !== null){
+        for (var i=0; i<jArray.length; i++){
+            const fileArray = jArray[i].split("|");
+            if (cwd == fileArray[4]){
+                var row = table.insertRow(-1);
+                var cell0 = row.insertCell(0);
+                var cell1 = row.insertCell(1);
+                var cell2 = row.insertCell(2);
+                var cell3 = row.insertCell(2);
+                var dir = fileArray[4].concat(fileArray[1]);
+                var dirURI = encodeURIComponent(dir);
+                var checkboxes = document.createElement("INPUT");
+                checkboxes.setAttribute("type", "checkbox");
+                checkboxes.setAttribute("class", "cb");
+                checkboxes.setAttribute("name", "fileToDelete[]");
+                checkboxes.setAttribute("id", fileArray[1]);
+                checkboxes.setAttribute("value", fileArray[1]);
+                cell0.appendChild(checkboxes);
+                if (!dir.endsWith("/")){
+                    cell1.insertAdjacentHTML('beforeEnd', "<a href='download.php?"+userName+":"+dirURI+"'>"+fileArray[1]);
+                } else {
+                    cell1.insertAdjacentHTML('beforeEnd', "<a href=javascript:displayFiles('"+dirURI+"')>"+fileArray[1]);
+                }
+                console.log(cwd);
+                cell2.innerHTML = fileArray[3];
+                cell3.innerHTML = fileArray[2];
+                row.className = "tableItems";
             }
-            console.log(cwd);
-            cell2.innerHTML = fileArray[3];
-            cell3.innerHTML = fileArray[2];
-            row.className = "tableItems";
         }
     }
     var wayBack = document.getElementById('wayBack');
@@ -224,12 +226,11 @@ function getRequest (){
     xhttp.send();
 }
 
-
+getRequest();
 displayFiles(' ...Loading Files...');
         window.onload = function () {
             setTimeout(function () {
                     let count = 0;
-                    getRequest();
                     displayFiles("/");
                     document.getElementById('delete').disabled = true;
 
