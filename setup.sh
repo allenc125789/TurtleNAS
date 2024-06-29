@@ -14,7 +14,7 @@ vUUID=$(/usr/sbin/blkid -s UUID -o value "$vFILESYSTEM")
 
 
 #: Dependancies.
-aDEPENDS=("gpg" "sudo" "rsync" "sshfs" "git" "nginx" "libnginx-mod-http-js" \
+aDEPENDS=("gpg" "sudo" "rsync" "sshfs" "git" "nginx" "libnginx-mod-http-js" "libjs-jquery"\
     "python3-pam" "ufw" "default-mysql-server" "php8.2" "php8.2-fpm" "php8.2-mysql")
     #: Dependancy Check
 apt-get install ${aDEPENDS[*]}
@@ -30,7 +30,11 @@ fi
 mkdir -v -p '/etc/nginx/ssl' && chmod 700 '/etc/nginx/ssl'
     #: Create media Dir. 
 mkdir -v '/media/REMOTE'
-mkdir -v -p "/media/LOCAL/$vUUID/admin"
+
+mkdir -v -p "/media/LOCAL/$vUUID/admin" && chown www-data "/media/LOCAL/$vUUID/admin"
+
+
+    #: Create tmp Dir.
 
 
 #: Creating Users.
@@ -58,8 +62,9 @@ yes | sudo ufw enable
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/selfsigned.key -out /etc/nginx/ssl/selfsigned.crt
     #: File Permissions and Grouping.
 sudo groupadd admin
-sudo adduser sysadmin www-data
 sudo adduser admin admin
+sudo adduser admin www-data
+sudo adduser sysadmin www-data
 chown -R sysadmin:www-data "$vPWD/turtlenas"
 chmod -R 755 "$vPWD/turtlenas"
     #: Sudo.
@@ -84,21 +89,26 @@ fi
 
 #: SQL.
     #: Create DB tables.
-mariadb -e "USE turtlenas; CREATE TABLE drives (user VARCHAR(36) PRIMARY KEY, type VARCHAR(6), disk VARCHAR(255), uuid CHAR(36) );"
-mariadb -e "USE turtlenas; CREATE TABLE files_dirs (user VARCHAR(36) PRIMARY KEY, folder VARCHAR(255), file VARCHAR(255) );"
+mariadb -e "CREATE DATABASE turtlenas;"
+mariadb -e "USE turtlenas; CREATE TABLE drives (user VARCHAR(36), type VARCHAR(6), disk VARCHAR(255), uuid CHAR(36) );"
+mariadb -e "USE turtlenas; CREATE TABLE locks (user VARCHAR(36), state INT(1) );"
+mariadb -e "USE turtlenas; CREATE TABLE files_admin (fullpath NVARCHAR(255) PRIMARY KEY, parent NVARCHAR(255), name NVARCHAR(255),date VARCHAR(224), size VARCHAR(255), mtime VARCHAR(244) );"
 mariadb -e "USE turtlenas; INSERT INTO drives (user, type, disk, uuid) VALUES('admin', 'LOCAL', '$vFILESYSTEM', '$vUUID');"
     #: Create DB Users.
-mariadb -e "CREATE DATABASE turtlenas;"
 mariadb -e "CREATE USER 'www-data'@'localhost' IDENTIFIED BY ''"
 mariadb -e "GRANT ALL PRIVILEGES ON turtlenas.drives TO 'www-data'@'localhost' WITH GRANT OPTION"
-mariadb -e "GRANT ALL PRIVILEGES ON turtlenas.files_dirs TO 'www-data'@'localhost' WITH GRANT OPTION"
+mariadb -e "GRANT ALL PRIVILEGES ON turtlenas.files_admin TO 'www-data'@'localhost' WITH GRANT OPTION"
+mariadb -e "GRANT ALL PRIVILEGES ON turtlenas.locks TO 'www-data'@'localhost' WITH GRANT OPTION"
+
 
 #: Web Server Configuration.
 echo -e "Configuring web server..."
     #: Configuration files.
-sed -i "s/@/$vDOMAIN/g" $vPWD"/turtlenas-config"
-mv "$vPWD/turtlenas-config" "/etc/nginx/sites-available/turtlenas-config"
-mv -f "$vPWD/nginx.conf" "/etc/nginx/nginx.conf"
+sed -i "s/@/$vDOMAIN/g" $vPWD"/extra/turtlenas-config"
+mv "$vPWD/extra/turtlenas-config" "/etc/nginx/sites-available"
+mv -f "$vPWD/extra/nginx.conf" "/etc/nginx"
+mv "$vPWD/extra/User-Manual.txt" "/media/LOCAL/$vUUID/admin"
+mv -f "$vPWD/extra/php.ini" "/etc/php/8.2/fpm"
 rm -f /etc/nginx/sites-enabled/default
 ln -v -s /etc/nginx/sites-available/turtlenas-config /etc/nginx/sites-enabled/
     #: Web page files.
