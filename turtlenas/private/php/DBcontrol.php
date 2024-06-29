@@ -294,6 +294,12 @@ class DBcontrol {
         }
     }
 
+    public function deleteRecord(){
+        $username = $_SESSION['sessuser'];
+        $stmt = $this->get_connection()->prepare("DELETE FROM files_$username");
+        $stmt->execute();
+    }
+
     public function deleteRecordByPath($vfullpath){
         $username = $_SESSION['sessuser'];
         $stmt = $this->get_connection()->prepare("DELETE FROM files_$username WHERE fullpath = :vfullpath");
@@ -445,11 +451,7 @@ class DBcontrol {
         $afiles = $this->scanDirAndSubdir($root);
         $sqlpathcheck = $this->getPathByPath();
         // Remove old files from database.
-        foreach ($sqlpathcheck as $sqlpath) {
-            if (!file_exists($sqlpath)){
-                $this->deleteRecordByPath($sqlpath);
-            }
-        }
+        $this->deleteRecord();
 /*            touch($sqlpath);
             $sqlmtime = $this->getFTimeByPath($sqlpath);
             try {
@@ -467,7 +469,6 @@ class DBcontrol {
         }
 */        // Insert new files into database.
         foreach ($afiles as $fullpath) {
-            $this->deleteRecordByPath($fullpath);
             $parse = dirname($fullpath). '/';
             $parent = str_replace($root, '/', $parse);
             $filename = str_replace($parse, '', $fullpath);
