@@ -142,9 +142,9 @@ class DBcontrol {
         $username = $_SESSION['sessuser'];
         $query = str_replace("'", "\\'", "$query");
         $path = str_replace("$username:", '', "$query");
-        $stmt = $this->get_connection()->query("SELECT * FROM files_$username");
+        $stmt = $this->get_connection()->query("SELECT * FROM files_$username WHERE parent = '$path'");
         while ($row = $stmt->fetch()){
-            $allrows = $row['fullpath']. "|".$row['name']. "|".$row['date']. "|".$row['size']. "|".$row['parent']. "|".$row['mtime'];
+            $allrows = $row['fullpath']. "|".$row['name']. "|".$row['date']. "|".$row['size']. "|".$row['parent']. "|".$row['hash'];
             $data[] = $allrows;
         }
         return $data;
@@ -301,16 +301,16 @@ class DBcontrol {
         $stmt->execute(['vfullpath' => $vfullpath]);
     }
 
-    public function getInsertFileRecord($vfullpath, $vparent, $vname, $vdate, $vsize, $vmtime){
+    public function getInsertFileRecord($vfullpath, $vparent, $vname, $vdate, $vsize, $vhash){
         $username = $_SESSION['sessuser'];
-        $stmt = $this->get_connection()->prepare("INSERT INTO files_$username (fullpath, parent, name, date, size, mtime) VALUES (:vfullpath, :vparent, :vname, :vdate, :vsize, :vmtime)");
+        $stmt = $this->get_connection()->prepare("INSERT INTO files_$username (fullpath, parent, name, date, size, hash) VALUES (:vfullpath, :vparent, :vname, :vdate, :vsize, :vhash)");
         $stmt->execute([
             'vfullpath' => addslashes($vfullpath),
             'vparent' => $vparent,
             'vname' => $vname,
             'vdate' => $vdate,
             'vsize' => $vsize,
-            'vmtime' => $vmtime,
+            'vhash' => $vhash,
         ]);
     }
 
@@ -430,48 +430,40 @@ class DBcontrol {
         return $out;
     }
 
-    public function updateFileRecord() {
-        $username = $_SESSION['sessuser'];
-        $lock = $this->getLockByName();
-        $this->getdeleteLockRecordByName();
-        if ($lock === "0" || $lock === null){
-            $this->getInsertLockRecord($username, "1");
-        } else {
-            exit();
-        }
+       public function updateFileRecord() {
         $skipFiles = array();
-        $mtime = '';
+        $username = $_SESSION['sessuser'];
         $root = $this->getRootByUser();
+        $roothash = $this->prepFileHash($root);
         $afiles = $this->scanDirAndSubdir($root);
         $sqlpathcheck = $this->getPathByPath();
+        if ($this->getHashByPath($root) == $roothash) {
+            var_dump($this->getHashByPath($root));
+            return;
+        }
         // Remove old files from database.
         foreach ($sqlpathcheck as $sqlpath) {
-            $sqlmtime = $this->getFTimeByPath($sqlpath);
-            try {
-//                $mtime = stat($sqlpath);
-            } catch (Exception $e) {
-                continue;
-            }
-//            $sqlhashcheck = $this->getHashByPath($sqlpath);
-//            $realhash = $this->prepFileHash($sqlpath);
-            $stat = stat(stripslashes($sqlpath));
-            if (!file_exists($sqlpath)) {
-                $this->deleteRecordByPath($sqlpath);
-            } elseif ($stat['mtime'] == $sqlmtime) {
+            $sqlhashcheck = $this->getHashByPath($sqlpath);
+            $realhash = $this->prepFileHash($sqlpath);
+            if ((file_exists($sqlpath) || $sqlhashcheck == $realhash || $sqlpath == $root)) {
                 $skipFiles[] = $sqlpath;
+                continue;
+            } else {
+                $this->deleteRecordByPath($sqlpath);
             }
         }
         // Insert new files into database.
         foreach ($afiles as $fullpath) {
-            if (!in_array($fullpath, $skipFiles)) {
+            if (!in_array($fullpath, $skipFiles)/* && (!is_null($skipFiles))*/) {
                 $parse = dirname($fullpath). '/';
                 $parent = str_replace($root, '/', $parse);
                 $filename = str_replace($parse, '', $fullpath);
                 $date = $this->prepFileDate($fullpath);
                 $size = $this->prepFileSize($fullpath);
-                $mtime = stat($fullpath);
+                $hash = $this->prepFileHash($fullpath);
                 try {
-                    $this->getInsertFileRecord($fullpath, $parent, $filename, $date, $size, $mtime['mtime']);
+                    $this->getInsertFileRecord($fullpath, $parent, $filename, $date, $size, $hash);
+                    $this->getInsertFileRecord($root, NULL, '/', $date, NULL, $roothash);
                 } catch (PDOException $e) {
                     continue;
                 }
