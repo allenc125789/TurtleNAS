@@ -446,6 +446,11 @@ class DBcontrol {
         $sqlpathcheck = $this->getPathByPath();
         // Remove old files from database.
         foreach ($sqlpathcheck as $sqlpath) {
+            if (!file_exists($sqlpath)){
+                $this->deleteRecordByPath($sqlpath);
+            }
+        }
+/*            touch($sqlpath);
             $sqlmtime = $this->getFTimeByPath($sqlpath);
             try {
 //                $mtime = stat($sqlpath);
@@ -456,34 +461,25 @@ class DBcontrol {
 //            $realhash = $this->prepFileHash($sqlpath);
             $stat = stat(stripslashes($sqlpath));
             if (!file_exists($sqlpath)) {
-                $this->deleteRecordByPath($sqlpath);
             } elseif ($stat['mtime'] == $sqlmtime) {
                 $skipFiles[] = $sqlpath;
             }
         }
-        // Insert new files into database.
+*/        // Insert new files into database.
         foreach ($afiles as $fullpath) {
-            if (!in_array($fullpath, $skipFiles)) {
-                $parse = dirname($fullpath). '/';
-                $parent = str_replace($root, '/', $parse);
-                $filename = str_replace($parse, '', $fullpath);
-                $date = $this->prepFileDate($fullpath);
-                $size = $this->prepFileSize($fullpath);
-                $mtime = stat($fullpath);
-                try {
-                    $this->getInsertFileRecord($fullpath, $parent, $filename, $date, $size, $mtime['mtime']);
-                } catch (PDOException $e) {
-                    continue;
-                }
+            $this->deleteRecordByPath($fullpath);
+            $parse = dirname($fullpath). '/';
+            $parent = str_replace($root, '/', $parse);
+            $filename = str_replace($parse, '', $fullpath);
+            $date = $this->prepFileDate($fullpath);
+            $size = $this->prepFileSize($fullpath);
+            $mtime = stat($fullpath);
+            try {
+                $this->getInsertFileRecord($fullpath, $parent, $filename, $date, $size, $mtime['mtime']);
+            } catch (PDOException $e) {
+                continue;
             }
         }
-        if ($lock === "1" || $lock === null){
-            $this->getdeleteLockRecordByName();
-            $this->getInsertLockRecord($username, "0");
-        } else {
-            exit();
-        }
-
     }
 
 }
