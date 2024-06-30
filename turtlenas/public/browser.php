@@ -101,7 +101,7 @@ function removeElementsByClass(className){
 
 function displayFiles (cwdURI){
     var userName = <?php echo json_encode($username); ?>;
-    cwd = decodeURIComponent(cwdURI);
+    var cwd = decodeURIComponent(cwdURI);
     countReset();
     removeElementsByClass('tableItems');
     var table = document.getElementById("fileTables");
