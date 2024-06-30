@@ -138,7 +138,7 @@ class DBcontrol {
         }
     }
 
-    public function getFilesForDisplay($query){
+    public function getFilesForDisplay(){
         $username = $_SESSION['sessuser'];
         $stmt = $this->get_connection()->query("SELECT * FROM files_$username");
         while ($row = $stmt->fetch()){
@@ -157,24 +157,6 @@ class DBcontrol {
         }
     }
 
-    public function getParentByQuery($query){
-        $username = $_SESSION['sessuser'];
-        $path = str_replace("$username:", '', "$query");
-        $root = $this->getRootByUser();
-        if ($path !== "/"){
-            $path = ltrim($path, '/');
-            $path = $this->getFullPath($path);
-            $path = dirname($path);
-            $path = $this->getShortPath($path);
-            return $path;
-        }
-        $stmt = $this->get_connection()->query("SELECT parent FROM files_$username WHERE name = '$path'");
-        while ($row = $stmt->fetch()){
-            $parent = $row['parent'];
-            return $parent;
-
-        }
-    }
 
     public function getPathByPath($data = ''){
         $username = $_SESSION['sessuser'];
@@ -199,8 +181,8 @@ class DBcontrol {
     public function deleteFile(){
         $post = $_POST['fileToDelete'];
         $username = $_SESSION['sessuser'];
-        $query = urldecode($_SERVER['QUERY_STRING']);
-        $parent = str_replace("$username:/", '', "$query");
+        $cookie = urldecode($_COOKIE["cwd"]);
+        $parent = substr($cookie, 1);
         $root = $this->getRootByUser();
         foreach ($post as $filename){
             $filename = $root . $parent . $filename;
@@ -228,16 +210,18 @@ class DBcontrol {
 
     public function createDir($post){
         $username = $_SESSION['sessuser'];
-        $query = urldecode($_SERVER['QUERY_STRING']);
-        $parent = str_replace("$username:/", '', "$query");
+        $cookie = urldecode($_COOKIE['cwd']);
+        $parent = substr($cookie, 1);
         $root = $this->getRootByUser();
         foreach ($post as $dir){
-            $pos = strpos($dir, $query);
-            $newdir = str_replace("$root$parent", '', $dir);
+            $pos = strpos($dir, $parent);
+            $newdir = str_replace("$parent", '', $dir);
             if ($pos === false && str_contains($dir, $root) && !file_exists($root . $parent . $newdir)){
                 mkdir($root . $parent . $newdir, 0777, true);
+                $this->updateFileRecord($root . $parent . $newdir ."/", $_REFRESH_DB = FALSE);
             } elseif (!str_contains($dir, $root)){
                 mkdir($root . $parent . $dir, 0777);
+                $this->updateFileRecord($root . $parent . $dir ."/", $_REFRESH_DB = FALSE);
 //                echo ($root . $parent . $dir ."/");
             }
         }
@@ -259,10 +243,10 @@ class DBcontrol {
         error_reporting(-1); // display all faires
         ini_set('display_errors', 1);  // ensure that faires will be seen
         ini_set('display_startup_errors', 1); // display faires that didn't born
-        $query = urldecode($_SERVER['QUERY_STRING']);
+        $cookie = $_COOKIE['cwd'];
         $username = $_SESSION['sessuser'];
-        $path = str_replace("$username:/", '', $query);
-        $fullpath = $this->getFullPath($path);
+        $path = urldecode($cookie);
+        $fullpath = $this->getFullPath($cookie);
 
 
         if (isset($_FILES['file'])){
@@ -278,10 +262,9 @@ class DBcontrol {
     }
 
     public function uploadDir(){
-        $query = urldecode($_SERVER['QUERY_STRING']);
-        $query = str_replace("%20", " ", $query);
+        $cookie = $_COOKIE['cwd'];
         $username = $_SESSION['sessuser'];
-        $path = str_replace("$username:/", '', $query);
+        $path = urldecode($cookie);;
         $fullpath = $this->getFullPath($path);
         if (isset($_FILES['dir'])){
             $file_array = $this->reArrayFiles($_FILES['dir']);
@@ -291,8 +274,9 @@ class DBcontrol {
             $uniqueDir = array_unique($directory, SORT_STRING);
             $this->createDir($uniqueDir);
                 for ($i=0;$i<count($file_array);$i++){
-                    $parent = pathinfo($file_array[$i]['full_path']);
-                    move_uploaded_file($file_array[$i]['tmp_name'], $fullpath . $file_array[$i]['full_path']);
+                    $fullpath = pathinfo($file_array[$i]['full_path']);
+                    move_uploaded_file($file_array[$i]['tmp_name'], $fullpath . $fullpath);
+                    $this->updateFileRecord($fullpath, $_REFRESH_DB = FALSE);
                 }
         }
     }
