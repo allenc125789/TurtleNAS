@@ -13,7 +13,7 @@ echo "<a href='/login.html'>Verifying...</a>";
 
 $verify = $control->validate_auth();
 if($verify){
-    header("Location: /browser.php?$username:%2F");
+    header("Location: /browser.php");
 }
 
 ?>
