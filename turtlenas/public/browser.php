@@ -50,11 +50,14 @@ if ($casequery || $query == NULL || $username == NULL){
         <?php echo "<form action='/delete.php?$queryen' id='deleteForm'  method='post'>";?>
     </table>
 </tbody>
+
 </body>
 <div id="buttonDivs" class="buttonDivs">
-<button id="delete">Delete</button>
-<br><br>
-</form>
+    <button id="delete" disabled="true">Delete</button>
+    </form>
+    <br><br>
+    <button id="refresh" onclick="refreshDB()">Refresh DB</button>
+    <br><br>
 
     <?php echo "<form action='/upload.php?$queryen' method='POST' enctype='multipart/form-data'>"?>
     <input type="file" id="button" name="file[]" multiple="" onchange="this.form.submit()">
@@ -188,6 +191,10 @@ function checkAll(ele) {
     }
 }
 
+function refreshDB() {
+    getRequest();
+}
+
 
 function deleteItems() {
    var form = document.getElementById('deleteForm');
@@ -227,17 +234,15 @@ function getRequest (){
 
 let count = 0;
 let jArray = <?php echo json_encode($fObject); ?>;
-displayFiles(' Loading Files...');
-document.getElementById('delete').disabled = true;
-displayFiles("/");
+                displayFiles("/");
         window.onload = function () {
             setTimeout(function () {
                 if (jArray === null){
+                    displayFiles(' Loading Files...');
                     getRequest();
                     location.reload();
                 }
-                getRequest();
-            }, 5000); // Delay of 5 seconds
+            }, 2500); // Delay of 5 seconds
         };
 
 //window.onload = function (){
