@@ -7,5 +7,5 @@ if($verify){
     $control->uploadDir();
     header("Location: /browser.php");
 }
-    
+
 ?>
