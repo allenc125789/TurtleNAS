@@ -6,6 +6,7 @@ $control = new DBcontrol;
 $verify = $control->validate_auth();
 if($verify){
     $control->deleteFile();
+    header("Location: /browser.php);
 }
 
 
