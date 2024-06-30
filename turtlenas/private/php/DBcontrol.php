@@ -140,8 +140,6 @@ class DBcontrol {
 
     public function getFilesForDisplay($query){
         $username = $_SESSION['sessuser'];
-        $query = str_replace("'", "\\'", "$query");
-        $path = str_replace("$username:", '', "$query");
         $stmt = $this->get_connection()->query("SELECT * FROM files_$username");
         while ($row = $stmt->fetch()){
             $allrows = $row['fullpath']. "|".$row['name']. "|".$row['date']. "|".$row['size']. "|".$row['parent']. "|".$row['mtime'];
@@ -294,7 +292,7 @@ class DBcontrol {
         }
     }
 
-    public function deleteRecord(){
+    public function deleteAllRecords(){
         $username = $_SESSION['sessuser'];
         $stmt = $this->get_connection()->prepare("DELETE FROM files_$username");
         $stmt->execute();
@@ -451,7 +449,7 @@ class DBcontrol {
         $afiles = $this->scanDirAndSubdir($root);
         $sqlpathcheck = $this->getPathByPath();
         // Remove old files from database.
-        $this->deleteRecord();
+        $this->deleteAllRecords();
 /*            touch($sqlpath);
             $sqlmtime = $this->getFTimeByPath($sqlpath);
             try {
