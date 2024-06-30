@@ -224,7 +224,12 @@ function getRequest (){
 
 let count = 0;
 let jArray = <?php echo json_encode($fObject); ?>;
-displayFiles("/");
+if (getCookie('cwd') !== "/"){
+    displayFiles(getCookie('cwd'));
+} else {
+    displayFiles("/");
+}
+
         window.onload = function () {
             setTimeout(function () {
                 if (jArray === null){
