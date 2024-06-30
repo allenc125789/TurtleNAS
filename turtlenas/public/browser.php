@@ -8,19 +8,10 @@ ini_set('display_startup_errors', 1); // display faires that didn't born
 
 $verify = $control->validate_auth();
 if ($verify){
-//    $control->updateFileRecord();
     $username = $_SESSION['sessuser'];
-    $queryen = $_SERVER['QUERY_STRING'];
-    $query = urldecode($queryen);
-    $fObject = $control->getFilesForDisplay($query);
-    $casequery = str_starts_with("$username:", $query);
-    $queryparent = $control->getParentByQuery($query);
+    $fObject = $control->getFilesForDisplay();
 }
 
-if ($casequery || $query == NULL || $username == NULL){
-    header("Location: /browser.php?$username:/");
-    header('Location: /login.html');
-}
 ?>
 
 <html>
@@ -47,7 +38,7 @@ if ($casequery || $query == NULL || $username == NULL){
             <td colspan=2 style="font-size:12" bgcolor="black"><font id='displayCwd' style="color:white;">Loading Files...</font>
             </td>
         </tr>
-        <?php echo "<form action='/delete.php?$queryen' id='deleteForm'  method='post'>";?>
+        <?php echo "<form action='/delete.php?' id='deleteForm'  method='post'>";?>
     </table>
 </tbody>
 
@@ -59,15 +50,15 @@ if ($casequery || $query == NULL || $username == NULL){
     <button id="refresh" onclick="refreshDB()">Refresh DB</button>
     <br><br>
 
-    <?php echo "<form action='/upload.php?$queryen' method='POST' enctype='multipart/form-data'>"?>
+    <?php echo "<form action='/upload.php' method='POST' enctype='multipart/form-data'>"?>
     <input type="file" id="button" name="file[]" multiple="" onchange="this.form.submit()">
     </form>
 
-    <?php echo "<form action='/uploadDir.php?$queryen' method='POST' enctype='multipart/form-data'>"?>
+    <?php echo "<form action='/uploadDir.php' method='POST' enctype='multipart/form-data'>"?>
     <input type="file" id="filepicker" name="dir[]" onchange="this.form.submit()" webkitdirectory mozdirectory multiple />
     </form>
 
-    <?php echo "<form action='/mkdir.php?$queryen' method='POST'>"?>
+    <?php echo "<form action='/mkdir.php' method='POST'>"?>
     <button type="submit" id="mkdir">Create Folder...</button>
     <input type="text" id="createDir" name="createDir" required minlength="1" maxlength="255" size="10" />
     </form>
@@ -102,11 +93,12 @@ function removeElementsByClass(className){
 function displayFiles (cwdURI){
     var userName = <?php echo json_encode($username); ?>;
     var cwd = decodeURIComponent(cwdURI);
-    countReset();
-    removeElementsByClass('tableItems');
     var table = document.getElementById("fileTables");
     var form0 = document.createElement('form');
     var form = document.getElementById('deleteForm');
+    countReset();
+    removeElementsByClass('tableItems');
+    document.cookie = "cwd="+cwd;
     form.textContent = '';
     table.append(form0);
     if (jArray !== null){
@@ -153,8 +145,6 @@ function displayFiles (cwdURI){
     document.getElementById('displayCwd').textContent = userName+":"+cwd;
     deleteItems();
 }
-
-
 
 
 function countReset(){
