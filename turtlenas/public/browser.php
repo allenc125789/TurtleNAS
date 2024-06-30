@@ -44,7 +44,7 @@ if ($casequery || $query == NULL || $username == NULL){
             <a id='refresh' href='#'>⟲</a>
             <a id='wayBack' href='#'>↩</a>
             </td>
-            <td colspan=2 style="font-size:12" bgcolor="black"><font id='displayCwd' style="color:white;"></font>
+            <td colspan=2 style="font-size:12" bgcolor="black"><font id='displayCwd' style="color:white;">Loading Files...</font>
             </td>
         </tr>
         <?php echo "<form action='/delete.php?$queryen' id='deleteForm'  method='post'>";?>
@@ -245,11 +245,6 @@ displayFiles("/");
             }, 2500); // Delay of 5 seconds
         };
 
-//window.onload = function (){
-//    displayFiles("/");
-//    document.getElementById('delete').disabled = true;
-//    getRequest();
-//};
 
 
 
