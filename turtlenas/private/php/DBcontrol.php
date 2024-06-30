@@ -209,14 +209,17 @@ class DBcontrol {
                 foreach ($arr as $file){
                     if (is_dir($file)) {
                         rmdir($file);
+                        $this->deleteRecordByPath($file);
                     } else {
                         unlink($file);
+                        $this->deleteRecordByPath($file);
                     }
                 }
                 rmdir($filename);
+                $this->deleteRecordByPath($filename);
             } else{
                 unlink($filename);
-                echo $filename;
+                $this->deleteRecordByPath($filename);
             }
         }
         $_POST = array();
@@ -265,7 +268,9 @@ class DBcontrol {
         if (isset($_FILES['file'])){
             $file_array = $this->reArrayFiles($_FILES['file']);
             for ($i=0;$i<count($file_array);$i++){
-                move_uploaded_file($file_array[$i]['tmp_name'], $fullpath . $file_array[$i]['name']);
+                $fullpath = $fullpath . $file_array[$i]['name'];
+                move_uploaded_file($file_array[$i]['tmp_name'], $fullpath);
+                $this->updateFileRecord($fullpath, $_REFRESH_DB = FALSE);
                 echo ($fullpath . $file_array[$i]['name']);
 
             }
@@ -434,39 +439,21 @@ class DBcontrol {
         return $out;
     }
 
-    public function updateFileRecord() {
+    public function updateFileRecord($afiles = NULL, $_REFRESH_DB = TRUE) {
         $username = $_SESSION['sessuser'];
-        $lock = $this->getLockByName();
-        $this->getdeleteLockRecordByName();
-        if ($lock === "0" || $lock === null){
-            $this->getInsertLockRecord($username, "1");
-        } else {
-            exit();
-        }
-        $skipFiles = array();
         $mtime = '';
         $root = $this->getRootByUser();
-        $afiles = $this->scanDirAndSubdir($root);
         $sqlpathcheck = $this->getPathByPath();
-        // Remove old files from database.
-        $this->deleteAllRecords();
-/*            touch($sqlpath);
-            $sqlmtime = $this->getFTimeByPath($sqlpath);
-            try {
-//                $mtime = stat($sqlpath);
-            } catch (Exception $e) {
-                continue;
-            }
-//            $sqlhashcheck = $this->getHashByPath($sqlpath);
-//            $realhash = $this->prepFileHash($sqlpath);
-            $stat = stat(stripslashes($sqlpath));
-            if (!file_exists($sqlpath)) {
-            } elseif ($stat['mtime'] == $sqlmtime) {
-                $skipFiles[] = $sqlpath;
-            }
+        if (is_null($afiles)){
+            $bfiles = $this->scanDirAndSubdir($root);
+        } else {
+            $bfiles = array($afiles);
         }
-*/        // Insert new files into database.
-        foreach ($afiles as $fullpath) {
+        if ($_REFRESH_DB === TRUE){
+            $this->deleteAllRecords();
+        }
+        // Insert new files into database.
+        foreach ($bfiles as $fullpath) {
             $parse = dirname($fullpath). '/';
             $parent = str_replace($root, '/', $parse);
             $filename = str_replace($parse, '', $fullpath);
