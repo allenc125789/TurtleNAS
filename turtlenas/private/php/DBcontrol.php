@@ -182,7 +182,7 @@ class DBcontrol {
         $post = $_POST['fileToDelete'];
         $username = $_SESSION['sessuser'];
         $cookie = urldecode($_COOKIE["cwd"]);
-        $parent = substr($cookie, 1);
+        $parent = ltrim($cookie, "/");
         $root = $this->getRootByUser();
         foreach ($post as $filename){
             $filename = $root . $parent . $filename;
@@ -209,20 +209,22 @@ class DBcontrol {
     }
 
     public function createDir($post){
+        error_reporting(-1); // display all faires
+        ini_set('display_errors', 1);  // ensure that faires will be seen
+        ini_set('display_startup_errors', 1); // display faires that didn't born
         $username = $_SESSION['sessuser'];
         $cookie = urldecode($_COOKIE['cwd']);
-        $parent = substr($cookie, 1);
+        $parent = ltrim($cookie, "/");
         $root = $this->getRootByUser();
         foreach ($post as $dir){
-            $pos = strpos($dir, $parent);
-            $newdir = str_replace("$parent", '', $dir);
-            if ($pos === false && str_contains($dir, $root) && !file_exists($root . $parent . $newdir)){
-                mkdir($root . $parent . $newdir, 0777, true);
-                $this->updateFileRecord($root . $parent . $newdir ."/", $_REFRESH_DB = FALSE);
-            } elseif (!str_contains($dir, $root)){
+            $pos = strpos($dir, $cookie);
+            $newdir = str_replace("$root$parent", '', $dir);
+            if (!str_contains($dir, $root)){
                 mkdir($root . $parent . $dir, 0777);
                 $this->updateFileRecord($root . $parent . $dir ."/", $_REFRESH_DB = FALSE);
-//                echo ($root . $parent . $dir ."/");
+            } else {
+                mkdir($root . $parent . $newdir, 0777, true);
+                $this->updateFileRecord($root . $parent . $newdir ."/", $_REFRESH_DB = FALSE);
             }
         }
     }
@@ -240,9 +242,6 @@ class DBcontrol {
     }
 
     public function uploadFile(){
-        error_reporting(-1); // display all faires
-        ini_set('display_errors', 1);  // ensure that faires will be seen
-        ini_set('display_startup_errors', 1); // display faires that didn't born
         $cookie = $_COOKIE['cwd'];
         $username = $_SESSION['sessuser'];
         $path = urldecode($cookie);
@@ -262,9 +261,12 @@ class DBcontrol {
     }
 
     public function uploadDir(){
-        $cookie = $_COOKIE['cwd'];
+        error_reporting(-1); // display all faires
+        ini_set('display_errors', 1);  // ensure that faires will be seen
+        ini_set('display_startup_errors', 1); // display faires that didn't born
+        $cookie = urldecode($_COOKIE['cwd']);
         $username = $_SESSION['sessuser'];
-        $path = urldecode($cookie);;
+        $path = ltrim($cookie, "/");
         $fullpath = $this->getFullPath($path);
         if (isset($_FILES['dir'])){
             $file_array = $this->reArrayFiles($_FILES['dir']);
@@ -274,11 +276,12 @@ class DBcontrol {
             $uniqueDir = array_unique($directory, SORT_STRING);
             $this->createDir($uniqueDir);
                 for ($i=0;$i<count($file_array);$i++){
-                    $fullpath = pathinfo($file_array[$i]['full_path']);
-                    move_uploaded_file($file_array[$i]['tmp_name'], $fullpath . $fullpath);
-                    $this->updateFileRecord($fullpath, $_REFRESH_DB = FALSE);
+                    $parent = $file_array[$i]['full_path'];
+                    move_uploaded_file($file_array[$i]['tmp_name'], $fullpath . $file_array[$i]['full_path']);
+                    $this->updateFileRecord($fullpath . $parent, $_REFRESH_DB = FALSE);
                 }
         }
+                    var_dump($uniqueDir);
     }
 
     public function deleteAllRecords(){
