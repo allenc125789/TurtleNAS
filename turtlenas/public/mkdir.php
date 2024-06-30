@@ -5,9 +5,8 @@ $control = new DBcontrol;
 
 $verify = $control->validate_auth();
 if($verify){
-    $query = $_SERVER['QUERY_STRING'];
     $post[] = $_POST['createDir'];
     $control->createDir($post);
-    header("Location: /browser.php?$query");
+    header("Location: /browser.php");
 }
 ?>
