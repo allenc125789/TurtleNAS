@@ -224,11 +224,14 @@ function getRequest (){
 
 let count = 0;
 let jArray = <?php echo json_encode($fObject); ?>;
-displayFiles("/");
+
+
+let cwdcookie = getCookie('cwd');
+displayFiles(cwdcookie);
+
         window.onload = function () {
             setTimeout(function () {
                 if (jArray === null){
-                    displayFiles(' Loading Files...');
                     getRequest();
                     location.reload();
                 }
