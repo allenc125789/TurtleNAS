@@ -13,6 +13,7 @@ echo "<a href='/login.html'>Verifying...</a>";
 
 $verify = $control->validate_auth();
 if($verify){
+    setcookie('cwd', "/");
     header("Location: /browser.php");
 }
 
