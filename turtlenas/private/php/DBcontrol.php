@@ -251,9 +251,8 @@ class DBcontrol {
         if (isset($_FILES['file'])){
             $file_array = $this->reArrayFiles($_FILES['file']);
             for ($i=0;$i<count($file_array);$i++){
-                $fullpath = $fullpath . $file_array[$i]['name'];
-                move_uploaded_file($file_array[$i]['tmp_name'], $fullpath);
-                $this->updateFileRecord($fullpath, $_REFRESH_DB = FALSE);
+                move_uploaded_file($file_array[$i]['tmp_name'], $fullpath . $file_array[$i]['name']);
+//                $this->updateFileRecord($fullpath, $_REFRESH_DB = FALSE);
                 echo ($fullpath . $file_array[$i]['name']);
 
             }
