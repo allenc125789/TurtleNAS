@@ -219,9 +219,10 @@ function deleteItems() {
 function getRequestUpdateRecords (){
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
+    // Write code for writing output when databse updates start.:
+
         if (this.readyState == 4 && this.status == 200) {
-           // Typical action to be performed when the document is ready:
-           document.getElementById("demo").innerHTML = xhttp.responseText;
+           // Write code for writing output when databse is fully updated.:
         }
     };
     xhttp.open("GET", "/updateRecords.php", true);
