@@ -35,7 +35,7 @@ if ($verify){
             <a id='refresh' href='#'>⟲</a>
             <a id='wayBack' href='#'>↩</a>
             </td>
-            <td colspan=2 style="font-size:12" bgcolor="black"><font id='displayCwd' style="color:white;">Loading Files...</font>
+            <td colspan=2 style="font-size:12" bgcolor="black"><font id='displayCwd' style="color:white;"> Loading Files...</font>
             </td>
         </tr>
         <?php echo "<form action='/delete.php?' id='deleteForm'  method='post'>";?>
@@ -182,7 +182,7 @@ function checkAll(ele) {
 }
 
 function refreshDB() {
-    getRequest();
+    getRequestUpdateRecords();
 }
 
 
@@ -216,8 +216,14 @@ function deleteItems() {
 
 
 
-function getRequest (){
+function getRequestUpdateRecords (){
     var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+           // Typical action to be performed when the document is ready:
+           document.getElementById("demo").innerHTML = xhttp.responseText;
+        }
+    };
     xhttp.open("GET", "/updateRecords.php", true);
     xhttp.send();
 }
@@ -230,7 +236,7 @@ let cwdcookie = getCookie('cwd');
         window.onload = function () {
             setTimeout(function () {
                 if (jArray === null){
-                    getRequest();
+                    getRequestUpdateRecords();
                     location.reload();
                 }
             displayFiles(cwdcookie);
