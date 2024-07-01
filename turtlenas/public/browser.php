@@ -122,7 +122,7 @@ function displayFiles (cwdURI){
                 if (!dir.endsWith("/")){
                     cell1.insertAdjacentHTML('beforeEnd', "<a href='download.php?"+userName+":"+dirURI+"'>"+fileArray[1]);
                 } else {
-                    cell1.insertAdjacentHTML('beforeEnd', "<a href=javascript:displayFiles('"+dirURI+"')>"+fileArray[1]);
+                    cell1.insertAdjacentHTML('beforeEnd', "<a href=javascript:displayFiles(\""+dirURI+"\")>"+fileArray[1]);
                 }
                 console.log(cwd);
                 cell2.innerHTML = fileArray[3];
