@@ -227,14 +227,13 @@ let jArray = <?php echo json_encode($fObject); ?>;
 
 
 let cwdcookie = getCookie('cwd');
-displayFiles(cwdcookie);
-
         window.onload = function () {
             setTimeout(function () {
                 if (jArray === null){
                     getRequest();
                     location.reload();
                 }
+            displayFiles(cwdcookie);
             }, 2500); // Delay of 5 seconds
         };
 
