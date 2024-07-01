@@ -246,15 +246,18 @@ class DBcontrol {
         $username = $_SESSION['sessuser'];
         $path = urldecode($cookie);
         $fullpath = $this->getFullPath($cookie);
+        $sqlArray = array();
 
 
         if (isset($_FILES['file'])){
             $file_array = $this->reArrayFiles($_FILES['file']);
             for ($i=0;$i<count($file_array);$i++){
                 move_uploaded_file($file_array[$i]['tmp_name'], $fullpath . $file_array[$i]['name']);
-                $this->updateFileRecord($fullpath . $file_array[$i]['name'], $_REFRESH_DB = FALSE);
+                $sqlArray[] = $fullpath . $file_array[$i]['name'];
                 echo ($fullpath . $file_array[$i]['name']);
-
+            }
+            for ($i=0;$i<count($sqlArray);$i++){
+                    $this->updateFileRecord($uniqueDir[$i], $_REFRESH_DB = FALSE);
             }
         }
     }
@@ -267,7 +270,6 @@ class DBcontrol {
         $username = $_SESSION['sessuser'];
         $path = ltrim($cookie, "/");
         $fullpath = $this->getFullPath($path);
-        $sqlArray = array();
         if (isset($_FILES['dir'])){
             $file_array = $this->reArrayFiles($_FILES['dir']);
             for ($i=0;$i<count($file_array);$i++){
