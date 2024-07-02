@@ -281,7 +281,7 @@ class DBcontrol {
 //                    $this->updateFileRecord($fullpath . $uniqueDir[$i], $_REFRESH_DB = FALSE);
                 }
                 for ($i=0;$i<count($uniqueDir);$i++){
-                    if (!isset($uniqueDir[$i]) || is_dir($uniqueDir[$i])){
+                    if (!isset($uniqueDir[$i])){
                         $this->updateFileRecord($uniqueDir[$i], $_REFRESH_DB = FALSE);
                     }
                 }
