@@ -250,7 +250,7 @@ function getRequestUploadFile() {
 function getRequestUploadDir() {
     var formData = new FormData( document.getElementById("uploadDir") );
     var xhttp = new XMLHttpRequest();
-    var log = "> Uploading Directory...<br><br>";
+    var log = "> Uploading Directory...<br>";
     document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
     cookieLogAdd(log);
         xhttp.onreadystatechange = function() {
@@ -277,7 +277,7 @@ function getRequestUpdateRecords (){
     // Write code for writing output when databse updates start.:
         if (this.readyState == 4 && this.status == 200) {
            // Write code for writing output when databse is fully updated.:
-            var log = "> Database Reloaded!<br>";
+            var log = "> Database Reloaded!<br><br>";
             document.getElementById('refreshDB').disabled = false;
             document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
             cookieLogAdd(log);
