@@ -205,7 +205,6 @@ class DBcontrol {
             }
         }
         $_POST = array();
-//        header("Location: /browser.php?$query");
     }
 
     public function createDir($post){
@@ -224,7 +223,6 @@ class DBcontrol {
                 $this->updateFileRecord($root . $parent . $dir . "/", $_REFRESH_DB = FALSE);
             } else {
                 mkdir($root . $parent . $newdir, 0777, true);
-//                $this->updateFileRecord($root . $parent . $newdir . "/", $_REFRESH_DB = FALSE);
             }
         }
     }
@@ -280,13 +278,11 @@ class DBcontrol {
                 for ($i=0;$i<count($file_array);$i++){
                     $parent = $fullpath . $file_array[$i]['full_path'];
                     move_uploaded_file($file_array[$i]['tmp_name'], $fullpath . $file_array[$i]['full_path']);
-//                    $this->updateFileRecord($parent, $_REFRESH_DB = FALSE);
                 }
                 for ($i=0;$i<count($uniqueDir);$i++){
                     if (!is_dir($uniqueDir[$i])){
                         $this->updateFileRecord($uniqueDir[$i], $_REFRESH_DB = FALSE);
                     }
-//                    $this->deleteRecordByPath($uniqueDir[$i], $_REFRESH_DB = FALSE);
                 }
         }
                     var_dump($uniqueDir);
