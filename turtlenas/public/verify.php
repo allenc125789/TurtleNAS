@@ -14,6 +14,7 @@ echo "<a href='/login.html'>Verifying...</a>";
 $verify = $control->validate_auth();
 if($verify){
     setcookie('cwd', "/");
+    setcookie('log', "Successful login!");
     header("Location: /browser.php");
 }
 
