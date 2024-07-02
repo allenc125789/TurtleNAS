@@ -221,10 +221,10 @@ class DBcontrol {
             $newdir = str_replace("$root$parent", '', $dir);
             if (!str_contains($dir, $root)){
                 mkdir($root . $parent . $dir, 0777);
-                $this->updateFileRecord($root . $parent . $dir ."/", $_REFRESH_DB = FALSE);
+                $this->updateFileRecord($root . $parent . $dir . "/", $_REFRESH_DB = FALSE);
             } else {
                 mkdir($root . $parent . $newdir, 0777, true);
-                $this->updateFileRecord($root . $parent . $newdir ."/", $_REFRESH_DB = FALSE);
+//                $this->updateFileRecord($root . $parent . $newdir . "/", $_REFRESH_DB = FALSE);
             }
         }
     }
@@ -278,12 +278,15 @@ class DBcontrol {
             $uniqueDir = array_unique($directory, SORT_STRING);
             $this->createDir($uniqueDir);
                 for ($i=0;$i<count($file_array);$i++){
-                    $parent = $file_array[$i]['full_path'];
+                    $parent = $fullpath . $file_array[$i]['full_path'];
                     move_uploaded_file($file_array[$i]['tmp_name'], $fullpath . $file_array[$i]['full_path']);
-                    $this->updateFileRecord($fullpath . $parent, $_REFRESH_DB = FALSE);
+//                    $this->updateFileRecord($parent, $_REFRESH_DB = FALSE);
                 }
                 for ($i=0;$i<count($uniqueDir);$i++){
-                    $this->updateFileRecord($uniqueDir[$i], $_REFRESH_DB = FALSE);
+                    if (!is_dir($uniqueDir[$i])){
+                        $this->updateFileRecord($uniqueDir[$i], $_REFRESH_DB = FALSE);
+                    }
+//                    $this->deleteRecordByPath($uniqueDir[$i], $_REFRESH_DB = FALSE);
                 }
         }
                     var_dump($uniqueDir);
