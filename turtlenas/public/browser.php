@@ -223,13 +223,14 @@ function deleteItems() {
 
 function getRequestUpdateRecords (){
     var xhttp = new XMLHttpRequest();
-//    xhttp.onreadystatechange = function() {
+    document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', "> Database Loading...<br>");
+    xhttp.onreadystatechange = function() {
     // Write code for writing output when databse updates start.:
-
-//        if (this.readyState == 4 && this.status == 200) {
+        if (this.readyState == 4 && this.status == 200) {
            // Write code for writing output when databse is fully updated.:
-//        }
-//    };
+            document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', "> Database ready!<br>");
+        }
+    };
     xhttp.open("GET", "/updateRecords.php", true);
     xhttp.send();
 }
