@@ -47,15 +47,13 @@ if ($verify){
     <button id="delete" disabled="true">Delete</button>
     </form>
     <br><br>
-    <button id="refreshDB" disabled="true" onclick="refreshDB()">Refresh DB</button>
-    <br><br>
 
-    <?php echo "<form action='/upload.php' method='POST' enctype='multipart/form-data'>"?>
-    <input type="file" id="button" name="file[]" multiple="" onchange="this.form.submit()">
+    <?php echo "<form id='uploadFile' action='/upload.php' method='POST' enctype='multipart/form-data'>"?>
+    <input type="file" onchange="getRequestUploadFile()" id="file" name="file[]" multiple="">
     </form>
 
     <?php echo "<form id='uploadDir' action='/uploadDir.php' method='POST' enctype='multipart/form-data'>"?>
-    <input type="file" onchange="getRequestUploadDir()" id="filepicker" name="dir[]" webkitdirectory mozdirectory multiple />
+    <input type="file" onchange="getRequestUploadDir()" id="dir" name="dir[]" webkitdirectory mozdirectory multiple />
     </form>
 
     <?php echo "<form action='/mkdir.php' method='POST'>"?>
@@ -66,7 +64,15 @@ if ($verify){
 
 <div id="logBox">
     <h4 id="logHeader">---Logs---</h4>
-    <div id="logOutput"><div>
+    <div id="logOutput"></div>
+</div>
+
+<div id="refreshDBDiv">
+    <button id="refreshDB" disabled="true" onclick="refreshDB()">Refresh DB</button>
+</div>
+
+<div id="refreshLogsDiv">
+    <button id="refreshLogs" onclick="refreshLogs()">Refresh Log List</button>
 </div>
 
 <script type='text/javascript'>
@@ -189,6 +195,10 @@ function refreshDB() {
     getRequestUpdateRecords();
 }
 
+function refreshLogs() {
+    document.cookie = "log=;";
+    document.getElementById('logOutput').innerHTML = '';
+}
 
 function deleteItems() {
    var form = document.getElementById('deleteForm');
@@ -217,46 +227,80 @@ function deleteItems() {
     });
 }
 
+function getRequestUploadFile() {
+    var formData = new FormData( document.getElementById("uploadFile") );
+    var xhttp = new XMLHttpRequest();
+    var log = "> Uploading File(s)...<br><br>";
+    document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
+    cookieLogAdd(log);
+        xhttp.onreadystatechange = function() {
+            if(xhttp.readyState == 4 && xhttp.status == 200)
+            {
+                var log = "> File(s) Uploading Finished!<br><br>";
+                document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
+                cookieLogAdd(log);
+                location.reload();
+            }
+        };
+        xhttp.open("post", "/upload.php", true);
+        xhttp.send(formData);
+}
+
 
 function getRequestUploadDir() {
-//    formData.append(data);
-//var input = document.getElementById("filepicker");
-//var inputData = encodeURIComponent(input.value);
     var formData = new FormData( document.getElementById("uploadDir") );
-    var xmlHttp = new XMLHttpRequest();
-        xmlHttp.onreadystatechange = function()
-        {
-            if(xmlHttp.readyState == 4 && xmlHttp.status == 200)
+    var xhttp = new XMLHttpRequest();
+    var log = "> Uploading Directory...<br><br>";
+    document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
+    cookieLogAdd(log);
+        xhttp.onreadystatechange = function() {
+            if(xhttp.readyState == 4 && xhttp.status == 200)
             {
-                alert(xmlHttp.responseText);
+                var log = "> Directory Uploading Finished!<br><br>";
+                document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
+                cookieLogAdd(log);
+                location.reload();
             }
-        }
-        xmlHttp.open("post", "/uploadDir.php");
-        xmlHttp.send(formData);
+        };
+        xhttp.open("post", "/uploadDir.php", true);
+        xhttp.send(formData);
 }
 
 
 function getRequestUpdateRecords (){
     var xhttp = new XMLHttpRequest();
+    var log = "> Database Refreshing...<br>";
     document.getElementById('refreshDB').disabled = true;
-    document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', "> Database Loading...<br>");
+    document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
+    cookieLogAdd(log);
     xhttp.onreadystatechange = function() {
     // Write code for writing output when databse updates start.:
         if (this.readyState == 4 && this.status == 200) {
            // Write code for writing output when databse is fully updated.:
-            document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', "> Database ready!<br>");
+            var log = "> Database Reloaded!<br>";
             document.getElementById('refreshDB').disabled = false;
+            document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
+            cookieLogAdd(log);
+            location.reload();
         }
     };
     xhttp.open("GET", "/updateRecords.php", true);
     xhttp.send();
 }
 
+function cookieLogAdd(ele) {
+    logcookie += ele;
+    document.cookie = 'log=' + logcookie;
+}
+
+
 let count = 0;
 let jArray = <?php echo json_encode($fObject); ?>;
 
 
+let logcookie = getCookie('log');
 let cwdcookie = getCookie('cwd');
+document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', logcookie);
         window.onload = function () {
             setTimeout(function () {
                 if (jArray === null){
