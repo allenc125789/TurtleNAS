@@ -278,10 +278,10 @@ class DBcontrol {
                 for ($i=0;$i<count($file_array);$i++){
                     $parent = $fullpath . $file_array[$i]['full_path'];
                     move_uploaded_file($file_array[$i]['tmp_name'], $fullpath . $file_array[$i]['full_path']);
-//                    $this->updateFileRecord($fullpath . $uniqueDir[$i], $_REFRESH_DB = FALSE);
+//                    $this->updateFileRecord($fullpath . $file_array[$i]['full_path'], $_REFRESH_DB = FALSE);
                 }
                 for ($i=0;$i<count($uniqueDir);$i++){
-                    if (!isset($uniqueDir[$i])){
+                    if (isset($uniqueDir[$i]) && is_dir($uniqueDir[$i])){
                         $this->updateFileRecord($uniqueDir[$i], $_REFRESH_DB = FALSE);
                     }
                 }
