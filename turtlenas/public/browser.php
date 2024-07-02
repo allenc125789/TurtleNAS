@@ -64,6 +64,11 @@ if ($verify){
     </form>
 </div>
 
+<div id="logBox">
+    <h3 id="logHeader">---Logs---</h3>
+    <div id="logOutput">
+    <div>
+</div>
 
 <script type='text/javascript'>
 
