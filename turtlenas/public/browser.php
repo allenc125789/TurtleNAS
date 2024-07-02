@@ -278,7 +278,6 @@ function getRequestUpdateRecords (){
         if (this.readyState == 4 && this.status == 200) {
            // Write code for writing output when databse is fully updated.:
             var log = "> Database Reloaded!<br><br>";
-            document.getElementById('refreshDB').disabled = false;
             document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
             cookieLogAdd(log);
             location.reload();
