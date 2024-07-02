@@ -53,7 +53,7 @@ if ($verify){
     </form>
 
     <?php echo "<form id='uploadDir' action='/uploadDir.php' method='POST' enctype='multipart/form-data'>"?>
-    <input type="file" onchange="getRequestUploadDir()" id="dir" name="dir[]" webkitdirectory mozdirectory multiple />
+    <input type="file" onchange="getRequestUploadDir()" id="dir" name="dir[]" directory webkitdirectory mozdirectory multiple />
     </form>
 
     <?php echo "<form action='/mkdir.php' method='POST'>"?>
