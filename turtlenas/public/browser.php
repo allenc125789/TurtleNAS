@@ -65,7 +65,7 @@ if ($verify){
 </div>
 
 <div id="logBox">
-    <h3 id="logHeader">---Logs---</h3>
+    <h4 id="logHeader">---Logs---</h4>
     <div id="logOutput">
     <div>
 </div>
