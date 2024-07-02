@@ -305,7 +305,6 @@ document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', logcookie);
             setTimeout(function () {
                 if (jArray === null){
                     getRequestUpdateRecords();
-                    location.reload();
                 }
             document.getElementById('refreshDB').disabled = false;
             displayFiles(cwdcookie);
