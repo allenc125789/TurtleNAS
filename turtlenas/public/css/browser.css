@@ -21,7 +21,7 @@
 
 #logBox {
   position: fixed;
-  bottom: 10;
+  bottom: 60;
   width: 226px;
   height: 300px;
   border: 1px solid black;
@@ -37,12 +37,12 @@
 
 #logOutput {
   position: fixed;
-  bottom: 10;
+  bottom: 60;
   width: 226px;
   height: 250px;
   white-space: nowrap;
   margin: 2px;
-  overflow: scroll;
+  overflow: auto;
   display: flex;
   flex-direction: column-reverse;
 }
@@ -58,6 +58,17 @@
 #size {
     width: 10%;
     text-align: center
+}
+
+#refreshDBDiv {
+  position: fixed;
+  bottom: 30px;
+}
+
+#refreshLogsDiv {
+  position: fixed;
+  bottom: 30px;
+  left: 95px;
 }
 
 .tableItems:hover {background-color:  #e5e5e5;}
