@@ -19,6 +19,20 @@
     background-color: lightgrey;
 }
 
+#logBox {
+  position: fixed;
+  bottom: 10;
+  width: 226px;
+  height: 300px;
+  border: 1px solid black;
+  padding: 10px;
+  margin: 2px;
+}
+
+#logHeader {
+  text-align: center;
+}
+
 #checks {
     width: 1%;
     text-align: center
