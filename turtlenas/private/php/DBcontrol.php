@@ -221,7 +221,7 @@ class DBcontrol {
             if (!str_contains($dir, $root)){
                 mkdir($root . $parent . $dir, 0777);
                 $this->updateFileRecord($root . $parent . $dir . "/", $_REFRESH_DB = FALSE);
-            } else {
+            } elseif (!file_exists($root . $parent . $newdir)) {
                 mkdir($root . $parent . $newdir, 0777, true);
             }
         }
@@ -280,7 +280,7 @@ class DBcontrol {
                     move_uploaded_file($file_array[$i]['tmp_name'], $fullpath . $file_array[$i]['full_path']);
                 }
                 for ($i=0;$i<count($uniqueDir);$i++){
-                    if (!is_dir($uniqueDir[$i])){
+                    if (!isset($uniqueDir[$i])){
                         $this->updateFileRecord($uniqueDir[$i], $_REFRESH_DB = FALSE);
                     }
                 }
