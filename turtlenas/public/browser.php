@@ -54,8 +54,8 @@ if ($verify){
     <input type="file" id="button" name="file[]" multiple="" onchange="this.form.submit()">
     </form>
 
-    <?php echo "<form action='/uploadDir.php' method='POST' enctype='multipart/form-data'>"?>
-    <input type="file" id="filepicker" name="dir[]" onchange="this.form.submit()" webkitdirectory mozdirectory multiple />
+    <?php echo "<form id='uploadDir' action='/uploadDir.php' method='POST' enctype='multipart/form-data'>"?>
+    <input type="file" onchange="getRequestUploadDir()" id="filepicker" name="dir[]" webkitdirectory mozdirectory multiple />
     </form>
 
     <?php echo "<form action='/mkdir.php' method='POST'>"?>
@@ -218,7 +218,22 @@ function deleteItems() {
 }
 
 
-
+function getRequestUploadDir() {
+//    formData.append(data);
+//var input = document.getElementById("filepicker");
+//var inputData = encodeURIComponent(input.value);
+    var formData = new FormData( document.getElementById("uploadDir") );
+    var xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function()
+        {
+            if(xmlHttp.readyState == 4 && xmlHttp.status == 200)
+            {
+                alert(xmlHttp.responseText);
+            }
+        }
+        xmlHttp.open("post", "/uploadDir.php");
+        xmlHttp.send(formData);
+}
 
 
 function getRequestUpdateRecords (){
