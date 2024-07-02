@@ -18,9 +18,7 @@
 
 +program runs effeiciently enough. changing directories is seamless, and multiple gigs of files can be uploaded without major impact on performance. Need to test with uploads from multiple users.
 
--need to figure out reloading for the initial SQL update.
-
--need to fix uploading files to the current directory. currently uploading files indsise a sub directory does nothing.
+-sqlcode and JS code for record updates is effiecient. however i still need to add function to update parent folders for each type of upload, at the end of each of their functions. I also need to change how the browser page interacts with loading post to new pages, and add xhttp async methods for each.
 
 -need to add a button to download the current folder as a zip, and another for encrypted zip.
 
