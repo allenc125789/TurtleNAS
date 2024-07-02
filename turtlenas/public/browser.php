@@ -47,7 +47,7 @@ if ($verify){
     <button id="delete" disabled="true">Delete</button>
     </form>
     <br><br>
-    <button id="refresh" onclick="refreshDB()">Refresh DB</button>
+    <button id="refreshDB" disabled="true" onclick="refreshDB()">Refresh DB</button>
     <br><br>
 
     <?php echo "<form action='/upload.php' method='POST' enctype='multipart/form-data'>"?>
@@ -205,6 +205,7 @@ function deleteItems() {
                 count -= 1;
                 var p = checks.value;
                 var old = document.getElementById(p)
+                document.getElementById('refreshDB').disabled = false;
                 console.log(checks);
                 form.removeChild(old);
             }
@@ -223,12 +224,14 @@ function deleteItems() {
 
 function getRequestUpdateRecords (){
     var xhttp = new XMLHttpRequest();
+    document.getElementById('refreshDB').disabled = true;
     document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', "> Database Loading...<br>");
     xhttp.onreadystatechange = function() {
     // Write code for writing output when databse updates start.:
         if (this.readyState == 4 && this.status == 200) {
            // Write code for writing output when databse is fully updated.:
             document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', "> Database ready!<br>");
+            document.getElementById('refreshDB').disabled = false;
         }
     };
     xhttp.open("GET", "/updateRecords.php", true);
@@ -246,6 +249,7 @@ let cwdcookie = getCookie('cwd');
                     getRequestUpdateRecords();
                     location.reload();
                 }
+            document.getElementById('refreshDB').disabled = false;
             displayFiles(cwdcookie);
             }, 2500); // Delay of 5 seconds
         };
