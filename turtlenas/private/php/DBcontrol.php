@@ -284,7 +284,15 @@ class DBcontrol {
                 foreach ($uniqueDir as $dir){
                     $this->updateFileRecord($dir . "/", $_REFRESH_DB = FALSE);
                 }
-
+                // For Windows compatibility. Windows will not upload the root folder of what's uploaded in uploadDir().
+                for ($i=0;$i<count($file_array);$i++){
+                    $file = $file_array[$i]['full_path'];
+                    $fileFilter[] = substr($file, 0, strpos($file, "/"));
+                    $uniqueDir = array_unique($fileFilter, SORT_STRING);
+                }
+                foreach ($uniqueDir as $dir){
+                    $this->updateFileRecord($cwd . $dir . "/", $_REFRESH_DB = FALSE);
+                }
         }
     }
 
