@@ -113,29 +113,29 @@ function displayFiles (cwdURI){
     if (jArray !== null){
         for (var i=0; i<jArray.length; i++){
             const fileArray = jArray[i].split("|");
-            if (cwd == fileArray[4]){
+            if (cwd == fileArray[3]){
                 var row = table.insertRow(-1);
                 var cell0 = row.insertCell(0);
                 var cell1 = row.insertCell(1);
                 var cell2 = row.insertCell(2);
                 var cell3 = row.insertCell(2);
-                var dir = fileArray[4].concat(fileArray[1]);
+                var dir = fileArray[3].concat(fileArray[0]);
                 var dirURI = encodeURIComponent(dir);
                 var checkboxes = document.createElement("INPUT");
                 checkboxes.setAttribute("type", "checkbox");
                 checkboxes.setAttribute("class", "cb");
                 checkboxes.setAttribute("name", "fileToDelete[]");
-                checkboxes.setAttribute("id", fileArray[1]);
-                checkboxes.setAttribute("value", fileArray[1]);
+                checkboxes.setAttribute("id", fileArray[0]);
+                checkboxes.setAttribute("value", fileArray[0]);
                 cell0.appendChild(checkboxes);
                 if (!dir.endsWith("/")){
-                    cell1.insertAdjacentHTML('beforeEnd', "<a href='download.php?"+userName+":"+dirURI+"'>"+fileArray[1]);
+                    cell1.insertAdjacentHTML('beforeEnd', "<a href='download.php?"+userName+":"+dirURI+"'>"+fileArray[0]);
                 } else {
-                    cell1.insertAdjacentHTML('beforeEnd', "<a href=javascript:displayFiles(\""+dirURI+"\")>"+fileArray[1]);
+                    cell1.insertAdjacentHTML('beforeEnd', "<a href=javascript:displayFiles(\""+dirURI+"\")>"+fileArray[0]);
                 }
                 console.log(cwd);
-                cell2.innerHTML = fileArray[3];
-                cell3.innerHTML = fileArray[2];
+                cell2.innerHTML = fileArray[2];
+                cell3.innerHTML = fileArray[1];
                 row.className = "tableItems";
             }
         }
@@ -261,11 +261,28 @@ function getRequestDelete() {
 }
 
 
+async function activateWakeLock() {
+    try {
+      wakeLock = await navigator.wakeLock.request("screen");
+    } catch (err) {
+      // The Wake Lock request has failed - usually system related, such as battery.
+      alert(`${err.name}, ${err.message}`);
+    }
+}
+
+function deactivateWakeLock() {
+    wakeLock.release().then(() => {
+        wakeLock = null;
+    });
+}
+
+
 function getRequestUploadFile() {
     var formData = new FormData( document.getElementById("uploadFile") );
     var xhttp = new XMLHttpRequest();
     var log = "> Uploading File(s)...<br>";
     document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
+    activateWakeLock();
     disableAllButtons();
     cookieLogAdd(log);
         xhttp.onreadystatechange = function() {
@@ -287,6 +304,7 @@ function getRequestUploadDir() {
     var xhttp = new XMLHttpRequest();
     var log = "> Uploading Directory...<br>";
     document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
+    activateWakeLock();
     disableAllButtons();
     cookieLogAdd(log);
         xhttp.onreadystatechange = function() {
@@ -306,6 +324,7 @@ function getRequestUpdateRecords() {
     var xhttp = new XMLHttpRequest();
     var log = "> Database Refreshing...<br>";
     document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
+    activateWakeLock();
     disableAllButtons();
     cookieLogAdd(log);
     xhttp.onreadystatechange = function() {
@@ -327,7 +346,7 @@ function cookieLogAdd(ele) {
     document.cookie = 'log=' + logcookie;
 }
 
-
+let wakeLock = null;
 let count = 0;
 let jArray = <?php echo json_encode($fObject); ?>;
 
