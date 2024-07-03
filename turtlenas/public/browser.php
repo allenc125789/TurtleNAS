@@ -199,6 +199,11 @@ function refreshDB() {
     getRequestUpdateRecords();
 }
 
+function cookieLogAdd(ele) {
+    logcookie += ele;
+    document.cookie = 'log=' + logcookie;
+}
+
 function refreshLogs() {
     document.cookie = "log=; expires=Thu, 01 Jan 0000 00:00:00 UTC; path=/;";
     document.getElementById('logOutput').innerHTML = '';
@@ -338,11 +343,6 @@ function getRequestUpdateRecords() {
     };
     xhttp.open("GET", "/updateRecords.php", true);
     xhttp.send();
-}
-
-function cookieLogAdd(ele) {
-    logcookie += ele;
-    document.cookie = 'log=' + logcookie;
 }
 
 let wakeLock = null;
