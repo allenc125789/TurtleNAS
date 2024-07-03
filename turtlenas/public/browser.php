@@ -38,7 +38,7 @@ if ($verify){
             <td colspan=2 style="font-size:12" bgcolor="black"><font id='displayCwd' style="color:white;"> Loading Files...</font>
             </td>
         </tr>
-        <?php echo "<form id='deleteForm' method='post' enctype='multipart/form-data'>";?>
+        <?php echo "<form id='deleteForm' method='post'>";?>
     </table>
 </tbody>
 
