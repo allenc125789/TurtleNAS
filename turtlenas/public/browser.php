@@ -30,7 +30,7 @@ if ($verify){
             <th>File Size</th>
         </tr>
         <tr class="hotbar">
-            <td bgcolor="white"><input type="checkbox" name="massSelect[]" id="massSelect" onchange="checkAll(this)"/></td>
+            <td bgcolor="white"><input class="buttons" type="checkbox" name="massSelect[]" id="massSelect" onchange="checkAll(this)"/></td>
             <td style="font-size: 20" bgcolor="white">
             <a id='refresh' href='#'>⟲</a>
             <a id='wayBack' href='#'>↩</a>
@@ -44,20 +44,20 @@ if ($verify){
 
 </body>
 <div id="buttonDivs" class="buttonDivs">
-    <button id="delete" disabled="true">Delete</button>
+    <button class="buttons" id="delete" disabled="true">Delete</button>
     </form>
     <br><br>
 
     <?php echo "<form id='uploadFile' action='/upload.php' method='POST' enctype='multipart/form-data'>"?>
-    <input type="file" onchange="getRequestUploadFile()" id="file" name="file[]" multiple="">
+    <input class="buttons" type="file" onchange="getRequestUploadFile()" id="file" name="file[]" multiple="">
     </form>
 
     <?php echo "<form id='uploadDir' action='/uploadDir.php' method='POST' enctype='multipart/form-data'>"?>
-    <input type="file" onchange="getRequestUploadDir()" id="dir" name="dir[]" directory webkitdirectory mozdirectory multiple />
+    <input class="buttons" type="file" onchange="getRequestUploadDir()" id="dir" name="dir[]" directory webkitdirectory mozdirectory multiple />
     </form>
 
     <?php echo "<form action='/mkdir.php' method='POST'>"?>
-    <button type="submit" id="mkdir">Create Folder...</button>
+    <button class="buttons" type="submit" id="mkdir">Create Folder...</button>
     <input type="text" id="createDir" name="createDir" required minlength="1" maxlength="255" size="10" />
     </form>
 </div>
@@ -68,11 +68,11 @@ if ($verify){
 </div>
 
 <div id="refreshDBDiv">
-    <button id="refreshDB" disabled="true" onclick="refreshDB()">Refresh DB</button>
+    <button class="buttons" id="refreshDB" disabled="true" onclick="refreshDB()">Refresh DB</button>
 </div>
 
 <div id="refreshLogsDiv">
-    <button id="refreshLogs" onclick="refreshLogs()">Refresh Log List</button>
+    <button class="buttons" id="refreshLogs" onclick="refreshLogs()">Refresh Log List</button>
 </div>
 
 <script type='text/javascript'>
@@ -191,6 +191,19 @@ function checkAll(ele) {
     }
 }
 
+function disableAllButtons() {
+    var n = document.getElementsByClassName('buttons');
+    var l = document.getElementsByClassName('cb');
+    for(var i=0;i<n.length;i++){
+       n[i].disabled = true;
+    }
+    for(var i=0;i<l.length;i++){
+       l[i].disabled = true;
+    }
+    document.getElementById("refresh").style.visibility = "hidden";
+    document.getElementById("wayBack").style.visibility = "hidden";
+}
+
 function refreshDB() {
     getRequestUpdateRecords();
 }
@@ -232,6 +245,7 @@ function getRequestUploadFile() {
     var xhttp = new XMLHttpRequest();
     var log = "> Uploading File(s)...<br><br>";
     document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
+    disableAllButtons();
     cookieLogAdd(log);
         xhttp.onreadystatechange = function() {
             if(xhttp.readyState == 4 && xhttp.status == 200)
@@ -252,6 +266,7 @@ function getRequestUploadDir() {
     var xhttp = new XMLHttpRequest();
     var log = "> Uploading Directory...<br>";
     document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
+    disableAllButtons();
     cookieLogAdd(log);
         xhttp.onreadystatechange = function() {
             if(xhttp.readyState == 4 && xhttp.status == 200)
@@ -266,12 +281,11 @@ function getRequestUploadDir() {
         xhttp.send(formData);
 }
 
-
 function getRequestUpdateRecords (){
     var xhttp = new XMLHttpRequest();
     var log = "> Database Refreshing...<br>";
-    document.getElementById('refreshDB').disabled = true;
     document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
+    disableAllButtons();
     cookieLogAdd(log);
     xhttp.onreadystatechange = function() {
     // Write code for writing output when databse updates start.:
@@ -303,6 +317,7 @@ document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', logcookie);
         window.onload = function () {
             setTimeout(function () {
                 if (jArray === null){
+                    disableAllButtons();
                     getRequestUpdateRecords();
                 }
             document.getElementById('refreshDB').disabled = false;
