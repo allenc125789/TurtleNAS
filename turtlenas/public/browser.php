@@ -38,13 +38,13 @@ if ($verify){
             <td colspan=2 style="font-size:12" bgcolor="black"><font id='displayCwd' style="color:white;"> Loading Files...</font>
             </td>
         </tr>
-        <?php echo "<form action='/delete.php?' id='deleteForm'  method='post'>";?>
+        <?php echo "<form id='deleteForm' method='post' enctype='multipart/form-data'>";?>
     </table>
 </tbody>
 
 </body>
 <div id="buttonDivs" class="buttonDivs">
-    <button class="buttons" id="delete" disabled="true">Delete</button>
+    <input class="buttons" id="delete" value="Delete" type="button" onclick="getRequestDelete()" disabled="true">
     </form>
     <br><br>
 
@@ -76,7 +76,6 @@ if ($verify){
 </div>
 
 <script type='text/javascript'>
-
 function getCookie(cname) {
   let name = cname + "=";
   let decodedCookie = decodeURIComponent(document.cookie);
@@ -156,14 +155,6 @@ function displayFiles (cwdURI){
     deleteItems();
 }
 
-
-function countReset(){
-    count = 0;
-    document.getElementById('delete').disabled = true;
-    document.getElementById('massSelect').checked = false;
-}
-
-
 function checkAll(ele) {
    var form = document.getElementById('deleteForm');
     var checkboxes = document.getElementsByClassName('cb');
@@ -213,6 +204,12 @@ function refreshLogs() {
     document.getElementById('logOutput').innerHTML = '';
 }
 
+function countReset(){
+    count = 0;
+    document.getElementById('delete').disabled = true;
+    document.getElementById('massSelect').checked = false;
+}
+
 function deleteItems() {
    var form = document.getElementById('deleteForm');
    var results = document.getElementsByClassName("cb");
@@ -239,6 +236,28 @@ function deleteItems() {
         });
     });
 }
+
+function getRequestDelete() {
+    var formData = new FormData( document.getElementById("deleteForm") );
+//    var formData = document.getElementById("deleteForm");
+    var xhttp = new XMLHttpRequest();
+    var log = "> Deleting Files/Directories...<br>";
+    document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
+    disableAllButtons();
+    cookieLogAdd(log);
+        xhttp.onreadystatechange = function() {
+            if(xhttp.readyState == 4 && xhttp.status == 200)
+            {
+                var log = "> Files/Directories deleted!<br><br>";
+                document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
+                cookieLogAdd(log);
+                location.reload();
+            }
+        };
+        xhttp.open("post", "/delete.php", true);
+        xhttp.send(formData);
+}
+
 
 function getRequestUploadFile() {
     var formData = new FormData( document.getElementById("uploadFile") );
@@ -281,7 +300,7 @@ function getRequestUploadDir() {
         xhttp.send(formData);
 }
 
-function getRequestUpdateRecords (){
+function getRequestUpdateRecords() {
     var xhttp = new XMLHttpRequest();
     var log = "> Database Refreshing...<br>";
     document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
@@ -291,7 +310,7 @@ function getRequestUpdateRecords (){
     // Write code for writing output when databse updates start.:
         if (this.readyState == 4 && this.status == 200) {
            // Write code for writing output when databse is fully updated.:
-            var log = "> Database Reloaded!<br><br>";
+            var log = "> Database Reloaded!<br>&nbsp;<br>&nbsp;";
             document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
             cookieLogAdd(log);
             location.reload();
