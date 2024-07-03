@@ -202,6 +202,8 @@ function refreshDB() {
 function refreshLogs() {
     document.cookie = "log=; expires=Thu, 01 Jan 0000 00:00:00 UTC; path=/;";
     document.getElementById('logOutput').innerHTML = '';
+    delete logcookie;
+    logcookie = '';
 }
 
 function countReset(){
@@ -248,7 +250,7 @@ function getRequestDelete() {
         xhttp.onreadystatechange = function() {
             if(xhttp.readyState == 4 && xhttp.status == 200)
             {
-                var log = "> Files/Directories deleted!<br><br>";
+                var log = "> OK!<br>-<br>";
                 document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
                 cookieLogAdd(log);
                 location.reload();
@@ -262,14 +264,14 @@ function getRequestDelete() {
 function getRequestUploadFile() {
     var formData = new FormData( document.getElementById("uploadFile") );
     var xhttp = new XMLHttpRequest();
-    var log = "> Uploading File(s)...<br><br>";
+    var log = "> Uploading File(s)...<br>";
     document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
     disableAllButtons();
     cookieLogAdd(log);
         xhttp.onreadystatechange = function() {
             if(xhttp.readyState == 4 && xhttp.status == 200)
             {
-                var log = "> File(s) Uploading Finished!<br><br>";
+                var log = "> OK!<br>-<br>";
                 document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
                 cookieLogAdd(log);
                 location.reload();
@@ -290,7 +292,7 @@ function getRequestUploadDir() {
         xhttp.onreadystatechange = function() {
             if(xhttp.readyState == 4 && xhttp.status == 200)
             {
-                var log = "> Directory Uploading Finished!<br><br>";
+                var log = "> OK!<br>-<br>";
                 document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
                 cookieLogAdd(log);
                 location.reload();
@@ -310,7 +312,7 @@ function getRequestUpdateRecords() {
     // Write code for writing output when databse updates start.:
         if (this.readyState == 4 && this.status == 200) {
            // Write code for writing output when databse is fully updated.:
-            var log = "> Database Reloaded!<br />";
+            var log = "> OK!<br>-<br>";
             document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
             cookieLogAdd(log);
             location.reload();
