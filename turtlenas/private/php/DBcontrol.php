@@ -264,29 +264,28 @@ class DBcontrol {
         error_reporting(-1); // display all faires
         ini_set('display_errors', 1);  // ensure that faires will be seen
         ini_set('display_startup_errors', 1); // display faires that didn't born
-        $cookie = urldecode($_COOKIE['cwd']);
         $username = $_SESSION['sessuser'];
-        $path = ltrim($cookie, "/");
-        $fullpath = $this->getFullPath($path);
+        $cookie = urldecode($_COOKIE['cwd']);
+        $parent = ltrim($cookie, "/");
+        $root = $this->getRootByUser();
+        $cwd = $root . $parent;
         if (isset($_FILES['dir'])){
             $file_array = $this->reArrayFiles($_FILES['dir']);
             for ($i=0;$i<count($file_array);$i++){
-                $directory[] = pathinfo($fullpath . $file_array[$i]['full_path'], PATHINFO_DIRNAME);
+                $directory[] = pathinfo($cwd . $file_array[$i]['full_path'], PATHINFO_DIRNAME);
             }
             $uniqueDir = array_unique($directory, SORT_STRING);
             $this->createDir($uniqueDir);
                 for ($i=0;$i<count($file_array);$i++){
-                    $parent = $fullpath . $file_array[$i]['full_path'];
-                    move_uploaded_file($file_array[$i]['tmp_name'], $fullpath . $file_array[$i]['full_path']);
-//                    $this->updateFileRecord($fullpath . $file_array[$i]['full_path'], $_REFRESH_DB = FALSE);
+                    $file = $cwd . $file_array[$i]['full_path'];
+                    move_uploaded_file($file_array[$i]['tmp_name'], $file);
+                    $this->updateFileRecord($file, $_REFRESH_DB = FALSE);
                 }
-                for ($i=0;$i<count($uniqueDir);$i++){
-                    if (isset($uniqueDir[$i]) && is_dir($uniqueDir[$i])){
-                        $this->updateFileRecord($uniqueDir[$i], $_REFRESH_DB = FALSE);
-                    }
+                foreach ($uniqueDir as $dir){
+                    $this->updateFileRecord($dir . "/", $_REFRESH_DB = FALSE);
                 }
+
         }
-                    var_dump($uniqueDir);
     }
 
     public function deleteAllRecords(){
