@@ -200,7 +200,7 @@ function refreshDB() {
 }
 
 function refreshLogs() {
-    document.cookie = "log=;";
+    document.cookie = "log=; expires=Thu, 01 Jan 0000 00:00:00 UTC; path=/;";
     document.getElementById('logOutput').innerHTML = '';
 }
 
@@ -310,7 +310,7 @@ function getRequestUpdateRecords() {
     // Write code for writing output when databse updates start.:
         if (this.readyState == 4 && this.status == 200) {
            // Write code for writing output when databse is fully updated.:
-            var log = "> Database Reloaded!<br>&nbsp;<br>&nbsp;";
+            var log = "> Database Reloaded!<br />";
             document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
             cookieLogAdd(log);
             location.reload();
