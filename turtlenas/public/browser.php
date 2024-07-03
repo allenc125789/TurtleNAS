@@ -239,6 +239,22 @@ function deleteItems() {
     });
 }
 
+async function activateWakeLock() {
+    try {
+      wakeLock = await navigator.wakeLock.request("screen");
+    } catch (err) {
+      // The Wake Lock request has failed - usually system related, such as battery.
+      alert(`${err.name}, ${err.message}`);
+    }
+}
+
+function deactivateWakeLock() {
+    wakeLock.release().then(() => {
+        wakeLock = null;
+    });
+}
+
+
 function getRequestDelete() {
     var formData = new FormData( document.getElementById("deleteForm") );
 //    var formData = document.getElementById("deleteForm");
@@ -259,23 +275,6 @@ function getRequestDelete() {
         xhttp.open("post", "/delete.php", true);
         xhttp.send(formData);
 }
-
-
-async function activateWakeLock() {
-    try {
-      wakeLock = await navigator.wakeLock.request("screen");
-    } catch (err) {
-      // The Wake Lock request has failed - usually system related, such as battery.
-      alert(`${err.name}, ${err.message}`);
-    }
-}
-
-function deactivateWakeLock() {
-    wakeLock.release().then(() => {
-        wakeLock = null;
-    });
-}
-
 
 function getRequestUploadFile() {
     var formData = new FormData( document.getElementById("uploadFile") );
