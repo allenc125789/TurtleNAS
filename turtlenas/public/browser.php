@@ -244,14 +244,15 @@ function deleteItems() {
     });
 }
 
-async function activateWakeLock() {
-    try {
-      wakeLock = await navigator.wakeLock.request("screen");
-    } catch (err) {
-      // The Wake Lock request has failed - usually system related, such as battery.
-      alert(`${err.name}, ${err.message}`);
-    }
-}
+const activateWakeLock = async () => {
+  try {
+    const wakeLock = await navigator.wakeLock.request("screen");
+  } catch (err) {
+    // The wake lock request fails - usually system-related, such as low battery.
+
+    console.log(`${err.name}, ${err.message}`);
+  }
+};
 
 function deactivateWakeLock() {
     wakeLock.release().then(() => {
