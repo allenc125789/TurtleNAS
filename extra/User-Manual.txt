@@ -7,7 +7,9 @@ Problem could be due to nginx, or modern browser design appending it automatical
 __File Upload Limits__
 (/etc/nginx.conf)
 + Contains a hardcap filesize limit for what can be uploaded to the server "client_max_body_size 1000G;".
-+ Contains a bandwidth limit nginx "limit_rate 10k;".
++ Contains a bandwidth limit nginx "limit_rate 10m;".
 
 (/etc/php/8.2/fpm/php.ini) 
 + Contains a hardcap filesize limit for what can be uploaded to the server "max_file_uploads;", "upload_max_filesize;", "post_max_size;", "max_file_uploads;"
+
++ Contains TTL for user-defined php.ini files (time-to-live) in seconds. Default is 300 seconds (5 minutes) "user_ini.cache_ttl = 3600"
