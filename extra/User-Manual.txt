@@ -1,15 +1,17 @@
 __Bugs__
 (/var/www/turtlenas/private/PHP/handle-downloads.php)
-+ Downloading "hidden/dotfiles" through a browser will append the filename if starting with a (.) dot. (Example: ".bashrc" --href--> "bashrc"). Uploading and backing up these files is fine otherwise, however if you download a hidden file, it is recommended doing so by using the "Zip Download", or the "Encrypted Download" button
++ Downloading "hidden/dotfiles" through a browser will append the filename if starting with a (.) dot. (Example: ".bashrc" --href--> "bashrc"). Uploading and backing up these files is fine otherwise, however if you download a hidden file, it is recommended doing so by using the "Zip Download", or the "Encrypted Download" button.
 
 Problem could be due to nginx, or modern browser design appending it automatically. Unsure how to fix.
 
 __File Upload Limits__
 (/etc/nginx.conf)
-+ Contains a hardcap filesize limit for what can be uploaded to the server "client_max_body_size 1000G;".
-+ Contains a bandwidth limit nginx "limit_rate 5m;".
++ Contains a hardcap filesize limit for what can be uploaded to the server. "client_max_body_size 1000G;"
++ Contains a bandwidth limit nginx. "limit_rate 5m;"
 
 (/etc/php/8.2/fpm/php.ini) 
-+ Contains a hardcap filesize limit for what can be uploaded to the server "max_file_uploads;", "upload_max_filesize;", "post_max_size;", "max_file_uploads;"
++ Contains a hardcap filesize limit for what can be uploaded to the server. "max_file_uploads;", "upload_max_filesize;", "post_max_size;", "max_file_uploads;"
 
-+ Contains TTL for user-defined php.ini files (time-to-live) in seconds. Default is 300 seconds (5 minutes) "user_ini.cache_ttl = 3600"
++ Contains TTL for user-defined php.ini files (time-to-live) in seconds. Default is 300 seconds (5 minutes). "user_ini.cache_ttl = 3600"
+
++ After this number of seconds, stored data will be seen as 'garbage' and cleaned up by the garbage collection process. "session.gc_maxlifetime = 43200"
