@@ -303,6 +303,7 @@ class DBcontrol {
     }
 
     public function deleteRecordByPath($vfullpath){
+        $vfullpath = addslashes($vfullpath);
         $username = $_SESSION['sessuser'];
         $stmt = $this->get_connection()->prepare("DELETE FROM files_$username WHERE fullpath = :vfullpath");
         $stmt->bindParam(':vfullpath', $vfullpath, PDO::PARAM_STR);
