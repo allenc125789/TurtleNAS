@@ -428,7 +428,7 @@ function getRequestUploadDir(){
 }
 
 function getRequestUpdateRecords(){
-    if (confirm("Refreshing the DataBase can fix certain problems, but will take time depending on the number of files. Continue?")){
+    if (confirm("Refreshing the DataBase can fix files not appearing, but will take time depending on the number of files. Continue?")){
         var xhttp = new XMLHttpRequest();
     } else {
         return;
