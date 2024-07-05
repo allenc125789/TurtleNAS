@@ -153,7 +153,7 @@ function displayFiles(cwdURI){
     if (cwd !== "/"){
         var i = cwd.substring(0, cwd.lastIndexOf("/"));
         var o = i.substring(0, i.lastIndexOf("/") + 1);
-        wayBack.setAttribute("onclick", "javascript:displayFiles('"+encodeURIComponent(o)+"');return false;");
+        wayBack.setAttribute("onclick", "javascript:displayFiles(\""+encodeURIComponent(o)+"\");return false;");
         wayBack.removeAttribute("hidden");
     } else{
         wayBack.setAttribute("hidden", "true");
