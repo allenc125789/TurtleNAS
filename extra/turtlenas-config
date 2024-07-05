@@ -20,5 +20,7 @@ server {
                 fastcgi_pass_header          Authorization;          
                 fastcgi_hide_header          X-Accel-Redirect;
                 fastcgi_hide_header          X-Sendfile;
+                fastcgi_read_timeout         43200;
+
         }
 }
