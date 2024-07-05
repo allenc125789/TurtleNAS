@@ -269,20 +269,30 @@ function getRequestDelete() {
     document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
     disableAllButtons();
     cookieLogAdd(log);
-        xhttp.onreadystatechange = function() {
-            if(xhttp.readyState == 4 && xhttp.status == 200)
-            {
-                var log = "> OK!<br>-<br>";
-                document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
-                cookieLogAdd(log);
-                location.reload();
-            }
-        };
-        xhttp.open("post", "/delete.php", true);
-        xhttp.send(formData);
+    xhttp.onreadystatechange = function() {
+    // Write code for writing output when databse updates start.:
+        var log = "> "+this.statusText+"!<br>-<br>";
+        if (this.readyState == 4 && this.status == 200){
+           // Write code for writing output when databse is fully updated.:
+            document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
+            cookieLogAdd(log);
+            location.reload();
+        } else if(this.status < 200){
+            var log = "> Please do not Refresh the page.";
+            document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
+            cookieLogAdd(log);
+        } else if(this.status >= 400){
+            var log = "> "+this.statusText+"("+this.status+")!<br>-<br>";
+            document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
+            cookieLogAdd(log);
+            location.reload();
+        }
+    };
+    xhttp.open("post", "/delete.php", true);
+    xhttp.send(formData);
 }
 
-function getRequestUploadFile() {
+async function getRequestUploadFile() {
     var formData = new FormData( document.getElementById("uploadFile") );
     var xhttp = new XMLHttpRequest();
     var log = "> Uploading File(s)...<br>";
@@ -290,17 +300,27 @@ function getRequestUploadFile() {
     activateWakeLock();
     disableAllButtons();
     cookieLogAdd(log);
-        xhttp.onreadystatechange = function() {
-            if(xhttp.readyState == 4 && xhttp.status == 200)
-            {
-                var log = "> OK!<br>-<br>";
-                document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
-                cookieLogAdd(log);
-                location.reload();
-            }
-        };
-        xhttp.open("post", "/upload.php", true);
-        xhttp.send(formData);
+    xhttp.onreadystatechange = function() {
+    // Write code for writing output when databse updates start.:
+        var log = "> "+this.statusText+"!<br>-<br>";
+        if (this.readyState == 4 && this.status == 200){
+           // Write code for writing output when databse is fully updated.:
+            document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
+            cookieLogAdd(log);
+            location.reload();
+        } else if(this.status < 200){
+            var log = "> Please do not Refresh the page.";
+            document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
+            cookieLogAdd(log);
+        } else if(this.status >= 400){
+            var log = "> "+this.statusText+"("+this.status+")!<br>-<br>";
+            document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
+            cookieLogAdd(log);
+            location.reload();
+        }
+    };
+    xhttp.open("post", "/upload.php", true);
+    xhttp.send(formData);
 }
 
 
@@ -312,17 +332,27 @@ function getRequestUploadDir() {
     activateWakeLock();
     disableAllButtons();
     cookieLogAdd(log);
-        xhttp.onreadystatechange = function() {
-            if(xhttp.readyState == 4 && xhttp.status == 200)
-            {
-                var log = "> OK!<br>-<br>";
-                document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
-                cookieLogAdd(log);
-                location.reload();
-            }
-        };
-        xhttp.open("post", "/uploadDir.php", true);
-        xhttp.send(formData);
+    xhttp.onreadystatechange = function() {
+    // Write code for writing output when databse updates start.:
+        var log = "> "+this.statusText+"!<br>-<br>";
+        if (this.readyState == 4 && this.status == 200){
+           // Write code for writing output when databse is fully updated.:
+            document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
+            cookieLogAdd(log);
+            location.reload();
+        } else if(this.status < 200){
+            var log = "> Please do not Refresh the page.";
+            document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
+            cookieLogAdd(log);
+        } else if(this.status >= 400){
+            var log = "> "+this.statusText+"("+this.status+")!<br>-<br>";
+            document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
+            cookieLogAdd(log);
+            location.reload();
+        }
+    };
+    xhttp.open("post", "/uploadDir.php", true);
+    xhttp.send(formData);
 }
 
 function getRequestUpdateRecords() {
@@ -334,9 +364,18 @@ function getRequestUpdateRecords() {
     cookieLogAdd(log);
     xhttp.onreadystatechange = function() {
     // Write code for writing output when databse updates start.:
-        if (this.readyState == 4 && this.status == 200) {
+        var log = "> "+this.statusText+"!<br>-<br>";
+        if (this.readyState == 4 && this.status == 200){
            // Write code for writing output when databse is fully updated.:
-            var log = "> OK!<br>-<br>";
+            document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
+            cookieLogAdd(log);
+            location.reload();
+        } else if(this.status < 200){
+            var log = "> Please do not Refresh the page.";
+            document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
+            cookieLogAdd(log);
+        } else if(this.status >= 400){
+            var log = "> "+this.statusText+"("+this.status+")!<br>-<br>";
             document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
             cookieLogAdd(log);
             location.reload();
