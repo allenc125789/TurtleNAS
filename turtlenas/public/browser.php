@@ -339,7 +339,7 @@ function getRequestUpdateRecords() {
             var log = "> OK!<br>-<br>";
             document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
             cookieLogAdd(log);
-            location.reload();
+//            location.reload();
         }
     };
     xhttp.open("GET", "/updateRecords.php", true);
