@@ -66,12 +66,12 @@
     text-align: center;
 }
 
-#dates {
+.dateItems {
     width: 18%;
     text-align: center;
 }
 
-#size {
+.sizeItems {
     width: 10%;
     text-align: center;
 }
