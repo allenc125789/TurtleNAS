@@ -7,6 +7,5 @@ $verify = $control->validate_auth();
 if($verify){
     $post[] = $_POST['createDir'];
     $control->createDir($post);
-    header("Location: /browser.php");
 }
 ?>
