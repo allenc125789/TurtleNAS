@@ -143,7 +143,9 @@ function displayFiles(cwdURI){
                 }
                 console.log(cwd);
                 cell2.innerHTML = fileArray[2];
+                cell2.setAttribute("class", "sizeItems");
                 cell3.innerHTML = fileArray[1];
+                cell3.setAttribute("class", "dateItems");
                 row.className = "tableItems";
             }
         }
