@@ -218,14 +218,24 @@ class DBcontrol {
         foreach ($post as $dir){
             $pos = strpos($dir, $cookie);
             $newdir = str_replace("$root$parent", '', $dir);
+            $basedir = basename($dir);
             if (!str_contains($dir, $root)){
-                mkdir($root . $parent . $dir, 0777);
-                $this->updateFileRecord($root . $parent . $dir . "/", $_REFRESH_DB = FALSE);
-            } elseif (!file_exists($root . $parent . $newdir)) {
-                mkdir($root . $parent . $newdir, 0777, true);
+                $this->filterString($dir);
+                mkdir($root . $parent . $basedir, 0755);
+                $this->updateFileRecord($root . $parent . $basedir . "/", $_REFRESH_DB = FALSE);
+            } elseif (!file_exists($root . $parent . $newdir)){
+                mkdir($root . $parent . $newdir, 0755, true);
             }
         }
     }
+
+    function filterString($dir){
+        if (preg_match('/[\'^£$%&*()}{@#~?><,|=_+¬-]/', $dir)){
+            header("HTTP/1.1 406 Not Acceptable");
+            die();
+        }
+    }
+
 
     function reArrayFiles(&$file_post) {
         $file_ary = array();
