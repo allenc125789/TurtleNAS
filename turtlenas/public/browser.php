@@ -61,10 +61,10 @@ if ($verify){
     <input class="buttons" type="file" onchange="getRequestUploadDir()" id="dir" name="dir[]" directory webkitdirectory mozdirectory multiple />
     </form>
 
-    <?php echo "<form action='/mkdir.php' method='POST'>"?>
+    <?php echo "<form id='makeDir' action='/mkdir.php' method='POST'>"?>
     <label for="mkdir" id="mkdirTxt" class="buttonTxt">Create Folder...</label>
-    <button class="buttons" type="submit" id="mkdir"></button>
-    <input type="text" id="createDir" name="createDir" required minlength="1" maxlength="255" size="10" />
+    <button class="buttons" type="button" id="mkdir"></button>
+    <input type="text" id="createDir" name="createDir" onchange="getRequestMakeDir()" required minlength="1" maxlength="255" size="10" />
     </form>
 </div>
 
@@ -392,6 +392,37 @@ async function getRequestUploadFile(){
         }
     };
     xhttp.open("POST", "/upload.php", true);
+    xhttp.send(formData);
+}
+
+async function getRequestMakeDir(){
+    var xhttp = new XMLHttpRequest();
+    var formData = new FormData( document.getElementById("makeDir") );
+    var log = "> Creating Folder...<br>";
+    document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
+    activateWakeLock();
+    disableButtons("ALL");
+    cookieLogAdd(log);
+    xhttp.onreadystatechange = function(){
+    // Write code for writing output when databse updates start.:
+        var log = "> "+this.statusText+"!<br>-<br>";
+        if (this.readyState == 4 && this.status == 200){
+           // Write code for writing output when databse is fully updated.:
+            document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
+            cookieLogAdd(log);
+            location.reload();
+        } else if(this.status < 200){
+            var log = "> Please do not reload the page.<br>";
+            document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
+            cookieLogAdd(log);
+        } else if(this.status >= 400){
+            var log = "> "+this.statusText+"("+this.status+")!<br>-<br>";
+            document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
+            cookieLogAdd(log);
+            location.reload();
+        }
+    };
+    xhttp.open("POST", "/mkdir.php", true);
     xhttp.send(formData);
 }
 
