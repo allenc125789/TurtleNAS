@@ -220,7 +220,7 @@ class DBcontrol {
             $newdir = str_replace("$root$parent", '', $dir);
             $basedir = basename($dir);
             if (!str_contains($dir, $root)){
-                $this->filterString($dir);
+                $this->filterString($basedir);
                 mkdir($root . $parent . $basedir, 0755);
                 $this->updateFileRecord($root . $parent . $basedir . "/", $_REFRESH_DB = FALSE);
             } elseif (!file_exists($root . $parent . $newdir)){
@@ -230,7 +230,7 @@ class DBcontrol {
     }
 
     function filterString($dir){
-        if (preg_match('/[\'^£$%&*()}{@#~?><,|=_+¬-]/', $dir)){
+        if (preg_match('/[\'^£$%&*()}\\\{@#~?><,|=_+¬-]/', $dir)){
             header("HTTP/1.1 406 Not Acceptable");
             die();
         }
