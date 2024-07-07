@@ -20,4 +20,4 @@ __File Upload Limits__
 
 (/etc/sites-available/turtlenas-config)
 
-+ Contains a read timeout for cgi. Determines time spent running a PHP script before timing out (causes a 504). ""
++ Contains a read timeout for cgi. Determines time spent running a PHP script before timing out (causes a 504). "fastcgi_read_timeout 43200;"
