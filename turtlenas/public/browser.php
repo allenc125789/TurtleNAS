@@ -51,6 +51,10 @@ if ($verify){
     </form>
     <br><br>
 
+    <label for="downloadZip" id="downloadZipTxt" class="buttonTxt">Down. Zip</label>
+    <input class="buttons" id="downloadZip" type="button" onclick="getRequestDownloadZip()">
+    <br><br>
+
     <?php echo "<form id='uploadFile' action='/upload.php' method='POST' enctype='multipart/form-data'>"?>
     <label for="file" id="fileTxt" class="buttonTxt">Upload File</label>
     <input class="buttons" type="file" onchange="getRequestUploadFile()" id="file" name="file[]" multiple="">
@@ -78,7 +82,7 @@ if ($verify){
     </div>
 
     <div id="refreshLogsDiv">
-        <label for="refreshLogs" id="buttonTxt" class="buttonTxt">Refresh Log List</label>
+        <label for="refreshLogs" id="buttonTxt" class="buttonTxt">Refresh Log</label>
         <button class="buttons" id="refreshLogs" onclick="refreshLogs()"></button>
     </div>
 </div>
@@ -467,6 +471,33 @@ function getRequestUploadDir(){
     };
     xhttp.open("POST", "/uploadDir.php", true);
     xhttp.send(formData);
+}
+function getRequestDownloadZip(){
+    var xhttp = new XMLHttpRequest();
+    var log = "> Downloading Zip...<br>";
+    document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
+    activateWakeLock();
+    disableButtons("ALL");
+    cookieLogAdd(log);
+    xhttp.onreadystatechange = function(){
+    // Write code for writing output when databse updates start.:
+        var log = "> "+this.statusText+"!<br>-<br>";
+        if (this.readyState == 4 && this.status == 200){
+           // Write code for writing output when databse is fully updated.:
+            document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
+            cookieLogAdd(log);
+        } else if(this.status < 200){
+            var log = "> Please do not reload the page.<br>";
+            document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
+            cookieLogAdd(log);
+        } else if(this.status >= 400){
+            var log = "> "+this.statusText+"("+this.status+")!<br>-<br>";
+            document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
+            cookieLogAdd(log);
+        }
+    };
+    xhttp.open("GET", "/updateRecords.php?", true);
+    xhttp.send();
 }
 
 function getRequestUpdateRecords(){
