@@ -85,7 +85,7 @@ if ($verify){
 
 <div id='accountMenuDiv'>
     <label for="signOut" id="signOutTxt" class="buttonTxt">Log-out</label>
-    <button class="buttons" id="signOut" onclick="#"></button>
+    <button class="buttons" id="signOut" onclick="getRequestSignOut()"></button>
 </div>
 
 <script type='text/javascript'>
@@ -500,6 +500,40 @@ function getRequestUpdateRecords(){
         }
     };
     xhttp.open("GET", "/updateRecords.php", true);
+    xhttp.send();
+}
+
+function getRequestSignOut(){
+    if (confirm("Logging off account. Continue?")){
+        var xhttp = new XMLHttpRequest();
+    } else {
+        return;
+    }
+    var log = "> Logging off...<br>";
+    document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
+    activateWakeLock();
+    disableButtons("ALL");
+    cookieLogAdd(log);
+    xhttp.onreadystatechange = function(){
+    // Write code for writing output when databse updates start.:
+        var log = "> "+this.statusText+"!<br>-<br>";
+        if (this.readyState == 4 && this.status == 200){
+           // Write code for writing output when databse is fully updated.:
+            document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
+            cookieLogAdd(log);
+            location.reload();
+        } else if(this.status < 200){
+            var log = "> Please do not reload the page.<br>";
+            document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
+            cookieLogAdd(log);
+        } else if(this.status >= 400){
+            var log = "> "+this.statusText+"("+this.status+")!<br>-<br>";
+            document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
+            cookieLogAdd(log);
+            location.reload();
+        }
+    };
+    xhttp.open("GET", "/signout.php", true);
     xhttp.send();
 }
 
