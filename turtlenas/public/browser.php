@@ -17,7 +17,7 @@ if ($verify){
 <html>
 <head>
     <meta charset="UTF=8">
-    <meta name="viewport" content="width==device-width, initial-scale=0.1">
+    <meta name="viewport" content="width==device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/browser.css">
 </head>
 
@@ -45,7 +45,7 @@ if ($verify){
     </body>
 </div>
 
-<div id="buttonDivs" class="buttonDivs">
+<div id="actionMenuDiv" class="actionMenuDiv">
     <label for="delete" id="deleteTxt" class="buttonTxt" style="cursor:default; background: #c7c7c7">Delete</label>
     <input class="buttons" id="delete" value="Delete" type="button" onclick="getRequestDelete()" disabled="true">
     </form>
@@ -66,21 +66,22 @@ if ($verify){
     <button class="buttons" type="submit" id="mkdir"></button>
     <input type="text" id="createDir" name="createDir" required minlength="1" maxlength="255" size="10" />
     </form>
-</div>
 
-<div id="logBox">
-    <h4 id="logHeader">---Logs---</h4>
-    <div id="logOutput"></div>
-</div>
+    <div id="logBox">
+        <h4 id="logHeader">---Logs---</h4>
+        <div id="logOutput"></div>
+    </div>
+    <br>
 
-<div id="refreshDBDiv">
-    <label for="refreshDB" id="refreshDBTxt" class="buttonTxt" style="cursor:default; background: #c7c7c7">Refresh DB</label>
-    <button class="buttons" id="refreshDB" disabled="true" onclick="refreshDB()"></button>
-</div>
+    <div id="refreshDBDiv">
+        <label for="refreshDB" id="refreshDBTxt" class="buttonTxt" style="cursor:default; background: #c7c7c7">Refresh DB</label>
+        <button class="buttons" id="refreshDB" disabled="true" onclick="refreshDB()"></button>
+    </div>
 
-<div id="refreshLogsDiv">
-    <label for="refreshLogs" id="buttonTxt" class="buttonTxt">Refresh Log List</label>
-    <button class="buttons" id="refreshLogs" onclick="refreshLogs()"></button>
+    <div id="refreshLogsDiv">
+        <label for="refreshLogs" id="buttonTxt" class="buttonTxt">Refresh Log List</label>
+        <button class="buttons" id="refreshLogs" onclick="refreshLogs()"></button>
+    </div>
 </div>
 
 <script type='text/javascript'>
@@ -142,6 +143,7 @@ function displayFiles(cwdURI){
                     cell1.insertAdjacentHTML('beforeEnd', "<a href=javascript:displayFiles(\""+dirURI+"\")>"+fileArray[0]);
                 }
                 console.log(cwd);
+                cell0.setAttribute("class", "checks");
                 cell2.innerHTML = fileArray[2];
                 cell2.setAttribute("class", "sizeItems");
                 cell3.innerHTML = fileArray[1];
