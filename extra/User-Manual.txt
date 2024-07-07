@@ -1,3 +1,7 @@
+__Errors__
+Browser.php, Logs;
+(406) Not Acceptable! This error relates to the filename entered for creating a file/folder with a problematic name. Filters have processed that the file name has "illegal" characters. Filters can be added/removed in the function "filterString()".
+
 __Bugs__
 (/var/www/turtlenas/private/PHP/handle-downloads.php)
 + Downloading "hidden/dotfiles" through a browser will append the filename if starting with a (.) dot. (Example: ".bashrc" --href--> "bashrc"). Uploading and backing up these files is fine otherwise, however if you download a hidden file, it is recommended doing so by using the "Zip Download", or the "Encrypted Download" button.
