@@ -1,6 +1,8 @@
 .fileTables {
     position: absolute;
-    left: 273px;
+    left: 20%;
+    top: 0%;
+    right: 0%
 }
 
 .hotbar {
@@ -9,13 +11,15 @@
     top: 0%;
 }
 
-.buttonDivs {
+#actionMenuDiv {
     position: fixed;
-    top: 8px;
-    left: 5px;
     border: 4px outset grey;
-    padding-top: 14px;
-    padding-left: 20px;
+    left: 0%;
+    right: 80%;
+    top: 0%;
+    bottom: 0%;
+    padding-top: 1%;
+    padding-left: 1%;
     background-color: lightgrey;
 }
 
@@ -35,13 +39,14 @@
 
 #logBox {
   position: fixed;
-  bottom: 60;
-  width: 226px;
-  height: 300px;
+  left: 1%;
+  right: 81%;
+  top: 35%;
+  bottom: 10%;
   border: 2px solid black;
-  padding: 10px;
+  padding: 1%;
   white-space: nowrap;
-  margin: 2px;
+  background-color: white;
 }
 
 #logHeader {
@@ -51,9 +56,10 @@
 
 #logOutput {
   position: fixed;
-  bottom: 60;
-  width: 226px;
-  height: 250px;
+  top: 50%;
+  bottom: 10%;
+  left: 2%;
+  right: 81%;
   white-space: nowrap;
   margin: 2px;
   overflow: auto;
@@ -61,8 +67,9 @@
   flex-direction: column-reverse;
 }
 
-#checks {
+.checks {
     width: 1%;
+    height: 0%;
     text-align: center;
 }
 
@@ -82,13 +89,13 @@
 
 #refreshDBDiv {
   position: fixed;
-  bottom: 30px;
+  bottom: 3%;
 }
 
 #refreshLogsDiv {
   position: fixed;
-  bottom: 30px;
-  left: 110;
+  bottom: 3%;
+  left: 11%;
 }
 
 .tableItems:hover {background-color:  #e5e5e5;}
