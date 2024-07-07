@@ -316,8 +316,10 @@ class DBcontrol {
     }
 
 
-    public function getDownload(){
-        $query = urldecode($_SERVER['QUERY_STRING']);
+    public function getDownload($query = NULL){
+        if ($query == NULL){
+            $query = urldecode($_SERVER['QUERY_STRING']);
+        }
         $username = $_SESSION['sessuser'];
         $shortpath = str_replace("$username:", '', $query);
         $file = $this->getRootByUser($username) . $shortpath;
@@ -337,9 +339,9 @@ class DBcontrol {
 
     public function execZipFolder(){
         $cwd = urldecode($_COOKIE['cwd']);
-        $command = shell_exec(" sudo bash ../private/bash/ 'PLAINTEXT' $cwd 2>&1");
+        $command = shell_exec(" sudo bash ../private/bash/zipFolder.sh 'PLAINTEXT' $cwd 2>&1");
         $output = "$command";
-    
+        $this->getDownload($cwd);
     }
     public function execEZipFolder(){
     }
