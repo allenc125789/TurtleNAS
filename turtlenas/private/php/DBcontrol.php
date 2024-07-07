@@ -34,6 +34,11 @@ class DBcontrol {
         }
     }
 
+    public function signout(){
+        session_start();
+        session_destroy();
+    }
+
     public function prepFileSize($fullpath, $size='0', $unit=''){
         if (is_dir($fullpath)){
             $scandir = $this->scanDirAndSubdir($fullpath, $_FilesOnly = TRUE);
