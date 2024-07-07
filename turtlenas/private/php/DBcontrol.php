@@ -229,6 +229,7 @@ class DBcontrol {
                 mkdir($root . $parent . $basedir, 0755);
                 $this->updateFileRecord($root . $parent . $basedir . "/", $_REFRESH_DB = FALSE);
             } elseif (!file_exists($root . $parent . $newdir)){
+                $this->filterString($basedir);
                 mkdir($root . $parent . $newdir, 0755, true);
             }
         }
@@ -265,6 +266,7 @@ class DBcontrol {
         if (isset($_FILES['file'])){
             $file_array = $this->reArrayFiles($_FILES['file']);
             for ($i=0;$i<count($file_array);$i++){
+                $this->filterString($file_array[$i['name']]);
                 move_uploaded_file($file_array[$i]['tmp_name'], $fullpath . $file_array[$i]['name']);
                 $sqlArray[] = $fullpath . $file_array[$i]['name'];
                 echo ($fullpath . $file_array[$i]['name']);
@@ -293,6 +295,7 @@ class DBcontrol {
             $this->createDir($uniqueDir);
                 for ($i=0;$i<count($file_array);$i++){
                     $file = $cwd . $file_array[$i]['full_path'];
+                    $this->filterString($file_array[$i['name']]);
                     move_uploaded_file($file_array[$i]['tmp_name'], $file);
                     $this->updateFileRecord($file, $_REFRESH_DB = FALSE);
                 }
