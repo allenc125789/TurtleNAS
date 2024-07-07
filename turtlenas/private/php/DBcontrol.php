@@ -315,6 +315,40 @@ class DBcontrol {
         }
     }
 
+
+    public function getDownload(){
+        $query = urldecode($_SERVER['QUERY_STRING']);
+        $username = $_SESSION['sessuser'];
+        $shortpath = str_replace("$username:", '', $query);
+        $file = $this->getRootByUser($username) . $shortpath;
+        echo basename(stripslashes($file));
+        header('Content-Type: application/octet-stream');
+        header('Content-Disposition: attachment; filename=' . basename(stripslashes($file)));
+        header('Content-Transfer-Encoding: binary');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Pragma: public');
+        header('Content-Length: ' . filesize($file));
+        ob_clean();
+        flush();
+        readfile(stripslashes($file));
+        exit;
+    }
+
+    public function execZipFolder(){
+        $cwd = urldecode($_COOKIE['cwd']);
+        $command = shell_exec(" sudo bash ../private/bash/ 'PLAINTEXT' $cwd 2>&1");
+        $output = "$command";
+    
+    }
+    public function execEZipFolder(){
+    }
+
+    public function execTarFolder(){
+    }
+    public function execETarFolder(){
+    }
+
     public function deleteAllRecords(){
         $username = $_SESSION['sessuser'];
         $stmt = $this->get_connection()->prepare("DELETE FROM files_$username");
