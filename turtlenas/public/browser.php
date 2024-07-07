@@ -71,7 +71,6 @@ if ($verify){
         <h4 id="logHeader">---Logs---</h4>
         <div id="logOutput"></div>
     </div>
-    <br>
 
     <div id="refreshDBDiv">
         <label for="refreshDB" id="refreshDBTxt" class="buttonTxt" style="cursor:default; background: #c7c7c7">Refresh DB</label>
@@ -82,6 +81,11 @@ if ($verify){
         <label for="refreshLogs" id="buttonTxt" class="buttonTxt">Refresh Log List</label>
         <button class="buttons" id="refreshLogs" onclick="refreshLogs()"></button>
     </div>
+</div>
+
+<div id='accountMenuDiv'>
+    <label for="signOut" id="signOutTxt" class="buttonTxt">Log-out</label>
+    <button class="buttons" id="signOut" onclick="#"></button>
 </div>
 
 <script type='text/javascript'>
