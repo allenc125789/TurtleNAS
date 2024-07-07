@@ -16,6 +16,4 @@ __File Upload Limits__
 (/etc/php/8.2/fpm/php.ini) 
 + Contains a hardcap filesize limit for what can be uploaded to the server. "max_file_uploads;", "upload_max_filesize;", "post_max_size;", "max_file_uploads;"
 
-+ Contains TTL for user-defined php.ini files (time-to-live) in seconds. Default is 300 seconds (5 minutes). "user_ini.cache_ttl = 3600"
-
 + After this number of seconds, stored data will be seen as 'garbage' and cleaned up by the garbage collection process. "session.gc_maxlifetime = 43200"
