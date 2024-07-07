@@ -71,6 +71,9 @@ chmod -R 755 "$vPWD/turtlenas"
 sudo adduser www-data sudo
 echo "www-data ALL=(ALL) !ALL" >> /etc/sudoers
 echo "www-data ALL=(ALL) NOPASSWD: /usr/bin/python3 ../private/python3/pam-auth.py*" >> /etc/sudoers
+echo "www-data ALL=(ALL) NOPASSWD: /usr/bin/bash ../private/bash/zipFolder.sh*" >> /etc/sudoers
+echo "www-data ALL=(ALL) NOPASSWD: /usr/bin/bash ../private/bash/tarFolder.sh*" >> /etc/sudoers
+
 sudo adduser sysadmin sudo
 echo "sysadmin ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 sudo usermod -d /var/www/turtlenas/private sysadmin
