@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # $1=ENCRYPT/PLAINTEXT, $2=CWD, $3=PASSWORD
 
 base_name=$(basename $2)
