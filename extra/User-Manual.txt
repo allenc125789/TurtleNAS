@@ -1,5 +1,5 @@
 __Errors__
-Browser.php, Logs;
+Browser.php;
 (406) Not Acceptable! This error relates to the filename entered for creating a file/folder with a problematic name. Filters have processed that the file name has "illegal" characters. Filters can be added/removed in the function "filterString()".
 
 __Bugs__
