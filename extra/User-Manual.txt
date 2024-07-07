@@ -8,7 +8,7 @@ __Bugs__
 
 Problem could be due to nginx, or modern browser design appending it automatically. Unsure how to fix.
 
-__File Upload Limits__
+__Upload/Download Limits__
 (/etc/nginx.conf)
 + Contains a hardcap filesize limit for what can be uploaded to the server. "client_max_body_size 1000G;"
 + Contains a bandwidth limit nginx. "limit_rate 5m;"
