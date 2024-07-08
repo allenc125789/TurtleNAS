@@ -324,13 +324,16 @@ class DBcontrol {
         if ($check == FALSE){
             $file = $this->getRootByUser($username) . $shortpath;
         } else {
-            $file = "/tmp/" . trim($download);
+            $file = "/tmp/" . $download;
         }
         $mime = mime_content_type($file);
-        var_dump($file);
-        echo basename(stripslashes($file));
+        $file = trim(stripslashes($file));
         header('Content-Type: ' . $mime);
-        header('Content-Disposition: attachment; filename=' . basename(stripslashes($file)));
+        if (!isset($_COOKIE['filename'])){
+            header('Content-Disposition: attachment; filename=' . basename($file));
+        } else {
+            header('Content-Disposition: attachment; filename=' . $_COOKIE['filename']);
+        }
         header('Content-Transfer-Encoding: binary');
         header('Expires: 0');
         header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
@@ -338,7 +341,7 @@ class DBcontrol {
         header('Content-Length: ' . filesize($file));
         ob_clean();
         flush();
-        readfile(stripslashes($file));
+        readfile($file);
         setcookie("download", "");
         exit;
     }
@@ -348,9 +351,11 @@ class DBcontrol {
         $cwd = urldecode($_COOKIE['cwd']);
         $root = $this->getRootByUser();
         $fullpath = $root . $cwd;
-        $command = shell_exec(" bash ../private/bash/zipFolder.sh $query $fullpath 2>&1");
-        $output = "$command";
+        $basename = basename($root . $cwd);
+        $command = shell_exec(" bash ../private/bash/zipFolder.sh $query ".escapeshellarg($fullpath));
+        $output = $command;
         setcookie("download", $output);
+        setcookie("filename", $basename . ".zip");
     }
 
     public function execEZipFolder(){
