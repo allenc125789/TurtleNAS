@@ -137,7 +137,8 @@ function displayFiles(cwdURI){
                 var cell2 = row.insertCell(2);
                 var cell3 = row.insertCell(2);
                 var dir = fileArray[3].concat(fileArray[0]);
-                var dirURI = encodeURIComponent(dir);
+                var dirURI = encodeURIComponent(fileArray[3].concat(encodeURIComponent(fileArray[0])));
+//                var dirURI = encodeURIComponent(dir);
                 var checkboxes = document.createElement("INPUT");
                 checkboxes.setAttribute("type", "checkbox");
                 checkboxes.setAttribute("class", "cb");
@@ -146,7 +147,7 @@ function displayFiles(cwdURI){
                 checkboxes.setAttribute("value", fileArray[0]);
                 cell0.appendChild(checkboxes);
                 if (!dir.endsWith("/")){
-                    cell1.insertAdjacentHTML('beforeEnd', "<a href='download.php?"+userName+":"+dirURI+"'>"+fileArray[0]);
+                    cell1.insertAdjacentHTML('beforeEnd', "<a href=download.php?"+dirURI+">"+fileArray[0]);
                 } else {
                     cell1.insertAdjacentHTML('beforeEnd', "<a href=javascript:displayFiles(\""+dirURI+"\")>"+fileArray[0]);
                 }
