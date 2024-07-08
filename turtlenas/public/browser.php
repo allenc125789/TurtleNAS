@@ -198,7 +198,7 @@ function checkAll(ele){
         for (var i = 0; i < checkboxes.length; i++) {
             if (checkboxes[i].type == 'checkbox' && checkboxes[i].checked == true){
                 checkboxes[i].checked = false;
-                count -= 1;
+                countReset();
                 disableButtons("delete");
 //                document.getElementById('delete').disabled = true;
             }
