@@ -327,12 +327,12 @@ class DBcontrol {
             $file = "/tmp/" . $download;
         }
         $mime = mime_content_type($file);
-        $file = trim(stripslashes($file));
+        $file = urldecode(trim(stripslashes($file)));
         header('Content-Type: ' . $mime);
         if (!isset($_COOKIE['filename'])){
             header('Content-Disposition: attachment; filename=' . basename($file));
         } else {
-            header('Content-Disposition: attachment; filename=' . $_COOKIE['filename']);
+            header('Content-Disposition: attachment; filename=' . urldecode($_COOKIE['filename']));
         }
         header('Content-Transfer-Encoding: binary');
         header('Expires: 0');
@@ -343,6 +343,7 @@ class DBcontrol {
         flush();
         readfile($file);
         setcookie("download", "");
+        setcookie("filename", "");
         exit;
     }
 
