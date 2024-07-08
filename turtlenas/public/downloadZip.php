@@ -5,7 +5,10 @@ $control = new DBcontrol;
 
 $verify = $control->validate_auth();
 if($verify){
-    $control->getZipFolder();
-//    header("Location: /browser.php");
+    if ($query = urldecode($_SERVER['QUERY_STRING']) !== "DOWNLOAD"){
+        $output = $control->execZipFolder($_SERVER['QUERY_STRING']);
+    } else {
+        $control->getDownload(TRUE);
+    }
 }
 ?>
