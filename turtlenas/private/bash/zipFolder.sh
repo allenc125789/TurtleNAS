@@ -9,6 +9,8 @@ if [ $1 == "ENCRYPT" ]; then
     echo "${hash}.zip"
 elif [ $1 == "PLAINTEXT" ]; then
     rm "/tmp/${hash}.zip"
-    zip -q -r -o "/tmp/${hash}.zip" $2
+    (cd $2 && zip -q -o -r "/tmp/${hash}.zip" ./)
     echo "${hash}.zip"
 fi
+
+exit
