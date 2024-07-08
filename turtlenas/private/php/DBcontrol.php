@@ -236,7 +236,7 @@ class DBcontrol {
     }
 
     function filterString($dir){
-        if (preg_match('/[\"^£$%&*();}\\\{@#~?><,|=_¬-]/', $dir)){
+        if (preg_match('/[\"^£$%&*;}\\\{@#~?><,|=_¬]/', $dir)){
             header("HTTP/1.1 406 Not Acceptable");
             die();
         }
@@ -316,15 +316,20 @@ class DBcontrol {
     }
 
 
-    public function getDownload($cwd = NULL){
-        if ($cwd == NULL){
-            $cwd = urldecode($_SERVER['QUERY_STRING']);
-        }
+    public function getDownload($check = FALSE){
         $username = $_SESSION['sessuser'];
-        $shortpath = str_replace("$username:", '', $cwd);
-        $file = $this->getRootByUser($username) . $shortpath;
+        $path = urldecode($_SERVER['QUERY_STRING']);
+        $shortpath = str_replace("$username:", '', $path);
+        $download = urldecode($_COOKIE['download']);
+        if ($check == FALSE){
+            $file = $this->getRootByUser($username) . $shortpath;
+        } else {
+            $file = "/tmp/" . trim($download);
+        }
+        $mime = mime_content_type($file);
+        var_dump($file);
         echo basename(stripslashes($file));
-        header('Content-Type: application/octet-stream');
+        header('Content-Type: ' . $mime);
         header('Content-Disposition: attachment; filename=' . basename(stripslashes($file)));
         header('Content-Transfer-Encoding: binary');
         header('Expires: 0');
@@ -334,15 +339,18 @@ class DBcontrol {
         ob_clean();
         flush();
         readfile(stripslashes($file));
+        setcookie("download", "");
         exit;
     }
 
     public function execZipFolder(){
         $query = urldecode($_SERVER['QUERY_STRING']);
         $cwd = urldecode($_COOKIE['cwd']);
-        $command = shell_exec(" sudo bash ../private/bash/zipFolder.sh 'PLAINTEXT' $cwd 2>&1");
+        $root = $this->getRootByUser();
+        $fullpath = $root . $cwd;
+        $command = shell_exec(" bash ../private/bash/zipFolder.sh $query $fullpath 2>&1");
         $output = "$command";
-        $this->getDownload($cwd);
+        setcookie("download", $output);
     }
 
     public function execEZipFolder(){
