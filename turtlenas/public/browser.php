@@ -252,6 +252,7 @@ function enableButtons(ID){
             l[i].disabled = false;
         }
         document.getElementById('massSelect').disabled = false;
+        document.getElementById("createDir").disabled = false;
         document.getElementById("refresh").style.visibility = "visible";
         document.getElementById("wayBack").style.visibility = "visible";
         var buttonsTxt = document.getElementsByClassName("buttonTxt")
