@@ -484,8 +484,13 @@ function getRequestDownloadZip(){
         var log = "> "+this.statusText+"!<br>-<br>";
         if (this.readyState == 4 && this.status == 200){
            // Write code for writing output when databse is fully updated.:
+            location.assign("/downloadZip.php?DOWNLOAD");
             document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
             cookieLogAdd(log);
+//            var blob = new Blob([this.response], {type: 'image/pdf'});
+//            let url = window.URL.createObjectURL(blob);
+//            a.href = url;
+//            window.URL.revokeObjectURL(url);
         } else if(this.status < 200){
             var log = "> Please do not reload the page.<br>";
             document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
@@ -494,9 +499,11 @@ function getRequestDownloadZip(){
             var log = "> "+this.statusText+"("+this.status+")!<br>-<br>";
             document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
             cookieLogAdd(log);
+            location.reload();
         }
     };
-    xhttp.open("GET", "/updateRecords.php?", true);
+    xhttp.open("GET", "/downloadZip.php?PLAINTEXT", true);
+    xhttp.responseType = 'blob';
     xhttp.send();
 }
 
