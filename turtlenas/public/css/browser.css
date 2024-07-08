@@ -28,6 +28,11 @@
     background-color: lightgrey;
 }
 
+#downloadMenuDiv {
+    position: fixed;
+    top: 13%;
+    left: 12%;
+}
 
 #accountMenuDiv {
     position: fixed;
