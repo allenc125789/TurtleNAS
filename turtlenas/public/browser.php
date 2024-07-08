@@ -51,10 +51,6 @@ if ($verify){
     </form>
     <br><br>
 
-    <label for="downloadZip" id="downloadZipTxt" class="buttonTxt">Down. Zip</label>
-    <input class="buttons" id="downloadZip" type="button" onclick="getRequestDownloadZip()">
-    <br><br>
-
     <?php echo "<form id='uploadFile' action='/upload.php' method='POST' enctype='multipart/form-data'>"?>
     <label for="file" id="fileTxt" class="buttonTxt">Upload File</label>
     <input class="buttons" type="file" onchange="getRequestUploadFile()" id="file" name="file[]" multiple="">
@@ -85,6 +81,12 @@ if ($verify){
         <label for="refreshLogs" id="buttonTxt" class="buttonTxt">Refresh Log</label>
         <button class="buttons" id="refreshLogs" onclick="refreshLogs()"></button>
     </div>
+</div>
+
+<div id='downloadMenuDiv'>
+    <label for="downloadZip" id="downloadZipTxt" class="buttonTxt">Down. Zip</label>
+    <input class="buttons" id="downloadZip" type="button" onclick="getRequestDownloadZip()">
+    <br><br>
 </div>
 
 <div id='accountMenuDiv'>
@@ -257,6 +259,10 @@ function enableButtons(ID){
             buttonsTxt[i].style.background = "white";
             buttonsTxt[i].style.cursor = "pointer";
         }
+        document.getElementById('delete').disabled = true;
+        document.getElementById('deleteTxt').style.background = "#c7c7c7"
+        document.getElementById('deleteTxt').style.cursor = "default"
+        countReset();
     } else if (ID == 'massSelect'){
         button = document.getElementById(ID);
         button.disabled = false;
@@ -294,6 +300,10 @@ function countReset(){
 //    document.getElementById('delete').disabled = true;
     disableButtons("delete");
     document.getElementById('massSelect').checked = false;
+    var l = document.getElementsByClassName('cb');
+    for(var i=0;i<l.length;i++){
+        l[i].checked = false;
+    }
 //    disableButtons("massSelect");
 }
 
@@ -488,10 +498,7 @@ function getRequestDownloadZip(){
             location.assign("/downloadZip.php?DOWNLOAD");
             document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
             cookieLogAdd(log);
-//            var blob = new Blob([this.response], {type: 'image/pdf'});
-//            let url = window.URL.createObjectURL(blob);
-//            a.href = url;
-//            window.URL.revokeObjectURL(url);
+            enableButtons("ALL")
         } else if(this.status < 200){
             var log = "> Please do not reload the page.<br>";
             document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
