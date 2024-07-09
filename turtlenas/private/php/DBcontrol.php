@@ -347,6 +347,7 @@ class DBcontrol {
         exit;
     }
 
+
     public function execZipFolder(){
         $query = urldecode($_SERVER['QUERY_STRING']);
         $cwd = urldecode($_COOKIE['cwd']);
