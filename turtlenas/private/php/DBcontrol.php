@@ -341,9 +341,9 @@ class DBcontrol {
         header('Content-Length: ' . filesize($file));
         ob_clean();
         flush();
-        readfile($file);
         setcookie("download", "");
         setcookie("filename", "");
+        readfile($file);
         exit;
     }
 
