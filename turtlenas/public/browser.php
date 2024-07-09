@@ -87,6 +87,11 @@ if ($verify){
     <label for="downloadZip" id="downloadZipTxt" class="buttonTxt">Down. Zip</label>
     <input class="buttons" id="downloadZip" type="button" onclick="getRequestDownloadZip()">
     <br><br>
+    <?php echo "<form id='downloadZipENForm' method='POST'>"?>
+    <label for="downloadZipEN" id="downloadZipENTxt" class="buttonTxt">Down. E Zip</label>
+    <input class="buttons" id="downloadZipEN" type="button" onclick="getRequestDownloadZipEN()">
+    <input type='hidden' id= 'hiddenZipEN' name='tmpPass' value='' />
+    </form>
 </div>
 
 <div id='accountMenuDiv'>
@@ -179,7 +184,7 @@ function displayFiles(cwdURI){
 }
 
 function checkAll(ele){
-   var form = document.getElementById('deleteForm');
+    var form = document.getElementById('deleteForm');
     var checkboxes = document.getElementsByClassName('cb');
     if (ele.checked){
         for (var i = 0; i < checkboxes.length; i++) {
@@ -486,7 +491,7 @@ function getRequestUploadDir(){
 }
 function getRequestDownloadZip(){
     var xhttp = new XMLHttpRequest();
-    var log = "> Downloading Zip...<br>";
+    var log = "> Downloading zip...<br>";
     document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
     activateWakeLock();
     disableButtons("ALL");
@@ -514,6 +519,47 @@ function getRequestDownloadZip(){
     xhttp.open("GET", "/downloadZip.php?PLAINTEXT", true);
     xhttp.responseType = 'blob';
     xhttp.send();
+}
+
+function getRequestDownloadZipEN(){
+    let formPrompt = prompt("Please type a password to use for your encrypted zip.");
+    var form = document.getElementById("downloadZipENForm");
+    var tmpInput = document.getElementById("hiddenZipEN");
+    var log = "> Downloading encrypted zip...<br>";
+    if (formPrompt != null){
+        var xhttp = new XMLHttpRequest();
+        tmpInput.setAttribute("value", formPrompt);
+        form.append(tmpInput);
+//        form.submit();
+    }
+    document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
+    var formData = new FormData( document.getElementById("downloadZipENForm") );
+    activateWakeLock();
+    disableButtons("ALL");
+    cookieLogAdd(log);
+    xhttp.onreadystatechange = function(){
+    // Write code for writing output when databse updates start.:
+        var log = "> "+this.statusText+"!<br>-<br>";
+        if (this.readyState == 4 && this.status == 200){
+           // Write code for writing output when databse is fully updated.:
+            location.assign("/downloadZip.php?DOWNLOAD");
+            document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
+            cookieLogAdd(log);
+            enableButtons("ALL")
+        } else if(this.status < 200){
+            var log = "> Please do not reload the page.<br>";
+            document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
+            cookieLogAdd(log);
+        } else if(this.status >= 400){
+            var log = "> "+this.statusText+"("+this.status+")!<br>-<br>";
+            document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
+            cookieLogAdd(log);
+            location.reload();
+        }
+    };
+    xhttp.open("POST", "/downloadZip.php?ENCRYPT", true);
+    xhttp.responseType = 'blob';
+    xhttp.send(formData);
 }
 
 function getRequestUpdateRecords(){
