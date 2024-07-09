@@ -2,10 +2,9 @@
 
 # $1=ENCRYPT/PLAINTEXT, $2=CWD, $3=PASSWORD
 
-base_name=$(basename $2)
-hash=$(echo -n $base_name | sha224sum | sed 's/ .$//')
+hash=$(echo -n find $2 -mindepth 1 -type f -print0 | sort -z | sha1sum | sed 's/ .$//')
 if [ $1 == "ENCRYPT" ]; then
-    zip -q -e -r "/tmp/${hash}.zip" $2 -P $3
+    (cd $2 && zip -q -o -e -r "/tmp/${hash}.zip" ./ -P "$3")
     echo "${hash}.zip"
 elif [ $1 == "PLAINTEXT" ]; then
     rm "/tmp/${hash}.zip"
