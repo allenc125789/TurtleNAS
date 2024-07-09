@@ -115,4 +115,4 @@ mv -r -p -f "$vPWD/extra/php.ini" "/etc/php/8.2/fpm"
 rm -f /etc/nginx/sites-enabled/default
 ln -v -s /etc/nginx/sites-available/turtlenas-config /etc/nginx/sites-enabled/
     #: Web page files.
-mv "$vPWD/turtlenas" "/var/www"
+cp -r -p -f "$vPWD/turtlenas" "/var/www"
