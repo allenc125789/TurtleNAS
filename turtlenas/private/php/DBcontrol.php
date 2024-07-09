@@ -348,13 +348,18 @@ class DBcontrol {
     }
 
 
-    public function execZipFolder(){
+    public function execZipFolder($post = ''){
+        $post = urldecode($post);
         $query = urldecode($_SERVER['QUERY_STRING']);
         $cwd = urldecode($_COOKIE['cwd']);
         $root = $this->getRootByUser();
         $fullpath = $root . $cwd;
         $basename = basename($root . $cwd);
-        $command = shell_exec(" bash ../private/bash/zipFolder.sh $query ".escapeshellarg($fullpath));
+        if ($query === "PLAINTEXT"){
+            $command = shell_exec(" bash ../private/bash/zipFolder.sh $query ".escapeshellarg($fullpath));
+        } elseif ($query === "ENCRYPT"){
+            $command = shell_exec(" bash ../private/bash/zipFolder.sh $query ".escapeshellarg($fullpath) . " " . escapeshellarg($post));
+        }
         $output = $command;
         setcookie("download", $output);
         setcookie("filename", $basename . ".zip");
