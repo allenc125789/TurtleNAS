@@ -5,8 +5,11 @@ $control = new DBcontrol;
 
 $verify = $control->validate_auth();
 if($verify){
-    if ($query = urldecode($_SERVER['QUERY_STRING']) !== "DOWNLOAD"){
-        $output = $control->execZipFolder($_SERVER['QUERY_STRING']);
+    if ($query = urldecode($_SERVER['QUERY_STRING']) === "PLAINTEXT"){
+        $output = $control->execZipFolder();
+    } elseif ($query = urldecode($_SERVER['QUERY_STRING']) === "ENCRYPT"){
+        $post = $_POST['tmpPass'];
+        $output = $control->execZipFolder($post);
     } else {
         $control->getDownload(TRUE);
     }
