@@ -33,6 +33,8 @@ mkdir -v '/media/REMOTE'
 
 mkdir -v -p "/media/LOCAL/$vUUID/admin" && chown www-data "/media/LOCAL/$vUUID/admin"
 
+mkdir -v "/var/www/.gnupg" && chown www-data "/var/www/.gnupg"
+
 
     #: Create tmp Dir.
 
