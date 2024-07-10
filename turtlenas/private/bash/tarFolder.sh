@@ -8,7 +8,6 @@ if [ "$1" == "ENCRYPT" ]; then
     rm "/tmp/${hash}.tar.gz.gpg"
     (tar -c -z -f "/tmp/${hash}.tar.gz" -C "$2" ".")
     (gpg --batch --no-options --passphrase "$3" --output "/tmp/${hash}.tar.gz.gpg" --symmetric "/tmp/${hash}.tar.gz")
-    rm -rfi $GNUPGHOME
     echo "${hash}.tar.gz.gpg"
 elif [ "$1" == "PLAINTEXT" ]; then
     rm "/tmp/${hash}.tar.gz"
