@@ -64,6 +64,7 @@ if ($verify){
     <?php echo "<form id='makeDir' onsubmit='getRequestMakeDir()' taget='_self' method='POST'>"?>
     <label for="mkdir" id="mkdirTxt" class="buttonTxt">Create Folder...</label>
     <button class="buttons" type="submit" id="mkdir"></button>
+    <br>
     <input type="text" id="createDir" name="createDir" required minlength="1" maxlength="255" size="10" />
     </form>
 
@@ -91,6 +92,14 @@ if ($verify){
     <label for="downloadZipEN" id="downloadZipENTxt" class="buttonTxt">Down. E Zip</label>
     <input class="buttons" id="downloadZipEN" type="button" onclick="getRequestDownloadZipEN()">
     <input type='hidden' id= 'hiddenZipEN' name='tmpPass' value='' />
+    </form>
+    <label for="downloadTar" id="downloadTarTxt" class="buttonTxt">Down. Tar</label>
+    <input class="buttons" id="downloadTar" type="button" onclick="getRequestDownloadTar()">
+    <br><br>
+    <?php echo "<form id='downloadTarENForm' method='POST'>"?>
+    <label for="downloadTarEN" id="downloadTarENTxt" class="buttonTxt">Down. E Tar</label>
+    <input class="buttons" id="downloadTarEN" type="button" onclick="getRequestDownloadTarEN()">
+    <input type='hidden' id= 'hiddenTarEN' name='tmpPass' value='' />
     </form>
 </div>
 
@@ -560,6 +569,81 @@ function getRequestDownloadZipEN(){
         }
     };
     xhttp.open("POST", "/downloadZip.php?ENCRYPT", true);
+    xhttp.responseType = 'blob';
+    xhttp.send(formData);
+}
+
+function getRequestDownloadTar(){
+    var xhttp = new XMLHttpRequest();
+    var log = "> Downloading tar...<br>";
+    document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
+    activateWakeLock();
+    disableButtons("ALL");
+    cookieLogAdd(log);
+    xhttp.onreadystatechange = function(){
+    // Write code for writing output when databse updates start.:
+        var log = "> "+this.statusText+"!<br>-<br>";
+        if (this.readyState == 4 && this.status == 200){
+           // Write code for writing output when databse is fully updated.:
+            location.assign("/downloadTar.php?DOWNLOAD");
+            document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
+            cookieLogAdd(log);
+            enableButtons("ALL")
+        } else if(this.status < 200){
+            var log = "> Please do not reload the page.<br>";
+            document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
+            cookieLogAdd(log);
+        } else if(this.status >= 400){
+            var log = "> "+this.statusText+"("+this.status+")!<br>-<br>";
+            document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
+            cookieLogAdd(log);
+            location.reload();
+        }
+    };
+    xhttp.open("GET", "/downloadTar.php?PLAINTEXT", true);
+    xhttp.responseType = 'blob';
+    xhttp.send();
+}
+
+function getRequestDownloadTarEN(){
+    let formPrompt = prompt("Please type a password to use for your encrypted tar.");
+    var form = document.getElementById("downloadTarENForm");
+    var tmpInput = document.getElementById("hiddenTarEN");
+    var log = "> Downloading encrypted tar...<br>";
+    if (formPrompt != null){
+        var xhttp = new XMLHttpRequest();
+        tmpInput.setAttribute("value", formPrompt);
+        form.append(tmpInput);
+//        form.submit();
+    } else {
+        die();
+    }
+    document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
+    var formData = new FormData( document.getElementById("downloadTarENForm") );
+    activateWakeLock();
+    disableButtons("ALL");
+    cookieLogAdd(log);
+    xhttp.onreadystatechange = function(){
+    // Write code for writing output when databse updates start.:
+        var log = "> "+this.statusText+"!<br>-<br>";
+        if (this.readyState == 4 && this.status == 200){
+           // Write code for writing output when databse is fully updated.:
+            location.assign("/downloadTar.php?DOWNLOAD");
+            document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
+            cookieLogAdd(log);
+            enableButtons("ALL")
+        } else if(this.status < 200){
+            var log = "> Please do not reload the page.<br>";
+            document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
+            cookieLogAdd(log);
+        } else if(this.status >= 400){
+            var log = "> "+this.statusText+"("+this.status+")!<br>-<br>";
+            document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
+            cookieLogAdd(log);
+            location.reload();
+        }
+    };
+    xhttp.open("POST", "/downloadTar.php?ENCRYPT", true);
     xhttp.responseType = 'blob';
     xhttp.send(formData);
 }
