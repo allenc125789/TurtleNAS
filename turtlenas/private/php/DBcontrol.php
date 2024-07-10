@@ -365,12 +365,24 @@ class DBcontrol {
         setcookie("filename", $basename . ".zip");
     }
 
-    public function execEZipFolder(){
-    }
-
-    public function execTarFolder(){
-    }
-    public function execETarFolder(){
+    public function execTarFolder($post = ''){
+        $post = urldecode($post);
+        $query = urldecode($_SERVER['QUERY_STRING']);
+        $cwd = urldecode($_COOKIE['cwd']);
+        $root = $this->getRootByUser();
+        $fullpath = $root . $cwd;
+        $basename = basename($root . $cwd);
+        if ($query === "PLAINTEXT"){
+            $command = shell_exec(" bash ../private/bash/tarFolder.sh $query ".escapeshellarg($fullpath));
+            $output = $command;
+            setcookie("download", $output);
+            setcookie("filename", $basename . ".tar.gz");
+        } elseif ($query === "ENCRYPT"){
+            $command = shell_exec(" bash ../private/bash/tarFolder.sh $query ".escapeshellarg($fullpath) . " " . escapeshellarg($post));
+            $output = $command;
+            setcookie("download", $output);
+            setcookie("filename", $basename . ".tar.gz.gpg");
+        }
     }
 
     public function deleteAllRecords(){
