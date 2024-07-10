@@ -531,6 +531,8 @@ function getRequestDownloadZipEN(){
         tmpInput.setAttribute("value", formPrompt);
         form.append(tmpInput);
 //        form.submit();
+    } else {
+        die();
     }
     document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
     var formData = new FormData( document.getElementById("downloadZipENForm") );
