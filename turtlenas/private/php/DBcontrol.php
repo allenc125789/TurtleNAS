@@ -236,7 +236,7 @@ class DBcontrol {
     }
 
     function filterString($dir){
-        if (preg_match('/[\"^£$%&*;}\\\{@#~?><,|=_¬]/', $dir)){
+        if (preg_match('/[\"^£$%&*;}\\\{@#~?><,|=¬]/', $dir)){
             header("HTTP/1.1 406 Not Acceptable");
             die();
         }
