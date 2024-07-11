@@ -22,6 +22,7 @@
 
 -sqlcode and JS code for record updates is effiecient. however i still need to add function to update parent folders for each type of upload, at the end of each of their functions. I also need to change how the browser page interacts with loading post to new pages, and add xhttp async methods for each.
 
+-need to create js based timeout function.
 
 -lots of unused code needs to be trimmed. might need to reuse the hashing system to provide an accurate hash of the directory about to be downloaded.
 
