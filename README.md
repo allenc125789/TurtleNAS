@@ -16,14 +16,14 @@
 
 +can download files without an extension
 
++ added a button with a dropdown menu to download the current folder as a zip, and another for encrypted zip, with tar alternatives.
+
 +program runs effeiciently enough. changing directories is seamless, and multiple gigs of files can be uploaded without major impact on performance. Need to test with uploads from multiple users.
 
 -sqlcode and JS code for record updates is effiecient. however i still need to add function to update parent folders for each type of upload, at the end of each of their functions. I also need to change how the browser page interacts with loading post to new pages, and add xhttp async methods for each.
 
--need to add a button to download the current folder as a zip, and another for encrypted zip.
 
--lots of unused code needs to be trimmed. especially relating to the old hashing system.
-
+-lots of unused code needs to be trimmed. might need to reuse the hashing system to provide an accurate hash of the directory about to be downloaded.
 
 # Summary:
 
