@@ -85,28 +85,36 @@ if ($verify){
 </div>
 
 <div id='downloadMenuDiv'>
-    <label for="downloadZip" id="downloadZipTxt" class="buttonTxt">Down. Zip</label>
-    <input class="buttons" id="downloadZip" type="button" onclick="getRequestDownloadZip()">
-    <br><br>
-    <?php echo "<form id='downloadZipENForm' method='POST'>"?>
-    <label for="downloadZipEN" id="downloadZipENTxt" class="buttonTxt">Down. E Zip</label>
-    <input class="buttons" id="downloadZipEN" type="button" onclick="getRequestDownloadZipEN()">
-    <input type='hidden' id= 'hiddenZipEN' name='tmpPass' value='' />
-    </form>
-    <label for="downloadTar" id="downloadTarTxt" class="buttonTxt">Down. Tar</label>
-    <input class="buttons" id="downloadTar" type="button" onclick="getRequestDownloadTar()">
-    <br><br>
-    <?php echo "<form id='downloadTarENForm' method='POST'>"?>
-    <label for="downloadTarEN" id="downloadTarENTxt" class="buttonTxt">Down. E Tar</label>
-    <input class="buttons" id="downloadTarEN" type="button" onclick="getRequestDownloadTarEN()">
-    <input type='hidden' id= 'hiddenTarEN' name='tmpPass' value='' />
-    </form>
+    <div class="dropdown">
+        <div class="select">
+            <span class="selected">Download</span>
+            <div class="caret"></div>
+        </div>
+        <ul class="menu">
+            <li><label for="downloadZip" id="downloadZipTxt" class="buttonTxt">Down. Zip</label></li>
+            <input class="buttons" id="downloadZip" type="button" onclick="getRequestDownloadZip()">
+            <?php echo "<form id='downloadZipENForm' method='POST'>"?>
+            <li><label for="downloadZipEN" id="downloadZipENTxt" class="buttonTxt">Down. E Zip</label></li>
+            <input class="buttons" id="downloadZipEN" type="button" onclick="getRequestDownloadZipEN()">
+            <input type='hidden' id= 'hiddenZipEN' name='tmpPass' value='' />
+            </form>
+            <li><label for="downloadTar" id="downloadTarTxt" class="buttonTxt">Down. Tar</label></li>
+            <input class="buttons" id="downloadTar" type="button" onclick="getRequestDownloadTar()">
+            <?php echo "<form id='downloadTarENForm' method='POST'>"?>
+            <li><label for="downloadTarEN" id="downloadTarENTxt" class="buttonTxt">Down. E Tar</label></li>
+            <input class="buttons" id="downloadTarEN" type="button" onclick="getRequestDownloadTarEN()">
+            <input type='hidden' id= 'hiddenTarEN' name='tmpPass' value='' />
+            </form>
+        </ul>
+    </div>
 </div>
 
 <div id='accountMenuDiv'>
     <label for="signOut" id="signOutTxt" class="buttonTxt">Log-out</label>
     <button class="buttons" id="signOut" onclick="getRequestSignOut()"></button>
 </div>
+
+<script src="/js/dropmenu.js"></script>
 
 <script type='text/javascript'>
 function getCookie(cname){
@@ -719,7 +727,6 @@ function getRequestSignOut(){
 let wakeLock = null;
 let count = 0;
 let jArray = <?php echo json_encode($fObject); ?>;
-
 
 let logcookie = getCookie('log');
 let cwdcookie = getCookie('cwd');
