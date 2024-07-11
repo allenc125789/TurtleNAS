@@ -1,6 +1,6 @@
 +multiple files can be uploaded.
 
-+files with spaces can be uploaded and downloaded, folders with spaces can be browsed
++files with spaces and special chars can be uploaded and downloaded and browseed
 
 +files and empty folders can be deleted
 
