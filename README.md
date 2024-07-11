@@ -16,7 +16,7 @@
 
 +can download files without an extension
 
-+ added a button with a dropdown menu to download the current folder as a zip, and another for encrypted zip, with tar alternatives.
++added a button with a dropdown menu to download the current folder as a zip, and another for encrypted zip, with tar alternatives.
 
 +program runs effeiciently enough. changing directories is seamless, and multiple gigs of files can be uploaded without major impact on performance. Need to test with uploads from multiple users.
 
