@@ -12,6 +12,11 @@ dropdowns.forEach(dropdown => {
         caret.classList.toggle('caret-rotate');
         menu.classList.toggle('menu-open');
     });
+    menu.addEventListener('mouseleave', () =>{
+        select.classList.remove('select-clicked');
+        caret.classList.remove('caret-rotate');
+        menu.classList.remove('menu-open');
+    });
     options.forEach(option => {
         option.addEventListener('click', () => {
             selected.innerText = option.innerText;
