@@ -243,6 +243,7 @@ function disableButtons(ID){
         document.getElementById("createDir").disabled = true;
         document.getElementById("refresh").style.visibility = "hidden";
         document.getElementById("wayBack").style.visibility = "hidden";
+        document.getElementById("downloadMenuDiv").style.visibility = "hidden";
         var buttonsTxt = document.getElementsByClassName("buttonTxt")
         for(var i=0;i<buttonsTxt.length;i++){
             buttonsTxt[i].style.background = "darkgrey";
@@ -277,9 +278,10 @@ function enableButtons(ID){
         document.getElementById("createDir").disabled = false;
         document.getElementById("refresh").style.visibility = "visible";
         document.getElementById("wayBack").style.visibility = "visible";
+        document.getElementById("downloadMenuDiv").style.visibility = "visible";
         var buttonsTxt = document.getElementsByClassName("buttonTxt")
         for(var i=0;i<buttonsTxt.length;i++){
-            buttonsTxt[i].style.background = "#e1e1e1";
+            buttonsTxt[i].style.background = "";
             buttonsTxt[i].style.cursor = "pointer";
         }
         document.getElementById('delete').disabled = true;
@@ -297,7 +299,7 @@ function enableButtons(ID){
         button.disabled = false;
         var ID = ID+"Txt";
         var button = document.getElementById(ID);
-        button.style.background = "#e1e1e1";
+        button.style.background = "";
         button.style.cursor = "pointer";
     }
 }
