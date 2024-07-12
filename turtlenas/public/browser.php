@@ -46,7 +46,7 @@ if ($verify){
 </div>
 
 <div id="actionMenuDiv" class="actionMenuDiv">
-    <label for="delete" id="deleteTxt" class="buttonTxt" style="cursor:default; background: #c7c7c7">Delete</label>
+    <label for="delete" id="deleteTxt" class="buttonTxt" style="cursor:default;">Delete</label>
     <input class="buttons" id="delete" value="Delete" type="button" onclick="getRequestDelete()" disabled="true">
     </form>
     <br><br>
@@ -74,7 +74,7 @@ if ($verify){
     </div>
 
     <div id="refreshDBDiv">
-        <label for="refreshDB" id="refreshDBTxt" class="buttonTxt" style="cursor:default; background: #c7c7c7">Refresh DB</label>
+        <label for="refreshDB" id="refreshDBTxt" class="buttonTxt" style="cursor:default;">Refresh DB</label>
         <button class="buttons" id="refreshDB" disabled="true" onclick="refreshDB()"></button>
     </div>
 
@@ -87,21 +87,21 @@ if ($verify){
 <div id='downloadMenuDiv'>
     <div class="dropdown">
         <div class="select">
-            <span class="selected">Download</span>
-            <div class="caret"></div>
+            <span class="selected"><img id="zipIcon" src="/images/zip-icon.png"></img></span>
         </div>
+            <div class="caret"></div>
         <ul class="menu">
-            <li><label for="downloadZip" id="downloadZipTxt" class="buttonTxt">Down. Zip</label></li>
+            <li><label for="downloadZip" id="downloadZipTxt" class="subButtonTxt">Zip File</label></li>
             <input class="buttons" id="downloadZip" type="button" onclick="getRequestDownloadZip()">
             <?php echo "<form id='downloadZipENForm' method='POST'>"?>
-            <li><label for="downloadZipEN" id="downloadZipENTxt" class="buttonTxt">Down. E Zip</label></li>
+            <li><label for="downloadZipEN" id="downloadZipENTxt" class="subButtonTxt">Zip File (Encrypted)</label></li>
             <input class="buttons" id="downloadZipEN" type="button" onclick="getRequestDownloadZipEN()">
             <input type='hidden' id= 'hiddenZipEN' name='tmpPass' value='' />
             </form>
-            <li><label for="downloadTar" id="downloadTarTxt" class="buttonTxt">Down. Tar</label></li>
+            <li><label for="downloadTar" id="downloadTarTxt" class="subButtonTxt">tarball</label></li>
             <input class="buttons" id="downloadTar" type="button" onclick="getRequestDownloadTar()">
             <?php echo "<form id='downloadTarENForm' method='POST'>"?>
-            <li><label for="downloadTarEN" id="downloadTarENTxt" class="buttonTxt">Down. E Tar</label></li>
+            <li><label for="downloadTarEN" id="downloadTarENTxt" class="subButtonTxt">tarball GPG (Encrypted)</label></li>
             <input class="buttons" id="downloadTarEN" type="button" onclick="getRequestDownloadTarEN()">
             <input type='hidden' id= 'hiddenTarEN' name='tmpPass' value='' />
             </form>
@@ -245,7 +245,7 @@ function disableButtons(ID){
         document.getElementById("wayBack").style.visibility = "hidden";
         var buttonsTxt = document.getElementsByClassName("buttonTxt")
         for(var i=0;i<buttonsTxt.length;i++){
-            buttonsTxt[i].style.background = "#c7c7c7";
+            buttonsTxt[i].style.background = "darkgrey";
             buttonsTxt[i].style.cursor = "default";
         }
     } else if (ID == 'massSelect'){
@@ -258,7 +258,7 @@ function disableButtons(ID){
         var button = document.getElementById(ID);
         button.disabled = true;
         var button = document.getElementById(ID+"Txt");
-        button.style.background = "#c7c7c7";
+        button.style.background = "darkgrey";
         button.style.cursor = "default";
     }
 }
@@ -279,11 +279,11 @@ function enableButtons(ID){
         document.getElementById("wayBack").style.visibility = "visible";
         var buttonsTxt = document.getElementsByClassName("buttonTxt")
         for(var i=0;i<buttonsTxt.length;i++){
-            buttonsTxt[i].style.background = "white";
+            buttonsTxt[i].style.background = "#e1e1e1";
             buttonsTxt[i].style.cursor = "pointer";
         }
         document.getElementById('delete').disabled = true;
-        document.getElementById('deleteTxt').style.background = "#c7c7c7"
+        document.getElementById('deleteTxt').style.background = "darkgrey"
         document.getElementById('deleteTxt').style.cursor = "default"
         countReset();
     } else if (ID == 'massSelect'){
@@ -297,7 +297,7 @@ function enableButtons(ID){
         button.disabled = false;
         var ID = ID+"Txt";
         var button = document.getElementById(ID);
-        button.style.background = "white";
+        button.style.background = "#e1e1e1";
         button.style.cursor = "pointer";
     }
 }
@@ -727,6 +727,7 @@ function getRequestSignOut(){
 let wakeLock = null;
 let count = 0;
 let jArray = <?php echo json_encode($fObject); ?>;
+disableButtons("ALL");
 
 let logcookie = getCookie('log');
 let cwdcookie = getCookie('cwd');
@@ -737,7 +738,7 @@ document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', logcookie);
                     disableButtons("ALL");
                     getRequestUpdateRecords();
                 }
-            enableButtons('refreshDB');
+            enableButtons("ALL");
             displayFiles(cwdcookie);
             }, 2500); // Delay of 5 seconds
         };
