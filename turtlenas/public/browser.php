@@ -32,11 +32,11 @@ if ($verify){
                 </tr>
                 <tr class="hotbar">
                     <td bgcolor="white"><input type="checkbox" name="massSelect[]" id="massSelect" onchange="checkAll(this)"></input></td>
-                    <td style="font-size: 20" bgcolor="white">
+                    <td style="font-size: 150%" bgcolor="white">
                     <a id='refresh' href='#'>⟲</a>
                     <a id='wayBack' href='#'>↩</a>
                     </td>
-                    <td colspan=2 style="font-size:12" bgcolor="black"><font id='displayCwd' style="color:white;"> Loading Files...</font>
+                    <td colspan=2 style="font-size:100%" bgcolor="black"><font id='displayCwd' style="color:white;"> Loading Files...</font>
                     </td>
                 </tr>
                 <?php echo "<form id='deleteForm' method='post'>";?>
@@ -86,7 +86,7 @@ if ($verify){
 
 <div id='downloadMenuDiv'>
     <div class="dropdown">
-        <div class="select">
+        <div title="Download the current folder as a compressed archive(zip) file." class="select">
             <span class="selected"><img id="zipIcon" src="/images/zip-icon.png"></img></span>
         </div>
             <div class="caret"></div>
