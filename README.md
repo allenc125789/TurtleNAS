@@ -1,30 +1,5 @@
-+multiple files can be uploaded.
-
-+files with spaces and special chars can be uploaded and downloaded and browseed
-
-+files and empty folders can be deleted
-
-+able to create empty folders
-
-+files without extensions can seemingly be uploaded/downloaded
-
-+added checkbox to uncheck/check all other chekboxes
-
-+folders with files inside can be deleted
-
-+compatible with Window's name formatting.
-
-+can download files without an extension
-
-+added a button with a dropdown menu to download the current folder as a zip, and another for encrypted zip, with tar alternatives.
-
-+program runs effeiciently enough. changing directories is seamless, and multiple gigs of files can be uploaded without major impact on performance. Need to test with uploads from multiple users.
-
--sqlcode and JS code for record updates is effiecient. however i still need to add function to update parent folders for each type of upload, at the end of each of their functions. I also need to change how the browser page interacts with loading post to new pages, and add xhttp async methods for each.
-
--need to create js based timeout function.
-
--lots of unused code needs to be trimmed. might need to reuse the hashing system to provide an accurate hash of the directory about to be downloaded.
+> [!NOTE]
+> Current Status: The Web Browser side of the application is almost complete in terms of functionality. Files can be uploaded, removed, downloaded, etc. from the admin account. I'll be constructing the admin page, cleaning code, and revaluating functions as soon as possible.
 
 # Summary:
 
