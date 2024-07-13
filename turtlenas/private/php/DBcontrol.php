@@ -209,6 +209,7 @@ class DBcontrol {
                 $this->deleteRecordByPath($filename);
             }
         }
+        $this->updateParentRecords();
         $_POST = array();
     }
 
@@ -274,6 +275,7 @@ class DBcontrol {
             for ($i=0;$i<count($sqlArray);$i++){
                     $this->updateFileRecord($uniqueDir[$i], $_REFRESH_DB = FALSE);
             }
+            $this->updateParentRecords();
         }
     }
 
@@ -312,7 +314,29 @@ class DBcontrol {
                 foreach ($uniqueDir as $dir){
                     $this->updateFileRecord($cwd . $dir . "/", $_REFRESH_DB = FALSE);
                 }
+            $this->updateParentRecords();
         }
+    }
+
+    public function updateParentRecords(){
+        $cwd = urldecode($_COOKIE['cwd']);
+        $root = $this->getRootByUser();
+        $parentArray = array();
+        $parent = "$root";
+        $dirNames = explode("/", $cwd . "/");
+        for ($i=0;$i<count($dirNames);$i++){
+            if ($dirNames[$i] !== "" && $dirNames[$i] !== $root){
+                $parent .= $dirNames[$i] . "/";
+//                $this->updateFileRecord($parent, $_REFRESH_DB = FALSE);
+                $parentArray[] .= $parent;
+            }
+        }
+        foreach ($parentArray as $parent){
+                $this->deleteRecordByPath($parent);
+                $this->updateFileRecord($parent, $_REFRESH_DB = FALSE);
+                setcookie('test', $parent);
+        }
+
     }
 
 
@@ -411,6 +435,18 @@ class DBcontrol {
             'vmtime' => $vmtime,
         ]);
     }
+
+
+
+    public function getParentByCWD($cwd){
+        $username = $_SESSION['sessuser'];
+        $stmt = $this->get_connection()->query("SELECT fullpath FROM files_$username WHERE parent = $cwd");
+        while ($row = $stmt->fetch()){
+            $newpath = $row['fullpath'];
+        }
+        return $newpath;
+    }
+
 
     public function getInsertLockRecord($vusername, $vstate){
         $stmt = $this->get_connection()->prepare("INSERT INTO locks (user, state) VALUES (:vuser, :vstate)");
