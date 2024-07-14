@@ -165,13 +165,20 @@ transition: 0.3s;
 }
 
 #window-block{
-  position: absolute;
+  position: fixed;
   bottom: 0%;
   right: 0%;
   left: 20%;
   top: 0%;
   background-color: lightgrey;
-  opacity: 0.25;
+  opacity: 0.30;
+}
+
+#loadingTxt{
+  position: fixed;
+  right: 40%;
+  top: 40%;
+  font-size: 200%;
 }
 
 .dropdown {
