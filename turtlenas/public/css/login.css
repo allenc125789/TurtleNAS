@@ -22,8 +22,8 @@ html {background: lightgrey;}
 
 .container {
     position: relative;
-    width: 400px;
-    max-width:400px;
+    width: 320px;
+    max-width:500px;
     border: 2px solid black;
     margin: 1rem;
     padding: 2rem;
@@ -53,8 +53,6 @@ html {background: lightgrey;}
 }
 
 .form__input-group {
-    position: relative;
-    left: 13%;
     padding: 1px;
 }
 
@@ -64,7 +62,7 @@ html {background: lightgrey;}
 
 .form__button {
     position: relative;
-    left: 60%;
+    left: 59%;
 }
 
 form__link {
