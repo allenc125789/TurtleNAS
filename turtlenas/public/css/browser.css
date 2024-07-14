@@ -11,12 +11,14 @@ html {font-family: 'Courier New', monospace;}
     position: sticky;
     z-axis: 2;
     top: 0%;
+    background-color: darkgrey;
 }
 
 #signOutTxt{
     position: sticky;
 
 }
+
 
 #actionMenuDiv {
     position: fixed;
@@ -160,6 +162,16 @@ border-left: 5px solid transparent;
 border-right: 5px solid transparent;
 border-top: 6px solid #fff;
 transition: 0.3s;
+}
+
+#window-block{
+  position: absolute;
+  bottom: 0%;
+  right: 0%;
+  left: 20%;
+  top: 0%;
+  background-color: lightgrey;
+  opacity: 0.25;
 }
 
 .dropdown {
