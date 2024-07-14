@@ -176,7 +176,7 @@ transition: 0.3s;
 
 #loadingTxt{
   position: fixed;
-  right: 40%;
+  right: 35%;
   top: 40%;
   font-size: 200%;
 }
