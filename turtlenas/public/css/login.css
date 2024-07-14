@@ -34,11 +34,6 @@ html {background: lightgrey;}
     
 }
 
-.form__title{
-    position: relative;
-    left: 30%;
-}
-
 .form__subtitle{
     color: grey;
     font-style: italic;
