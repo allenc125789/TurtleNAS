@@ -114,6 +114,9 @@ if ($verify){
     <button class="buttons" id="signOut" onclick="getRequestSignOut()"></button>
 </div>
 
+    <div id='window-block'>
+    </div>
+
 <script src="/js/dropmenu.js"></script>
 
 <script type='text/javascript'>
@@ -244,6 +247,7 @@ function disableButtons(ID){
         document.getElementById("refresh").style.visibility = "hidden";
         document.getElementById("wayBack").style.visibility = "hidden";
         document.getElementById("downloadMenuDiv").style.visibility = "hidden";
+        document.getElementById("window-block").style.visibility = "visible";
         var buttonsTxt = document.getElementsByClassName("buttonTxt")
         for(var i=0;i<buttonsTxt.length;i++){
             buttonsTxt[i].style.background = "darkgrey";
@@ -279,6 +283,7 @@ function enableButtons(ID){
         document.getElementById("refresh").style.visibility = "visible";
         document.getElementById("wayBack").style.visibility = "visible";
         document.getElementById("downloadMenuDiv").style.visibility = "visible";
+        document.getElementById("window-block").style.visibility = "hidden";
         var buttonsTxt = document.getElementsByClassName("buttonTxt")
         for(var i=0;i<buttonsTxt.length;i++){
             buttonsTxt[i].style.background = "";
