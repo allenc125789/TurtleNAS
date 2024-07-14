@@ -40,7 +40,9 @@ body {
     color: var(--color-error);
 }
 
-
+.form__input-group {
+    padding: 1px;
+}
 
 .form__input--error {
     color: var(--color-error);
