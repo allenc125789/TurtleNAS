@@ -114,8 +114,7 @@ if ($verify){
     <button class="buttons" id="signOut" onclick="getRequestSignOut()"></button>
 </div>
 
-    <div id='window-block'>
-    </div>
+<div id='window-block'><text id="loadingTxt">Loading...</text></div>
 
 <script src="/js/dropmenu.js"></script>
 
