@@ -17,14 +17,31 @@ body {
 
 }
 
+html {background: lightgrey;}
+
+
 .container {
+    position: relative;
     width: 400px;
     max-width:400px;
+    border: 2px solid black;
     margin: 1rem;
     padding: 2rem;
     box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
     border-radius: var(--border-radius);
-    background: #ffffff;
+    background-color: white;
+    z-index: 20;
+    
+}
+
+.form__title{
+    position: relative;
+    left: 30%;
+}
+
+.form__subtitle{
+    color: grey;
+    font-style: italic;
 }
 
 .form__message {
@@ -41,11 +58,18 @@ body {
 }
 
 .form__input-group {
+    position: relative;
+    left: 10%;
     padding: 1px;
 }
 
 .form__input--error {
     color: var(--color-error);
+}
+
+.form__button {
+    position: relative;
+    left: 57%;
 }
 
 form__link {
