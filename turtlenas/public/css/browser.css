@@ -179,6 +179,8 @@ transition: 0.3s;
   right: 35%;
   top: 40%;
   font-size: 200%;
+  user-select: none;
+  cursor: default;  
 }
 
 .dropdown {
