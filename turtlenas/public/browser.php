@@ -173,9 +173,9 @@ function displayFiles(cwdURI){
                 checkboxes.setAttribute("value", fileArray[0]);
                 cell0.appendChild(checkboxes);
                 if (!dir.endsWith("/")){
-                    cell1.insertAdjacentHTML('beforeEnd', "<a href=download.php?"+dirURI+">"+fileArray[0]);
+                    cell1.insertAdjacentHTML('beforeEnd', "<img id='fileIcon' src='/images/file-icon.png'><a href=download.php?"+dirURI+">"+fileArray[0]);
                 } else {
-                    cell1.insertAdjacentHTML('beforeEnd', "<a href=javascript:displayFiles(\""+dirURI+"\")>"+fileArray[0]);
+                    cell1.insertAdjacentHTML('beforeEnd', "<img id='folderIcon' src='/images/folder-icon.png'></img><a href=javascript:displayFiles(\""+dirURI+"\")>"+fileArray[0]);
                 }
                 console.log(cwd);
                 cell0.setAttribute("class", "checks");
