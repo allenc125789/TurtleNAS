@@ -36,7 +36,7 @@ if ($verify){
                     <a id='refresh' href='#'>⟲</a>
                     <a id='wayBack' href='#'>↩</a>
                     </td>
-                    <td colspan=2 style="font-size:100%" bgcolor="black"><font id='displayCwd' style="color:white;"> Loading Files...</font>
+                    <td colspan=2 style="font-size:100%" title="Current folder." bgcolor="black"><font id='displayCwd' style="color:white;"> Loading Files...</font>
                     </td>
                 </tr>
                 <?php echo "<form id='deleteForm' method='post'>";?>
