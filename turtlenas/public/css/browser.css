@@ -32,7 +32,8 @@ html {font-family: 'Courier New', monospace;}
 
 #downloadMenuDiv {
     position: fixed;
-    top: 10%;
+    top: 11%;
+    bottom: 89%;
     left: 16%;
     width: 17%;
     height: 0%;
