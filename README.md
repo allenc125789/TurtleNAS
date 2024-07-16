@@ -42,27 +42,3 @@ Open the server's IP or Hostname in an alternate browser (*example:* https://192
 
 You may also login directly from SSH.
 
-
-## System
-### Users
-### Groups
-### Settings
-## SSHFS Connections
-## Storage
-## Services
-### Cron
-### Packages
-## Power
-
-
-
-### Creating/Removing new SSHFS connections for backup:
-### Creating/Removing new Users:
-### Downloading/Uploading files from the web:
-### Settings (Permission, Grouping, Security, etc...):
-### Changing Passwords
-### Setting User Permissions
-### Setting Web Access Permissions
-
-https://softpanorama.org/Access_control/Sudo/sudoer_file_examples.shtml
-
