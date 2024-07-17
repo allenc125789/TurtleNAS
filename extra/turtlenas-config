@@ -2,7 +2,7 @@ server {
         listen 443 ssl;
         root /var/www/turtlenas/public;
         index index.php login.html index.html index.htm index.nginx-debian.html;
-        server_name rezient.com;
+        server_name;
         ssl_certificate /etc/nginx/ssl/selfsigned.crt;
         ssl_certificate_key /etc/nginx/ssl/selfsigned.key;
         ssl_protocols       TLSv1 TLSv1.1 TLSv1.2;
