@@ -1,5 +1,5 @@
 > [!NOTE]
-> **Current Status:** The Web Browser side of the application is almost complete in terms of functionality. Files can be uploaded, removed, downloaded, etc. from the admin account. I'll be constructing the admin page, cleaning code, and revaluating functions as soon as possible.
+> **Current Status:** The Web-GUI based File Browser side of the application is almost complete in terms of functionality. Files can be uploaded, removed, downloaded, etc. from the admin account. I'll be constructing the admin page, cleaning code, and revaluating functions as soon as possible.
 
 # Summary:
 
