@@ -1,6 +1,6 @@
 #!/bin/bash
 
-
+# $1=New Username
 
 sWARNING=" ((\033[1;33mWARNING\033[0m)) "
 sERROR=" ((\033[0;31mERROR\033[0m)) "
