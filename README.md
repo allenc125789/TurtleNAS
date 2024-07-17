@@ -38,6 +38,9 @@ This draw-back is minor in my opinion, when understanding the perks that come in
 
 # Post-Install & Usage:
 
+> [!NOTE]
+> This application has not been designed to be web facing, but for use in a internal network.
+
 Open the server's IP or Hostname in an alternate browser (*example:* https://192.168.0.20), login to the web portal with the password you made on install. Username is `admin`. You may use this account to create/delete new users, edit permissions, add connections, and more!
 
 You may also login directly from SSH.
