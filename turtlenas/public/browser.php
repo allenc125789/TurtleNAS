@@ -1,5 +1,5 @@
 <?php
-include "../private/php/DBcontrol.php";
+require "../private/php/DBcontrol.php";
 $control = new DBcontrol;
 
 error_reporting(-1); // display all faires
