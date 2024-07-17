@@ -1,7 +1,7 @@
 <?php
 
 // Call DBcontrol and declare it's class.
-require("../private/php/DBcontrol.php");
+require_once("../private/php/DBcontrol.php");
 $control = new DBcontrol;
 
 //POST creds.
