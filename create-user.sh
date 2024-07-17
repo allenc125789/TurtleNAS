@@ -12,9 +12,6 @@ vUUID=$(/usr/sbin/blkid -s UUID -o value "$vFILESYSTEM")
 
 
 #: Creating Users.
-    #: System Admin.
-sudo useradd -M $1
-    #: Admin.
 if sudo useradd -M $1; then
     passwd $1
 else
