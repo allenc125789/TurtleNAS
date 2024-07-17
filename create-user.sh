@@ -18,6 +18,7 @@ else
     :
 fi
 
+mkdir -v -p "/media/LOCAL/$vUUID/$1" && chown www-data "/media/LOCAL/$vUUID/$1"
 
 
 #: SQL.
