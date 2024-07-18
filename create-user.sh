@@ -9,7 +9,11 @@ vPWD=$(dirname $0)
 vFILESYSTEM=$(df -P . | sed -n '$s/[[:blank:]].*//p')
 vUUID=$(/usr/sbin/blkid -s UUID -o value "$vFILESYSTEM")
 
-
+if [ -z "${1}" ]; then
+    echo "Argument needed. Example: (#/: bash ./create-user.sh JohnDoe)."
+else
+    :
+fi
 
 #: Creating Users.
 if sudo useradd -M $1; then
