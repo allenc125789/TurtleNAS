@@ -108,7 +108,6 @@ echo -e "Configuring web server..."
     #: Configuration files.
 if [ -z "${vDOMAIN}" ]; then
     sed -i "s/@/_/g" $vPWD"/extra/turtlenas-config"
-    exit
 else
     sed -i "s/@/$vDOMAIN/g" $vPWD"/extra/turtlenas-config"
 fi
