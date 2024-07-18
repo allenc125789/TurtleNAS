@@ -31,8 +31,8 @@ This draw-back is minor in my opinion, when understanding the perks that come in
 > [!IMPORTANT]
 > **Recommeneded on fresh install of latest Debian Stable, with no Desktop Environment configured.** While this program may work on other configurations, i'll only be maintaining it from Debian (Stable) 12.5.0 and up on this setup.
 
-  1) Copy and paste this command as root: `git clone https://allenc125789:@github.com/allenc125789/TurtleNAS.git && bash ./TurtleNAS/setup.sh`
-  2) Use `su` to enter root in terminal and type `bash path/to/files/setup.sh`.
+  1) Install Debian.
+  2) Copy and paste this command as root: `git clone https://allenc125789:@github.com/allenc125789/TurtleNAS.git && bash ./TurtleNAS/setup.sh`
   3) Go through the setup. Packages will be ask to install and configuartion will take place. You'll also be asked to setup a password for the admin account **(make it secure and remember it, you'll log in to the browser with this.)** and sign an SSL cert.
   4) After the setup finishes with no errors, enter `/usr/sbin/reboot` and wait for the system to reboot.
 
