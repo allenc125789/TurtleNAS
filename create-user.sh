@@ -11,6 +11,7 @@ vUUID=$(/usr/sbin/blkid -s UUID -o value "$vFILESYSTEM")
 
 if [ -z "${1}" ]; then
     echo "Argument needed. Example: (#/: bash ./create-user.sh JohnDoe)."
+    exit
 else
     :
 fi
