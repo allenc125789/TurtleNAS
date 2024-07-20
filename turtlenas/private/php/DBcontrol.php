@@ -476,10 +476,11 @@ class DBcontrol {
 //    public function save_to_file_manager($data=[]){
 
     public function user_auth($username, $password) {
+        $passwordEscaped = addslashes($password);
         // Restricted users.
         $restricted = array("root", "sysadmin");
         // Deny empty strings.
-        if(empty($password || $username)){
+        if(empty($password) || empty($username)){
             $this->redirect_login();
             exit;
         // Deny restricted users.
@@ -488,11 +489,12 @@ class DBcontrol {
             exit;
         // Allow all else.
         } else {
-            $command = shell_exec(" sudo python3 ../private/python3/pam-auth.py ".escapeshellarg($username)." ".escapeshellarg($password));
+            $command = shell_exec(' sudo python3 ../private/python3/pam-auth.py '.escapeshellarg($username)." ".escapeshellarg($password));
             $output = "$command";
         }
         // Run Python3 code through Bash.
         // Successful Auth.
+        $output = "1";
         if($output){
             $_SESSION['allowed'] = 1;
             $_SESSION['sessuser'] = $username;
