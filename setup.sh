@@ -58,7 +58,6 @@ export HISTCONTROL=ignorespace
     #: Firewall.
 echo -e "Enabling Firewall..."
 sudo ufw allow 'Nginx HTTPS'
-sudo ufw allow 'Nginx HTTP'
 sudo ufw allow 'OpenSSH'
 yes | sudo ufw enable
     #: SSL Creation.
