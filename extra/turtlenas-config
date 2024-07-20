@@ -1,6 +1,4 @@
 server {
-        listen  80 default_server;
-        listen  [::]:80 default_server;
         listen 443 ssl;
         root /var/www/turtlenas/public;
         index index.php login.html index.html index.htm index.nginx-debian.html;
@@ -11,8 +9,6 @@ server {
         ssl_ciphers         HIGH:!aNULL:!MD5;
         ssl_session_tickets off;
         location / {
-                return 301 https://$host$request_uri;
-
                 try_files $uri $uri/ =404;
         }
         location /private {
