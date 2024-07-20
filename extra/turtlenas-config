@@ -11,9 +11,10 @@ server {
         ssl_ciphers         HIGH:!aNULL:!MD5;
         ssl_session_tickets off;
         location / {
-                try_files $uri $uri/ =404;
                 return 301 https://$host$request_uri;
-}
+
+                try_files $uri $uri/ =404;
+        }
         location /private {
                 root /var/www/turtlenas/private;
         }
