@@ -476,7 +476,6 @@ class DBcontrol {
 //    public function save_to_file_manager($data=[]){
 
     public function user_auth($username, $password) {
-        $passwordEscaped = addslashes($password);
         // Restricted users.
         $restricted = array("root", "sysadmin");
         // Deny empty strings.
