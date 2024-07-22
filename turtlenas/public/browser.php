@@ -171,6 +171,7 @@ function displayFiles(cwdURI){
                 checkboxes.setAttribute("name", "fileToDelete[]");
                 checkboxes.setAttribute("id", fileArray[0]);
                 checkboxes.setAttribute("value", fileArray[0]);
+                checkboxes.setAttribute("disabled", "true");
                 cell0.appendChild(checkboxes);
                 if (!dir.endsWith("/")){
                     cell1.insertAdjacentHTML('beforeEnd', "<img id='fileIcon' src='/images/file-icon.png'><a href=download.php?"+dirURI+">"+fileArray[0]);
@@ -265,6 +266,17 @@ function disableButtons(ID){
         button.style.background = "darkgrey";
         button.style.cursor = "default";
     }
+}
+
+function enableButtonsLimited(){
+    document.getElementById("downloadMenuDiv").style.visibility = "visible";
+    document.getElementById("window-block").style.visibility = "hidden";
+    enableButtons("refreshDB");
+    enableButtons("refreshLogs");
+    enableButtons("downloadZip");
+    enableButtons("downloadZipEN");
+    enableButtons("downloadTar");
+    enableButtons("downloadTarEN");
 }
 
 function enableButtons(ID){
@@ -527,7 +539,7 @@ function getRequestDownloadZip(){
             location.assign("/downloadZip.php?DOWNLOAD");
             document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
             cookieLogAdd(log);
-            enableButtons("ALL")
+            enableButtonsLimited()
         } else if(this.status < 200){
             var log = "> Please do not reload the page.<br>";
             document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
@@ -570,7 +582,7 @@ function getRequestDownloadZipEN(){
             location.assign("/downloadZip.php?DOWNLOAD");
             document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
             cookieLogAdd(log);
-            enableButtons("ALL")
+            enableButtonsLimited();
         } else if(this.status < 200){
             var log = "> Please do not reload the page.<br>";
             document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
@@ -602,7 +614,7 @@ function getRequestDownloadTar(){
             location.assign("/downloadTar.php?DOWNLOAD");
             document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
             cookieLogAdd(log);
-            enableButtons("ALL")
+            enableButtonsLimited();
         } else if(this.status < 200){
             var log = "> Please do not reload the page.<br>";
             document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
@@ -645,7 +657,7 @@ function getRequestDownloadTarEN(){
             location.assign("/downloadTar.php?DOWNLOAD");
             document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
             cookieLogAdd(log);
-            enableButtons("ALL")
+            enableButtonsLimited();
         } else if(this.status < 200){
             var log = "> Please do not reload the page.<br>";
             document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
@@ -744,7 +756,7 @@ document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', logcookie);
                     disableButtons("ALL");
                     getRequestUpdateRecords();
                 }
-            enableButtons("ALL");
+            enableButtonsLimited();
             displayFiles(cwdcookie);
             }, 2500); // Delay of 5 seconds
         };
