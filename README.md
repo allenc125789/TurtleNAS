@@ -1,5 +1,5 @@
 > [!NOTE]
-> **Current Status:** The Web-GUI based File Browser of the application is almost complete in terms of functionality. Files can be uploaded, removed, downloaded, etc. to the Debian server from the admin account, or an account made with `create-user.sh`. I'll be constructing the admin page, an automated backup system, cleaning code, and revaluating functionality/methodology as soon as possible.
+> **Current Status:** The Web-GUI based File Browser of the application is almost complete in terms of functionality. Files can be uploaded, removed, downloaded, etc. to the Debian server from the admin account, or an account made with `create-user.sh`. I'll be (1)constructing the admin page, (2)an automated backup system, (3) cleaning code, and (4) revaluating functionality/methodology as soon as possible.
 
 # Summary:
 
