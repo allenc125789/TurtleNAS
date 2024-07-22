@@ -493,7 +493,6 @@ class DBcontrol {
         }
         // Run Python3 code through Bash.
         // Successful Auth.
-        $output = "1";
         if($output){
             $_SESSION['allowed'] = 1;
             $_SESSION['sessuser'] = $username;
