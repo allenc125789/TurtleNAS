@@ -6,7 +6,7 @@ __Errors__
 
 `(504) Gateway Timout!` Usually happens due too a function taking too long, such as when uploading many files, or refreshing many files. Check your settings, (using the later __Upload/Download Limits__ section for reference), and double-check all settings meet the expected server-load.
 
-`(504) Not Found!` Usually happens if a file can not be found. Check what's trying to be accessed, and check if the file exists, or a link is found. If this happens when downloading a file, refresh the Database(DB) through the browser.
+`(404) Not Found!` Usually happens if a file can not be found. Check what's trying to be accessed, and check if the file exists, or a link is found. If this happens when downloading a file, refresh the Database(DB) through the browser.
 
 
 __Bugs__
