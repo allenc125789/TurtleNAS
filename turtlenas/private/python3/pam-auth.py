@@ -38,8 +38,8 @@ try:
         auth.authenticate()
         auth.acct_mgmt()
 except PAM.error as resp:
-        bool(False)
+        print(0);
 except:
         print('Internal error')
 else:
-        Bool(True)
+        print(1);
