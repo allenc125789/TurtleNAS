@@ -2,9 +2,9 @@ __Errors__
 
 > (/var/www/turtlenas/public/browser.php)
 
-(406) Not Acceptable! This error relates to the filename entered for creating a file/folder with a problematic name. Filters have processed that the file name has "illegal" characters. Filters can be added/removed in the function "filterString()".
+*(406) Not Acceptable!* This error relates to the filename entered for creating a file/folder with a problematic name. Filters have processed that the file name has "illegal" characters. Filters can be added/removed in the function "filterString()".
 
-(504) Gateway Timout! Usually happens due too a function taking too long. Check your settings, (using the later __Upload/Download Limits__ section for reference), and double-check all settings meet the expected server-load.
+*(504) Gateway Timout!* Usually happens due too a function taking too long. Check your settings, (using the later __Upload/Download Limits__ section for reference), and double-check all settings meet the expected server-load.
 
 
 __Bugs__
