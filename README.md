@@ -25,7 +25,7 @@ Designed with a web GUI and an easily configurable system for adding clients for
 
 ### Tests (SSHFS, NFS, SMB):
 
-Research done by a user named [Jakeler](https://github.com/Jakeler) tests and compares the R/W speed between the three show that while `sshfs` (Blue) is not the fastest option (plaintext comparison), it still has [great speeds](https://blog.ja-ke.tech/2019/08/27/nas-performance-sshfs-nfs-smb.html)! 
+Research done by a user named [Jakeler](https://github.com/Jakeler) tests and compares the R/W speed between the three most common file-sharing protocols. While `sshfs` (Blue) is not the fastest option (plaintext comparison), it still has [great speeds](https://blog.ja-ke.tech/2019/08/27/nas-performance-sshfs-nfs-smb.html)! 
 
 ![](https://github.com/allenc125789/TurtleNAS/blob/main/extra/Screenshot%20from%202024-04-02%2023-37-15.png)
 
