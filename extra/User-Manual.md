@@ -17,7 +17,8 @@ Problem could be due to nginx, or modern browser design appending it automatical
 
 __Upload/Download Limits__
 
-[!NOTE] Hardcaps
+> [!NOTE] Hardcaps
+
 > (/etc/nginx.conf)
 
 + Contains a hardcap filesize limit for what can be uploaded to the server. "client_max_body_size 1000G;"
