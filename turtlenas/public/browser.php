@@ -79,7 +79,7 @@ if ($verify){
     </div>
 
     <div id="refreshLogsDiv">
-        <label for="refreshLogs" id="buttonTxt" class="buttonTxt">Refresh Log</label>
+        <label for="refreshLogs" id="refreshLogsTxt" class="buttonTxt">Refresh Log</label>
         <button class="buttons" id="refreshLogs" onclick="refreshLogs()"></button>
     </div>
 </div>
