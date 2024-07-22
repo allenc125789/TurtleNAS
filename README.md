@@ -41,7 +41,7 @@ This draw-back is minor in my opinion, when understanding the perks that come in
 # Post-Install & Usage:
 
 > [!NOTE]
-> This application is not currently designed to be web facing, but for use in a internal network.
+> This application is not currently designed to be web facing, but for use in a internal network. After all the essential functions have been designed, I will be testing it's security more in depth.
 
 Open the server's IP or Hostname in an alternate browser (*example:* https://192.168.0.20), login to the web portal with the password you made on install. Username is `admin`. You may use this account to upload and download files directly to the server.
 
