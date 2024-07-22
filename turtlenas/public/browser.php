@@ -116,6 +116,8 @@ if ($verify){
 
 <div id='window-block'><text id="loadingTxt">Loading...</text></div>
 
+<div id='trialLabel'>Some buttons are not available for interaction on this trial server. Please download the program if you would like to try the current version fully: <a href="https://github.com/allenc125789/TurtleNAS/tree/main">https://github.com/allenc125789/TurtleNAS/tree/main</a></div>
+
 <script src="/js/dropmenu.js"></script>
 
 <script type='text/javascript'>
@@ -277,6 +279,7 @@ function enableButtonsLimited(){
     enableButtons("downloadZipEN");
     enableButtons("downloadTar");
     enableButtons("downloadTarEN");
+    enableButtons("signOut");
 }
 
 function enableButtons(ID){
