@@ -33,7 +33,7 @@ This draw-back is minor in my opinion, when understanding the perks that come in
 
   1) Install Debian.
   2) Copy and paste this command as root: `git clone https://allenc125789:@github.com/allenc125789/TurtleNAS.git && bash ./TurtleNAS/setup.sh`
-  3) Go through the setup. Dependancies will be installed install and configuartion will take place. You'll also be asked to setup a password for the admin account **(make it secure and remember it, you'll log in to the browser with this.)** and sign an SSL cert.
+  3) Go through the setup. Dependancies will be installed and configuartion will take place. You'll also be asked to setup a password for the admin account **(make it secure and remember it, you'll log in to the browser with this.)** and sign an SSL cert.
   4) After the setup finishes with no errors, enter `sudo reboot` and wait for the system to reboot.
 
 # Post-Install & Usage:
