@@ -11,4 +11,4 @@
 + program runs effeiciently enough with recent JS code implimentation. Changing directories is seamless, and multiple gigs of files can be uploaded without major impact on performance. Need to test with uploads from multiple users.
 
 ~ need to create js based timeout function.
-~ lots of unused code needs to be trimmed. might need to reuse the hashing system to provide an accurate hash of the directory about to be downloaded.
+~ lots of unused code needs to be trimmed. might need to reuse the hashing system to provide a more unique hash when downloading a compressed folder.
