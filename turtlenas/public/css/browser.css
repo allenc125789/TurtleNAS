@@ -241,4 +241,10 @@ display: block;
 opacity: 1;
 }
 
+#trialLabel {
+position: fixed;
+bottom: 0%;
+left: 21%;
+}
+
 .tableItems:hover {background-color:  #e5e5e5;}
