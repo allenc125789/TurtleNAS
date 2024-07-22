@@ -1,6 +1,6 @@
 __Errors__
 
-(/var/www/turtlenas/public/browser.php)
+> (/var/www/turtlenas/public/browser.php)
 
 (406) Not Acceptable! This error relates to the filename entered for creating a file/folder with a problematic name. Filters have processed that the file name has "illegal" characters. Filters can be added/removed in the function "filterString()".
 
