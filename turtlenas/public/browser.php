@@ -663,7 +663,7 @@ function getRequestDownloadTarEN(){
 }
 
 function getRequestUpdateRecords(){
-    if (confirm("Refreshing the DataBase can fix files not appearing and inaccurate data, but will take time depending on the number of files. Continue?")){
+    if (confirm("Refreshing the Database can fix files not appearing and inaccurate data, but will take time depending on the number of files. Continue?")){
         var xhttp = new XMLHttpRequest();
     } else {
         return;
