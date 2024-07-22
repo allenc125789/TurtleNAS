@@ -17,7 +17,8 @@ Problem could be due to nginx, or modern browser design appending it automatical
 
 __Upload/Download Limits__
 
-> [!NOTE] Hardcaps
+> [!NOTE]
+> Hardcaps
 
 > (/etc/nginx.conf)
 
