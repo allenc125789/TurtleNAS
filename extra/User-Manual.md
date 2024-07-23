@@ -8,15 +8,6 @@ __Errors__
 
 `(404) Not Found!` Usually happens if a file can not be found. Check what's trying to be accessed, and check if the file exists, or a link is found. If this happens when downloading a file, refresh the Database(DB) through the browser.
 
-
-__Bugs__
-
-> (/var/www/turtlenas/private/PHP/handle-downloads.php)
-
-+ Downloading "hidden/dotfiles" through a browser will append the filename if starting with a (.) dot. (Example: ".bashrc" --href--> "bashrc"). Uploading and backing up these files is fine otherwise, however if you download a hidden file, it is recommended doing so by using the "Zip Download".
-
-Problem could be due to nginx, or modern browser design appending it automatically. Unsure how to fix.
-
 __Upload/Download Limits__
 
 *- Hardcaps*
@@ -36,3 +27,13 @@ __Upload/Download Limits__
 > (/etc/sites-available/turtlenas-config)
 
 + Contains a read timeout for cgi. Determines time spent running a PHP script before timing out (causes a 504). "fastcgi_read_timeout 43200;"
+
+__Bugs__
+
+> (/var/www/turtlenas/private/PHP/handle-downloads.php)
+
++ Downloading "hidden/dotfiles" through a browser will append the filename if starting with a (.) dot. (Example: ".bashrc" --href--> "bashrc"). Uploading and backing up these files is fine otherwise, however if you download a hidden file, it is recommended doing so by using the "Zip Download".
+
+Problem could be due to nginx, or modern browser design appending it automatically. Unsure how to fix at the moment.
+
++ Logging onto a web-user with no files already in their root directory will cause a reaccuring prompt to refresh the database, in an attempt to find files. This can be stopped by pressing cancel and uploading new files. I have ideas to fix, however this specific bug is a low priority for the moment.
