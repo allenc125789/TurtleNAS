@@ -271,6 +271,8 @@ function disableButtons(ID){
 }
 
 function enableButtonsLimited(){
+    document.getElementById("refresh").style.visibility = "visible";
+    document.getElementById("wayBack").style.visibility = "visible";
     document.getElementById("downloadMenuDiv").style.visibility = "visible";
     document.getElementById("window-block").style.visibility = "hidden";
     enableButtons("refreshDB");
@@ -311,6 +313,9 @@ function enableButtons(ID){
         button = document.getElementById(ID);
         button.disabled = false;
     } else if (ID.tagName == 'a'){
+        var button = document.getElementById(ID);
+        button.style.visibility = "visible";
+    } else if (ID == 'refresh' || ID.tagName == 'wayBack'){
         var button = document.getElementById(ID);
         button.style.visibility = "visible";
     } else {
