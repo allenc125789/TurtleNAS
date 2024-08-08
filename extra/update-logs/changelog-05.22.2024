@@ -11,6 +11,8 @@
 + program runs effeiciently enough with recent JS code implimentation. Changing directories is seamless, and multiple gigs of files can be uploaded without major impact on performance. Need to test with uploads from multiple users.
 + added changelogs to keep track of my progress better, starting today.
 
+--To Do--
+
 ~ need to create js based timeout function.
 ~ lots of unused code needs to be trimmed. might need to reuse the hashing system to provide a more unique hash when downloading a compressed folder.
 ~ re-evaluate permissions method. Consideration for R/W abalities, sudo, and grouping needed.
