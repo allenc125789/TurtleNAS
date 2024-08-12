@@ -45,7 +45,7 @@ Research done by a user named Jakeler[^1] tests and compares the R/W speed betwe
 > [!NOTE]
 > This application is under development and NOT currently designed yet to be public facing, only for use in a internal network. After all the essential functions have been designed, I will be testing it's security more in depth.
 
-Open the server's IP or Hostname in an alternate browser (*example: https://192.168.0.20*), login to the web portal with the password you made on install. Username is `admin`. You may use this account to upload and download files directly to the server. You may also login directly from SSH.
+Open the server's IP or Hostname in an alternate browser (*example: https://192.168.0.20*), login to the web portal with the password you made on install. Username is `admin`.
 
 If you encounter any errors or issues, please refer to the [User Manual](https://github.com/allenc125789/TurtleNAS/blob/main/extra/User-Manual.md), or make a issue request.
 
