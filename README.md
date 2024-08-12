@@ -3,9 +3,9 @@
 >
 > I'll be constructing the admin page, an automated backup system, cleaning code, and revaluating functionality/methodology as soon as possible.
 >
-> [Click here to see the update-logs!](https://github.com/allenc125789/TurtleNAS/tree/main/extra/update-logs)
+> [Update-logs](https://github.com/allenc125789/TurtleNAS/tree/main/extra/update-logs)
 > 
-> [Click here to see the Planned Updates!](https://github.com/allenc125789/TurtleNAS/blob/main/extra/update-logs/Planned-Updates)
+> [Planned Updates](https://github.com/allenc125789/TurtleNAS/blob/main/extra/update-logs/Planned-Updates)
 
 # Summary:
 
