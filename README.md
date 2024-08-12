@@ -31,8 +31,6 @@ Research done by a user named Jakeler[^1] tests and compares the R/W speed betwe
 
 ![](https://github.com/allenc125789/TurtleNAS/blob/main/extra/Screenshot%20from%202024-04-02%2023-37-15.png)
 
-This draw-back is minor in my opinion, when understanding the perks that come in the form of simplicity, usablity, and security.
-
 # Install:
 > [!IMPORTANT]
 > **Recommeneded on fresh install of latest Debian Stable, with no Desktop Environment configured.** While this program may work on other configurations, i'll only be maintaining it from Debian (Stable) 12.5.0 and up on this setup.
