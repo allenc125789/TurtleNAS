@@ -25,12 +25,6 @@ Designed with a web GUI and an easily configurable system for adding clients for
   - Provides a secure connection through SSH with key access to backup-clients, by default.
   - Fastest option of encrypted file transfer protocols.
 
-### Tests (SSHFS, NFS, SMB):
-
-Research done by a user named Jakeler[^1] tests and compares the R/W speed between the three most common file-sharing protocols. `sshfs` (Blue) is shown to be the fastest option, with encrypted transportation.[^2] 
-
-![](https://github.com/allenc125789/TurtleNAS/blob/main/extra/Screenshot%20from%202024-04-02%2023-37-15.png)
-
 # Install:
 > [!IMPORTANT]
 > **Recommeneded on fresh install of latest Debian Stable, with no Desktop Environment configured.** While this program may work on other configurations, i'll only be maintaining it from Debian (Stable) 12.5.0 and up on this setup.
