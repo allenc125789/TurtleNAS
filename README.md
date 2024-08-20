@@ -15,8 +15,6 @@
 
 :desktop_computer:. . .:turtle:. . .:desktop_computer:
 
-### About:
-
 An Open-Source NAS system based on Debian. Offers a web-GUI file browser and an easily configurable system for adding clients and files for quick backup and restoration.
 
 # Install:
