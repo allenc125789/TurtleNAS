@@ -1,3 +1,11 @@
+# Summary:
+
+*TurtleNAS for Debian, to help deliver files in it's secure shell!‎*
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ❤
+
+:desktop_computer:. . .:turtle:. . .:desktop_computer:
+
 > [!NOTE]
 > **Current Status:** Under Development. The Web-GUI based File Browser of the application is almost complete in terms of functionality. Files can be uploaded, removed, downloaded, etc. to the Debian server from the admin account, or an account made with `create-user.sh`.
 >
@@ -7,13 +15,7 @@
 [Planned Updates](https://github.com/allenc125789/TurtleNAS/blob/main/extra/update-logs/Planned-Updates),
 [Work-Flow](https://github.com/allenc125789/TurtleNAS/blob/main/extra/TurtleNAS-FlowChart.png)
 
-# Summary:
-
-*TurtleNAS for Debian, to help deliver files in it's secure shell!‎*
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ❤
-
-:desktop_computer:. . .:turtle:. . .:desktop_computer:
+# About:
 
 An Open-Source NAS system based on Debian. Offers a web-GUI file browser and an easily configurable system for adding clients and files for quick backup and restoration.
 
