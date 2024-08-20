@@ -1,7 +1,7 @@
 # Backups:
 Backups are made easy, through the use of the protocol SSHFS. This protocol makes the process of registering a client computer that you would like to backup simpler, with connections being established server-side, provided the correct SSH credentials.
 
-The pro's of using `sshfs` vs `smb` or `nfs` are:
+The pro's of using `sshfs` vs `smb` & `nfs` are:
 
   - Allowing easier server/client connection configuration for backing up files.
   - Provides a secure connection through SSH with key access to backup-clients, by default.
