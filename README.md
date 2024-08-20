@@ -18,6 +18,8 @@
 An Open-Source NAS system based on Debian. Offers a web-GUI file browser and an easily configurable system for adding clients and files for quick backup and restoration.
 
 # Install:
+
+## From Source:
 > [!IMPORTANT]
 > **Recommeneded on fresh install of latest Debian Stable, with no Desktop Environment configured.** While this program may work on other configurations, i'll only be maintaining it from Debian (Stable) 12.5.0 and up on this setup.
 
