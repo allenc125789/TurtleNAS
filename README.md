@@ -51,3 +51,6 @@ If you encounter any errors or issues, please refer to the [User Manual](https:/
 
 [^1]: https://github.com/Jakeler
 [^2]: https://blog.ja-ke.tech/2019/08/27/nas-performance-sshfs-nfs-smb.html
+
+
+**References:**
