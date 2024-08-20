@@ -1,4 +1,3 @@
-# Summary:
 
 *TurtleNAS for Debian, to help deliver files in it's secure shell!‎*
 
