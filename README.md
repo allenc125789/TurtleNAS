@@ -49,6 +49,6 @@ Open the server's IP or Hostname in an alternate browser (*example: https://192.
 
 If you encounter any errors or issues, please refer to the [User Manual](https://github.com/allenc125789/TurtleNAS/blob/main/extra/User-Manual.md), or make a issue request.
 
-# References:
+## References:
 [^1]: https://github.com/Jakeler
 [^2]: https://blog.ja-ke.tech/2019/08/27/nas-performance-sshfs-nfs-smb.html
