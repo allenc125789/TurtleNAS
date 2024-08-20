@@ -7,6 +7,7 @@ Working status for compatible clients that can connect to turtlenas, post setup.
 - [x] Windows
 - [ ] Mac/Apple
 - [ ] Android
+- [ ] IOS
 
 ## Browsers:
 - [x] Chrome
