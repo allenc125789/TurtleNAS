@@ -1,6 +1,6 @@
 # Compatibility
 
-Current working status for what clients can access turtlenas, post setup.
+Working status for compatible clients that can connect to turtlenas, post setup.
 
 ## OS:
 - [x] Linux
