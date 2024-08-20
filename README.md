@@ -17,13 +17,7 @@
 
 ### About:
 
-Designed with a web GUI and an easily configurable system for adding clients for file backup and restoration. This program provides: an easy to use setup system, a configuration menu for admins, a download page for users, security with SSH/HTTPS connections, and the built-in linux PAM system for account management.
-
-`sshfs` is utilized over `smb` and `nfs`, the direct pro's of this protocol are:
-
-  - Allowing easier server/client connection configuration for backing up files.
-  - Provides a secure connection through SSH with key access to backup-clients, by default.
-  - Fastest option of encrypted file transfer protocols.
+An Open-Source NAS system based on Debian. Offers a web-GUI file browser and an easily configurable system for adding clients and files for quick backup and restoration.
 
 # Install:
 > [!IMPORTANT]
