@@ -7,15 +7,13 @@
 [Planned Updates](https://github.com/allenc125789/TurtleNAS/blob/main/extra/update-logs/Planned-Updates),
 [Work-Flow](https://github.com/allenc125789/TurtleNAS/blob/main/extra/TurtleNAS-FlowChart.png)
 
-____
+
+# About:
+
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ❤
 
 :desktop_computer:. . .:turtle:. . .:desktop_computer:
-
-*TurtleNAS for Debian, to help deliver files in it's secure shell!‎*
-
-# About:
 
 An Open-Source NAS system based on Debian. Offers a web-GUI file browser and an easily configurable system for adding clients and files for quick backup and restoration.
 
