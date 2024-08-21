@@ -36,4 +36,4 @@ __Known Bugs__
 
 + Logging onto a web-user with no files already in their root directory will cause a reaccuring prompt to refresh the database, in an attempt to find files. This can be stopped by pressing cancel and uploading new files. I have ideas to fix, however this specific bug is a low priority for the moment.
 
-[Return to homepage.](https://github.com/allenc125789/TurtleNAS/blob/main/README.md#install)
+[Return to homepage.](https://github.com/allenc125789/TurtleNAS/blob/main/README.md#post-install--usage)
