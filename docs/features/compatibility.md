@@ -1,6 +1,6 @@
 # Compatibility
 
-Working status for tested browsers and OS's compatible with connecting to TurtleNAS's webpage, post setup.
+Working status for tested browsers and OS's that can use TurtleNAS's webpage, post setup.
 
 ## Browsers:
 - [x] Chrome
