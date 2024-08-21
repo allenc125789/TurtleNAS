@@ -1,6 +1,6 @@
 # Compatibility
 
-Working status for compatible clients that can connect to turtlenas, post setup.
+Working status for current compatible browsers and OS's that can connect to turtlenas, post setup.
 
 ## OS:
 - [x] Linux
