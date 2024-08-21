@@ -19,7 +19,7 @@ An Open-Source NAS system based on Debian. Offers a web-GUI, which includes a fi
 >   + [File Browser.](https://github.com/allenc125789/TurtleNAS/blob/main/docs/features/file-browser.md)
 >   + [Compatibility.](https://github.com/allenc125789/TurtleNAS/blob/main/docs/features/compatibility.md)
 
-# Install:
+# Installation:
 > [!IMPORTANT]
 > **[> Requirements](https://github.com/allenc125789/TurtleNAS/blob/main/docs/requirements.md)**
 >
