@@ -8,7 +8,7 @@ Research done by a user named Jakeler[^1] tests and compares the R/W speed betwe
 
 ![](https://github.com/allenc125789/TurtleNAS/blob/main/docs/images/screenshots/jakeler-webpage.png)
 
-[Return to homepage.](https://github.com/allenc125789/TurtleNAS/blob/main/README.md#about)
+[Return to homepage.](https://github.com/allenc125789/TurtleNAS/blob/main/README.md#overview)
 
 ## References:
 [^1]: https://github.com/Jakeler
