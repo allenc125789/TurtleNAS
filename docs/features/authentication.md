@@ -4,4 +4,4 @@ Authentication is performed with Debian's built in login system (PAM), using a p
 
 ![screenshot of the login page.](https://github.com/allenc125789/TurtleNAS/blob/main/docs/images/screenshots/login-page.png)
 
-[Return to homepage.](https://github.com/allenc125789/TurtleNAS/blob/main/README.md#about)
+[Return to homepage.](https://github.com/allenc125789/TurtleNAS/blob/main/README.md#overview)
