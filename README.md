@@ -33,7 +33,7 @@ An Open-Source NAS system based on Debian. Offers a web-GUI file browser and an 
   3) Go through the setup.
      + Dependancies that need to be installed.
      + A password prompt for an admin account **(make it secure and remember it, you'll log in to the browser with this.)**
-     + Signing an SSL cert.
+     + Signing an SSL certificate.
   4) After the setup finishes with no errors, enter `sudo reboot` and wait for the system to reboot.
 
 # Post-Install & Usage:
