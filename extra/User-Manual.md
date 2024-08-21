@@ -28,7 +28,7 @@ __Upload/Download Limits__
 
 + Contains a read timeout for cgi. Determines time spent running a PHP script before timing out (causes a 504). "fastcgi_read_timeout 43200;"
 
-__Bugs__
+__Known Bugs__
 
 > (/var/www/turtlenas/private/PHP/handle-downloads.php)
 
