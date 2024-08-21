@@ -2,7 +2,7 @@
 
 Working status for tested browsers and OS's that can use TurtleNAS's webpage, post setup.
 
-While you may be able to use TurtleNAS with other browsers/OSs, I have only confirmed full compatibility with the following checked boxes:
+While you may be able to use TurtleNAS with other browsers/OSs, I have only confirmed full compatibility with the following checked boxes below.
 
 ## Browsers:
 - [x] Chrome
