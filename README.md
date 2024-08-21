@@ -29,7 +29,7 @@ Requirements:
 **OS**:Debian12.6
 
 **RAM**: 1GB
-
+__
 ### [Source]
 > [!IMPORTANT]
 > **Recommeneded on fresh install of latest Debian Stable, with no Desktop Environment configured.** While this program may work on other configurations, all development so far has been done on this setup.
