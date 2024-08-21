@@ -14,3 +14,5 @@ Working status for compatible clients that can connect to turtlenas, post setup.
 - [x] Firefox
 - [ ] Edge
 - [ ] IOS
+
+[Return to homepage.](https://github.com/allenc125789/TurtleNAS/blob/main/README.md#about)
