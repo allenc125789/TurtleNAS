@@ -10,6 +10,7 @@
 
 # Overview:
 
+![TurtleNAS Preview](https://github.com/allenc125789/TurtleNAS/blob/main/docs/images/screenshots/turtlenas-preview.gif)
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ❤
 
