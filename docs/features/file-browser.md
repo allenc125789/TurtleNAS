@@ -1,5 +1,5 @@
 # File Browser:
-A basic file-browser is included with the program. Features include: 
+A basic web file-browser is included with the program. Features include: 
 + Upload, download, and delete buttons for files/folders, which are available depending on specified user permissions.
 + Directory traversal.
 + (Admins Only) A button to switch view to the admin center.
