@@ -1,4 +1,4 @@
-# Compatibility
+# Client Compatibility
 
 Working status for tested browsers and OS's that can use TurtleNAS's webpage, post setup.
 
