@@ -30,7 +30,7 @@ An Open-Source NAS system based on Debian. Offers a web-GUI file browser and an 
 
   1) Install Debian and the `git` package.
   2) Copy and paste this command as root: `git clone https://allenc125789:@github.com/allenc125789/TurtleNAS.git && bash ./TurtleNAS/setup.sh`
-  3) Go through the setup.
+  3) Go through the setup steps.
      + Installation of dependancies (`y` to install and continue).
      + A password prompt for an admin account **(make it secure and remember it, you'll log in to the browser with this.)**
      + Signing an SSL certificate.
