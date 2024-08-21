@@ -25,6 +25,7 @@ An Open-Source NAS system based on Debian. Offers a web-GUI file browser and an 
 # Install:
 
 Requirements:
+
 **OS**:Debian12.6
 
 **RAM**: 1GB
