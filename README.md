@@ -24,7 +24,7 @@ An Open-Source NAS system based on Debian. Offers a web-GUI, which includes a fi
 
 # Install:
 > [!IMPORTANT]
-> **[Requirements](https://github.com/allenc125789/TurtleNAS/blob/main/docs/requirements.md)**
+> **[> Requirements](https://github.com/allenc125789/TurtleNAS/blob/main/docs/requirements.md)**
 >
 > **Recommeneded on fresh install of latest Debian Stable, with no Desktop Environment configured.** While this program may work on other configurations, all development so far has been done on this setup.
 >
