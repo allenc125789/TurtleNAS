@@ -15,4 +15,4 @@ Working status for tested browsers and OS's compatible with connecting to turtle
 - [ ] Android
 - [ ] IOS
 
-[Return to homepage.](https://github.com/allenc125789/TurtleNAS/blob/main/README.md#about)
+[Return to homepage.](https://github.com/allenc125789/TurtleNAS/blob/main/README.md#overview)
