@@ -22,7 +22,7 @@ __Upload/Download Limits__
 
 + Contains a hardcap filesize limit for what can be uploaded to the server. "max_file_uploads;", "upload_max_filesize;", "post_max_size;", "max_file_uploads;"
 
-+ After this number of seconds, stored data will be seen as 'garbage' and cleaned up by the garbage collection process. Will stop a download mid upload if set too short. "session.gc_maxlifetime = 43200;"
++ After this number of seconds, stored php sessions will be seen as 'garbage' and cleaned up by the garbage collection process. Will stop a download mid upload if set too short. "session.gc_maxlifetime = 43200;"
 
 > (/etc/sites-available/turtlenas-config)
 
