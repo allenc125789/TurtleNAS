@@ -387,6 +387,7 @@ class DBcontrol {
         ]);
     }
 
+    //Sets SESSSION user identity and permission attributes, referring to the python PAM script for user identity, and a bash script for sudo permissions. (the bash script will be changed to reference an sql DB for permissions).
     public function user_auth($username, $password) {
         // Restricted users.
         $restricted = array("root", "sysadmin");
