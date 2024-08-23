@@ -11,7 +11,7 @@ if($verify){
         $post = $_POST['tmpPass'];
         $output = $control->execZipFolder($post);
     } else {
-        $control->getDownload(TRUE);
+        $control->getDownload(FALSE);
     }
 }
 ?>
