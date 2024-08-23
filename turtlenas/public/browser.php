@@ -6,36 +6,47 @@ error_reporting(-1); // display all faires
 ini_set('display_errors', 1);  // ensure that faires will be seen
 ini_set('display_startup_errors', 1); // display faires that didn't born
 
+//Verfies creds.
 $verify = $control->validate_auth();
 if ($verify){
     $username = $_SESSION['sessuser'];
     $fObject = $control->getFilesForDisplay();
 }
-
 ?>
-
 <html>
 <head>
     <meta charset="UTF=8">
-    <meta name="viewport" content="width==device-width, initial-scale=1.0">
+    <meta name="viewport" content="width==device-width, initial-scale=0.1">
     <link rel="stylesheet" href="/css/browser.css">
 </head>
 
 <div id="contents">
     <body>
         <tbody>
+            <!--File Table body-->
             <table id="fileTables" class="fileTables" border=2px>
                 <tr bgcolor="grey">
                     <th colspan=2>File Name</th>
                     <th>Last Modified</th>
                     <th>File Size</th>
                 </tr>
+
+                <!--Hotbar/Actionbar for file table.-->
                 <tr class="hotbar">
+                    <!--Select all checkboxes button.-->
                     <td bgcolor="white"><input type="checkbox" name="massSelect[]" id="massSelect" onchange="checkAll(this)"></input></td>
+
+                    <!--Hotbar Background.-->
                     <td style="font-size: 150%" bgcolor="white">
-                    <a id='refresh' href='#'>⟲</a>
+
+                    <!--Return to root folder button.-->
+                    <a id='return' href='#'>⟲</a>
+
+                    <!--Way back directory button.-->
                     <a id='wayBack' href='#'>↩</a>
                     </td>
+
+                    <!--Current folder display.-->
                     <td colspan=2 style="font-size:100%" title="Current folder." bgcolor="black"><font id='displayCwd' style="color:white;"> Loading Files...</font>
                     </td>
                 </tr>
@@ -45,45 +56,56 @@ if ($verify){
     </body>
 </div>
 
+<!--Button menu.-->
 <div id="actionMenuDiv" class="actionMenuDiv">
+    <!--Delete button.-->
     <label for="delete" id="deleteTxt" class="buttonTxt" style="cursor:default;">Delete</label>
     <input class="buttons" id="delete" value="Delete" type="button" onclick="getRequestDelete()" disabled="true">
     </form>
     <br><br>
 
+    <!--Upload file button.-->
     <?php echo "<form id='uploadFile' action='/upload.php' method='POST' enctype='multipart/form-data'>"?>
     <label for="file" id="fileTxt" class="buttonTxt">Upload File</label>
     <input class="buttons" type="file" onchange="getRequestUploadFile()" id="file" name="file[]" multiple="">
     </form>
 
+    <!--Upload directory button.-->
     <?php echo "<form id='uploadDir' action='/uploadDir.php' method='POST' enctype='multipart/form-data'>"?>
     <label for="dir" id="dirTxt" class="buttonTxt">Upload Folder</label>
     <input class="buttons" type="file" onchange="getRequestUploadDir()" id="dir" name="dir[]" directory webkitdirectory mozdirectory multiple />
     </form>
 
+    <!--Create directory button.-->
     <?php echo "<form id='makeDir' onsubmit='getRequestMakeDir()' taget='_self' method='POST'>"?>
     <label for="mkdir" id="mkdirTxt" class="buttonTxt">Create Folder...</label>
     <button class="buttons" type="submit" id="mkdir"></button>
     <br>
+
+    <!--Create directory text box.-->
     <input type="text" id="createDir" name="createDir" required minlength="1" maxlength="255" size="10" />
     </form>
 
+    <!--Log box.-->
     <div id="logBox">
         <h4 id="logHeader">---Logs---</h4>
         <div id="logOutput"></div>
     </div>
 
+    <!--Refresh DB button.-->
     <div id="refreshDBDiv">
         <label for="refreshDB" id="refreshDBTxt" class="buttonTxt" style="cursor:default;">Refresh DB</label>
-        <button class="buttons" id="refreshDB" disabled="true" onclick="refreshDB()"></button>
+        <button class="buttons" id="refreshDB" disabled="true" onclick="getRequestUpdateRecords()"></button>
     </div>
 
+    <!--Refresh logs button.-->
     <div id="refreshLogsDiv">
         <label for="refreshLogs" id="buttonTxt" class="buttonTxt">Refresh Log</label>
         <button class="buttons" id="refreshLogs" onclick="refreshLogs()"></button>
     </div>
 </div>
 
+<!--Download options button.-->
 <div id='downloadMenuDiv'>
     <div class="dropdown">
         <div title="Download the current folder as a compressed archive(zip) file." class="select">
@@ -91,15 +113,22 @@ if ($verify){
         </div>
             <div class="caret"></div>
         <ul class="menu">
+            <!--Button to download zip file of current folder.-->
             <li><label for="downloadZip" id="downloadZipTxt" class="subButtonTxt">Zip File</label></li>
             <input class="buttons" id="downloadZip" type="button" onclick="getRequestDownloadZip()">
+
+            <!--Button to download encrypted zip file of current folder.-->
             <?php echo "<form id='downloadZipENForm' method='POST'>"?>
             <li><label for="downloadZipEN" id="downloadZipENTxt" class="subButtonTxt">Zip File (Encrypted)</label></li>
             <input class="buttons" id="downloadZipEN" type="button" onclick="getRequestDownloadZipEN()">
             <input type='hidden' id= 'hiddenZipEN' name='tmpPass' value='' />
             </form>
+
+            <!--Button to download tar file of current folder.-->
             <li><label for="downloadTar" id="downloadTarTxt" class="subButtonTxt">tarball</label></li>
             <input class="buttons" id="downloadTar" type="button" onclick="getRequestDownloadTar()">
+
+            <!--Button to download encrypted tar file of current folder.-->
             <?php echo "<form id='downloadTarENForm' method='POST'>"?>
             <li><label for="downloadTarEN" id="downloadTarENTxt" class="subButtonTxt">tarball GPG (Encrypted)</label></li>
             <input class="buttons" id="downloadTarEN" type="button" onclick="getRequestDownloadTarEN()">
@@ -109,16 +138,20 @@ if ($verify){
     </div>
 </div>
 
+<!--Account Management section.-->
 <div id='accountMenuDiv'>
+    <!--Button to sign out of account.-->
     <label for="signOut" id="signOutTxt" class="buttonTxt">Log-out</label>
     <button class="buttons" id="signOut" onclick="getRequestSignOut()"></button>
 </div>
 
+<!--Screen blocking div for when a request is "loading".-->
 <div id='window-block'><text id="loadingTxt">Loading...</text></div>
 
+<!--JavaScript Section.-->
 <script src="/js/dropmenu.js"></script>
-
 <script type='text/javascript'>
+//Gets the value of a cookie by it's name.
 function getCookie(cname){
   let name = cname + "=";
   let decodedCookie = decodeURIComponent(document.cookie);
@@ -135,13 +168,14 @@ function getCookie(cname){
   return "";
 }
 
+//Removes all items from the file-table.
 function removeElementsByClass(className){
     const elements = document.getElementsByClassName(className);
     while(elements.length > 0){
         elements[0].parentNode.removeChild(elements[0]);
     }
 }
-
+//Refreshes the file-table and organizes files for display when called.
 function displayFiles(cwdURI){
     var userName = <?php echo json_encode($username); ?>;
     var cwd = decodeURIComponent(cwdURI);
@@ -164,7 +198,6 @@ function displayFiles(cwdURI){
                 var cell3 = row.insertCell(2);
                 var dir = fileArray[3].concat(fileArray[0]);
                 var dirURI = encodeURIComponent(fileArray[3].concat(encodeURIComponent(fileArray[0])));
-//                var dirURI = encodeURIComponent(dir);
                 var checkboxes = document.createElement("INPUT");
                 checkboxes.setAttribute("type", "checkbox");
                 checkboxes.setAttribute("class", "cb");
@@ -188,7 +221,7 @@ function displayFiles(cwdURI){
         }
     }
     var wayBack = document.getElementById('wayBack');
-    var refresh = document.getElementById('refresh');
+    var returnButton = document.getElementById('return');
     if (cwd !== "/"){
         var i = cwd.substring(0, cwd.lastIndexOf("/"));
         var o = i.substring(0, i.lastIndexOf("/") + 1);
@@ -197,40 +230,13 @@ function displayFiles(cwdURI){
     } else{
         wayBack.setAttribute("hidden", "true");
     }
-    refresh.setAttribute("onclick", "javascript:displayFiles('%2F');return false;");
+    returnButton.setAttribute("onclick", "javascript:displayFiles('%2F');return false;");
     document.getElementById('displayCwd').textContent = userName+":"+cwd;
-    deleteItems();
+    selectedItemsCount();
 }
 
-function checkAll(ele){
-    var form = document.getElementById('deleteForm');
-    var checkboxes = document.getElementsByClassName('cb');
-    if (ele.checked){
-        for (var i = 0; i < checkboxes.length; i++) {
-            if (checkboxes[i].type == 'checkbox' && checkboxes[i].checked == false){
-                checkboxes[i].checked = true;
-                count += 1;
-                let p = checkboxes[i].cloneNode(true);
-                form.appendChild(p)
-                console.log(count);
-                enableButtons("delete");
-//                document.getElementById('delete').disabled = false;
-            }
 
-        }
-    } else {
-        for (var i = 0; i < checkboxes.length; i++) {
-            if (checkboxes[i].type == 'checkbox' && checkboxes[i].checked == true){
-                checkboxes[i].checked = false;
-                countReset();
-                disableButtons("delete");
-//                document.getElementById('delete').disabled = true;
-            }
-        }
-        form.textContent = '';
-    }
-}
-
+//Disables buttons by ID, or "ALL" for all buttons.
 function disableButtons(ID){
     if (ID == "ALL"){
         var n = document.getElementsByClassName('buttons');
@@ -243,7 +249,7 @@ function disableButtons(ID){
         }
         document.getElementById('massSelect').disabled = true;
         document.getElementById("createDir").disabled = true;
-        document.getElementById("refresh").style.visibility = "hidden";
+        document.getElementById("return").style.visibility = "hidden";
         document.getElementById("wayBack").style.visibility = "hidden";
         document.getElementById("downloadMenuDiv").style.visibility = "hidden";
         document.getElementById("window-block").style.visibility = "visible";
@@ -267,6 +273,7 @@ function disableButtons(ID){
     }
 }
 
+//Enables buttons by ID, or "ALL" for all buttons.
 function enableButtons(ID){
     if (ID == "ALL"){
         var n = document.getElementsByClassName('buttons');
@@ -279,7 +286,7 @@ function enableButtons(ID){
         }
         document.getElementById('massSelect').disabled = false;
         document.getElementById("createDir").disabled = false;
-        document.getElementById("refresh").style.visibility = "visible";
+        document.getElementById("return").style.visibility = "visible";
         document.getElementById("wayBack").style.visibility = "visible";
         document.getElementById("downloadMenuDiv").style.visibility = "visible";
         document.getElementById("window-block").style.visibility = "hidden";
@@ -308,15 +315,13 @@ function enableButtons(ID){
     }
 }
 
-function refreshDB() {
-    getRequestUpdateRecords();
-}
-
+//Adds text to the log cookie.
 function cookieLogAdd(ele){
     logcookie += ele;
     document.cookie = 'log=' + logcookie;
 }
 
+//Refreshes logs by deleting the log cookie.
 function refreshLogs(){
     document.cookie = "log=; expires=Thu, 01 Jan 0000 00:00:00 UTC; path=/;";
     document.getElementById('logOutput').innerHTML = '';
@@ -324,19 +329,48 @@ function refreshLogs(){
     logcookie = '';
 }
 
+//The "Select All" checkbox button.
+function checkAll(ele){
+    var form = document.getElementById('deleteForm');
+    var checkboxes = document.getElementsByClassName('cb');
+    //Checks all checkboxes.
+    if (ele.checked){
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i].type == 'checkbox' && checkboxes[i].checked == false){
+                checkboxes[i].checked = true;
+                count += 1;
+                let p = checkboxes[i].cloneNode(true);
+                form.appendChild(p)
+                console.log(count);
+                enableButtons("delete");
+            }
+        }
+    //Unchecks all checkboxes.
+    } else {
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i].type == 'checkbox' && checkboxes[i].checked == true){
+                checkboxes[i].checked = false;
+                countReset();
+                disableButtons("delete");
+            }
+        }
+        form.textContent = '';
+    }
+}
+
+//Resets the "checkbox selection" count to 0.
 function countReset(){
     count = 0;
-//    document.getElementById('delete').disabled = true;
     disableButtons("delete");
     document.getElementById('massSelect').checked = false;
     var l = document.getElementsByClassName('cb');
     for(var i=0;i<l.length;i++){
         l[i].checked = false;
     }
-//    disableButtons("massSelect");
 }
 
-function deleteItems(){
+//Keeps track of number of checkboxes checked to determine if the delete button should be active.
+function selectedItemsCount(){
    var form = document.getElementById('deleteForm');
    var results = document.getElementsByClassName("cb");
     Array.prototype.forEach.call(results, function(checks) {
@@ -350,39 +384,35 @@ function deleteItems(){
                 count -= 1;
                 var p = checks.value;
                 var old = document.getElementById(p)
-//                disableButtons("refreshDB");
-//                document.getElementById('refreshDB').disabled = false;
-                console.log(checks);
                 form.removeChild(old);
             }
             if (count == 0) {
                 disableButtons("delete");
-//                document.getElementById('delete').disabled = true;
             } else {
                 enableButtons("delete");
-//                document.getElementById('delete').disabled = false;
             }
         });
     });
 }
 
+//Prevents client's sceens from turning off while uploading files. If a user's screen locked, the upload could be cancelled.
 const activateWakeLock = async () => {
   try {
     const wakeLock = await navigator.wakeLock.request("screen");
   } catch (err) {
     // The wake lock request fails - usually system-related, such as low battery.
-
     console.log(`${err.name}, ${err.message}`);
   }
 };
 
+//Allows client's screen to turn off.
 function deactivateWakeLock(){
     wakeLock.release().then(() => {
         wakeLock = null;
     });
 }
 
-
+//Processes request for deleting files and folders.
 function getRequestDelete(){
     if (confirm("You are about to DELETE "+count+" File(s). Continue?")){
         var xhttp = new XMLHttpRequest();
@@ -417,6 +447,7 @@ function getRequestDelete(){
     xhttp.send(formData);
 }
 
+//Processes request for uploading files.
 async function getRequestUploadFile(){
     var xhttp = new XMLHttpRequest();
     var formData = new FormData( document.getElementById("uploadFile") );
@@ -448,6 +479,7 @@ async function getRequestUploadFile(){
     xhttp.send(formData);
 }
 
+//Processes request for creating a directory.
 async function getRequestMakeDir(){
     var xhttp = new XMLHttpRequest();
     var formData = new FormData( document.getElementById("makeDir") );
@@ -457,7 +489,6 @@ async function getRequestMakeDir(){
     disableButtons("ALL");
     cookieLogAdd(log);
     event.preventDefault();
-
     xhttp.onreadystatechange = function(){
     // Write code for writing output when databse updates start.:
         var log = "> "+this.statusText+"!<br>-<br>";
@@ -481,7 +512,7 @@ async function getRequestMakeDir(){
     xhttp.send(formData);
 }
 
-
+//Processes request for uploading a directory.
 function getRequestUploadDir(){
     var xhttp = new XMLHttpRequest();
     var formData = new FormData( document.getElementById("uploadDir") );
@@ -512,6 +543,8 @@ function getRequestUploadDir(){
     xhttp.open("POST", "/uploadDir.php", true);
     xhttp.send(formData);
 }
+
+//Processes request for downloading an Zip file.
 function getRequestDownloadZip(){
     var xhttp = new XMLHttpRequest();
     var log = "> Downloading zip...<br>";
@@ -544,6 +577,7 @@ function getRequestDownloadZip(){
     xhttp.send();
 }
 
+//Processes request for downloading an encrypted Zip file.
 function getRequestDownloadZipEN(){
     let formPrompt = prompt("Please type a password to use for your encrypted zip.");
     var form = document.getElementById("downloadZipENForm");
@@ -553,7 +587,6 @@ function getRequestDownloadZipEN(){
         var xhttp = new XMLHttpRequest();
         tmpInput.setAttribute("value", formPrompt);
         form.append(tmpInput);
-//        form.submit();
     } else {
         die();
     }
@@ -587,6 +620,7 @@ function getRequestDownloadZipEN(){
     xhttp.send(formData);
 }
 
+//Processes request for downloading a plain-text tar file of the current folder.
 function getRequestDownloadTar(){
     var xhttp = new XMLHttpRequest();
     var log = "> Downloading tar...<br>";
@@ -619,6 +653,7 @@ function getRequestDownloadTar(){
     xhttp.send();
 }
 
+//Processes request for downloading a encrypted tar file of the current folder.
 function getRequestDownloadTarEN(){
     let formPrompt = prompt("Please type a password to use for your encrypted tar.");
     var form = document.getElementById("downloadTarENForm");
@@ -628,7 +663,6 @@ function getRequestDownloadTarEN(){
         var xhttp = new XMLHttpRequest();
         tmpInput.setAttribute("value", formPrompt);
         form.append(tmpInput);
-//        form.submit();
     } else {
         die();
     }
@@ -662,6 +696,7 @@ function getRequestDownloadTarEN(){
     xhttp.send(formData);
 }
 
+//Requests to update the file DB.
 function getRequestUpdateRecords(){
     if (confirm("Refreshing the DataBase can fix files not appearing and inaccurate data, but will take time depending on the number of files. Continue?")){
         var xhttp = new XMLHttpRequest();
@@ -696,6 +731,7 @@ function getRequestUpdateRecords(){
     xhttp.send();
 }
 
+//Signs out of account, and sends user back to the login page.
 function getRequestSignOut(){
     if (confirm("Logging off account. Continue?")){
         var xhttp = new XMLHttpRequest();
@@ -730,13 +766,15 @@ function getRequestSignOut(){
     xhttp.send();
 }
 
+//Establishes variables for other functions.
 let wakeLock = null;
 let count = 0;
 let jArray = <?php echo json_encode($fObject); ?>;
-disableButtons("ALL");
-
 let logcookie = getCookie('log');
 let cwdcookie = getCookie('cwd');
+
+//Main JS code body.
+disableButtons("ALL");
 document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', logcookie);
         window.onload = function () {
             setTimeout(function () {
@@ -748,10 +786,5 @@ document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', logcookie);
             displayFiles(cwdcookie);
             }, 2500); // Delay of 5 seconds
         };
-
-
-
-
 </script>
-
 </html>
