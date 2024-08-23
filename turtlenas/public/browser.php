@@ -423,7 +423,7 @@ function deactivateWakeLock(){
     });
 }
 
-//Processes request for deleting files and folders.
+//Request for deleting files and folders.
 function getRequestDelete(){
     if (confirm("You are about to DELETE "+count+" File(s). Continue?")){
         var xhttp = new XMLHttpRequest();
@@ -458,7 +458,7 @@ function getRequestDelete(){
     xhttp.send(formData);
 }
 
-//Processes request for uploading files.
+//Request for uploading files.
 async function getRequestUploadFile(){
     var xhttp = new XMLHttpRequest();
     var formData = new FormData( document.getElementById("uploadFile") );
@@ -490,7 +490,7 @@ async function getRequestUploadFile(){
     xhttp.send(formData);
 }
 
-//Processes request for creating a directory.
+//Request for creating a directory.
 async function getRequestMakeDir(){
     var xhttp = new XMLHttpRequest();
     var formData = new FormData( document.getElementById("makeDir") );
@@ -523,7 +523,7 @@ async function getRequestMakeDir(){
     xhttp.send(formData);
 }
 
-//Processes request for uploading a directory.
+//Request for uploading a directory.
 function getRequestUploadDir(){
     var xhttp = new XMLHttpRequest();
     var formData = new FormData( document.getElementById("uploadDir") );
@@ -555,7 +555,7 @@ function getRequestUploadDir(){
     xhttp.send(formData);
 }
 
-//Processes request for downloading an Zip file.
+//Request for downloading an Zip file.
 function getRequestDownloadZip(){
     var xhttp = new XMLHttpRequest();
     var log = "> Downloading zip...<br>";
@@ -588,7 +588,7 @@ function getRequestDownloadZip(){
     xhttp.send();
 }
 
-//Processes request for downloading an encrypted Zip file.
+//Request for downloading an encrypted Zip file.
 function getRequestDownloadZipEN(){
     let formPrompt = prompt("Please type a password to use for your encrypted zip.");
     var form = document.getElementById("downloadZipENForm");
@@ -631,7 +631,7 @@ function getRequestDownloadZipEN(){
     xhttp.send(formData);
 }
 
-//Processes request for downloading a plain-text tar file of the current folder.
+//Request for downloading a plain-text tar file of the current folder.
 function getRequestDownloadTar(){
     var xhttp = new XMLHttpRequest();
     var log = "> Downloading tar...<br>";
@@ -664,7 +664,7 @@ function getRequestDownloadTar(){
     xhttp.send();
 }
 
-//Processes request for downloading a encrypted tar file of the current folder.
+//Request for downloading a encrypted tar file of the current folder.
 function getRequestDownloadTarEN(){
     let formPrompt = prompt("Please type a password to use for your encrypted tar.");
     var form = document.getElementById("downloadTarENForm");
@@ -707,7 +707,7 @@ function getRequestDownloadTarEN(){
     xhttp.send(formData);
 }
 
-//Requests to update the file DB.
+//Request to update the file DB.
 function getRequestUpdateRecords(){
     if (confirm("Refreshing the DataBase can fix files not appearing and inaccurate data, but will take time depending on the number of files. Continue?")){
         var xhttp = new XMLHttpRequest();
@@ -742,7 +742,7 @@ function getRequestUpdateRecords(){
     xhttp.send();
 }
 
-//Requests to sign out of account, and sends user back to the login page.
+//Request to sign out of account, and sends user back to the login page.
 function getRequestSignOut(){
     if (confirm("Logging off account. Continue?")){
         var xhttp = new XMLHttpRequest();
