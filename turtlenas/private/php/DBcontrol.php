@@ -430,7 +430,7 @@ class DBcontrol {
         }
     }
 
-    // Verify Session.
+    // Verifies Session, allows user or returns user to the login page.
     public function validate_auth() {
         $validated = $_SESSION['allowed'];
         switch ($validated) {
@@ -443,7 +443,7 @@ class DBcontrol {
         }
     }
 
-    // Verify Privlige.
+    // Verifies Privlige, allows user or returns user to the login page.
     public function validate_priv() {
         $privlige = $_SESSION['admin_status'];
         switch ($privlige) {
