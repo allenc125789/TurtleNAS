@@ -14,10 +14,12 @@ class DBcontrol {
     private $pass;
     private $charset;
 
+    //Sends user back to the login screen.
     public function redirect_login(){
         header('Location: /login.html');
     }
 
+    //Establishes connection to MariaDB.
     public function get_connection(){
         $this->host = "localhost";
         $this->dbname = "turtlenas";
@@ -34,11 +36,13 @@ class DBcontrol {
         }
     }
 
+    //Delete session for user when signing out.
     public function signout(){
         session_start();
         session_destroy();
     }
 
+    //get the file size for files, and converts it to human readable format.
     public function prepFileSize($fullpath, $size='0', $unit=''){
         if (is_dir($fullpath)){
             $scandir = $this->scanDirAndSubdir($fullpath, $_FilesOnly = TRUE);
@@ -59,12 +63,14 @@ class DBcontrol {
         return number_format($size)."B";
     }
 
+    //get the date for the last modified time of a file.
     public function prepFileDate($fullpath){
         if (file_exists($fullpath)) {
             return date("m/d/y (H:i:s)", filemtime($fullpath));
         }
     }
 
+    //creates a hash for files and folders.
     public function prepFileHash($fullpath, $hfile = ''){
         if ((file_exists($fullpath)) && (!is_dir($fullpath))) {
             return hash_file('sha224', "$fullpath");
@@ -77,6 +83,7 @@ class DBcontrol {
         }
     }
 
+    //Fetches disk information, and root folder for users.
     public function getDiskByUser(){
         $username = $_SESSION['sessuser'];
         $stmt = $this->get_connection()->query("SELECT * FROM drives WHERE user = '$username'");
@@ -87,54 +94,15 @@ class DBcontrol {
         return $username;
     }
 
-    public function getShortPath($fullpath){
-        $username = $_SESSION['sessuser'];
-        $root = $this->getRootByUser();
-        $parent = str_replace($root,'',$fullpath);
-        if ("$fullpath/" == $root){
-            $parent = '/';
-            return $parent;
-        } else {
-            return "/$parent/";
-        }
-    }
-
+    //gets the full path for a file, based on the user's designated root folder.
     public function getFullPath($shortpath){
         $root = $this->getRootByUser();
         $filename = ($root . $shortpath);
-//        $fullpath = str_replace("\'", "\\'", $filename);
         return $filename;
     }
 
-    public function getFullPathByHash($hash){
-        $username = $_SESSION['sessuser'];
-        $stmt = $this->get_connection()->query("SELECT fullpath FROM files_$username WHERE hash = '$hash'");
-        while ($row = $stmt->fetch()){
-            $fullpath = $row['fullpath'];
-            return $fullpath;
-        }
-    }
-
-    public function getNameByHash($hash){
-        $username = $_SESSION['sessuser'];
-        $stmt = $this->get_connection()->query("SELECT name FROM files_$username WHERE hash = '$hash'");
-        while ($row = $stmt->fetch()){
-            $fullpath = $row['fullpath'];
-            return $fullpath;
-        }
-    }
-
-    public function getParentByHash($hash){
-        $username = $_SESSION['sessuser'];
-        $stmt = $this->get_connection()->query("SELECT parent FROM files_$username WHERE hash = '$hash'");
-        while ($row = $stmt->fetch()){
-            $fullpath = $row['fullpath'];
-            return $fullpath;
-        }
-    }
-
-
-    public function getFTimeByPath($fullpath){
+    //gets the mtime for when a file was last modified.
+    public function getMTimeByPath($fullpath){
         $username = $_SESSION['sessuser'];
         $stmt = $this->get_connection()->query("SELECT mtime FROM files_$username WHERE fullpath = '$fullpath'");
         while ($row = $stmt->fetch()){
@@ -143,6 +111,7 @@ class DBcontrol {
         }
     }
 
+    //Get file records for user view in the file browser.
     public function getFilesForDisplay(){
         $username = $_SESSION['sessuser'];
         $stmt = $this->get_connection()->query("SELECT * FROM files_$username");
@@ -153,6 +122,7 @@ class DBcontrol {
         return $data;
     }
 
+    //Get the user's root directory
     public function getRootByUser(){
         $username = $_SESSION['sessuser'];
         $stmt = $this->get_connection()->query("SELECT * FROM drives WHERE user = '$username'");
@@ -162,27 +132,7 @@ class DBcontrol {
         }
     }
 
-
-    public function getPathByPath($data = ''){
-        $username = $_SESSION['sessuser'];
-        $stmt = $this->get_connection()->query("SELECT fullpath FROM files_$username");
-        while ($row = $stmt->fetch()){
-            $newpath = $row['fullpath'];
-            $data .= ("$newpath|");
-            $sqlpaths = explode('|', $data);
-        }
-        return $sqlpaths;
-    }
-
-    public function getHashByPath($fullpath, $data = '', $sqlhash = ''){
-        $username = $_SESSION['sessuser'];
-        $stmt = $this->get_connection()->query("SELECT hash FROM files_$username WHERE fullpath = '$fullpath'");
-        while ($row = $stmt->fetch()){
-            $sqlhash = $row['hash'];
-        }
-        return $sqlhash;
-    }
-
+    //function to delete files and directories.
     public function deleteFile(){
         $post = $_POST['fileToDelete'];
         $username = $_SESSION['sessuser'];
@@ -213,10 +163,8 @@ class DBcontrol {
         $_POST = array();
     }
 
+    //Function to create new directories.
     public function createDir($post){
-        error_reporting(-1); // display all faires
-        ini_set('display_errors', 1);  // ensure that faires will be seen
-        ini_set('display_startup_errors', 1); // display faires that didn't born
         $username = $_SESSION['sessuser'];
         $cookie = urldecode($_COOKIE['cwd']);
         $parent = ltrim($cookie, "/");
@@ -236,6 +184,7 @@ class DBcontrol {
         }
     }
 
+    //String Filter/Blacklist. Returns a 406 error.
     function filterString($dir){
         if (preg_match('/[\"^£$%&*;}\\\{@#~?><,|=¬]/', $dir)){
             header("HTTP/1.1 406 Not Acceptable");
@@ -244,6 +193,7 @@ class DBcontrol {
     }
 
 
+    //creates an array from file names passed through POST to iterate through.
     function reArrayFiles(&$file_post) {
         $file_ary = array();
         $file_count = count($file_post['name']);
@@ -256,14 +206,13 @@ class DBcontrol {
         return $file_ary;
     }
 
+    //Moves and orders files uploaded from the browser.
     public function uploadFile(){
         $cookie = $_COOKIE['cwd'];
         $username = $_SESSION['sessuser'];
         $path = urldecode($cookie);
         $fullpath = $this->getFullPath($cookie);
         $sqlArray = array();
-
-
         if (isset($_FILES['file'])){
             $file_array = $this->reArrayFiles($_FILES['file']);
             for ($i=0;$i<count($file_array);$i++){
@@ -279,10 +228,8 @@ class DBcontrol {
         }
     }
 
+    //Moves and orders folders uploaded from the browser.
     public function uploadDir(){
-        error_reporting(-1); // display all faires
-        ini_set('display_errors', 1);  // ensure that faires will be seen
-        ini_set('display_startup_errors', 1); // display faires that didn't born
         $username = $_SESSION['sessuser'];
         $cookie = urldecode($_COOKIE['cwd']);
         $parent = ltrim($cookie, "/");
@@ -318,6 +265,7 @@ class DBcontrol {
         }
     }
 
+    //Updates the size of parent folder records when new files are uploaded.
     public function updateParentRecords(){
         $cwd = urldecode($_COOKIE['cwd']);
         $root = $this->getRootByUser();
@@ -327,7 +275,6 @@ class DBcontrol {
         for ($i=0;$i<count($dirNames);$i++){
             if ($dirNames[$i] !== "" && $dirNames[$i] !== $root){
                 $parent .= $dirNames[$i] . "/";
-//                $this->updateFileRecord($parent, $_REFRESH_DB = FALSE);
                 $parentArray[] .= $parent;
             }
         }
@@ -339,22 +286,22 @@ class DBcontrol {
 
     }
 
-
-    public function getDownload($check = FALSE){
+    //Download selected files or folders.
+    public function getDownload($needsRoot = TRUE){
         $username = $_SESSION['sessuser'];
         $path = urldecode($_SERVER['QUERY_STRING']);
         $shortpath = str_replace("$username:", '', $path);
         $download = urldecode($_COOKIE['download']);
-        if ($check == FALSE){
-            $file = $this->getRootByUser($username) . $shortpath;
+        if ($needsRoot == TRUE){
+            $fullpath = $this->getRootByUser($username) . $shortpath;
         } else {
-            $file = "/tmp/" . $download;
+            $fullpath = "/tmp/" . $download;
         }
-        $mime = mime_content_type($file);
-        $file = urldecode(trim(stripslashes($file)));
+        $mime = mime_content_type($fullpath);
+        $fullpath = urldecode(trim(stripslashes($fullpath)));
         header('Content-Type: ' . $mime);
         if (!isset($_COOKIE['filename'])){
-            header('Content-Disposition: attachment; filename=' . basename($file));
+            header('Content-Disposition: attachment; filename=' . basename($fullpath));
         } else {
             header('Content-Disposition: attachment; filename=' . urldecode($_COOKIE['filename']));
         }
@@ -362,16 +309,16 @@ class DBcontrol {
         header('Expires: 0');
         header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
         header('Pragma: public');
-        header('Content-Length: ' . filesize($file));
+        header('Content-Length: ' . filesize($fullpath));
         ob_clean();
         flush();
         setcookie("download", "");
         setcookie("filename", "");
-        readfile($file);
+        readfile($fullpath);
         exit;
     }
 
-
+    //Creates a zip folder for downloading.
     public function execZipFolder($post = ''){
         $post = urldecode($post);
         $query = urldecode($_SERVER['QUERY_STRING']);
@@ -389,6 +336,7 @@ class DBcontrol {
         setcookie("filename", $basename . ".zip");
     }
 
+    //Create a tar file for downloading.
     public function execTarFolder($post = ''){
         $post = urldecode($post);
         $query = urldecode($_SERVER['QUERY_STRING']);
@@ -409,12 +357,14 @@ class DBcontrol {
         }
     }
 
+    //Delete all records for a user's files.
     public function deleteAllRecords(){
         $username = $_SESSION['sessuser'];
         $stmt = $this->get_connection()->prepare("DELETE FROM files_$username");
         $stmt->execute();
     }
 
+    //Delete a specific file by path.
     public function deleteRecordByPath($vfullpath){
         $vfullpath = addslashes($vfullpath);
         $username = $_SESSION['sessuser'];
@@ -423,6 +373,7 @@ class DBcontrol {
         $stmt->execute(['vfullpath' => $vfullpath]);
     }
 
+    //Function to set file records.
     public function getInsertFileRecord($vfullpath, $vparent, $vname, $vdate, $vsize, $vmtime){
         $username = $_SESSION['sessuser'];
         $stmt = $this->get_connection()->prepare("INSERT INTO files_$username (fullpath, parent, name, date, size, mtime) VALUES (:vfullpath, :vparent, :vname, :vdate, :vsize, :vmtime)");
@@ -435,45 +386,6 @@ class DBcontrol {
             'vmtime' => $vmtime,
         ]);
     }
-
-
-
-    public function getParentByCWD($cwd){
-        $username = $_SESSION['sessuser'];
-        $stmt = $this->get_connection()->query("SELECT fullpath FROM files_$username WHERE parent = $cwd");
-        while ($row = $stmt->fetch()){
-            $newpath = $row['fullpath'];
-        }
-        return $newpath;
-    }
-
-
-    public function getInsertLockRecord($vusername, $vstate){
-        $stmt = $this->get_connection()->prepare("INSERT INTO locks (user, state) VALUES (:vuser, :vstate)");
-        $stmt->execute([
-            'vuser' => $vusername,
-            'vstate' => $vstate,
-        ]);
-    }
-
-    public function getdeleteLockRecordByName(){
-        $vusername = $_SESSION['sessuser'];
-        $stmt = $this->get_connection()->prepare("DELETE FROM locks WHERE user = :vusername");
-        $stmt->bindParam(':vusername', $vusername, PDO::PARAM_STR);
-        $stmt->execute(['vusername' => $vusername]);
-    }
-
-    public function getLockByName(){
-        $username = $_SESSION['sessuser'];
-        $stmt = $this->get_connection()->query("SELECT user FROM locks WHERE user = '$username'");
-        while ($row = $stmt->fetch()){
-            $sqlhash = $row['state'];
-        }
-        return $sqlhash;
-    }
-
-
-//    public function save_to_file_manager($data=[]){
 
     public function user_auth($username, $password) {
         // Restricted users.
@@ -564,11 +476,11 @@ class DBcontrol {
         return $out;
     }
 
+    //Checks files from an array for updating records.
     public function updateFileRecord($afiles = NULL, $_REFRESH_DB = TRUE) {
         $username = $_SESSION['sessuser'];
         $mtime = '';
         $root = $this->getRootByUser();
-        $sqlpathcheck = $this->getPathByPath();
         if (is_null($afiles)){
             $bfiles = $this->scanDirAndSubdir($root);
         } else {
@@ -592,7 +504,6 @@ class DBcontrol {
             }
         }
     }
-
 }
 
 ?>
