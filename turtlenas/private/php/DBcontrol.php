@@ -373,7 +373,7 @@ class DBcontrol {
         $stmt->execute(['vfullpath' => $vfullpath]);
     }
 
-    //Function to set file records.
+    //Function to set file records passed from updateFileRecord.
     public function getInsertFileRecord($vfullpath, $vparent, $vname, $vdate, $vsize, $vmtime){
         $username = $_SESSION['sessuser'];
         $stmt = $this->get_connection()->prepare("INSERT INTO files_$username (fullpath, parent, name, date, size, mtime) VALUES (:vfullpath, :vparent, :vname, :vdate, :vsize, :vmtime)");
