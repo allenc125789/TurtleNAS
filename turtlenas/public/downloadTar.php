@@ -10,7 +10,7 @@ if($verify){
         $post = $_POST['tmpPass'];
         $output = $control->execTarFolder($post);
     } else {
-        $control->getDownload(TRUE);
+        $control->getDownload(FALSE);
     }
 }
 ?>
