@@ -175,22 +175,27 @@ function removeElementsByClass(className){
         elements[0].parentNode.removeChild(elements[0]);
     }
 }
+
 //Refreshes the file-table and organizes files for display when called.
 function displayFiles(cwdURI){
+    //Establishes table variables.
     var userName = <?php echo json_encode($username); ?>;
     var cwd = decodeURIComponent(cwdURI);
     var table = document.getElementById("fileTables");
     var form0 = document.createElement('form');
     var form = document.getElementById('deleteForm');
+    //Prepares table for contents.
     countReset();
     removeElementsByClass('tableItems');
     document.cookie = "cwd="+cwd;
     form.textContent = '';
     table.append(form0);
+    //If files are found, start processing them into the table.
     if (jArray !== null){
         for (var i=0; i<jArray.length; i++){
             const fileArray = jArray[i].split("|");
             if (cwd == fileArray[3]){
+               //Establishes table content variables.
                 var row = table.insertRow(-1);
                 var cell0 = row.insertCell(0);
                 var cell1 = row.insertCell(1);
@@ -199,27 +204,33 @@ function displayFiles(cwdURI){
                 var dir = fileArray[3].concat(fileArray[0]);
                 var dirURI = encodeURIComponent(fileArray[3].concat(encodeURIComponent(fileArray[0])));
                 var checkboxes = document.createElement("INPUT");
+                //Sets row class name.
+                row.className = "tableItems";
+                //Sets checkbox attributes, according to the file in their row.
                 checkboxes.setAttribute("type", "checkbox");
                 checkboxes.setAttribute("class", "cb");
                 checkboxes.setAttribute("name", "fileToDelete[]");
                 checkboxes.setAttribute("id", fileArray[0]);
                 checkboxes.setAttribute("value", fileArray[0]);
+                //Sets cell 0 as a checkbox.
                 cell0.appendChild(checkboxes);
+                cell0.setAttribute("class", "checks");
+                //Sets Cell 1 as a file or a directory.
                 if (!dir.endsWith("/")){
                     cell1.insertAdjacentHTML('beforeEnd', "<img id='fileIcon' src='/images/file-icon.png'><a href=download.php?"+dirURI+">"+fileArray[0]);
                 } else {
                     cell1.insertAdjacentHTML('beforeEnd', "<img id='folderIcon' src='/images/folder-icon.png'></img><a href=javascript:displayFiles(\""+dirURI+"\")>"+fileArray[0]);
                 }
-                console.log(cwd);
-                cell0.setAttribute("class", "checks");
+                //Sets cell 2 as the size of the file.
                 cell2.innerHTML = fileArray[2];
                 cell2.setAttribute("class", "sizeItems");
+                //Sets cell 3 as the date of when the file was last modified.
                 cell3.innerHTML = fileArray[1];
                 cell3.setAttribute("class", "dateItems");
-                row.className = "tableItems";
             }
         }
     }
+    //Sets directory traversal buttons.
     var wayBack = document.getElementById('wayBack');
     var returnButton = document.getElementById('return');
     if (cwd !== "/"){
@@ -232,9 +243,9 @@ function displayFiles(cwdURI){
     }
     returnButton.setAttribute("onclick", "javascript:displayFiles('%2F');return false;");
     document.getElementById('displayCwd').textContent = userName+":"+cwd;
+    //Sets event listeners on checkboxes.
     selectedItemsCount();
 }
-
 
 //Disables buttons by ID, or "ALL" for all buttons.
 function disableButtons(ID){
@@ -369,7 +380,7 @@ function countReset(){
     }
 }
 
-//Keeps track of number of checkboxes checked to determine if the delete button should be active.
+//Adds listening events to track checkboxes being checked, determining if the delete button should be active.
 function selectedItemsCount(){
    var form = document.getElementById('deleteForm');
    var results = document.getElementsByClassName("cb");
@@ -731,7 +742,7 @@ function getRequestUpdateRecords(){
     xhttp.send();
 }
 
-//Signs out of account, and sends user back to the login page.
+//Requests to sign out of account, and sends user back to the login page.
 function getRequestSignOut(){
     if (confirm("Logging off account. Continue?")){
         var xhttp = new XMLHttpRequest();
