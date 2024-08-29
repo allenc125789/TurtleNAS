@@ -3,7 +3,7 @@
 require_once("../private/php/DBcontrol.php");
 $control = new DBcontrol;
 
-#Calls the Delete function on verification.
+#Delete files/folders.
 $verify = $control->validate_auth();
 if($verify){
     $control->deleteFile();
