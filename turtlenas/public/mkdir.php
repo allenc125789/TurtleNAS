@@ -9,4 +9,5 @@ if($verify){
     $control->createDir($post);
     header("Location: /browser.php");
 }
+
 ?>
