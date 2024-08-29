@@ -3,7 +3,7 @@
 require_once("../private/php/DBcontrol.php");
 $control = new DBcontrol;
 
-#Calls the Download function on verification.
+#Download files/folders.
 $verify = $control->validate_auth();
 if($verify){
     $control->getDownload();
