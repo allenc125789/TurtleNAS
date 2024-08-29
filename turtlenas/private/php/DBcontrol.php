@@ -38,7 +38,6 @@ class DBcontrol {
 
     //Delete session for user when signing out.
     public function signout(){
-        session_start();
         session_destroy();
     }
 
