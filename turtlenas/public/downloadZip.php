@@ -1,4 +1,5 @@
 <?php
+
 require_once("../private/php/DBcontrol.php");
 $control = new DBcontrol;
 
@@ -13,4 +14,5 @@ if($verify){
         $control->getDownload(FALSE);
     }
 }
+
 ?>
