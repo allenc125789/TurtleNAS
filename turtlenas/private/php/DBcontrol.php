@@ -250,8 +250,7 @@ class DBcontrol {
                 foreach ($uniqueDir as $dir){
                     $this->updateFileRecord($dir . "/", $_REFRESH_DB = FALSE);
                 }
-                // For Windows compatibility. Windows will not create a record for the root folder of what's-
-                // uploaded in uploadDir() without the following.
+                // For Windows compatibility. Windows will not create a record for whats uploaded by uploadDir() without the following.
                 for ($i=0;$i<count($file_array);$i++){
                     $file = $file_array[$i]['full_path'];
                     $fileFilter[] = substr($file, 0, strpos($file, "/"));
