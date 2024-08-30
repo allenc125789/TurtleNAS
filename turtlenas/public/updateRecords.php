@@ -1,5 +1,5 @@
 <?php
-require_once("../private/php/DBcontrol.php");
+require_once("../private/php/DBcontrol.browser.php");
 $control = new DBcontrol;
 
 #Update user's SQL file databases. 
