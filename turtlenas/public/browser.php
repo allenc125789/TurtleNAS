@@ -1,5 +1,5 @@
 <?php
-require_once "../private/php/DBcontrol.browser.php";
+require_once "../private/php/DBcontrol.php";
 $control = new DBcontrol;
 
 error_reporting(-1); // display all faires
@@ -217,7 +217,7 @@ function displayFiles(cwdURI){
                 cell0.setAttribute("class", "checks");
                 //Sets Cell 1 as a file or a directory.
                 if (!dir.endsWith("/")){
-                    cell1.insertAdjacentHTML('beforeEnd', "<img id='fileIcon' src='/images/file-icon.png'><a href=browser-components/download.php?"+dirURI+">"+fileArray[0]);
+                    cell1.insertAdjacentHTML('beforeEnd', "<img id='fileIcon' src='/images/file-icon.png'><a href=download.php?"+dirURI+">"+fileArray[0]);
                 } else {
                     cell1.insertAdjacentHTML('beforeEnd', "<img id='folderIcon' src='/images/folder-icon.png'></img><a href=javascript:displayFiles(\""+dirURI+"\")>"+fileArray[0]);
                 }
