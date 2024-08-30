@@ -1,6 +1,6 @@
 <?php
 
-require_once("../private/php/DBcontrol.php");
+require_once("../private/php/DBcontrol.browser.php");
 $control = new DBcontrol;
 
 #Download a zip file of a folder. Encryption depending on query as args.
