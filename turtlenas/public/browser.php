@@ -784,8 +784,9 @@ let cwdcookie = getCookie('cwd');
 disableButtons("ALL");
 document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', logcookie);
         window.onload = function () {
-            enableButtons("ALL");
-            displayFiles(cwdcookie);
+            setTimeout(function () {
+                enableButtons("ALL");
+                displayFiles(cwdcookie);
             }, 2500); // Delay of 5 seconds
         };
 </script>
