@@ -2,10 +2,6 @@
 require_once "../private/php/DBcontrol.php";
 $control = new DBcontrol;
 
-error_reporting(-1); // display all faires
-ini_set('display_errors', 1);  // ensure that faires will be seen
-ini_set('display_startup_errors', 1); // display faires that didn't born
-
 //Verfies creds.
 $verify = $control->validate_auth();
 if ($verify){
@@ -788,11 +784,6 @@ let cwdcookie = getCookie('cwd');
 disableButtons("ALL");
 document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', logcookie);
         window.onload = function () {
-            setTimeout(function () {
-                if (jArray === null){
-                    disableButtons("ALL");
-                    getRequestUpdateRecords();
-                }
             enableButtons("ALL");
             displayFiles(cwdcookie);
             }, 2500); // Delay of 5 seconds
