@@ -36,6 +36,4 @@ These are bugs already known. Many I have plans to fix already, although some ar
 
 + Downloading "hidden/dotfiles" through a browser will append the filename if starting with a (.) dot. (Example: ".bashrc" --href--> "bashrc"). Uploading and backing up these files is fine otherwise, however if you download a hidden file, it is recommended doing so by using the "Zip Download". Problem could be due to nginx, or modern browser design appending it automatically. Unsure how to fix at the moment.
 
-+ Logging onto a web-user with no files already in their root directory will cause a reaccuring prompt to refresh the database, in an attempt to find files. This can be stopped by pressing cancel and uploading new files. I have ideas to fix, however this specific bug is a low priority for the moment.
-
 [Return to homepage.](https://github.com/allenc125789/TurtleNAS/blob/main/README.md#post-install--usage)
