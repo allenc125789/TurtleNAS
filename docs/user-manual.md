@@ -38,6 +38,4 @@ These are bugs already known. Many I have plans to fix already, although some ar
 
 + Logging onto a web-user with no files already in their root directory will cause a reaccuring prompt to refresh the database, in an attempt to find files. This can be stopped by pressing cancel and uploading new files. I have ideas to fix, however this specific bug is a low priority for the moment.
 
-+ Creating a new user or logging onto a profile with no files in their profile, will cause an infinite loading loop when entering the File-Browser in an attempt to find files. It can be stopped by pressing "Cancel" during the refresh prompt and uploading a file.
-
 [Return to homepage.](https://github.com/allenc125789/TurtleNAS/blob/main/README.md#post-install--usage)
