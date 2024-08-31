@@ -39,6 +39,6 @@ An Open-Source NAS system based on Debian. Offers a web-GUI, which includes a fi
 
 Open the server's IP or Hostname in an alternate browser (*example: https://192.168.0.20*), login to the web portal with the password you made on install. Username is `admin`.
 
-**If you encounter any errors or issues, please refer to the [User Manual](https://github.com/allenc125789/TurtleNAS/blob/main/extra/User-Manual.md), or make an issue request.**
+**If you encounter any errors or issues, please refer to the [User Manual](https://github.com/allenc125789/TurtleNAS/blob/main/docs/user-manual.md), or make an issue request.**
 
 
