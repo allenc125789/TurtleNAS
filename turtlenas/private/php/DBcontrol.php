@@ -426,11 +426,11 @@ class DBcontrol {
     }
 
     // Verifies Privlige, allows user or returns user to the login page.
-    public function validate_priv() {
+    public function validate_priv($group) {
         $username = $_SESSION['sessuser'];
-        $command = shell_exec(' sudo bash ../private/bash/group-check.sh '.escapeshellarg($username));
+        $command = shell_exec(' sudo bash ../private/bash/group-check.sh '.escapeshellarg($username)." ".escapeshellarg($group));
         switch ($command) {
-            case $username:
+            case 1:
                 return true;
                 break;
             default:
