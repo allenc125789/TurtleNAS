@@ -10,7 +10,7 @@ rules=$(echo "$string" | sed "s/$2:.*://g")
 spaces=$(echo "$rules" | sed "s/,/ /g")
 groupContent=( $spaces )
 
-# Compare to Admin Group.
+# Check if user is in group.
 if [[ ${groupContent[@]} =~ $1 ]]
 then
     echo "1"
