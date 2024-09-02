@@ -410,17 +410,7 @@ class DBcontrol {
             $this->redirect_login();
             exit;
         }
-        // Set Privlige through Bash.
-        $command2 = shell_exec(" bash ../private/bash/admin-check.sh $username 2>&1");
-        $output2 = "$command2";
-        // Admin True
-        if ($output2 == "1"){
-            $_SESSION['admin_status'] = 1;
-        // Admin False
-        } else{
-            $_SESSION['admin_status'] = 0;
-        }
-    }
+
 
     // Verifies Session, allows user or returns user to the login page.
     public function validate_auth() {
@@ -437,9 +427,10 @@ class DBcontrol {
 
     // Verifies Privlige, allows user or returns user to the login page.
     public function validate_priv() {
-        $privlige = $_SESSION['admin_status'];
-        switch ($privlige) {
-            case 1:
+        $username = $_SESSION['sessuser'];
+        $command = shell_exec(' sudo bash ../private/bash/group-check.sh '.escapeshellarg($username));
+        switch ($command) {
+            case $username:
                 return true;
                 break;
             default:
