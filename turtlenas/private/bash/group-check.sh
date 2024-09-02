@@ -1,12 +1,19 @@
 #!/bin/bash
 
-# $1=Username
+# $=Username, $2=Group requested
 
 # Used to check admin group privlige.
-groupVar=$(groups $1)
+string=$(getent group $2)
 
 # Parsing.
-groups=$(echo "$groupVar" | sed "s/$1 : //g")
+rules=$(echo "$string" | sed "s/$2:.*://g")
+spaces=$(echo "$rules" | sed "s/,/ /g")
+groupContent=( $spaces )
 
-# Present groups.
-echo $groups
+# Compare to Admin Group.
+if [[ ${groupContent[@]} =~ $1 ]]
+then
+    echo "1"
+else
+    echo "0"
+fi
