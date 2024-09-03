@@ -6,7 +6,7 @@ $control = new DBcontrol;
 $verify = $control->validate_auth();
 $verifyPriv = $control->validate_priv();
 if($verify && $verifyPriv){
-    $control->deleteFile();
+    echo("hi");
 }
 
 
