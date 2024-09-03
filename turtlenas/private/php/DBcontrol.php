@@ -412,6 +412,7 @@ class DBcontrol {
         }
     }
 
+
     // Verifies Session, allows user or returns user to the login page.
     public function validate_auth() {
         $validated = $_SESSION['allowed'];
@@ -427,8 +428,14 @@ class DBcontrol {
 
     // Verifies Privlige, allows user or returns user to the login page.
     public function validate_priv($group) {
+        error_reporting(-1); // display all faires
+        ini_set('display_errors', 1);  // ensure that faires will be seen
+        ini_set('display_startup_errors', 1); // display faires that didn't born
+
+
         $username = $_SESSION['sessuser'];
-        $command = shell_exec(' sudo bash ../../../private/bash/validate-group.sh '.escapeshellarg($username)." ".escapeshellarg($group));
+        $command = shell_exec(' bash ../../../private/bash/validate-group.sh '.escapeshellarg($username)." ".escapeshellarg($group));
+        $output = var_dump($command);
         switch ($command) {
             case 1:
                 return true;
