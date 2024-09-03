@@ -5,7 +5,7 @@ $control = new DBcontrol;
 
 $verify = $control->validate_auth();
 $verifyPriv = $control->validate_priv();
-if($verify && $verifyPriv){
+if($verify && $verifyPriv("admin")){
     echo("hi");
 }
 
