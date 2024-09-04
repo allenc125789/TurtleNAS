@@ -430,7 +430,7 @@ class DBcontrol {
         $username = $_SESSION['sessuser'];
         $group = 'admin';
         $command = shell_exec(' bash ../private/bash/validate-group.sh '.escapeshellarg($username)." ".escapeshellarg($group));
-        $output = var_dump($command);
+//        $output = var_dump($command);
         switch ($command) {
             case 1:
                 return true;
