@@ -425,7 +425,20 @@ class DBcontrol {
                 break;
         }
     }
-
+    
+    public function validate_priv($group = 'admin') {
+        $username = $_SESSION['sessuser'];
+        $command = shell_exec(' bash ../private/bash/validate-group.sh '.escapeshellarg($username)." ".escapeshellarg($group));
+        $output = var_dump($command);
+        switch ($command) {
+            case 1:
+                return true;
+                break;
+            default:
+                $this->redirect_login();
+                break;
+        }
+    }
     // Function to fetch file list from directory.
     public function scanDirAndSubdir($dir, $_FilesOnly = FALSE, &$out = []) {
         $username = $_SESSION['sessuser'];
