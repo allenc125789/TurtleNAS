@@ -66,12 +66,14 @@ if ($verify){
     <label for="file" id="fileTxt" class="buttonTxt">Upload File</label>
     <input class="buttons" type="file" onchange="getRequestUploadFile()" id="file" name="file[]" multiple="">
     </form>
+    <br><br>
 
     <!--Upload directory button.-->
     <?php echo "<form id='uploadDir' action='/uploadDir.php' method='POST' enctype='multipart/form-data'>"?>
     <label for="dir" id="dirTxt" class="buttonTxt">Upload Folder</label>
     <input class="buttons" type="file" onchange="getRequestUploadDir()" id="dir" name="dir[]" directory webkitdirectory mozdirectory multiple />
     </form>
+    <br><br>
 
     <!--Create directory button.-->
     <?php echo "<form id='makeDir' onsubmit='getRequestMakeDir()' taget='_self' method='POST'>"?>
