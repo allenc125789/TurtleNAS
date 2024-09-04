@@ -143,7 +143,7 @@ if ($verify){
     <label for="signOut" id="signOutTxt" class="buttonTxt">Log-out</label>
     <button class="buttons" id="signOut" onclick="getRequestSignOut()"></button>
 
-    <?php if($verifyPriv){include("../private/html/admin-button.html");}?>
+    <?php if($verifyPriv){include("../private/html/browser-AdminButton.html");}?>
 </div>
 
 <!--Screen blocking div for when a request is "loading".-->
