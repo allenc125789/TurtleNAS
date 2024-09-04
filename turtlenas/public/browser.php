@@ -4,6 +4,7 @@ $control = new DBcontrol;
 
 //Verfies creds.
 $verify = $control->validate_auth();
+$verifyPriv = $control->validate_priv();
 if ($verify){
     $username = $_SESSION['sessuser'];
     $fObject = $control->getFilesForDisplay();
@@ -140,7 +141,7 @@ if ($verify){
     <label for="signOut" id="signOutTxt" class="buttonTxt">Log-out</label>
     <button class="buttons" id="signOut" onclick="getRequestSignOut()"></button>
 
-<?php?>
+<?phpif($validate_priv){include(../private/html/admin-button.php);}?>
 </div>
 
 <!--Screen blocking div for when a request is "loading".-->
