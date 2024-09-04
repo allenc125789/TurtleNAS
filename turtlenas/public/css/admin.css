@@ -9,3 +9,18 @@
     padding-left: 1%;
     background-color: lightgrey;
 }
+
+.buttons{
+  display: none;
+}
+
+.buttonTxt {
+  font-size: 75%;
+  border: 2px outset #ccc;
+  border-radius: 8px;
+  display: inline-block;
+  padding: 2% 4%;
+  cursor: pointer;
+  background-color: #e1e1e1;
+}
+.buttonTxt:hover {background-color: white;}
