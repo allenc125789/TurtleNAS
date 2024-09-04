@@ -3,7 +3,7 @@
 >
 > I'll be constructing the admin page, an automated backup system, cleaning code, and revaluating functionality/methodology as soon as possible.
 >
-[Update-logs](https://github.com/allenc125789/TurtleNAS/tree/main/docs/update-logs),
+[Update-logs](https://github.com/allenc125789/TurtleNAS/blob/dev/docs/update-logs/Change-Logs.md),
 [Planned Updates](https://github.com/allenc125789/TurtleNAS/blob/main/docs/update-logs/Planned-Updates.md),
 [Work-Flow](https://github.com/allenc125789/TurtleNAS/blob/main/docs/images/project-tracking/TurtleNAS-FlowChart.png)
 
