@@ -6,6 +6,14 @@
 </head>
 
 <div id="actionMenuDiv" class="actionMenuDiv">
+</div>
+
+<!--Account Management section.-->
+<div id='accountMenuDiv'>
+    <!--Button to sign out of account.-->
+    <label for="signOut" id="signOutTxt" class="buttonTxt">Log-out</label>
+    <button class="buttons" id="signOut" onclick="getRequestSignOut()"></button>
+
     <!--Button to switch to the browser view.-->
     <form action='/browser.php' method='POST'>
     <label for="adminView" id="adminViewTxT" class="buttonTxt">Browser-View</label>
