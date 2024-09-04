@@ -25,7 +25,6 @@ class DBcontrol {
     public function validate_priv($group) {
         $username = $_SESSION['sessuser'];
         $command = shell_exec(' bash ../../../private/bash/validate-group.sh '.escapeshellarg($username)." ".escapeshellarg($group));
-        $output = var_dump($command);
         switch ($command) {
             case 1:
                 return true;
