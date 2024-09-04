@@ -1,3 +1,8 @@
+
+08.29.2024
++ Cleaned and removed unused code.
++ Added comments to give a better description for each function and other specific/complex sections of the code.
+
 05.22.2024
 + multiple files can be uploaded.
 + files with spaces and special chars can be uploaded and downloaded and browseed
