@@ -139,6 +139,10 @@ if ($verify){
     <!--Button to sign out of account.-->
     <label for="signOut" id="signOutTxt" class="buttonTxt">Log-out</label>
     <button class="buttons" id="signOut" onclick="getRequestSignOut()"></button>
+
+    <!--Button to switch to the admin view.-->
+    <label for="adminView" id="adminViewTxt" class="buttonTxt">Admin View</label>
+    <button class="buttons" id="adminView" onclick="getRequestAdminView()"></button>
 </div>
 
 <!--Screen blocking div for when a request is "loading".-->
@@ -791,4 +795,3 @@ document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', logcookie);
         };
 </script>
 </html>
-
