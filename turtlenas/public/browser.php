@@ -140,8 +140,7 @@ if ($verify){
     <label for="signOut" id="signOutTxt" class="buttonTxt">Log-out</label>
     <button class="buttons" id="signOut" onclick="getRequestSignOut()"></button>
 
-    <!--Button to switch to the admin view.-->
-
+<?php?>
 </div>
 
 <!--Screen blocking div for when a request is "loading".-->
