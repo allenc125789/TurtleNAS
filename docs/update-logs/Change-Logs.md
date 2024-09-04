@@ -1,11 +1,11 @@
-09.04.2024
+## 09.04.2024
 + Added the "Admin-View" button, which allows user's to switch to admin pages, if said user is in Debian's 'admin' group.
 
-08.29.2024
+## 08.29.2024
 + Cleaned and removed unused code.
 + Added comments to give a better description for each function and other specific/complex sections of the code.
 
-05.22.2024
+## 05.22.2024
 + multiple files can be uploaded.
 + files with spaces and special chars can be uploaded and downloaded and browseed
 + files and empty folders can be deleted
