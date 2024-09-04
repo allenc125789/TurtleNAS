@@ -426,26 +426,6 @@ class DBcontrol {
         }
     }
 
-    // Verifies Privlige, allows user or returns user to the login page.
-    public function validate_priv($group) {
-        error_reporting(-1); // display all faires
-        ini_set('display_errors', 1);  // ensure that faires will be seen
-        ini_set('display_startup_errors', 1); // display faires that didn't born
-
-
-        $username = $_SESSION['sessuser'];
-        $command = shell_exec(' bash ../../../private/bash/validate-group.sh '.escapeshellarg($username)." ".escapeshellarg($group));
-        $output = var_dump($command);
-        switch ($command) {
-            case 1:
-                return true;
-                break;
-            default:
-                $this->redirect_login();
-                break;
-        }
-    }
-
     // Function to fetch file list from directory.
     public function scanDirAndSubdir($dir, $_FilesOnly = FALSE, &$out = []) {
         $username = $_SESSION['sessuser'];
