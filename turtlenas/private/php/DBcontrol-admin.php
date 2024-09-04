@@ -1,6 +1,12 @@
 <?php
+session_start();
+
 
 class DBcontrol {
+    //Sends user back to the login screen.
+    public function redirect_login(){
+        header('Location: /login.html');
+    }
 
     // Verifies Session, allows user or returns user to the login page.
     public function validate_auth() {
@@ -32,4 +38,4 @@ class DBcontrol {
 
 }
 
-<?
+?>
