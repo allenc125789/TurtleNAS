@@ -1,3 +1,5 @@
+09.04.2024
++ Added the "Admin-View" button, which allows user's to switch to admin pages, if said user is in Debian's 'admin' group.
 
 08.29.2024
 + Cleaned and removed unused code.
