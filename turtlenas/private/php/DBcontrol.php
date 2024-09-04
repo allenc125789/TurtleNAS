@@ -425,9 +425,10 @@ class DBcontrol {
                 break;
         }
     }
-    
-    public function validate_priv($group = 'admin') {
+
+    public function validate_priv() {
         $username = $_SESSION['sessuser'];
+        $group = 'admin';
         $command = shell_exec(' bash ../private/bash/validate-group.sh '.escapeshellarg($username)." ".escapeshellarg($group));
         $output = var_dump($command);
         switch ($command) {
