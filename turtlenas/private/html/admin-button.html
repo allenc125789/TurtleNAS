@@ -1,3 +1,5 @@
     <!--Button to switch to the admin view.-->
-    <label for="adminView" id="adminViewTxt" class="buttonTxt">Admin View</label>
-    <button class="buttons" id="adminView" onclick="location.href = /admin/system/general.php"></button>
+    <form action='/admin/system/general.php' method='POST'>
+    <label for="adminView" id="adminViewTxT" class="buttonTxt">Admin View</label>
+    <input class="buttons" id="adminView" type="submit">
+    </form>
