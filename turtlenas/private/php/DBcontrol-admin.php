@@ -1,3 +1,5 @@
+<?php
+
 class DBcontrol {
 
     // Verifies Privlige, allows user or returns user to the login page.
@@ -16,3 +18,5 @@ class DBcontrol {
     }
 
 }
+
+<?
