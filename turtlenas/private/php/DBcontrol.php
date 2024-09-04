@@ -436,7 +436,7 @@ class DBcontrol {
                 return true;
                 break;
             default:
-                $this->redirect_login();
+                return false;
                 break;
         }
     }
