@@ -1,6 +1,6 @@
 <?php
 
-require("../../../private/php/DBcontrol.php");
+require("../../../private/php/DBcontrol-admin.php");
 $control = new DBcontrol;
 
 $verify = $control->validate_auth();
