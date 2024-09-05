@@ -1,5 +1,10 @@
 ## 09.04.2024
++Added a page selection menu for speific admin pages
+
+## 09.04.2024
 +Added the "Admin-View" button, which allows user's to switch to admin pages, if said user is in Debian's 'admin' group.
+
++Created a group verifcation function, for group specific validation.
 
 ## 08.29.2024
 +Cleaned and removed unused code.
