@@ -41,7 +41,7 @@ form {display: inline;}
   display: inline-block;
   padding: 2%;
   cursor: pointer;
-  background-color: #e1e1e1;
+  background-color: #f0f0f0;
 }
 .dropdownTxt:hover {background-color: white;}
 
