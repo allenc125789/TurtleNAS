@@ -15,6 +15,12 @@ form {display: inline;}
     background-color: lightgrey;
 }
 
+.pageContents {
+  position: absolute;
+  left: 20%;
+  right: 0%;
+}
+
 .buttons{
   display: none;
 }
