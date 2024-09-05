@@ -11,3 +11,5 @@
 ~ Need to create an IP based-blacklist logging and banning system. Probably by a bash or php based function logging into mariadb
 
 ~ Create a dockerfile for easier deployment
+
+~ fix the hotbar of the browser. Currently it is a bit buggy. Will probably need a seperate div on the table item.
