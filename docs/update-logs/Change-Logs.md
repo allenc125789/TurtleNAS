@@ -2,7 +2,7 @@
 +Added a page selection menu for speific admin pages
 
 ## 09.04.2024
-+Added the "Admin-View" button, which allows user's to switch to admin pages, if said user is in Debian's 'admin' group.
++Added view changing buttons, which allows users to switch between the File Browser and Admin pages.
 
 +Created a group verifcation function, for group specific validation.
 
