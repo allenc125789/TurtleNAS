@@ -2,7 +2,7 @@
 +Added a page selection menu for speific admin pages
 
 ## 09.04.2024
-+Added view changing buttons, which allows users to switch between the File Browser and Admin pages.
++Added view changing buttons, which allows users to switch between the File Browser and Admin pages, if said user is in the 'admin' group.
 
 +Created a group verifcation function, for group specific validation.
 
