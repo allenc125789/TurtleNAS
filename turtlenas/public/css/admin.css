@@ -41,14 +41,14 @@ form {display: inline;}
   display: inline-block;
   padding: 2%;
   cursor: pointer;
-  background-color: #f0f0f0;
+  background-color: #eee;
 }
 .dropdownTxt:hover {background-color: white;}
 
 .dropdownItem {
   width: 95%;
   font-size: 75%;
-  border: 2px outset #ccc;
+  border-bottom: 2px solid #7b7b7b;
   display: inline-block;
   padding: 2%;
   cursor: pointer;
