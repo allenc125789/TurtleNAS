@@ -1,4 +1,5 @@
 var dropdown = document.getElementsByClassName("dropdown-btn");
+var dropdownTxt = document.getElementsByClassName("dropdownTxt");
 var i;
 
 for (i = 0; i < dropdown.length; i++) {
@@ -10,5 +11,11 @@ for (i = 0; i < dropdown.length; i++) {
     } else {
       dropdownContent.style.display = "block";
     }
+  });
+}
+
+for (i = 0; i < dropdownTxt.length; i++) {
+  dropdownTxt[i].addEventListener("click", function() {
+    this.classList.toggle("active");
   });
 }
