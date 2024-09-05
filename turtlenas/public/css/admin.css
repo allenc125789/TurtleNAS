@@ -19,6 +19,10 @@ form {display: inline;}
   display: none;
 }
 
+.dropdown-btn{
+  display: none;
+}
+
 .buttonTxt {
   font-size: 75%;
   border: 2px outset #ccc;
