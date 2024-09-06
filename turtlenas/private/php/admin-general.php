@@ -25,7 +25,7 @@ function execPrint($command){
 $printUptime = execPrintUptime();
 $printHostname = execPrint("hostname");
 $printDomainname = execPrint("domainname");
-$printIP = execPrint("hostname -I");
+$printIP = execPrint("ip -o -f inet addr show | awk '/scope global/ {print $4}'");
 $printCPUs = execPrintCPUs();
 $printMem = execPrintMem();
 $printLinuxVersion = execPrint("cat /proc/version");
