@@ -6,10 +6,14 @@ Features include:
 + An activity log.
 
 Action buttons:
++ Log-out
++ Admin-View (Only available to admin group users
 + Upload Files
 + Upload Folders
 + Download
 + Delete
++ Refresh DB
++ Refresh Logs
 
 ![screenshot of the filebrowser.](https://github.com/allenc125789/TurtleNAS/blob/main/docs/images/screenshots/browser-page.png)
 
