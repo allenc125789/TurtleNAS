@@ -7,7 +7,7 @@ Features include:
 
 Action buttons:
 + Log-out
-+ Admin-View (Only available to admin group users
++ Admin-View (Only available to users in the admin group)
 + Upload Files
 + Upload Folders
 + Download
