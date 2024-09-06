@@ -6,10 +6,10 @@ Features include:
 + An activity log.
 
 Action buttons:
-+ Upload
++ Upload Files
++ Upload Folders
 + Download
 + Delete
-
 
 ![screenshot of the filebrowser.](https://github.com/allenc125789/TurtleNAS/blob/main/docs/images/screenshots/browser-page.png)
 
