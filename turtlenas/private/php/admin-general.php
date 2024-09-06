@@ -1,8 +1,4 @@
 <?php
-
-
-
-
 function execPrintUptime(){
     $uptime = shell_exec(' uptime -p');
     $uptime = ltrim($uptime, "up ");
