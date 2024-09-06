@@ -1,6 +1,9 @@
 <?php
 
-function printUptime(){
+
+
+
+function execPrintUptime(){
     $uptime = shell_exec(' uptime -p');
     $uptime = ltrim($uptime, "up ");
     return $uptime;
@@ -12,16 +15,24 @@ function execPrintCPUs(){
     return $grep;
 }
 
-function execPrint($command){
-    $uptime = shell_exec(" $command");
-    return $uptime;
+function execPrintMem(){
+    $grep = shell_exec(" grep MemTotal /proc/meminfo");
+    $grep = ltrim($grep, "MemTotal:\t");
+    return $grep;
 }
 
-$printUptime = printUptime();
+function execPrint($command){
+    $command = shell_exec(" $command");
+    return $command;
+}
+
+$printUptime = execPrintUptime();
 $printHostname = execPrint("hostname");
 $printDomainname = execPrint("domainname");
 $printIP = execPrint("hostname -I");
 $printCPUs = execPrintCPUs();
+$printMem = execPrintMem();
+$printLinuxVersion = execPrint("cat /proc/version");
 ?>
 
 <div class='pageContents'>
@@ -38,10 +49,10 @@ $printCPUs = execPrintCPUs();
 
     <text>CPU(s): <?php echo($printCPUs);?></text>
     <br>
-    <text>RAM:</text>
+    <text>RAM: <?php echo($printMem);?></text>
     <br><br>
 
-    <text>Debian version:</text>
+    <text>Debian version: <?php echo($printLinuxVersion);?></text>
     <br>
     <text>TurtleNAS version:</text>
     <br>
