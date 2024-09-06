@@ -12,7 +12,7 @@ Action buttons:
 + Upload Folders
 + Download
 + Delete
-+ Refresh DB (File DataBase. Used to fix possible inaccuracies for files displayed.)
++ Refresh DB (Used to fix possible inaccuracies for files displayed.)
 + Refresh Logs
 
 ![screenshot of the filebrowser.](https://github.com/allenc125789/TurtleNAS/blob/main/docs/images/screenshots/browser-page.png)
