@@ -10,7 +10,7 @@ Action buttons:
 + Admin-View (Only available to users in the admin group)
 + Upload Files
 + Upload Folders
-+ Download current folder as a ZIP (export as a ZIP or tar.)
++ ZIP Download (export current folder as a ZIP or tar.)
 + Delete
 + Refresh DB (Used to fix possible inaccuracies for files displayed.)
 + Refresh Logs
