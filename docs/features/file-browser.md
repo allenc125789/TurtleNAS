@@ -1,5 +1,7 @@
 # File Browser:
-A basic web-based File Browser is included with the program. This allows a manual method of adding and accessing files in your database for backup. Features include: 
+A basic web-based File Browser is included with the program. This allows a manual method of adding and accessing files in your database for backup.
+
+Features include: 
 + Directory traversal.
 + An activity log.
 
