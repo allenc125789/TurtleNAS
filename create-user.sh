@@ -2,10 +2,6 @@
 
 # $1=New Username
 
-sWARNING=" ((\033[1;33mWARNING\033[0m)) "
-sERROR=" ((\033[0;31mERROR\033[0m)) "
-vDOMAIN=$(grep "domain" /etc/resolv.conf | awk '{print $NF}')
-vPWD=$(dirname $0)
 vFILESYSTEM=$(df -P . | sed -n '$s/[[:blank:]].*//p')
 vUUID=$(/usr/sbin/blkid -s UUID -o value "$vFILESYSTEM")
 
@@ -23,7 +19,7 @@ else
     :
 fi
 
-mkdir -v -p "/media/LOCAL/$vUUID/$1" && chown www-data "/media/LOCAL/$vUUID/$1"
+mkdir -v -p "/media/LOCAL/$vUUID/$1" && chown -R www-data:sysadmin "/media/LOCAL/$vUUID/$1"
 
 
 #: SQL.

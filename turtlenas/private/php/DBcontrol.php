@@ -244,7 +244,7 @@ class DBcontrol {
                 foreach ($uniqueDir as $dir){
                     $this->updateFileRecord($dir . "/", $_REFRESH_DB = FALSE);
                 }
-                // For Windows compatibility. Windows will not create a record for whats uploaded by uploadDir() without the following.
+                // For Windows compatibility. If a file is uploaded from Windows OS, a DB record is not made without the following.
                 for ($i=0;$i<count($file_array);$i++){
                     $file = $file_array[$i]['full_path'];
                     $fileFilter[] = substr($file, 0, strpos($file, "/"));
@@ -410,17 +410,8 @@ class DBcontrol {
             $this->redirect_login();
             exit;
         }
-        // Set Privlige through Bash.
-        $command2 = shell_exec(" bash ../private/bash/admin-check.sh $username 2>&1");
-        $output2 = "$command2";
-        // Admin True
-        if ($output2 == "1"){
-            $_SESSION['admin_status'] = 1;
-        // Admin False
-        } else{
-            $_SESSION['admin_status'] = 0;
-        }
     }
+
 
     // Verifies Session, allows user or returns user to the login page.
     public function validate_auth() {
@@ -435,19 +426,19 @@ class DBcontrol {
         }
     }
 
-    // Verifies Privlige, allows user or returns user to the login page.
     public function validate_priv() {
-        $privlige = $_SESSION['admin_status'];
-        switch ($privlige) {
+        $username = $_SESSION['sessuser'];
+        $group = 'admin';
+        $command = shell_exec(' bash ../private/bash/validate-group.sh '.escapeshellarg($username)." ".escapeshellarg($group));
+        switch ($command) {
             case 1:
                 return true;
                 break;
             default:
-                $this->redirect_login();
+                return false;
                 break;
         }
     }
-
     // Function to fetch file list from directory.
     public function scanDirAndSubdir($dir, $_FilesOnly = FALSE, &$out = []) {
         $username = $_SESSION['sessuser'];

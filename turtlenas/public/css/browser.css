@@ -1,5 +1,11 @@
 html {font-family: 'Courier New', monospace;}
 
+form {
+
+display: inline;
+
+}
+
 .fileTables {
     position: absolute;
     left: 20%;

@@ -4,6 +4,7 @@ $control = new DBcontrol;
 
 //Verfies creds.
 $verify = $control->validate_auth();
+$verifyPriv = $control->validate_priv();
 if ($verify){
     $username = $_SESSION['sessuser'];
     $fObject = $control->getFilesForDisplay();
@@ -46,7 +47,7 @@ if ($verify){
                     <td colspan=2 style="font-size:100%" title="Current folder." bgcolor="black"><font id='displayCwd' style="color:white;"> Loading Files...</font>
                     </td>
                 </tr>
-                <?php echo "<form id='deleteForm' method='post'>";?>
+                <form id='deleteForm' method='post'>
             </table>
         </tbody>
     </body>
@@ -61,19 +62,21 @@ if ($verify){
     <br><br>
 
     <!--Upload file button.-->
-    <?php echo "<form id='uploadFile' action='/upload.php' method='POST' enctype='multipart/form-data'>"?>
+    <form id='uploadFile' action='/upload.php' method='POST' enctype='multipart/form-data'>
     <label for="file" id="fileTxt" class="buttonTxt">Upload File</label>
     <input class="buttons" type="file" onchange="getRequestUploadFile()" id="file" name="file[]" multiple="">
     </form>
+    <br><br>
 
     <!--Upload directory button.-->
-    <?php echo "<form id='uploadDir' action='/uploadDir.php' method='POST' enctype='multipart/form-data'>"?>
+    <form id='uploadDir' action='/uploadDir.php' method='POST' enctype='multipart/form-data'>
     <label for="dir" id="dirTxt" class="buttonTxt">Upload Folder</label>
     <input class="buttons" type="file" onchange="getRequestUploadDir()" id="dir" name="dir[]" directory webkitdirectory mozdirectory multiple />
     </form>
+    <br><br>
 
     <!--Create directory button.-->
-    <?php echo "<form id='makeDir' onsubmit='getRequestMakeDir()' taget='_self' method='POST'>"?>
+    <form id='makeDir' onsubmit='getRequestMakeDir()' taget='_self' method='POST'>
     <label for="mkdir" id="mkdirTxt" class="buttonTxt">Create Folder...</label>
     <button class="buttons" type="submit" id="mkdir"></button>
     <br>
@@ -114,7 +117,7 @@ if ($verify){
             <input class="buttons" id="downloadZip" type="button" onclick="getRequestDownloadZip()">
 
             <!--Button to download encrypted zip file of current folder.-->
-            <?php echo "<form id='downloadZipENForm' method='POST'>"?>
+            <form id='downloadZipENForm' method='POST'>
             <li><label for="downloadZipEN" id="downloadZipENTxt" class="subButtonTxt">Zip File (Encrypted)</label></li>
             <input class="buttons" id="downloadZipEN" type="button" onclick="getRequestDownloadZipEN()">
             <input type='hidden' id= 'hiddenZipEN' name='tmpPass' value='' />
@@ -125,7 +128,7 @@ if ($verify){
             <input class="buttons" id="downloadTar" type="button" onclick="getRequestDownloadTar()">
 
             <!--Button to download encrypted tar file of current folder.-->
-            <?php echo "<form id='downloadTarENForm' method='POST'>"?>
+            <form id='downloadTarENForm' method='POST'>
             <li><label for="downloadTarEN" id="downloadTarENTxt" class="subButtonTxt">tarball GPG (Encrypted)</label></li>
             <input class="buttons" id="downloadTarEN" type="button" onclick="getRequestDownloadTarEN()">
             <input type='hidden' id= 'hiddenTarEN' name='tmpPass' value='' />
@@ -139,6 +142,8 @@ if ($verify){
     <!--Button to sign out of account.-->
     <label for="signOut" id="signOutTxt" class="buttonTxt">Log-out</label>
     <button class="buttons" id="signOut" onclick="getRequestSignOut()"></button>
+
+    <?php if($verifyPriv){include("../private/html/browser-AdminButton.html");}?>
 </div>
 
 <!--Screen blocking div for when a request is "loading".-->
@@ -791,4 +796,3 @@ document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', logcookie);
         };
 </script>
 </html>
-
