@@ -15,6 +15,10 @@ form {display: inline;}
     background-color: lightgrey;
 }
 
+#updateMenuDiv{
+    width: 30%;
+}
+
 .pageContents {
   position: absolute;
   left: 21%;
