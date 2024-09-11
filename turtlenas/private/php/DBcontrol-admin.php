@@ -44,6 +44,9 @@ class DBcontrol {
         return $command;
     }
 
+    public function requestAptUpdate() {
+        shell_exec("../../../private/bash/aptUpdate.sh");
+    }
 
 }
 
