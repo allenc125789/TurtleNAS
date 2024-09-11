@@ -1,5 +1,6 @@
 <?php
 $printUpdates = $control->printUpdateList();
+$printUpdatesCount = $control->printUpdateList(TRUE);
 ?>
 
 <!--Account Management section.-->
@@ -15,6 +16,7 @@ $printUpdates = $control->printUpdateList();
     </div>
 
     <div>
+        <text><br>Upgradable packages(<?php echo($printUpdatesCount);?>).<br><br></text>
         <?php echo($printUpdates);?>
     </div>
 
