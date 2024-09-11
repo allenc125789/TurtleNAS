@@ -1,6 +1,5 @@
 <?php
-
-
+$printUpdates = $control->printUpdateList();
 ?>
 
 <!--Account Management section.-->
@@ -14,4 +13,9 @@
         <label for="upgrade" id="upgradeTxt" class="buttonTxt">Upgrade</label>
         <button class="buttons" id="upgrade" onclick="#"></button>
     </div>
+
+    <div>
+        <?php echo($printUpdates);?>
+    </div>
+
 </div>
