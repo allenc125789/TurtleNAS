@@ -62,14 +62,14 @@ if ($verify){
     <br><br>
 
     <!--Upload file button.-->
-    <form id='uploadFile' action='/upload.php' method='POST' enctype='multipart/form-data'>
+    <form id='uploadFile' action='/browser-components/upload.php' method='POST' enctype='multipart/form-data'>
     <label for="file" id="fileTxt" class="buttonTxt">Upload File</label>
     <input class="buttons" type="file" onchange="getRequestUploadFile()" id="file" name="file[]" multiple="">
     </form>
     <br><br>
 
     <!--Upload directory button.-->
-    <form id='uploadDir' action='/uploadDir.php' method='POST' enctype='multipart/form-data'>
+    <form id='uploadDir' action='/browser-components/uploadDir.php' method='POST' enctype='multipart/form-data'>
     <label for="dir" id="dirTxt" class="buttonTxt">Upload Folder</label>
     <input class="buttons" type="file" onchange="getRequestUploadDir()" id="dir" name="dir[]" directory webkitdirectory mozdirectory multiple />
     </form>
@@ -218,7 +218,7 @@ function displayFiles(cwdURI){
                 cell0.setAttribute("class", "checks");
                 //Sets Cell 1 as a file or a directory.
                 if (!dir.endsWith("/")){
-                    cell1.insertAdjacentHTML('beforeEnd', "<img id='fileIcon' src='/images/file-icon.png'><a href=download.php?"+dirURI+">"+fileArray[0]);
+                    cell1.insertAdjacentHTML('beforeEnd', "<img id='fileIcon' src='/images/file-icon.png'><a href=browser-components/download.php?"+dirURI+">"+fileArray[0]);
                 } else {
                     cell1.insertAdjacentHTML('beforeEnd', "<img id='folderIcon' src='/images/folder-icon.png'></img><a href=javascript:displayFiles(\""+dirURI+"\")>"+fileArray[0]);
                 }
@@ -455,7 +455,7 @@ function getRequestDelete(){
             location.reload();
         }
     };
-    xhttp.open("POST", "/delete.php", true);
+    xhttp.open("POST", "/browser-components/delete.php", true);
     xhttp.send(formData);
 }
 
@@ -487,7 +487,7 @@ async function getRequestUploadFile(){
             location.reload();
         }
     };
-    xhttp.open("POST", "/upload.php", true);
+    xhttp.open("POST", "/browser-components/upload.php", true);
     xhttp.send(formData);
 }
 
@@ -520,7 +520,7 @@ async function getRequestMakeDir(){
             location.reload();
         }
     };
-    xhttp.open("POST", "/mkdir.php", true);
+    xhttp.open("POST", "/browser-components/mkdir.php", true);
     xhttp.send(formData);
 }
 
@@ -552,7 +552,7 @@ function getRequestUploadDir(){
             location.reload();
         }
     };
-    xhttp.open("POST", "/uploadDir.php", true);
+    xhttp.open("POST", "/browser-components/uploadDir.php", true);
     xhttp.send(formData);
 }
 
@@ -569,7 +569,7 @@ function getRequestDownloadZip(){
         var log = "> "+this.statusText+"!<br>-<br>";
         if (this.readyState == 4 && this.status == 200){
            // Write code for writing output when databse is fully updated.:
-            location.assign("/downloadZip.php?DOWNLOAD");
+            location.assign("/browser-components/downloadZip.php?DOWNLOAD");
             document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
             cookieLogAdd(log);
             enableButtons("ALL")
@@ -584,7 +584,7 @@ function getRequestDownloadZip(){
             location.reload();
         }
     };
-    xhttp.open("GET", "/downloadZip.php?PLAINTEXT", true);
+    xhttp.open("GET", "/browser-components/downloadZip.php?PLAINTEXT", true);
     xhttp.responseType = 'blob';
     xhttp.send();
 }
@@ -612,7 +612,7 @@ function getRequestDownloadZipEN(){
         var log = "> "+this.statusText+"!<br>-<br>";
         if (this.readyState == 4 && this.status == 200){
            // Write code for writing output when databse is fully updated.:
-            location.assign("/downloadZip.php?DOWNLOAD");
+            location.assign("/browser-components/downloadZip.php?DOWNLOAD");
             document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
             cookieLogAdd(log);
             enableButtons("ALL")
@@ -627,7 +627,7 @@ function getRequestDownloadZipEN(){
             location.reload();
         }
     };
-    xhttp.open("POST", "/downloadZip.php?ENCRYPT", true);
+    xhttp.open("POST", "/browser-components/downloadZip.php?ENCRYPT", true);
     xhttp.responseType = 'blob';
     xhttp.send(formData);
 }
@@ -645,7 +645,7 @@ function getRequestDownloadTar(){
         var log = "> "+this.statusText+"!<br>-<br>";
         if (this.readyState == 4 && this.status == 200){
            // Write code for writing output when databse is fully updated.:
-            location.assign("/downloadTar.php?DOWNLOAD");
+            location.assign("/browser-components/downloadTar.php?DOWNLOAD");
             document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
             cookieLogAdd(log);
             enableButtons("ALL")
@@ -660,7 +660,7 @@ function getRequestDownloadTar(){
             location.reload();
         }
     };
-    xhttp.open("GET", "/downloadTar.php?PLAINTEXT", true);
+    xhttp.open("GET", "/browser-components/downloadTar.php?PLAINTEXT", true);
     xhttp.responseType = 'blob';
     xhttp.send();
 }
@@ -688,7 +688,7 @@ function getRequestDownloadTarEN(){
         var log = "> "+this.statusText+"!<br>-<br>";
         if (this.readyState == 4 && this.status == 200){
            // Write code for writing output when databse is fully updated.:
-            location.assign("/downloadTar.php?DOWNLOAD");
+            location.assign("/browser-components/downloadTar.php?DOWNLOAD");
             document.getElementById("logOutput").insertAdjacentHTML('beforeEnd', log);
             cookieLogAdd(log);
             enableButtons("ALL")
@@ -703,7 +703,7 @@ function getRequestDownloadTarEN(){
             location.reload();
         }
     };
-    xhttp.open("POST", "/downloadTar.php?ENCRYPT", true);
+    xhttp.open("POST", "/browser-components/downloadTar.php?ENCRYPT", true);
     xhttp.responseType = 'blob';
     xhttp.send(formData);
 }
@@ -739,7 +739,7 @@ function getRequestUpdateRecords(){
             location.reload();
         }
     };
-    xhttp.open("GET", "/updateRecords.php", true);
+    xhttp.open("GET", "/browser-components/updateRecords.php", true);
     xhttp.send();
 }
 
