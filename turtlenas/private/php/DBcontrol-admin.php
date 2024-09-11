@@ -35,6 +35,13 @@ class DBcontrol {
         }
     }
 
+    public function printUpdateList() {
+        $command = shell_exec("apt-get --just-print upgrade 2>&1 | perl -ne 'if (/Inst\s([\w,\-,\d,\.,~,:,\+]+)\s\[([\w,\-,\d,\.,~,:,\+]+)\]\s\(([\w,\-,\d,\.,~,:,\+]+)\)? /i) {print \"+<b>$1</b> [CURRENT: $2, NEW: $3]<br>\"}'");
+        return $command;
+    }
+
+
+
 }
 
 ?>
