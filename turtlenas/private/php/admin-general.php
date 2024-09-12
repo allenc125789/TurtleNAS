@@ -31,6 +31,16 @@ $printMem = execPrintMem();
 $printLinuxVersion = execPrint("cat /proc/version");
 ?>
 
+<html>
+
+<head>
+    <meta charset="UTF=8">
+    <meta name="viewport" content="width==device-width, initial-scale=0.1">
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+
+
+
 <div class='pageContents'>
     <text>Logged in as: <?php echo($_SESSION['sessuser']);?></text>
     <br><br>
@@ -53,3 +63,4 @@ $printLinuxVersion = execPrint("cat /proc/version");
     <text>TurtleNAS version:</text>
     <br>
 </div>
+</html>
