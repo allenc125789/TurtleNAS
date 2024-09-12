@@ -35,6 +35,7 @@ function windowBlockON(){
 
 function getRequestAptUpdate(){
     var xhttp = new XMLHttpRequest();
+    windowBlockON();
     xhttp.onreadystatechange = function(){
     // Write code for writing output when databse updates start.:
         if (this.readyState == 4 && this.status == 200){
