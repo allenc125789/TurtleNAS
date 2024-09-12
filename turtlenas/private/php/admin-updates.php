@@ -22,6 +22,9 @@ $printUpdatesCount = $control->printUpdateList(TRUE);
 
 </div>
 
+<!--Screen blocking div for when a request is "loading".-->
+<div id='window-block'><text id="loadingTxt">Loading...</text></div>
+
 <script type='text/javascript'>
 //Request to sign out of account, and sends user back to the login page.
 
