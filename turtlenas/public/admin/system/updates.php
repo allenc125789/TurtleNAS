@@ -7,7 +7,6 @@ $verify = $control->validate_auth();
 $verifyPriv = $control->validate_priv("admin");
 
 if ($verify && $verifyPriv){
-    include("../../../private/html/admin-pageSelectMenu.html");
     include("../../../private/php/admin-updates.php");
 }
 
