@@ -45,7 +45,7 @@ class DBcontrol {
     }
 
     public function requestAptUpdate() {
-        shell_exec("../../../private/bash/aptUpdate.sh");
+        shell_exec("sudo apt-get update");
     }
 
 }
