@@ -3,6 +3,13 @@ $printUpdates = $control->printUpdateList();
 $printUpdatesCount = $control->printUpdateList(TRUE);
 ?>
 
+<html>
+<head>
+    <meta charset="UTF=8">
+    <meta name="viewport" content="width==device-width, initial-scale=0.1">
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+
 <!--Account Management section.-->
 <div class='pageContents'>
     <div id='updateMenuDiv'>
@@ -52,3 +59,4 @@ function getRequestAptUpdate(){
     xhttp.send();
 }
 </script>
+</html>
