@@ -61,5 +61,6 @@ function getRequestAptUpdate(){
     xhttp.open("GET", "/admin/system/requestAptUpdate.php", true);
     xhttp.send();
 }
+windowBlockOFF();
 </script>
 </html>
