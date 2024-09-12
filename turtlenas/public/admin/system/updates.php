@@ -12,3 +12,6 @@ if ($verify && $verifyPriv){
 }
 
 ?>
+
+<!--Screen blocking div for when a request is "loading".-->
+<div id='window-block'><text id="loadingTxt">Loading...</text></div>
