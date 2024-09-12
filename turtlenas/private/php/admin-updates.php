@@ -24,6 +24,15 @@ $printUpdatesCount = $control->printUpdateList(TRUE);
 
 <script type='text/javascript'>
 //Request to sign out of account, and sends user back to the login page.
+
+function windowBlockOFF(){
+    document.getElementById("window-block").style.visibility = "hidden";
+}
+
+function windowBlockON(){
+    document.getElementById("window-block").style.visibility = "visible";
+}
+
 function getRequestAptUpdate(){
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function(){
