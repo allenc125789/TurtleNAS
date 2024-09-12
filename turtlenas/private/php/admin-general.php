@@ -39,7 +39,7 @@ $printLinuxVersion = execPrint("cat /proc/version");
     <link rel="stylesheet" href="/css/admin.css">
 </head>
 
-
+<?php include("../../../private/html/admin-pageSelectMenu.html");?>
 
 <div class='pageContents'>
     <text>Logged in as: <?php echo($_SESSION['sessuser']);?></text>
