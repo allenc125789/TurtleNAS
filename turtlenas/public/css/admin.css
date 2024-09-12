@@ -19,6 +19,25 @@ form {display: inline;}
     width: 30%;
 }
 
+#window-block{
+  position: fixed;
+  bottom: 0%;
+  right: 0%;
+  left: 20%;
+  top: 0%;
+  background-color: lightgrey;
+  opacity: 0.30;
+}
+
+#loadingTxt{
+  position: fixed;
+  right: 35%;
+  top: 40%;
+  font-size: 200%;
+  user-select: none;
+  cursor: default;  
+}
+
 .pageContents {
   position: absolute;
   left: 21%;
