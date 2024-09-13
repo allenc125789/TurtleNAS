@@ -11,3 +11,5 @@
 ~ Need to create an IP based-blacklist logging and banning system. Probably by a bash or php based function logging into mariadb
 
 ~ Create a dockerfile for easier deployment
+
+~ Have "Apt upgrade" stream the input into html, trying this method https://stackoverflow.com/questions/20107147/php-reading-shell-exec-live-output
