@@ -48,6 +48,10 @@ class DBcontrol {
         shell_exec("sudo apt-get update");
     }
 
+    public function requestAptUpgrade() {
+        shell_exec("sudo apt-get -y upgrade");
+    }
+
 }
 
 ?>
