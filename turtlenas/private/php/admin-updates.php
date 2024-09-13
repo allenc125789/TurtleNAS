@@ -22,7 +22,7 @@ $printUpdatesCount = $control->printUpdateList(TRUE);
 
         <!--Button to sign out of account.-->
         <label for="upgrade" id="upgradeTxt" class="buttonTxt">Upgrade</label>
-        <button class="buttons" id="upgrade" onclick="#"></button>
+        <button class="buttons" id="upgrade" onclick="getRequestAptUpgrade()"></button>
     </div>
 
     <div>
@@ -61,6 +61,23 @@ function getRequestAptUpdate(){
     xhttp.open("GET", "/admin/system/requestAptUpdate.php", true);
     xhttp.send();
 }
+
+function getRequestAptUpgrade(){
+    var xhttp = new XMLHttpRequest();
+    windowBlockON();
+    xhttp.onreadystatechange = function(){
+    // Write code for writing output when databse updates start.:
+        if (this.readyState == 4 && this.status == 200){
+           // Write code for writing output when databse is fully updated.:
+            location.reload();
+        } else if(this.status >= 400){
+            location.reload();
+        }
+    };
+    xhttp.open("GET", "/admin/system/requestAptUpgrade.php", true);
+    xhttp.send();
+}
+
 windowBlockOFF();
 </script>
 </html>
