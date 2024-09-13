@@ -7,7 +7,7 @@ $verify = $control->validate_auth();
 $verifyPriv = $control->validate_priv("admin");
 
 if ($verify && $verifyPriv){
-    $control->requestAptUpdate();
+    $control->requestAptUpgrade();
 }
 
 ?>
