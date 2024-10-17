@@ -36,7 +36,7 @@ These are bugs already known. Many I have plans to fix already, although some ar
 > 
 > Firefox
 
-+ Web-Browser sometimes crashes when uploading large files in firefox. Other than using chromium, no fix is available that I know of. Will be a subject of research later.
++ Web-Browser sometimes crashes when uploading large files/folders in firefox. Only fix at the momenr is to use google-chrome/chromium. Will be a subject of research later.
 
 > (/var/www/turtlenas/private/PHP/handle-downloads.php)
 
