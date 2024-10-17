@@ -32,6 +32,11 @@ __Known Bugs__
 
 These are bugs already known. Many I have plans to fix already, although some are things I may not to personally resolve, and will be noted. Help especially on these bugs are appreciated!
 
+> (/var/www/turtlenas/public/browser.php)
+> Firefox
+
++ Web-Browser sometimes crashes when uploading large files in firefox. Other than using chromium, no fix is available that I know of. Will be a subject of research later.
+
 > (/var/www/turtlenas/private/PHP/handle-downloads.php)
 
 + Downloading "hidden/dotfiles" through a browser will append the filename if starting with a (.) dot. (Example: ".bashrc" --href--> "bashrc"). Uploading and backing up these files is fine otherwise, however if you download a hidden file, it is recommended doing so by using the "Zip Download". Problem could be due to nginx, or modern browser design appending it automatically. Unsure how to fix at the moment.
