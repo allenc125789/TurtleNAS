@@ -33,6 +33,7 @@ __Known Bugs__
 These are bugs already known. Many I have plans to fix already, although some are things I may not to personally resolve, and will be noted. Help especially on these bugs are appreciated!
 
 > (/var/www/turtlenas/public/browser.php)
+> 
 > Firefox
 
 + Web-Browser sometimes crashes when uploading large files in firefox. Other than using chromium, no fix is available that I know of. Will be a subject of research later.
