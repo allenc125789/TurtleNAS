@@ -35,9 +35,10 @@ $printUpdatesCount = $control->printUpdateList(TRUE);
 <!--Screen blocking div for when a request is "loading".-->
 <div id='window-block'><text id="loadingTxt">Loading...</text></div>
 
+<!--Console for showing upgrade process.-->
 <div id='console'>
     <div id='console-output'>
-        <text id='console-text'></text>
+        <text id='console-text'><?php echo($);?></text>
     </div>
     <div id='console-buttons'>
         <label for="upgrade" id="upgradeTxt" class="buttonTxt">Stop</label>
