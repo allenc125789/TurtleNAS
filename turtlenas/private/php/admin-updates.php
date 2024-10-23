@@ -1,6 +1,7 @@
 <?php
 $printUpdates = $control->printUpdateList();
 $printUpdatesCount = $control->printUpdateList(TRUE);
+$requestAptUpgrade = $control->requestAptUpgrade();
 ?>
 
 <html>
@@ -38,7 +39,7 @@ $printUpdatesCount = $control->printUpdateList(TRUE);
 <!--Console for showing upgrade process.-->
 <div id='console'>
     <div id='console-output'>
-        <text id='console-text'><?php echo($);?></text>
+        <text id='console-text'><?php echo($requestAptUpgrade);?></text>
     </div>
     <div id='console-buttons'>
         <label for="upgrade" id="upgradeTxt" class="buttonTxt">Stop</label>
