@@ -45,12 +45,12 @@ class DBcontrol {
     }
 
     public function requestAptUpdate() {
-        $command = shell_exec("printf 'n' | apt upgrade");
+        $command = shell_exec("sudo apt-get update");
         return $command;
     }
 
     public function requestAptUpgrade() {
-        shell_exec("sudo apt-get -y upgrade");
+        shell_exec("printf 'n' | apt upgrade | head -n -1");
     }
 }
 
