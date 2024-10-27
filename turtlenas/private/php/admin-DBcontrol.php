@@ -50,8 +50,10 @@ class DBcontrol {
     }
 
     public function requestAptUpgrade() {
-        shell_exec("printf 'n' | apt-get upgrade | head -n -1");
+        $command = shell_exec("printf 'n' | sudo apt-get upgrade | head -n -1 | sed 's/,[^.]*$/,<br>/' | sed 's/[  ]*$/  <br>/'");
+        return $command;
     }
 }
+
 
 ?>
