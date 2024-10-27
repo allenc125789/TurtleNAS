@@ -79,19 +79,9 @@ function getRequestAptUpdate(){
 }
 
 function getRequestAptUpgrade(){
-    var xhttp = new XMLHttpRequest();
+    var console = document.getElementById("console")
     windowBlockON();
-    xhttp.onreadystatechange = function(){
-    // Write code for writing output when databse updates start.:
-        if (this.readyState == 4 && this.status == 200){
-           // Write code for writing output when databse is fully updated.:
-            location.reload();
-        } else if(this.status >= 400){
-            location.reload();
-        }
-    };
-    xhttp.open("GET", "/admin/system/requestAptUpgrade.php", true);
-    xhttp.send();
+    console.style.visibility = "visible"
 }
 
 windowBlockOFF();
