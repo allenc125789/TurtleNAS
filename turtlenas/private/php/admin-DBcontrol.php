@@ -50,7 +50,7 @@ class DBcontrol {
     }
 
     public function requestAptUpgrade() {
-        shell_exec("printf 'n' | apt upgrade | head -n -1");
+        shell_exec("printf 'n' | apt-get upgrade | head -n -1");
     }
 }
 
