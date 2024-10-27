@@ -57,6 +57,7 @@ form {display: inline;}
     box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
     background-color: white;
     z-index: 20;
+    visibility: hidden;
 }
 
 #console-output{
@@ -67,6 +68,7 @@ form {display: inline;}
     bottom: 20%;
     border: 2px solid black;
     background-color: white;
+    overflow: scroll;
     z-index: 20;
 }
 
