@@ -23,7 +23,7 @@ $requestAptUpgrade = $control->requestAptUpgrade();
 
         <!--Button to sign out of account.-->
         <label for="upgrade" id="upgradeTxt" class="buttonTxt">Upgrade</label>
-        <button class="buttons" id="upgrade" onclick="getRequestAptUpgrade()"></button>
+        <button class="buttons" id="upgrade" onclick="openConsole()"></button>
     </div>
 
     <div>
@@ -42,8 +42,8 @@ $requestAptUpgrade = $control->requestAptUpgrade();
         <text id='console-text'><?php echo($requestAptUpgrade);?></text>
     </div>
     <div id='console-buttons'>
-        <label for="upgrade" id="upgradeTxt" class="buttonTxt">Stop</label>
-        <button class="buttons" id="upgrade" onclick="#"></button>
+        <label for="closeConsoleButton" id="closeConsoleButtonTxt" class="buttonTxt">Stop</label>
+        <button class="buttons" id="closeConsoleButton" onclick="closeConsole()"></button>
 
         <label for="upgrade" id="upgradeTxt" class="buttonTxt">Continue</label>
         <button class="buttons" id="upgrade" onclick="#"></button>
@@ -78,10 +78,16 @@ function getRequestAptUpdate(){
     xhttp.send();
 }
 
-function getRequestAptUpgrade(){
-    var console = document.getElementById("console")
+function openConsole(){
+    var console = document.getElementById("console");
     windowBlockON();
-    console.style.visibility = "visible"
+    console.style.visibility = "visible";
+}
+
+function closeConsole(){
+    var console = document.getElementById("console");
+    windowBlockOFF();
+    console.style.visibility = "hidden";
 }
 
 windowBlockOFF();
