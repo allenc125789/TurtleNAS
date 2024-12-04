@@ -12,8 +12,8 @@ $username = $_POST['uname'];
 echo "<a href='/login.html'>Page not loaded...</a>";
 
 $control->user_auth($username, $password);
-$verify = $control->validate_auth();
-if($verify){
+$auth = $control->validate_auth();
+if($auth){
     setcookie('cwd', "/");
     setcookie('log', "> Successful login!<br>-<br>");
     header("Location: /browser.php");
