@@ -426,16 +426,16 @@ class DBcontrol {
         }
     }
 
-    public function validate_priv() {
+    // Verifies Privlige for group argument, allows user or returns user to the login page.
+    public function validate_priv($group) {
         $username = $_SESSION['sessuser'];
-        $group = 'admin';
-        $command = shell_exec(' bash ../private/bash/validate-group.sh '.escapeshellarg($username)." ".escapeshellarg($group));
+        $command = shell_exec(' bash ../../../private/bash/validate-group.sh '.escapeshellarg($username)." ".escapeshellarg($group));
         switch ($command) {
             case 1:
                 return true;
                 break;
             default:
-                return false;
+                $this->redirect_login();
                 break;
         }
     }
