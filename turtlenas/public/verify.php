@@ -17,7 +17,7 @@ if($auth){
     setcookie('log', "> Successful login!<br>-<br>");
     header("Location: /browser.php");
 } else{
-    
+    session_destroy();
 }
 
 ?>
