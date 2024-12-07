@@ -434,6 +434,9 @@ class DBcontrol {
             case 1:
                 return true;
                 break;
+            case 0:
+                return false;
+                break;
             default:
                 return false;
                 break;
