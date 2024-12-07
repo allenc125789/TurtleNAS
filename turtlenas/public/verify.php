@@ -13,8 +13,9 @@ echo "<a href='/login.html'>Page not loaded...</a>";
 $control->user_auth($username, $password);
 $auth = $control->validate_auth();
 $priv = $control->validate_priv();
+$groups = "www-data"
 
-if($auth & $priv){
+if($auth && $priv($groups)){
     setcookie('cwd', "/");
     setcookie('log', "> Successful login!<br>-<br>");
     header("Location: /browser.php");
