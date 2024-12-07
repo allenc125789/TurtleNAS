@@ -1,14 +1,20 @@
 <?php
 require_once "../private/php/DBcontrol.php";
 $control = new DBcontrol;
+$username = $_SESSION['sessuser'];
 
 //Verfies creds.
-$verify = $control->validate_auth();
-$verifyPriv = $control->validate_priv();
-if ($verify){
-    $username = $_SESSION['sessuser'];
+$groups = "www-data";
+$auth = $control->validate_auth();
+$priv = $control->validate_priv($groups);
+
+if($auth && $priv){
     $fObject = $control->getFilesForDisplay();
+} else{
+    header("Location: /login.html");
 }
+
+
 ?>
 <html>
 <head>
