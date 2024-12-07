@@ -12,7 +12,9 @@ echo "<a href='/login.html'>Page not loaded...</a>";
 
 $control->user_auth($username, $password);
 $auth = $control->validate_auth();
-if($auth){
+$priv = $control->validate_priv();
+
+if($auth & $priv){
     setcookie('cwd', "/");
     setcookie('log', "> Successful login!<br>-<br>");
     header("Location: /browser.php");
