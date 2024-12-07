@@ -10,7 +10,10 @@ $username = $_POST['uname'];
 
 echo "<a href='/login.html'>Page not loaded...</a>";
 
+#Compare user input to PAM. Authorizes user session.
 $control->user_auth($username, $password);
+
+#Validate Authentication.
 $auth = $control->validate_auth();
 $priv = $control->validate_priv();
 $groups = "www-data"
