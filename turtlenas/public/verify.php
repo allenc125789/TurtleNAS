@@ -10,20 +10,19 @@ $username = $_POST['uname'];
 
 echo "<a href='/login.html'>Page not loaded...</a>";
 
-#Compare user input to PAM. Authorizes user session.
+
 $control->user_auth($username, $password);
 
-#Validate Authentication.
+$groups = "www-data";
 $auth = $control->validate_auth();
-$priv = $control->validate_priv();
-$groups = "www-data"
+$priv = $control->validate_priv($groups);
 
-if($auth && $priv($groups)){
+if($auth && $priv){
     setcookie('cwd', "/");
     setcookie('log', "> Successful login!<br>-<br>");
     header("Location: /browser.php");
 } else{
-    session_destroy();
+    header("Location: /login.html");
 }
 
 ?>
