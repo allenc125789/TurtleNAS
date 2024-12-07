@@ -421,7 +421,7 @@ class DBcontrol {
                 return true;
                 break;
             default:
-                $this->redirect_login();
+                return false;
                 break;
         }
     }
@@ -429,13 +429,13 @@ class DBcontrol {
     // Verifies Privlige for group argument, allows user or returns user to the login page.
     public function validate_priv($group) {
         $username = $_SESSION['sessuser'];
-        $command = shell_exec(' bash ../../../private/bash/validate-group.sh '.escapeshellarg($username)." ".escapeshellarg($group));
+        $command = shell_exec(' bash ../private/bash/validate-group.sh '.escapeshellarg($username)." ".escapeshellarg($group));
         switch ($command) {
             case 1:
                 return true;
                 break;
             default:
-                $this->redirect_login();
+                return false;
                 break;
         }
     }
