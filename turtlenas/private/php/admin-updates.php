@@ -14,7 +14,7 @@ $requestAptUpgrade = $control->requestAptUpgrade();
 
 <?php include("../../../private/html/admin-pageSelectMenu.html");?>
 
-<!--Account Management section.-->
+<!--Upgrade Action section.-->
 <div class='pageContents'>
     <div id='updateMenuDiv'>
         <!--Button to switch to the browser view.-->
