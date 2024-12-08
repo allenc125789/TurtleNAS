@@ -52,8 +52,6 @@ $requestAptUpgrade = $control->requestAptUpgrade();
 
 
 <script type='text/javascript'>
-//Request to sign out of account, and sends user back to the login page.
-
 function windowBlockOFF(){
     document.getElementById("window-block").style.visibility = "hidden";
 }
