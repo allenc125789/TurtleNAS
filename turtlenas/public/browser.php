@@ -149,7 +149,7 @@ if($auth && $priv){
     <label for="signOut" id="signOutTxt" class="buttonTxt">Log-out</label>
     <button class="buttons" id="signOut" onclick="getRequestSignOut()"></button>
 
-    <?php if($verifyPriv){include("../private/html/browser-adminButton.html");}?>
+    <?php $groups = "admin"; $priv = $control->validate_priv($groups); if($priv){include("../private/html/browser-adminButton.html");}?>
 </div>
 
 <!--Screen blocking div for when a request is "loading".-->
