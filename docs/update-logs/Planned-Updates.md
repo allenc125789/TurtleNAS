@@ -12,4 +12,4 @@
 
 ~ Create a dockerfile for easier deployment
 
-~ fix the hotbar of the browser. Currently it is a bit buggy. Will probably need a seperate div on the table item.
+~ fix the hotbar of the browser. Currently, it is a bit buggy when scrolling down. Will probably need a seperate div on the table item.
