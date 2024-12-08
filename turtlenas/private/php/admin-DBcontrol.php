@@ -37,7 +37,7 @@ class DBcontrol {
 
     public function printUpdateList($count = FALSE) {
         if ($count == FALSE){
-            //Prints "apt upgrade" result's. Stylized for html.
+            //Prints "apt upgrade" result's. Stylized for html, in a list format.
             $command = shell_exec("apt-get --just-print dist-upgrade 2>&1 | perl -ne 'if (/Inst\s([\w,\-,\d,\.,~,:,\+]+)\s\[([\w,\-,\d,\.,~,:,\+]+)\]\s\(([\w,\-,\d,\.,~,:,\+]+)\)? /i) {print \"+<b>$1</b> [$2 ==> $3]<br>\"}'");
         } else {
             //Print's "apt update" result's. Stylized for html.
