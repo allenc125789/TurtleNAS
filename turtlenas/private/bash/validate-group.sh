@@ -11,7 +11,7 @@ spaces=$(echo "$rules" | sed "s/,/ /g")
 groupContent=( $spaces )
 
 # Check if user is in group.
-if [[ ${groupContent[@]} =~ $1 ]]
+if [[ " ${groupContent[*]} " =~ [[:space:]]${1}[[:space:]] ]]
 then
     echo "1"
 else
