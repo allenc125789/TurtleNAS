@@ -3,10 +3,12 @@
 require("../../../private/php/admin-DBcontrol.php");
 $control = new DBcontrol;
 
-$verify = $control->validate_auth();
-$verifyPriv = $control->validate_priv("admin");
+//Verfies creds.
+$groups = "www-data";
+$auth = $control->validate_auth();
+$priv = $control->validate_priv($groups);
 
-if ($verify && $verifyPriv){
+if($auth && $priv){
     include("../../../private/php/admin-general.php");
 }
 
