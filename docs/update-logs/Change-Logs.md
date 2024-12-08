@@ -1,10 +1,13 @@
+## 12.08.2024
++Added/fixed feature, group authorization: Pages and features will be locked depending on the group they belong to. eg; the average linux user will not be able to be accessed by TurtleNAS, unless it's within the www-data user group. Admin pages will not be available unless the user acessing it belongs to the admin group.
+
 ## 09.05.2024
 +Added a page selection menu for speific admin pages
 
 ## 09.04.2024
 +Added view changing buttons, which allows users to switch between the File Browser and Admin pages, if said user is in the 'admin' group.
 
-+Created a group verifcation function, for group specific validation.
+~~+Created a group verifcation function, for group specific validation.~~ (Was not fully functioning, fixed on 12.08.2024)
 
 ## 08.29.2024
 +Cleaned and removed unused code.
