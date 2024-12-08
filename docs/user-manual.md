@@ -1,4 +1,4 @@
-__Errors__
+## __Errors__
 
 > (/var/www/turtlenas/public/browser.php)
 
@@ -8,7 +8,7 @@ __Errors__
 
 `(404) Not Found!` Usually happens if a file can not be found. Check what's trying to be accessed, and check if the file exists, or a link is found. If this happens when downloading a file, refresh the Database(DB) through the browser.
 
-__Upload/Download Limits__
+## __Upload/Download Limits__
 
 *- Hardcaps*
 
@@ -28,7 +28,7 @@ __Upload/Download Limits__
 
 + Contains a read timeout for cgi. Determines time spent running a PHP script before timing out (causes a 504). "fastcgi_read_timeout 43200;"
 
-__Known Bugs__
+## __Known Bugs__
 
 > [!NOTE]
 > These are bugs already known. I have plans to fix some, although others are things I may not be able to personally resolve, and will be noted. Help especially on these bugs are appreciated!
