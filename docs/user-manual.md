@@ -30,7 +30,7 @@ __Upload/Download Limits__
 
 __Known Bugs__
 
-These are bugs already known. Many I have plans to fix already, although some are things I may not to personally resolve, and will be noted. Help especially on these bugs are appreciated!
+These are bugs already known. Many I have plans to fix already, although some are things I may not be able to personally resolve, and will be noted. Help especially on these bugs are appreciated!
 
 > (/var/www/turtlenas/public/browser.php)
 > 
