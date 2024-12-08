@@ -17,20 +17,7 @@ $requestAptUpgrade = $control->requestAptUpgrade();
 <!--Account Management section.-->
 <div class='pageContents'>
     <div id='updateMenuDiv'>
-        <!--Button to switch to the browser view.-->
-        <label for="refresh" id="refreshTxt" class="buttonTxt">Refresh</label>
-        <input class="buttons" id="refresh" onclick="getRequestAptUpdate()">
-
-        <!--Button to sign out of account.-->
-        <label for="upgrade" id="upgradeTxt" class="buttonTxt">Upgrade</label>
-        <button class="buttons" id="upgrade" onclick="openConsole()"></button>
     </div>
-
-    <div>
-        <text><br>Upgradable packages(<?php echo($printUpdatesCount);?>).<br><br></text>
-        <?php echo($printUpdates);?>
-    </div>
-
 </div>
 
 <!--Screen blocking div for when a request is "loading".-->
