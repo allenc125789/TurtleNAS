@@ -1,3 +1,5 @@
+~ Need to create the base page layout for the admin pages.
+
 ~ need to create js based timeout function.
 
 ~ lots of unused code needs to be trimmed. might need to reuse the hashing system to provide a more unique hash when downloading a compressed folder.
