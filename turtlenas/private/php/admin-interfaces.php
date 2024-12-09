@@ -21,7 +21,8 @@ $requestAptUpgrade = $control->requestAptUpgrade();
             <!--File Table body-->
             <table id="fileTables" class="fileTables" border=2px>
                 <tr bgcolor="grey">
-                    <th colspan=2>Name</th>
+                    <th colspan=2>Number</th>
+                    <th>Name</th>
                     <th>Active</th>
                     <th>IP Address</th>
                     <th>Gateway</th>
