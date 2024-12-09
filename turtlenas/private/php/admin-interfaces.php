@@ -46,7 +46,7 @@ function getNetworksForDisplay(){
 
 <!--Account Management section.-->
 <div class='pageContents'>
-    <?php echo($getNetworksForDisplay);?>
+    <?php var_dump($getNetworksForDisplay);?>
     <div id='networkMenuDiv'>
         <tbody>
             <!--File Table body-->
