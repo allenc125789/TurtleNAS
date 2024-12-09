@@ -55,6 +55,19 @@ class DBcontrol {
         $command = shell_exec("printf 'n' | sudo apt-get upgrade | head -n -1 | sed 's/,[^.]*$/,<br>/' | sed 's/[  ]*$/  <br>/'");
         return $command;
     }
+
+
+    //Get network's for user view in the interface page.
+    public function getNetworksForDisplay(){
+        $username = $_SESSION['sessuser'];
+        $stmt = $this->get_connection()->query("SELECT * FROM files_$username");
+        while ($row = $stmt->fetch()){
+            $allrows = $row['name']. "|".$row['date']. "|".$row['size']. "|".$row['parent']. "|".$row['mtime'];
+            $data[] = $allrows;
+        }
+        return $data;
+    }
+
 }
 
 
