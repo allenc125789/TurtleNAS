@@ -16,7 +16,7 @@ $requestAptUpgrade = $control->requestAptUpgrade();
 
 <!--Account Management section.-->
 <div class='pageContents'>
-    <div id='updateMenuDiv'>
+    <div id='networkMenuDiv'>
     </div>
 </div>
 
