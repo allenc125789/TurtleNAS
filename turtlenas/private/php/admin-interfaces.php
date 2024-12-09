@@ -2,6 +2,26 @@
 $printUpdates = $control->printUpdateList();
 $printUpdatesCount = $control->printUpdateList(TRUE);
 $requestAptUpgrade = $control->requestAptUpgrade();
+
+    //Get network's for user view in the interface page.
+    function getNetworksForDisplay(){
+        $data = [];
+        $username = $_SESSION['sessuser'];
+        //Prepare network numbers.
+        $command = shell_exec("ip link show | awk 'NR % 2 {print} !(NR % 2) && /pattern/ {print}' | awk '{print $1}' | sed 's/.$//'");
+        $subArray = explode("/n", $command);
+        for $i in $subArray{
+            $data['number'] += $i
+        }
+        //Prepare network names.
+        $command = shell_exec("ip link show | awk 'NR % 2 {print} !(NR % 2) && /pattern/ {print}' | awk '{print $2}' | sed 's/.$//'");
+        $subArray = explode("/n", $command);
+        for $i in $subArray{
+            $data['names'] += $i
+        }
+        return $data;
+    }
+
 ?>
 
 <html>
