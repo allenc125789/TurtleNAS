@@ -63,11 +63,17 @@ class DBcontrol {
     public function getNetworksForDisplay(){
         $data = [];
         $username = $_SESSION['sessuser'];
+        //Prepare network numbers.
+        $command = shell_exec("ip link show | awk 'NR % 2 {print} !(NR % 2) && /pattern/ {print}' | awk '{print $1}' | sed 's/.$//'");
+        $subArray = explode("/n", $command);
+        for $i in $subArray{
+            $data['number'] += $i
+        }
         //Prepare network names.
-        $printNames = shell_exec("ip link show | awk 'NR % 2 {print} !(NR % 2) && /pattern/ {print}' | awk '{print $2}' | sed 's/.$//'");
-        $namesArr = explode("/n", $printNames);
-        for $name in $namesArr{
-            $data['names'] += $name
+        $command = shell_exec("ip link show | awk 'NR % 2 {print} !(NR % 2) && /pattern/ {print}' | awk '{print $2}' | sed 's/.$//'");
+        $subArray = explode("/n", $command);
+        for $i in $subArray{
+            $data['names'] += $i
         }
         return $data;
     }
