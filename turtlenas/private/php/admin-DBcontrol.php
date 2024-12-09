@@ -57,14 +57,13 @@ class DBcontrol {
     }
 
 
+
+
     //Get network's for user view in the interface page.
     public function getNetworksForDisplay(){
         $username = $_SESSION['sessuser'];
-        $stmt = $this->get_connection()->query("SELECT * FROM files_$username");
-        while ($row = $stmt->fetch()){
-            $allrows = $row['name']. "|".$row['date']. "|".$row['size']. "|".$row['parent']. "|".$row['mtime'];
-            $data[] = $allrows;
-        }
+        $names = shell_exec("ip link show | awk 'NR % 2 {print} !(NR % 2) && /pattern/ {print}' | awk '{print $2}' | sed 's/.$//'");
+        $namesArr = explode("/n", $names);
         return $data;
     }
 
