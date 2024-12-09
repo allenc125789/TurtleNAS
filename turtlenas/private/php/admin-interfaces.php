@@ -23,7 +23,7 @@ $requestAptUpgrade = $control->requestAptUpgrade();
                 <tr bgcolor="grey">
                     <th colspan=2>Number</th>
                     <th>Name</th>
-                    <th>Active</th>
+                    <th>Status</th>
                     <th>IP Address</th>
                     <th>Gateway</th>
                 </tr>
