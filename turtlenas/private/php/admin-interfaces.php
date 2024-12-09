@@ -17,7 +17,16 @@ $requestAptUpgrade = $control->requestAptUpgrade();
 <!--Account Management section.-->
 <div class='pageContents'>
     <div id='networkMenuDiv'>
-    </div>
+            <tbody>
+        <!--File Table body-->
+        <table id="fileTables" class="fileTables" border=2px>
+            <tr bgcolor="grey">
+                <th colspan=2>File Name</th>
+                <th>Last Modified</th>
+                <th>File Size</th>
+            </tr>
+        </table>
+    </tbody>
 </div>
 
 <!--Screen blocking div for when a request is "loading".-->
