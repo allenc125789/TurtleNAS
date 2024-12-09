@@ -25,6 +25,10 @@ function getNetworksForDisplay(){
     for $i in $subArray{
         $data['status'] += $i
     }
+    //Prepare network IP's.
+    for $i in $data['names']{
+        $command = shell_exec("ip route show 0.0.0.0/0 dev $i | cut -d\  -f3");
+        $data['ip'] += $command
     return $data;
 }
 
