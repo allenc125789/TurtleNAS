@@ -38,7 +38,7 @@ $requestAptUpgrade = $control->requestAptUpgrade();
 <!--Console for showing upgrade process.-->
 <div id='console'>
     <div id='console-output'>
-        <text id='console-text'><?php echo($requestAptUpgrade);?></text>
+        <text id='console-text'></text>
     </div>
     <div id='console-buttons'>
         <label for="closeConsoleButton" id="closeConsoleButtonTxt" class="buttonTxt">Stop</label>
