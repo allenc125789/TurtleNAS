@@ -11,24 +11,25 @@ function getNetworksForDisplay(){
     $command = shell_exec("ip link show | awk 'NR % 2 {print} !(NR % 2) && /pattern/ {print}' | awk '{print $1}' | sed 's/.$//'");
     $subArray = explode("/n", $command);
     foreach ($subArray as $i){
-        $data['number'] += $i
+        $data['number'] += $i;
     }
     //Prepare network names.
     $command = shell_exec("ip link show | awk 'NR % 2 {print} !(NR % 2) && /pattern/ {print}' | awk '{print $2}' | sed 's/.$//'");
     $subArray = explode("/n", $command);
     foreach ($subArray as $i){
-        $data['names'] += $i
+        $data['names'] += $i;
     }
     //Prepare network status.
     $command = shell_exec("ip link show | awk 'NR % 2 {print} !(NR % 2) && /pattern/ {print}' | awk '{print $9}'");
     $subArray = explode("/n", $command);
     foreach ($subArray as $i){
-        $data['status'] += $i
+        $data['status'] += $i;
     }
     //Prepare network IP's.
     foreach ($data['names'] as $i){
         $command = shell_exec("ip route show 0.0.0.0/0 dev $i | cut -d\  -f3");
-        $data['ip'] += $command
+        $data['ip'] += $command;
+    }
     return $data;
 }
 
