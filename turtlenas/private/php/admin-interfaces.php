@@ -19,6 +19,12 @@ function getNetworksForDisplay(){
     for $i in $subArray{
         $data['names'] += $i
     }
+    //Prepare network status.
+    $command = shell_exec("ip link show | awk 'NR % 2 {print} !(NR % 2) && /pattern/ {print}' | awk '{print $9}'");
+    $subArray = explode("/n", $command);
+    for $i in $subArray{
+        $data['status'] += $i
+    }
     return $data;
 }
 
