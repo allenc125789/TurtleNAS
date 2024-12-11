@@ -43,7 +43,7 @@
 > 
 > Firefox
 
-+ Web-Browser sometimes crashes when uploading large files/folders in firefox. Only fix at the momenr is to use google-chrome/chromium. Will be a subject of research later, but help here is appreciated.
++ Uploading empty folders in firefox uploads a folder with a hashshed string Chromium does not upload anything. Uploading empty folders might be an important feature for users and will be a subject of research later, but help here is appreciated.
 
 > (/var/www/turtlenas/private/PHP/handle-downloads.php)
 
