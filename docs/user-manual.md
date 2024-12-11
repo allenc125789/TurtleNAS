@@ -39,7 +39,7 @@
 
 + Web-Browser sometimes crashes when uploading large files/folders in firefox. Only fix at the momenr is to use google-chrome/chromium. Will be a subject of research later, but help here is appreciated.
 
-> (/var/www/turtlenas/public/browser.php)
+> (/var/www/turtlenas/private/php/DBcontrol.php->uploadDir())
 > 
 > Firefox
 
