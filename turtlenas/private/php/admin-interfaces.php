@@ -191,7 +191,6 @@ function displayInterfaces(){
 
 async function requestDisableInterface(checkbox){
     var xhttp = new XMLHttpRequest();
-    activateWakeLock();
     var value = checkbox.value;
     var checkboxStatus = checkbox.checked;
     var c = confirm("WARNING, you are about to disable interface ("+value+"). Are you sure you want to continue?");
@@ -208,11 +207,11 @@ async function requestDisableInterface(checkbox){
             }
         };
         xhttp.open("POST", "/upload.php", true);
-        xhttp.send(formData);
+        xhttp.send(postData);
     } else {
         checkbox.checked = !checkboxStatus;
     }
-
+}
 
 function windowBlockOFF(){
     document.getElementById("window-block").style.visibility = "hidden";
