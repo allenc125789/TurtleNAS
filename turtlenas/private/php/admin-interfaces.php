@@ -74,8 +74,9 @@ function displayInterfaces(){
     $printGateway = execPrintGateway($printNames);
 
     foreach ($numbers as $i){
+        $data[$i]['number'] = $numbers[$i - 1];
         $data[$i]['name'] = $printNames[$i - 1];
-        $data[$i]['status'] = $PrintStatus[$i - 1];
+        $data[$i]['status'] = $printStatus[$i - 1];
         $data[$i]['ip'] = $printIP[$i - 1];
         $data[$i]['netmask'] = $printNetmask[$i - 1];
         $data[$i]['gateway'] = $printGateway[$i - 1];
@@ -85,6 +86,7 @@ function displayInterfaces(){
 
 
 $displayInterfaces = displayInterfaces();
+$printStatus = execPrintStatus();
 
 
 ?>
@@ -101,16 +103,16 @@ $displayInterfaces = displayInterfaces();
 
 <!--Account Management section.-->
 <div class='pageContents'>
-    <?php print_r($displayInterfaces); ?>
     <div id='networkMenuDiv'>
         <tbody>
             <!--File Table body-->
             <table id="fileTables" class="fileTables" border=2px>
                 <tr bgcolor="grey">
-                    <th colspan=2>Number</th>
-                    <th>Name</th>
+                    <th>Number</th>
+                    <th>Interface Name</th>
                     <th>Status</th>
                     <th>IP Address</th>
+                    <th>Netmask</th>
                     <th>Gateway</th>
                 </tr>
             </table>
@@ -144,29 +146,35 @@ function displayInterfaces(){
     var table = document.getElementById("fileTables");
     //If files are found, start processing them into the table.
     //Establishes table content variables.
-    var row = table.insertRow(-1);
-    var cell0 = row.insertCell(0);
-    var cell1 = row.insertCell(1);
-    var cell2 = row.insertCell(2);
-    var cell3 = row.insertCell(3);
-    var cell4 = row.insertCell(4);
-    var cell5 = row.insertCell(5);
-    var checkboxes = document.createElement("INPUT");
-    //Sets row class name.
-    row.className = "tableItems";
+    for (i in jArray){
+        console.log(jArray[i]);
+        var row = table.insertRow(-1);
+        var cell0 = row.insertCell(0);
+        var cell1 = row.insertCell(1);
+        var cell2 = row.insertCell(2);
+        var cell3 = row.insertCell(3);
+        var cell4 = row.insertCell(4);
+        var cell5 = row.insertCell(5);
+//        var cell5 = row.insertCell(5);
+        var checkboxes = document.createElement("INPUT");
+        //Sets row class name.
+        row.className = "tableItems";
                 //Sets checkbox attributes, according to the file in their row.
-    checkboxes.setAttribute("type", "checkbox");
-    checkboxes.setAttribute("class", "cb");
-    checkboxes.setAttribute("name", "toggleInterface[]");
+        checkboxes.setAttribute("type", "checkbox");
+        checkboxes.setAttribute("class", "cb");
+        checkboxes.setAttribute("name", "toggleInterface[]");
 //                checkboxes.setAttribute("id", fileArray[0]);
 //                checkboxes.setAttribute("value", fileArray[0]);
      //Sets cell 0 as a checkbox.
-    cell0.appendChild(checkboxes);
-    cell0.setAttribute("class", "checks");
+        cell0.appendChild(checkboxes);
+        cell0.setAttribute("class", "checks");
     //Sets Cell 1 as a file or a directory.
-    let jArray = <?php echo json_encode($printNames); ?>;
-    for (var i=0; i<jArray.length; i++){
-        cell1.insertAdjacentHTML('beforeEnd', "<text>"+jArray[i]+"</text>");
+        cell0.insertAdjacentHTML('beforeEnd', "<text> "+jArray[i]['number']+"</text>");
+        cell1.insertAdjacentHTML('beforeEnd', "<text> "+jArray[i]['name']+"</text>");
+        cell2.insertAdjacentHTML('beforeEnd', "<text> "+jArray[i]['status']+"</text>");
+        cell3.insertAdjacentHTML('beforeEnd', "<text> "+jArray[i]['ip']+"</text>");
+        cell4.insertAdjacentHTML('beforeEnd', "<text> "+jArray[i]['netmask']+"</text>");
+        cell5.insertAdjacentHTML('beforeEnd', "<text> "+jArray[i]['gateway']+"</text>");
     }
 /*                //Sets cell 2 as the size of the file.
                 cell2.innerHTML = fileArray[2];
@@ -200,6 +208,8 @@ function closeConsole(){
     windowBlockOFF();
     console.style.visibility = "hidden";
 }
+
+let jArray = <?php echo json_encode($displayInterfaces); ?>;
 
 windowBlockOFF();
 displayInterfaces();
