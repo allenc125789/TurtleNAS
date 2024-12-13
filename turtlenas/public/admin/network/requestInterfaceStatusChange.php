@@ -8,10 +8,10 @@ $groups = "admin";
 $auth = $control->validate_auth();
 $priv = $control->validate_priv($groups);
 
-/*if($auth && $priv){
-    $interface = urldecode($_POST['interface']
-    $status = urldecode($_POST['status']
-    $control->changeInterfaceStatus($interface, $status);
+if($auth && $priv){
+    $interfaces = urldecode($_POST['interface'];
+    $status = urldecode($_POST['status'];
+    $control->changeInterfaceStatus($interfaces, $status);
 }
-*/
+
 ?>
