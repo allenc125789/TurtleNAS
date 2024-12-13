@@ -62,7 +62,7 @@ class DBcontrol {
         } else{
             $status = down;
         }
-        $command = shell_exec("ip link set $interfaces $status");
+        $command = shell_exec("sudo ip link set $interfaces $status");
     }
 
 }
