@@ -56,6 +56,11 @@ class DBcontrol {
         return $command;
     }
 
+    public function changeInterfaceStatus($interface, $status) {
+        $command = shell_exec("ip link set $interface $status");
+
+    }
+
 }
 
 
