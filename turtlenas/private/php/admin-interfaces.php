@@ -110,7 +110,7 @@ $displayInterfaces = displayInterfaces();
                     <th>Active</th>
                     <th>Interface Name</th>
                     <th>Status</th>
-                    <th>IP Address</th>
+                    <th>IPv4 Address</th>
                     <th>Netmask</th>
                     <th>Gateway</th>
                     <th>Comment</th>
