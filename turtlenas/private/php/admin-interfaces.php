@@ -3,14 +3,6 @@ $printUpdates = $control->printUpdateList();
 $printUpdatesCount = $control->printUpdateList(TRUE);
 $requestAptUpgrade = $control->requestAptUpgrade();
 
-    //Prepare network numbers.
-function execPrintNumbers(){
-    $command = shell_exec("ip link show | awk '/^[1-9]/' | awk '{print $1}' | sed 's/.$//' | sed 's/$/\|/' | tr -d '[:space:]'");
-    $numbers = explode("|", $command);
-    $n = array_pop($numbers);
-    return $numbers;
-}
-
     //Prepare network names.
 function execPrintNames(){
     $command = shell_exec("ip link show | awk '/^[1-9]/' | awk '{print $2}' | sed 's/.$//' | sed 's/$/\|/' | tr -d '[:space:]'");
@@ -68,15 +60,32 @@ function execPrintGateway($printNames){
     return $gateways;
 }
 
+    //Displays Interfaces.
+function displayInterfaces(){
+    $data = [];
+    $command = shell_exec("ip link show | awk '/^[1-9]/' | awk '{print $1}' | sed 's/.$//' | sed 's/$/\|/' | tr -d '[:space:]'");
+    $numbers = explode("|", $command);
+    $n = array_pop($numbers);
+
+    $printNames = execPrintNames();
+    $printStatus = execPrintStatus();
+    $printIP = execPrintIP($printNames);
+    $printNetmask = execPrintNetmask($printNames);
+    $printGateway = execPrintGateway($printNames);
+
+    foreach ($numbers as $i){
+        $data[$i]['name'] = $printNames[$i - 1];
+        $data[$i]['status'] = $PrintStatus[$i - 1];
+        $data[$i]['ip'] = $printIP[$i - 1];
+        $data[$i]['netmask'] = $printNetmask[$i - 1];
+        $data[$i]['gateway'] = $printGateway[$i - 1];
+    }
+    return $data;
+}
 
 
+$displayInterfaces = displayInterfaces();
 
-
-$printNumbers = execPrintNumbers();
-$printNames = execPrintNames();
-$printStatus = execPrintStatus();
-$printIP = execPrintIP($printNames);
-$printGateway = execPrintGateway($printNames);
 
 ?>
 
@@ -92,6 +101,7 @@ $printGateway = execPrintGateway($printNames);
 
 <!--Account Management section.-->
 <div class='pageContents'>
+    <?php print_r($displayInterfaces); ?>
     <div id='networkMenuDiv'>
         <tbody>
             <!--File Table body-->
@@ -153,13 +163,12 @@ function displayInterfaces(){
      //Sets cell 0 as a checkbox.
     cell0.appendChild(checkboxes);
     cell0.setAttribute("class", "checks");
-/*                //Sets Cell 1 as a file or a directory.
-                if (!dir.endsWith("/")){
-                    cell1.insertAdjacentHTML('beforeEnd', "<img id='fileIcon' src='/images/file-icon.png'><a href=download.php?"+dirURI+">"+fileArray[0]);
-                } else {
-                    cell1.insertAdjacentHTML('beforeEnd', "<img id='folderIcon' src='/images/folder-icon.png'></img><a href=javascript:displayFiles(\""+dirURI+"\")>"+fileArray[0]);
-                }
-                //Sets cell 2 as the size of the file.
+    //Sets Cell 1 as a file or a directory.
+    let jArray = <?php echo json_encode($printNames); ?>;
+    for (var i=0; i<jArray.length; i++){
+        cell1.insertAdjacentHTML('beforeEnd', "<text>"+jArray[i]+"</text>");
+    }
+/*                //Sets cell 2 as the size of the file.
                 cell2.innerHTML = fileArray[2];
                 cell2.setAttribute("class", "sizeItems");
                 //Sets cell 3 as the date of when the file was last modified.
