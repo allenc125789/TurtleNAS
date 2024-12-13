@@ -197,7 +197,7 @@ async function requestDisableInterface(checkbox){
     var xhttp = new XMLHttpRequest();
     var value = checkbox.value;
     var checkboxStatus = checkbox.checked;
-    var c = confirm("WARNING, you are about to disable interface ("+value+"). Are you sure you want to continue?");
+    var c = confirm("WARNING, you are about to change interface ("+value+"). This may cause connection issues.\n\nAre you sure you want to continue?");
     var postData = 'interface='+value+'&status='+checkboxStatus;
     // If user confirmation is true, allow the change in interface.
     if (c == true){
