@@ -19,41 +19,41 @@ function execPrintStatus(){
     return $status;
 }
 
-    //Prepare network IP's.
+    //Prepare network IPs.
 function execPrintIP($printNames){
     $ip = [];
     foreach ($printNames as $i){
         $command = shell_exec("ip a l $i | awk '/inet/ {print $2}' | cut -d/ -f1 | head -n 1 | tr -d '[:space:]'");
         if ($command == null){
-            $command = "empty";
+            $command = "EMPTY";
         }
         $ip[] = $command;
     }
     return $ip;
 }
 
-    //Prepare network Netmask's.
+    //Prepare network Netmasks.
 function execPrintNetmask($printNames){
     $netmask = [];
     foreach ($printNames as $i){
         $command = shell_exec("ip a l $i | awk '/inet/ {print $2}' | cut -d/ -f2 | head -n 1 | tr -d '[:space:]'");
         if ($command == null){
-            $command = "empty";
+            $command = "EMPTY";
         }
         $netmask[] = $command;
     }
     return $netmask;
 }
 
-    //Prepare network Gateway's.
+    //Prepare network Gateways.
 function execPrintGateway($printNames){
     $gateway = [];
     foreach ($printNames as $i){
         $command = shell_exec("ip route show 0.0.0.0/0 dev $i | cut -d\  -f3 | tr -d '[:space:]'");
         if ($command == null && $i == "lo"){
-            $command = "null";
+            $command = "NULL";
         } elseif ($command == null){
-            $command = "empty";
+            $command = "EMPTY";
         }
         $gateways[] = $command;
     }
@@ -86,7 +86,6 @@ function displayInterfaces(){
 
 
 $displayInterfaces = displayInterfaces();
-$printStatus = execPrintStatus();
 
 
 ?>
@@ -108,7 +107,7 @@ $printStatus = execPrintStatus();
             <!--File Table body-->
             <table id="fileTables" class="fileTables" border=2px>
                 <tr bgcolor="grey">
-                    <th>Number</th>
+                    <th>Active</th>
                     <th>Interface Name</th>
                     <th>Status</th>
                     <th>IP Address</th>
@@ -163,18 +162,17 @@ function displayInterfaces(){
         checkboxes.setAttribute("type", "checkbox");
         checkboxes.setAttribute("class", "cb");
         checkboxes.setAttribute("name", "toggleInterface[]");
-//                checkboxes.setAttribute("id", fileArray[0]);
-//                checkboxes.setAttribute("value", fileArray[0]);
+        checkboxes.setAttribute("value", jArray[i]['name']);
      //Sets cell 0 as a checkbox.
         cell0.appendChild(checkboxes);
         cell0.setAttribute("class", "checks");
-    //Sets Cell 1 as a file or a directory.
+    //Sets cell content.
         cell0.insertAdjacentHTML('beforeEnd', "<text> "+jArray[i]['number']+"</text>");
-        cell1.insertAdjacentHTML('beforeEnd', "<text> "+jArray[i]['name']+"</text>");
-        cell2.insertAdjacentHTML('beforeEnd', "<text> "+jArray[i]['status']+"</text>");
-        cell3.insertAdjacentHTML('beforeEnd', "<text> "+jArray[i]['ip']+"</text>");
-        cell4.insertAdjacentHTML('beforeEnd', "<text> "+jArray[i]['netmask']+"</text>");
-        cell5.insertAdjacentHTML('beforeEnd', "<text> "+jArray[i]['gateway']+"</text>");
+        cell1.insertAdjacentHTML('beforeEnd', "<text>"+jArray[i]['name']+"</text>");
+        cell2.insertAdjacentHTML('beforeEnd', "<text>"+jArray[i]['status']+"</text>");
+        cell3.insertAdjacentHTML('beforeEnd', "<text>"+jArray[i]['ip']+"</text>");
+        cell4.insertAdjacentHTML('beforeEnd', "<text>"+jArray[i]['netmask']+"</text>");
+        cell5.insertAdjacentHTML('beforeEnd', "<text>"+jArray[i]['gateway']+"</text>");
     }
 /*                //Sets cell 2 as the size of the file.
                 cell2.innerHTML = fileArray[2];
