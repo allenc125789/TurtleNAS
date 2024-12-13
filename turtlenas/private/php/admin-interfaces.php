@@ -110,8 +110,7 @@ $displayInterfaces = displayInterfaces();
                     <th>Active</th>
                     <th>Interface Name</th>
                     <th>Status</th>
-                    <th>IPv4 Address</th>
-                    <th>Netmask</th>
+                    <th colspan=2>IPv4 Address</th>
                     <th>Gateway</th>
                     <th>Comment</th>
                 </tr>
@@ -179,7 +178,12 @@ function displayInterfaces(){
         cell1.insertAdjacentHTML('beforeEnd', "<text>"+jArray[i]['name']+"</text>");
         cell2.insertAdjacentHTML('beforeEnd', "<text>"+jArray[i]['status']+"</text>");
         cell3.insertAdjacentHTML('beforeEnd', "<text>"+jArray[i]['ip']+"</text>");
-        cell4.insertAdjacentHTML('beforeEnd', "<text>"+jArray[i]['netmask']+"</text>");
+        //Sets netmask cell.
+        if (jArray[i]['netmask'] == "EMPTY"){
+            cell4.insertAdjacentHTML('beforeEnd', "<text>"+jArray[i]['netmask']+"</text>");
+        }else {
+            cell4.insertAdjacentHTML('beforeEnd', "<text>/"+jArray[i]['netmask']+"</text>");
+        }
         cell5.insertAdjacentHTML('beforeEnd', "<text>"+jArray[i]['gateway']+"</text>");
     }
 }
