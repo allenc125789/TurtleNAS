@@ -57,12 +57,12 @@ class DBcontrol {
     }
 
     public function changeInterfaceStatus($interfaces, $status) {
-        if ($status == true){
-            $status = up;
+        if ($status == 'true'){
+            $status = 'up';
         } else{
-            $status = down;
+            $status = 'down';
         }
-        $command = shell_exec("sudo ip link set $interfaces $status");
+//        $command = shell_exec("sudo ip link set $interfaces $status");
     }
 
 }
