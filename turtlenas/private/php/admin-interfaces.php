@@ -185,16 +185,34 @@ function displayInterfaces(){
 }
 
 
-function requestDisableInterface(checkbox){
+
+
+
+
+async function requestDisableInterface(checkbox){
+    var xhttp = new XMLHttpRequest();
+    activateWakeLock();
     var value = checkbox.value;
     var checkboxStatus = checkbox.checked;
     var c = confirm("WARNING, you are about to disable interface ("+value+"). Are you sure you want to continue?");
+    // If user confirmation is true, allow the change in interface.
     if (c == true){
-        console.log('true');
+        var postData = {interface:value, status:checkboxStatus};
+        xhttp.onreadystatechange = function(){
+        // Write code for writing output when databse updates start.:
+            if (this.readyState == 4 && this.status == 200){
+               // Write code for writing output when databse is fully updated.:
+                location.reload();
+            } else if(this.status >= 400){
+                location.reload();
+            }
+        };
+        xhttp.open("POST", "/upload.php", true);
+        xhttp.send(formData);
     } else {
         checkbox.checked = !checkboxStatus;
     }
-}
+
 
 function windowBlockOFF(){
     document.getElementById("window-block").style.visibility = "hidden";
