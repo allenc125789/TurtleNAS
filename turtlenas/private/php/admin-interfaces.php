@@ -23,7 +23,7 @@ function execPrintStatus(){
 function execPrintIP($printNames){
     $ip = [];
     foreach ($printNames as $i){
-        $command = shell_exec("ip a l $i | awk '/inet/ {print $2}' | cut -d/ -f1 | head -n 1 | tr -d '[:space:]'");
+        $command = shell_exec("ip a l $i | awk '/inet / {print $2}' | cut -d/ -f1 | head -n 1 | tr -d '[:space:]'");
         if ($command == null){
             $command = "EMPTY";
         }
