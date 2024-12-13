@@ -113,6 +113,7 @@ $displayInterfaces = displayInterfaces();
                     <th>IP Address</th>
                     <th>Netmask</th>
                     <th>Gateway</th>
+                    <th>Comment</th>
                 </tr>
             </table>
         </tbody>
@@ -146,7 +147,6 @@ function displayInterfaces(){
     //If files are found, start processing them into the table.
     //Establishes table content variables.
     for (i in jArray){
-        console.log(jArray[i]);
         var row = table.insertRow(-1);
         var cell0 = row.insertCell(0);
         var cell1 = row.insertCell(1);
@@ -154,38 +154,47 @@ function displayInterfaces(){
         var cell3 = row.insertCell(3);
         var cell4 = row.insertCell(4);
         var cell5 = row.insertCell(5);
-//        var cell5 = row.insertCell(5);
+        var cell6 = row.insertCell(6);
         var checkboxes = document.createElement("INPUT");
         //Sets row class name.
         row.className = "tableItems";
-                //Sets checkbox attributes, according to the file in their row.
+        //Sets checkbox attributes, according to the file in their row.
         checkboxes.setAttribute("type", "checkbox");
         checkboxes.setAttribute("class", "cb");
         checkboxes.setAttribute("name", "toggleInterface[]");
         checkboxes.setAttribute("value", jArray[i]['name']);
-     //Sets cell 0 as a checkbox.
+        checkboxes.setAttribute("onchange", "requestDisableInterface(this)");
+        if (jArray[i]['name'] == 'lo'){
+            checkboxes.setAttribute("disabled", "disabled");
+            checkboxes.setAttribute("checked", "true");
+        }
+        if (jArray[i]['status'] == 'UP'){
+            checkboxes.setAttribute("checked", "true");
+        }
+        //Sets cell 0 as a checkbox.
         cell0.appendChild(checkboxes);
         cell0.setAttribute("class", "checks");
-    //Sets cell content.
-        cell0.insertAdjacentHTML('beforeEnd', "<text> "+jArray[i]['number']+"</text>");
+        //Sets cell content.
+        cell0.insertAdjacentHTML('beforeEnd', "<text> "+jArray[i]['number']+".</text>");
         cell1.insertAdjacentHTML('beforeEnd', "<text>"+jArray[i]['name']+"</text>");
         cell2.insertAdjacentHTML('beforeEnd', "<text>"+jArray[i]['status']+"</text>");
         cell3.insertAdjacentHTML('beforeEnd', "<text>"+jArray[i]['ip']+"</text>");
         cell4.insertAdjacentHTML('beforeEnd', "<text>"+jArray[i]['netmask']+"</text>");
         cell5.insertAdjacentHTML('beforeEnd', "<text>"+jArray[i]['gateway']+"</text>");
     }
-/*                //Sets cell 2 as the size of the file.
-                cell2.innerHTML = fileArray[2];
-                cell2.setAttribute("class", "sizeItems");
-                //Sets cell 3 as the date of when the file was last modified.
-                cell3.innerHTML = fileArray[1];
-                cell3.setAttribute("class", "dateItems");
-            }
-        }
+}
+
+
+function requestDisableInterface(checkbox){
+    var value = checkbox.value;
+    var checkboxStatus = checkbox.checked;
+    var c = confirm("WARNING, you are about to disable interface ("+value+"). Are you sure you want to continue?");
+    if (c == true){
+        console.log('true');
+    } else {
+        checkbox.checked = !checkboxStatus;
     }
-*/}
-
-
+}
 
 function windowBlockOFF(){
     document.getElementById("window-block").style.visibility = "hidden";
