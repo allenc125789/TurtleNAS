@@ -7,11 +7,12 @@ $control = new DBcontrol;
 $groups = "admin";
 $auth = $control->validate_auth();
 $priv = $control->validate_priv($groups);
+echo('hi');
 
 if($auth && $priv){
-//    $interfaces = urldecode($_POST['interface'];
-//    $status = urldecode($_POST['status'];
-//    $control->changeInterfaceStatus($interfaces, $status);
+    $interfaces = urldecode($_POST['interface']);
+    $status = urldecode($_POST['status'];
+    $control->changeInterfaceStatus($interfaces, $status);
 }
 
 ?>
