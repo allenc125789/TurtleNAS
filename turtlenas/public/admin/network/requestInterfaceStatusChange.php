@@ -11,7 +11,7 @@ echo('hi');
 
 if($auth && $priv){
     $interfaces = urldecode($_POST['interface']);
-    $status = urldecode($_POST['status'];
+    $status = urldecode($_POST['status']);
     $control->changeInterfaceStatus($interfaces, $status);
 }
 
