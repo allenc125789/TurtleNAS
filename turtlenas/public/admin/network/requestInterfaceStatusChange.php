@@ -9,6 +9,8 @@ $auth = $control->validate_auth();
 $priv = $control->validate_priv($groups);
 
 if($auth && $priv){
+    $interface = urldecode($_POST['interface']
+    $status = urldecode($_POST['status']
     $control->changeInterfaceStatus($interface, $status);
 }
 
