@@ -194,10 +194,6 @@ async function requestDisableInterface(checkbox){
     var value = checkbox.value;
     var checkboxStatus = checkbox.checked;
     var c = confirm("WARNING, you are about to disable interface ("+value+"). Are you sure you want to continue?");
-//    let postData = {
-//        'interface': value,
-//        'status': checkboxStatus
-//    };
     var postData = 'interface='+value+'&status='+checkboxStatus;
     // If user confirmation is true, allow the change in interface.
     if (c == true){
@@ -206,9 +202,9 @@ async function requestDisableInterface(checkbox){
             if (this.readyState == 4 && this.status == 200){
                // Write code for writing output when databse is fully updated.:
                 console.log("working");
-//                location.reload();
-//            } else if(this.status >= 400){
-//                location.reload();
+                location.reload();
+            } else if(this.status >= 400){
+                location.reload();
             }
         };
         xhttp.open("POST", "/admin/network/requestInterfaceStatusChange.php", true);
