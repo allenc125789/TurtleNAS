@@ -27,7 +27,7 @@ $requestAptUpgrade = $control->requestAptUpgrade();
     </div>
 
     <div>
-        <text><br>Upgradable packages(<?php echo($printUpdatesCount);?>).<br><br></text>
+        <text><br>Upgradable packages(<?php echo("${printUpdatesCount})."); if ($printUpdateCount == 0){ echo(" All packages up to date!");}?><br><br></text>
         <?php echo($printUpdates);?>
     </div>
 
