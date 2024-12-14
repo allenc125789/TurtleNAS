@@ -42,25 +42,25 @@ $printLinuxVersion = execPrint("cat /proc/version");
 <?php include("../../../private/html/admin-pageSelectMenu.html");?>
 
 <div class='pageContents'>
-    <text>Logged in as: <?php echo($_SESSION['sessuser']);?></text>
+    <text><b>Logged in as:</b> <?php echo($_SESSION['sessuser']);?></text>
     <br><br>
-    <text>Uptime: <?php echo($printUptime);?></text>
+    <text><b>Uptime:</b> <?php echo($printUptime);?></text>
     <br><br>
-    <text>Computer Name: <?php echo($printHostname);?></text>
+    <text><b>Computer Name:</b> <?php echo($printHostname);?></text>
     <br>
-    <text>Domain Name: <?php echo($printDomainname);?></text>
+    <text><b>Domain Name:</b> <?php echo($printDomainname);?></text>
     <br>
-    <text>IP Address: <?php echo($printIP);?></text>
-    <br><br>
-
-    <text>CPU(s): <?php echo($printCPUs);?></text>
-    <br>
-    <text>RAM: <?php echo($printMem);?></text>
+    <text><b>IP Address:</b> <?php echo($printIP);?></text>
     <br><br>
 
-    <text>Debian version: <?php echo($printLinuxVersion);?></text>
+    <text><b>CPU(s):</b> <?php echo($printCPUs);?></text>
     <br>
-    <text>TurtleNAS version:</text>
+    <text><b>RAM:</b> <?php echo($printMem);?></text>
+    <br><br>
+
+    <text><b>Debian version:</b> <?php echo($printLinuxVersion);?></text>
+    <br>
+    <text><b>TurtleNAS version:</b></text>
     <br>
 </div>
 </html>
