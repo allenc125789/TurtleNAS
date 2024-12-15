@@ -102,7 +102,7 @@ $displayInterfaces = displayInterfaces();
 
 <!--Account Management section.-->
 <div class='pageContents'>
-    <label for="refresh" class="buttonTxt">Log-out</label>
+    <label for="refresh" class="buttonTxt">Refresh Interfaces</label>
     <button class="buttons" id="refresh" onclick="requestInterfaceRefresh()"></button>
     <div id='networkMenuDiv'>
         <tbody>
