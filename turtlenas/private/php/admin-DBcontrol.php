@@ -71,7 +71,7 @@ class DBcontrol {
         $n = array_pop($names);
 
         foreach ($names as $i){
-            shell_exec('sudo dhclient -r'.escapeshellarg($i).' && sudo dhclient'.escapeshellarg($i));
+            $command = shell_exec("sudo dhclient -r $i && sudo dhclient $i");
         }
     }
 
