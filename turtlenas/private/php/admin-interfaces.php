@@ -102,6 +102,8 @@ $displayInterfaces = displayInterfaces();
 
 <!--Account Management section.-->
 <div class='pageContents'>
+    <label for="refresh" class="buttonTxt">Log-out</label>
+    <button class="buttons" id="refresh" onclick="requestInterfaceRefresh()"></button>
     <div id='networkMenuDiv'>
         <tbody>
             <!--File Table body-->
@@ -216,6 +218,26 @@ async function requestDisableInterface(checkbox){
         xhttp.send(postData);
     } else {
         checkbox.checked = !checkboxStatus;
+    }
+}
+
+async function requestInterfaceRefresh(){
+    var xhttp = new XMLHttpRequest();
+    var c = confirm("WARNING, you are about to refresh the interface's connections. This will temporarily drop connections.\n\nAre you sure you want to continue?");
+    // If user confirmation is true, allow the change in interface.
+    if (c == true){
+        xhttp.onreadystatechange = function(){
+        // Write code for writing output when databse updates start.:
+            if (this.readyState == 4 && this.status == 200){
+               // Write code for writing output when databse is fully updated.:
+                console.log("working");
+                location.reload();
+            } else if(this.status >= 400){
+                location.reload();
+            }
+        };
+        xhttp.open("POST", "/admin/network/requestInterfaceRefresh.php", true);
+        xhttp.send();
     }
 }
 
