@@ -105,7 +105,7 @@ $displayInterfaces = displayInterfaces();
     <div id='interfaceButtonsDiv'>
         <label for="refresh" class="buttonTxt">Refresh Interfaces</label>
         <button class="buttons" id="refresh" onclick="requestInterfaceRefresh()"></button>
-    </div>div
+    </div>
     <div id='networkMenuDiv'>
         <tbody>
             <!--File Table body-->
