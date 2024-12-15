@@ -79,6 +79,9 @@ echo "www-data ALL=(ALL) NOPASSWD: /bin/apt-get upgrade" >> /etc/sudoers
 echo "www-data ALL=(ALL) NOPASSWD: /bin/apt-get -y upgrade" >> /etc/sudoers
 echo "www-data ALL=(ALL) NOPASSWD: /bin/ip link set * up" >> /etc/sudoers
 echo "www-data ALL=(ALL) NOPASSWD: /bin/ip link set * down" >> /etc/sudoers
+echo "www-data ALL=(ALL) NOPASSWD: /bin/ifdown *" >> /etc/sudoers
+echo "www-data ALL=(ALL) NOPASSWD: /bin/ifup *" >> /etc/sudoers
+
 
 sudo adduser sysadmin sudo
 echo "sysadmin ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
