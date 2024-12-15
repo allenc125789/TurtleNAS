@@ -7,7 +7,6 @@ $control = new DBcontrol;
 $groups = "admin";
 $auth = $control->validate_auth();
 $priv = $control->validate_priv($groups);
-echo('hi');
 
 if($auth && $priv){
     $interfaces = urldecode($_POST['interface']);
