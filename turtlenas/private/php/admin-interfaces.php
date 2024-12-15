@@ -102,8 +102,10 @@ $displayInterfaces = displayInterfaces();
 
 <!--Account Management section.-->
 <div class='pageContents'>
-    <label for="refresh" class="buttonTxt">Refresh Interfaces</label>
-    <button class="buttons" id="refresh" onclick="requestInterfaceRefresh()"></button>
+    <div id='interfaceButtonsDiv'>
+        <label for="refresh" class="buttonTxt">Refresh Interfaces</label>
+        <button class="buttons" id="refresh" onclick="requestInterfaceRefresh()"></button>
+    </div>div
     <div id='networkMenuDiv'>
         <tbody>
             <!--File Table body-->
