@@ -123,6 +123,10 @@ form {display: inline;}
 }
 .dropdownItem:hover {background-color: #e8e8e8;}
 
+#interfaceButtonsDiv{
+
+}
+
 #accountMenuDiv {
     position: fixed;
     border: 6px outset grey;
