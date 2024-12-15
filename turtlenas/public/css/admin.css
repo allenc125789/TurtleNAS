@@ -92,7 +92,7 @@ form {display: inline;}
   border: 2px outset #ccc;
   border-radius: 8px;
   display: inline-block;
-  padding: 2% 4%;
+  padding: 8px 10px;
   cursor: pointer;
   background-color: #e1e1e1;
 }
