@@ -65,6 +65,17 @@ class DBcontrol {
         $command = shell_exec("sudo ip link set $interfaces $status");
     }
 
+    public function interfaceRefresh() {
+        $command = shell_exec("ip link show | awk '/^[1-9]/' | awk '{print $2}' | sed 's/.$//' | sed 's/$/\|/' | tr -d '[:space:]'");
+        $names = explode("|", $command);
+        $n = array_pop($names);
+
+        foreach ($names as $i){
+            $command = shell_exec("sudo ifdown $i && sudo ifup $i");
+        }
+    }
+
+
 }
 
 
