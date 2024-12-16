@@ -42,6 +42,11 @@ $printLinuxVersion = execPrint("cat /proc/version");
 <?php include("../../../private/html/admin-pageSelectMenu.html");?>
 
 <div class='pageContents'>
+    <div class='pageTitle'>
+        <h1>General</h1>
+        <hr>
+        <br><br>
+    </div>
     <text><b>Logged in as:</b> <?php echo($_SESSION['sessuser']);?></text>
     <br><br>
     <text><b>Uptime:</b> <?php echo($printUptime);?></text>
