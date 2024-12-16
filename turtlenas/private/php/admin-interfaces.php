@@ -102,6 +102,11 @@ $displayInterfaces = displayInterfaces();
 
 <!--Account Management section.-->
 <div class='pageContents'>
+    <div class='pageTitle'>
+        <h1>Interfaces</h1>
+        <hr>
+        <br><br>
+    </div>
     <div id='interfaceButtonsDiv'>
         <label for="refresh" class="buttonTxt">Refresh Interfaces</label>
         <button class="buttons" id="refresh" onclick="requestInterfaceRefresh()"></button>
