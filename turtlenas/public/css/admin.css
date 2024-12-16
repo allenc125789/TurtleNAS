@@ -124,7 +124,7 @@ form {display: inline;}
 .dropdownItem:hover {background-color: #e8e8e8;}
 
 #interfaceButtonsDiv{
-
+  width: 20%;
 }
 
 #accountMenuDiv {
