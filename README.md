@@ -12,7 +12,7 @@
 
 ![TurtleNAS Preview](https://github.com/allenc125789/TurtleNAS/blob/main/docs/images/screenshots/turtlenas-preview.gif)
 
-An Open-Source NAS system based on Debian. Offers a web-GUI, which includes a file browser and an easily configurable system for accessing local clients to backup and restore files/folders.
+A simple Open-Source NAS program based on Debian. Offers a web-GUI, which includes a file browser and an easily configurable system for accessing local clients to backup and restore files/folders.
 
 ### Features
 >   + [Authentication.](https://github.com/allenc125789/TurtleNAS/blob/main/docs/features/authentication.md)
