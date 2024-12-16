@@ -105,7 +105,7 @@ $displayInterfaces = displayInterfaces();
     <div class='pageTitle'>
         <h1>Interfaces</h1>
         <hr>
-        <br><br>
+        <br>
     </div>
     <div id='interfaceButtonsDiv'>
         <label for="refresh" class="buttonTxt">Refresh Interfaces</label>
