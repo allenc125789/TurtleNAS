@@ -19,7 +19,7 @@ $requestAptUpgrade = $control->requestAptUpgrade();
     <div class='pageTitle'>
         <h1>Updates</h1>
         <hr>
-        <br><br>
+        <br>
     </div>
 
     <div id='updateMenuDiv'>
