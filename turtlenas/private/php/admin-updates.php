@@ -16,6 +16,12 @@ $requestAptUpgrade = $control->requestAptUpgrade();
 
 <!--Upgrade Action section.-->
 <div class='pageContents'>
+    <div class='pageTitle'>
+        <h1>Updates</h1>
+        <hr>
+        <br><br>
+    </div>
+
     <div id='updateMenuDiv'>
         <!--Button to switch to the browser view.-->
         <label for="refresh" id="refreshTxt" class="buttonTxt">Refresh</label>
