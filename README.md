@@ -28,6 +28,7 @@ A simple Open-Source NAS program based on Debian. Offers a web-GUI, which includ
 
 ### Source
 + **Run the following as Root**
+  
   1) Install Debian and the `git` package.
      + `apt install git`
   3) Download the program and run the setup with this command:
