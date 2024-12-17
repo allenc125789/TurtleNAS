@@ -206,6 +206,7 @@ async function requestDisableInterface(checkbox){
     var xhttp = new XMLHttpRequest();
     var value = checkbox.value;
     var checkboxStatus = checkbox.checked;
+    windowBlockON();
     var c = confirm("WARNING, you are about to change interface ("+value+"). This may cause connection issues.\n\nAre you sure you want to continue?");
     var postData = 'interface='+value+'&status='+checkboxStatus;
     // If user confirmation is true, allow the change in interface.
@@ -230,6 +231,7 @@ async function requestDisableInterface(checkbox){
 
 async function requestInterfaceRefresh(){
     var xhttp = new XMLHttpRequest();
+    windowBlockON();
     var c = confirm("WARNING, you are about to refresh the interfaces. This will refresh the connection to DHCP and other connections. Will temporarily drop connections.\n\nAre you sure you want to continue?");
     // If user confirmation is true, allow the change in interface.
     if (c == true){
