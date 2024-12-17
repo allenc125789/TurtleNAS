@@ -23,11 +23,18 @@ $requestAptUpgrade = $control->requestAptUpgrade();
     </div>
 
     <div id='updateMenuDiv'>
-        <!--Button to switch to the browser view.-->
+
+       <input type="checkbox" id="autoRefresh" value="true">
+       <label for="autoRefresh">-[Automatic Refresh]</label><br>
+
+       <input type="checkbox" id="autoUpdate" value="true">
+       <label for="autoUpdate">-[Automatic Update]</label><br><br>
+
+        <!--Button to refresh the update list.-->
         <label for="refresh" id="refreshTxt" class="buttonTxt">Refresh</label>
         <input class="buttons" id="refresh" onclick="getRequestAptUpdate()">
 
-        <!--Button to sign out of account.-->
+        <!--Button to bring up the update prompt.-->
         <label for="upgrade" id="upgradeTxt" class="buttonTxt">Upgrade</label>
         <button class="buttons" id="upgrade" onclick="openConsole()"></button>
     </div>
