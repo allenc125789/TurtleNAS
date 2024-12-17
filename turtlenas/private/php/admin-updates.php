@@ -24,11 +24,11 @@ $requestAptUpgrade = $control->requestAptUpgrade();
 
     <div id='updateMenuDiv'>
 
-       <input type="checkbox" id="autoRefresh" value="true">
        <label for="autoRefresh">-[Automatic Refresh]</label><br>
+       <input type="checkbox" id="autoRefresh" value="true" onchange="requestAutoRefresh()">
 
-       <input type="checkbox" id="autoUpdate" value="true">
        <label for="autoUpdate">-[Automatic Update]</label><br><br>
+       <input type="checkbox" id="autoUpdate" value="true" onchange="requestAutoUpdates()">
 
         <!--Button to refresh the update list.-->
         <label for="refresh" id="refreshTxt" class="buttonTxt">Refresh</label>
