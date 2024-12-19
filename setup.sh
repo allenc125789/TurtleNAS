@@ -102,15 +102,12 @@ fi
     #: Create DB tables.
 mariadb -e "CREATE DATABASE turtlenas;"
 mariadb -e "USE turtlenas; CREATE TABLE drives (user VARCHAR(36), type VARCHAR(6), disk VARCHAR(255), uuid CHAR(36) );"
-mariadb -e "USE turtlenas; CREATE TABLE sysinfo (autoUpdates INT, autoUpdatesRefresh INT );"
 mariadb -e "USE turtlenas; CREATE TABLE files_admin (fullpath NVARCHAR(255) PRIMARY KEY, parent NVARCHAR(255), name NVARCHAR(255),date VARCHAR(224), size VARCHAR(255), mtime CHAR(244) );"
 mariadb -e "USE turtlenas; INSERT INTO drives (user, type, disk, uuid) VALUES('admin', 'LOCAL', '$vFILESYSTEM', '$vUUID');"
-mariadb -e "USE turtlenas; INSERT INTO drives (autoUpdates, autoUpdatesRefresh) VALUES('0', '0');"
 
     #: Create DB Users.
 mariadb -e "CREATE USER 'www-data'@'localhost' IDENTIFIED BY ''"
 mariadb -e "GRANT ALL PRIVILEGES ON turtlenas.drives TO 'www-data'@'localhost' WITH GRANT OPTION"
-mariadb -e "GRANT ALL PRIVILEGES ON turtlenas.sysinfo TO 'www-data'@'localhost' WITH GRANT OPTION"
 mariadb -e "GRANT ALL PRIVILEGES ON turtlenas.files_admin TO 'www-data'@'localhost' WITH GRANT OPTION"
 
 
