@@ -19,3 +19,4 @@
 ~ fix the hotbar of the browser. Currently, it is a bit buggy when scrolling down. Will probably need a seperate div on the table item.
 
 ~ Change the admin->update page from an html styled list, to something similar to the browser page, that allows the selection/deselection of which upgrades you do/don't want.
+
