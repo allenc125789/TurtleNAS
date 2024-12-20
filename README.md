@@ -20,7 +20,7 @@ A simple Open-Source NAS program for Debian. Offers a web-GUI, which includes a 
 >   + [Authentication.](https://github.com/allenc125789/TurtleNAS/blob/main/docs/features/authentication.md)
 >   + [Web-Based File Browser.](https://github.com/allenc125789/TurtleNAS/blob/main/docs/features/file-browser.md)
 >   + [Admin Resources.](https://github.com/allenc125789/TurtleNAS/blob/main/docs/features/admin.md)
->   + [Compatibility.](https://github.com/allenc125789/TurtleNAS/blob/main/docs/features/compatibility.md)
+>   + [Browser Compatibility.](https://github.com/allenc125789/TurtleNAS/blob/main/docs/features/compatibility.md)
 
 # Installation:
 > [!IMPORTANT]
