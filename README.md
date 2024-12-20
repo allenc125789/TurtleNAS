@@ -1,7 +1,7 @@
 > [!NOTE]
 > **Current Status:** Under Development. Doing the admin pages.
 >
-> (Working on admin->network->interfaces.php) Setting up the page to be a list similar to the browser page. With the ability to select and deselect which interfaces are up or down. As well as the ability to change the interface's setting's (IP address, netmask, etc.)
+> See the current progress on the dev branch [here](https://github.com/allenc125789/TurtleNAS/tree/dev)
 >
 [Update-logs](https://github.com/allenc125789/TurtleNAS/blob/dev/docs/update-logs/Change-Logs.md),
 [Planned Updates](https://github.com/allenc125789/TurtleNAS/blob/main/docs/update-logs/Planned-Updates.md),
