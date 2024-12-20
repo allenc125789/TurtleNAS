@@ -1,14 +1,15 @@
 <?php
-require_once("../private/php/DBcontrol.php");
+
+require("../../../private/php/admin-DBcontrol.php");
 $control = new DBcontrol;
 
 //Verfies creds.
-$groups = "www-data";
+$groups = "admin";
 $auth = $control->validate_auth();
 $priv = $control->validate_priv($groups);
 
 if($auth && $priv){
-    $control->updateFileRecord();
+    include("../../../private/php/admin-general.php");
 }
 
 ?>

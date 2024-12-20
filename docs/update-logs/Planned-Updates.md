@@ -4,6 +4,8 @@
 
 ~ lots of unused code needs to be trimmed. might need to reuse the hashing system to provide a more unique hash when downloading a compressed folder.
 
+~ add wifi interfacing features to the network->interface page.
+
 ~ re-evaluate permissions method. Consideration for R/W abalities, sudo, and grouping needed.
 
 ~ currently, there is no limit for how much data can be uploaded to the server. When creating the admin menu, I'll be adding a function to limit file uploads per user based on disk availability. I'll also probably need to add notifications for when disk's are becoming full.
@@ -14,4 +16,7 @@
 
 ~ Create a dockerfile for easier deployment
 
-~ Have "Apt upgrade" stream the input into html, trying this method https://stackoverflow.com/questions/20107147/php-reading-shell-exec-live-output
+~ fix the hotbar of the browser. Currently, it is a bit buggy when scrolling down. Will probably need a seperate div on the table item.
+
+~ Change the admin->update page from an html styled list, to something similar to the browser page, that allows the selection/deselection of which upgrades you do/don't want.
+

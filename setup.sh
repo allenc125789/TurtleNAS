@@ -73,6 +73,15 @@ chmod -R 755 "$vPWD/turtlenas"
 sudo adduser www-data sudo
 echo "www-data ALL=(ALL) !ALL" >> /etc/sudoers
 echo "www-data ALL=(ALL) NOPASSWD: /usr/bin/python3 ../private/python3/pam-auth.py*" >> /etc/sudoers
+echo "www-data ALL=(ALL) NOPASSWD: /usr/bin/bash ../private/bash/validate-group.sh*" >> /etc/sudoers
+echo "www-data ALL=(ALL) NOPASSWD: /bin/apt-get update" >> /etc/sudoers
+echo "www-data ALL=(ALL) NOPASSWD: /bin/apt-get upgrade" >> /etc/sudoers
+echo "www-data ALL=(ALL) NOPASSWD: /bin/apt-get -y upgrade" >> /etc/sudoers
+echo "www-data ALL=(ALL) NOPASSWD: /bin/ip link set * up" >> /etc/sudoers
+echo "www-data ALL=(ALL) NOPASSWD: /bin/ip link set * down" >> /etc/sudoers
+echo "www-data ALL=(ALL) NOPASSWD: /sbin/dhclient*" >> /etc/sudoers
+
+
 sudo adduser sysadmin sudo
 echo "sysadmin ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 sudo usermod -d /var/www/turtlenas/private sysadmin
@@ -93,14 +102,13 @@ fi
     #: Create DB tables.
 mariadb -e "CREATE DATABASE turtlenas;"
 mariadb -e "USE turtlenas; CREATE TABLE drives (user VARCHAR(36), type VARCHAR(6), disk VARCHAR(255), uuid CHAR(36) );"
-mariadb -e "USE turtlenas; CREATE TABLE locks (user VARCHAR(36), state INT(1) );"
 mariadb -e "USE turtlenas; CREATE TABLE files_admin (fullpath NVARCHAR(255) PRIMARY KEY, parent NVARCHAR(255), name NVARCHAR(255),date VARCHAR(224), size VARCHAR(255), mtime CHAR(244) );"
 mariadb -e "USE turtlenas; INSERT INTO drives (user, type, disk, uuid) VALUES('admin', 'LOCAL', '$vFILESYSTEM', '$vUUID');"
+
     #: Create DB Users.
 mariadb -e "CREATE USER 'www-data'@'localhost' IDENTIFIED BY ''"
 mariadb -e "GRANT ALL PRIVILEGES ON turtlenas.drives TO 'www-data'@'localhost' WITH GRANT OPTION"
 mariadb -e "GRANT ALL PRIVILEGES ON turtlenas.files_admin TO 'www-data'@'localhost' WITH GRANT OPTION"
-mariadb -e "GRANT ALL PRIVILEGES ON turtlenas.locks TO 'www-data'@'localhost' WITH GRANT OPTION"
 
 
 #: Web Server Configuration.

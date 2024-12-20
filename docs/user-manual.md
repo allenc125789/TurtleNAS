@@ -1,4 +1,4 @@
-__Errors__
+## __Errors__
 
 > (/var/www/turtlenas/public/browser.php)
 
@@ -8,7 +8,7 @@ __Errors__
 
 `(404) Not Found!` Usually happens if a file can not be found. Check what's trying to be accessed, and check if the file exists, or a link is found. If this happens when downloading a file, refresh the Database(DB) through the browser.
 
-__Upload/Download Limits__
+## __Upload/Download Limits__
 
 *- Hardcaps*
 
@@ -28,9 +28,22 @@ __Upload/Download Limits__
 
 + Contains a read timeout for cgi. Determines time spent running a PHP script before timing out (causes a 504). "fastcgi_read_timeout 43200;"
 
-__Known Bugs__
+## __Known Bugs__
 
-These are bugs already known. Many I have plans to fix already, although some are things I may not to personally resolve, and will be noted. Help especially on these bugs are appreciated!
+> [!NOTE]
+> These are bugs already known. I have plans to fix some, although others are things I may not be able to personally resolve, and will be noted. Help especially on these bugs are appreciated!
+
+> (/var/www/turtlenas/public/browser.php)
+> 
+> Firefox
+
++ Web-Browser sometimes crashes when uploading large files/folders in firefox. Only fix at the momenr is to use google-chrome/chromium. Will be a subject of research later, but help here is appreciated.
+
+> (/var/www/turtlenas/private/php/DBcontrol.php->uploadDir())
+> 
+> Firefox
+
++ Uploading empty folders in firefox uploads a folder with a hashshed string Chromium does not upload anything. Uploading empty folders might be an important feature for users and will be a subject of research later, but help here is appreciated.
 
 > (/var/www/turtlenas/private/PHP/handle-downloads.php)
 

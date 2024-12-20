@@ -2,9 +2,12 @@
 require_once("../private/php/DBcontrol.php");
 $control = new DBcontrol;
 
-$verify = $control->validate_auth();
-if ($verify){
-    $username = $_SESSION['sessuser'];
+//Verfies creds.
+$groups = "www-data";
+$auth = $control->validate_auth();
+$priv = $control->validate_priv($groups);
+
+if($auth && $priv){
     $fObject = $control->signout();
 }
 ?>

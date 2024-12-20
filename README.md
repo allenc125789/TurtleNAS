@@ -1,9 +1,9 @@
 > [!NOTE]
-> **Current Status:** Under Development. The Web-GUI based File Browser of the application is almost complete in terms of functionality. Files can be uploaded, removed, downloaded, etc. to the Debian server from the admin account, or an account made with `create-user.sh`.
+> **Current Status:** Under Development. Doing the admin pages.
 >
-> I'll be constructing the admin page, an automated backup system, cleaning code, and revaluating functionality/methodology as soon as possible. Check the `dev` branch for my current progress!
+> (Working on admin->network->interfaces.php) Setting up the page to be a list similar to the browser page. With the ability to select and deselect which interfaces are up or down. As well as the ability to change the interface's setting's (IP address, netmask, etc.)
 >
-[Update-logs](https://github.com/allenc125789/TurtleNAS/tree/main/docs/update-logs),
+[Update-logs](https://github.com/allenc125789/TurtleNAS/blob/dev/docs/update-logs/Change-Logs.md),
 [Planned Updates](https://github.com/allenc125789/TurtleNAS/blob/main/docs/update-logs/Planned-Updates.md),
 [Work-Flow](https://github.com/allenc125789/TurtleNAS/blob/main/docs/images/project-tracking/TurtleNAS-FlowChart.png)
 
@@ -12,12 +12,17 @@
 
 ![TurtleNAS Preview](https://github.com/allenc125789/TurtleNAS/blob/main/docs/images/screenshots/turtlenas-preview.gif)
 
-An Open-Source NAS program based on Debian. Offers a web-GUI, which includes a file browser and an easily configurable system for accessing local clients to backup and restore files/folders.
+A simple Open-Source NAS program based on Debian. Offers a web-GUI, which includes a file browser and an easily configurable system for accessing local clients to backup and restore files/folders.
+
 
 ### Features
+<details>
+
 >   + [Authentication.](https://github.com/allenc125789/TurtleNAS/blob/main/docs/features/authentication.md)
 >   + [File Browser.](https://github.com/allenc125789/TurtleNAS/blob/main/docs/features/file-browser.md)
 >   + [Compatibility.](https://github.com/allenc125789/TurtleNAS/blob/main/docs/features/compatibility.md)
+
+</details>
 
 # Installation:
 > [!IMPORTANT]
@@ -27,13 +32,20 @@ An Open-Source NAS program based on Debian. Offers a web-GUI, which includes a f
 >
 
 ### Source
++ **Run the following as Root**
+
   1) Install Debian and the `git` package.
-  2) Download the program and run the setup with this command as root: `git clone https://allenc125789:@github.com/allenc125789/TurtleNAS.git && bash ./TurtleNAS/setup.sh`
-  3) Go through the setup steps.
-     + Installation of dependancies (`y` to install and continue).
-     + Create a new password for the admin account **(make it secure and remember it, you'll log in to the browser with this.)**
+     + `apt install git`
+       
+  3) Download the program and run the setup with this command:
+     + `git clone https://allenc125789:@github.com/allenc125789/TurtleNAS.git && bash ./TurtleNAS/setup.sh`
+       
+  4) Read through the setup steps and enter the necessary information when presented.
+     + Installation of dependancies. (`y` to install and continue)
+     + Create a new password for the admin account. **(make it secure and remember it, you'll log in to the browser with this.)**
      + Signing an SSL certificate.
-  4) After the setup finishes with no errors, enter `sudo reboot` and wait for the system to reboot.
+       
+  5) After the setup finishes with no errors, enter `sudo reboot` and wait for the system to reboot.
 
 # Post-Install & Usage:
 
