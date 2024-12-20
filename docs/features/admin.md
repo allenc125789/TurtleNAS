@@ -2,7 +2,7 @@
 
 For the default admin user (created during setup), and other's placed in Debian's admin group, you'll have access to otherwise, restricted sub-sections of pages for controlling the server.
 
-Resources include:
+**Resources include:**
 
 + System Information
 + Connection Information
