@@ -9,7 +9,7 @@ While you may be able to use TurtleNAS with other browsers/OSs, I have only conf
 |--------:|----------:|--------:|--------:|------:|-------|
 | Chrome  |     ☐     |    ☐    |    ☒    |   ☒   |       |
 | Firefox |     ☐     |    ☐    |    ☒    |   ☒   |   Sometimes crashes when uploading large folders. See [User-manual](https://github.com/allenc125789/TurtleNAS/blob/main/docs/user-manual.md)    |
-| Edge    |           |    ☐    |    ☐    |       |       |
-| Safari  |     ☐     |    ☐    |         |       |       |
+| Edge    |           |         |    ☐    |       |       |
+| Safari  |     ☐     |         |         |       |       |
 
 [Return to homepage.](https://github.com/allenc125789/TurtleNAS/blob/main/README.md#overview)
