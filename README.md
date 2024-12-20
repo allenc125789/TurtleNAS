@@ -29,7 +29,7 @@ A simple Open-Source NAS program for Debian. Offers a web-GUI, which includes a 
 > **Recommeneded on fresh install of latest Debian Stable, with no Desktop Environment configured.** While this program may work on other configurations, all development so far has been done on this setup.
 >
 
-## Install (Source)
+## Source
 <details>
 
 + **Run the following as Root**
