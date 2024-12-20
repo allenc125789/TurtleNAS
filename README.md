@@ -16,13 +16,10 @@ A simple Open-Source NAS program based on Debian. Offers a web-GUI, which includ
 
 
 ### Features
-<details>
 
 >   + [Authentication.](https://github.com/allenc125789/TurtleNAS/blob/main/docs/features/authentication.md)
 >   + [File Browser.](https://github.com/allenc125789/TurtleNAS/blob/main/docs/features/file-browser.md)
 >   + [Compatibility.](https://github.com/allenc125789/TurtleNAS/blob/main/docs/features/compatibility.md)
-
-</details>
 
 # Installation:
 > [!IMPORTANT]
@@ -32,6 +29,8 @@ A simple Open-Source NAS program based on Debian. Offers a web-GUI, which includ
 >
 
 ### Source
+<details>
+
 + **Run the following as Root**
 
   1) Install Debian and the `git` package.
@@ -46,6 +45,9 @@ A simple Open-Source NAS program based on Debian. Offers a web-GUI, which includ
      + Signing an SSL certificate.
        
   5) After the setup finishes with no errors, enter `sudo reboot` and wait for the system to reboot.
+
+</details>
+
 
 # Post-Install & Usage:
 
