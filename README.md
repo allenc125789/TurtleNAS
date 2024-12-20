@@ -30,7 +30,7 @@ A simple Open-Source NAS program based on Debian. Offers a web-GUI, which includ
 >
 
 ## Install (Source)
-<details>
+<details~>
 
 + **Run the following as Root**
 
@@ -50,7 +50,7 @@ A simple Open-Source NAS program based on Debian. Offers a web-GUI, which includ
        
   5) After the setup finishes with no errors, enter `sudo reboot` and wait for the system to reboot.
 
-</details>
+</details~>
 
 
 # Post-Install & Usage:
