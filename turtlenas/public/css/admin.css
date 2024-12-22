@@ -61,8 +61,10 @@ form {display: inline;}
 }
 
 #timezone-menu{
-    position: relative;
+    position: absolute;
     width: 20%;
+    display: inline;
+    top: 61%
 }
 
 #console-output{
