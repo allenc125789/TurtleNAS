@@ -60,6 +60,11 @@ form {display: inline;}
     visibility: hidden;
 }
 
+#timezone-menu{
+    position: relative;
+    width: 20%;
+}
+
 #console-output{
     position: absolute;
     left: 2%;
