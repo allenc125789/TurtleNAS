@@ -30,6 +30,8 @@
         <a class="dropdownItem" href="#">Limits</a><br>
       </div>
     </div>
+    <br>
+    <br>
     <text>Server Time: </text>
 </div>
 
