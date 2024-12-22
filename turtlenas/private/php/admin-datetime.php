@@ -18,5 +18,8 @@
         <hr>
         <br>
     </div>
+    <text>Time Zone: </text>
+    <text>Server Time:: </text>
+
 </div>
 </html>
