@@ -19,6 +19,16 @@
         <br>
     </div>
     <text>Time Zone: </text>
+        <!--Dropdown button for network.-->
+  <label for="network-btn" id="signOutTxt" class="dropdownTxt">Network</label>
+  <button id="network-btn" class="dropdown-btn">Network
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
+    <a class="dropdownItem" href="/admin/network/interfaces.php">Interfaces</a><br>
+    <a class="dropdownItem" href="#">Connections</a><br>
+    <a class="dropdownItem" href="#">Limits</a><br>
+    </div>
     <text>Server Time: </text>
 
 </div>
