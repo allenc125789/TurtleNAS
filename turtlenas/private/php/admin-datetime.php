@@ -30,6 +30,7 @@
     <a class="dropdownItem" href="#">Limits</a><br>
     </div>
     <text>Server Time: </text>
-
 </div>
+
+<script src="/js/admin-dropmenu.js"></script>
 </html>
