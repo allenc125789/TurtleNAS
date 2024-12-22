@@ -9,7 +9,6 @@ $auth = $control->validate_auth();
 $priv = $control->validate_priv($groups);
 
 if($auth && $priv){
-    echo("Admin page loaded.");
-}
+    include("../../../private/php/admin-datetime.php");}
 
 ?>
