@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="/css/admin.css">
 </head>
 
-<?php include("../../../private/html/admin-pageSelectMenu.html");?>
 
 <div class='pageContents'>
     <div class='pageTitle'>
@@ -20,17 +19,19 @@
     </div>
     <text>Time Zone: </text>
         <!--Dropdown button for network.-->
-  <label for="network-btn" id="signOutTxt" class="dropdownTxt">Network</label>
-  <button id="network-btn" class="dropdown-btn">Network
-    <i class="fa fa-caret-down"></i>
-  </button>
-  <div class="dropdown-container">
-    <a class="dropdownItem" href="/admin/network/interfaces.php">Interfaces</a><br>
-    <a class="dropdownItem" href="#">Connections</a><br>
-    <a class="dropdownItem" href="#">Limits</a><br>
+    <div id='timezone-menu'>
+      <label for="interface-btn" id="signOutTxt" class="dropdownTxt">Network</label>
+      <button id="interface-btn" class="dropdown-btn">Network
+        <i class="fa fa-caret-down"></i>
+      </button>
+      <div class="dropdown-container">
+        <a class="dropdownItem" href="/admin/network/interfaces.php">Interfaces</a><br>
+        <a class="dropdownItem" href="#">Connections</a><br>
+        <a class="dropdownItem" href="#">Limits</a><br>
+      </div>
     </div>
     <text>Server Time: </text>
 </div>
 
-<script src="/js/admin-dropmenu.js"></script>
+<?php include("../../../private/html/admin-pageSelectMenu.html");?>
 </html>
