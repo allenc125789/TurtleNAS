@@ -17,7 +17,7 @@
         <hr>
         <br>
     </div>
-    <text>Time Zone: </text>
+    <text><b>Time Zone: </b></text>
         <!--Dropdown button for network.-->
     <div id='timezone-menu'>
       <label for="interface-btn" id="signOutTxt" class="dropdownTxt">Network</label>
@@ -32,7 +32,7 @@
     </div>
     <br>
     <br>
-    <text>Server Time: </text>
+    <text><b>Server Time: </b><?php echo(shell_exec('date')); ?></text>
 </div>
 
 <?php include("../../../private/html/admin-pageSelectMenu.html");?>
