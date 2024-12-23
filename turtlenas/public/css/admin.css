@@ -117,7 +117,7 @@ form {display: inline;}
 .dropdownTxt:hover {background-color: white;}
 
 .dropdownItem {
-  width: 95%;
+  width: 98%;
   font-size: 75%;
   border-bottom: 2px solid #7b7b7b;
   display: inline-block;
@@ -127,7 +127,9 @@ form {display: inline;}
   background-color: lightgrey;
   color: black;
   text-decoration: none;
-  font-weight:bold;
+  font-weight: bold;
+  position: relative;
+  left: -3%;
 }
 .dropdownItem:hover {background-color: #e8e8e8;}
 
