@@ -120,6 +120,8 @@ form {display: inline;}
   width: 98%;
   font-size: 75%;
   border-bottom: 2px solid #7b7b7b;
+  border-left: 2px solid #7b7b7b;
+  border-right: 2px solid #7b7b7b;
   display: inline-block;
   padding: 2%;
   cursor: pointer;
