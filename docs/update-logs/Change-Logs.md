@@ -1,6 +1,6 @@
 ## 12.24.2024
 +Added pages to the admin menu:
-  + Update
+  + Updates
   + Interfaces
 
 ## 12.08.2024
