@@ -1,7 +1,7 @@
 ## 12.24.2024
 +Added pages to the admin menu:
   + Update
-  + Inerfaces
+  + Interfaces
 
 ## 12.08.2024
 +Added/fixed feature, group authorization: Pages and features will be locked depending on the group they belong to. eg; the average linux user will not be able to be accessed by TurtleNAS, unless it's within the www-data user group. Admin pages will not be available unless the user acessing it belongs to the admin group.
