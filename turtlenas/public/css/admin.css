@@ -63,9 +63,9 @@ form {display: inline;}
 }
 
 #timezone-menu{
-    position: absolute;
-    width: 20%;
-    display: inline;
+  position: absolute;
+  width: 20%;
+  display: inline;
 }
 
 
@@ -156,6 +156,12 @@ form {display: inline;}
   background-color: grey;
 }
 .active:hover {background-color: #959595;}
+
+#container{
+  height: 200px;
+  overflow-y: scroll;
+  position: absolute;
+}
 
 /* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
 .dropdown-container {
