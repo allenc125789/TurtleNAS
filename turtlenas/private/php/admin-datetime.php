@@ -7,7 +7,9 @@ function execPrintTimezones(){
     return $timezones;
 }
 
+
 $displayTimezones = execPrintTimezones();
+$currentTimezone = shell_exec("timedatectl | awk '/Time zone: / {print $3}'");
 
 ?>
 
@@ -29,8 +31,8 @@ $displayTimezones = execPrintTimezones();
         <text><b>Time Zone: </b></text>
         <!--Dropdown button for timezones.-->
         <div id='timezone-menu'>
-            <label for="interface-btn" id="timeout-current" class="dropdownTxt"><?php echo(shell_exec("timedatectl | awk '/Time zone: / {print $3}'")); ?></label>
-            <button id="interface-btn" class="dropdown-btn">
+            <label for="tz-btn" id="tz-btn-label" class="dropdownTxt"><?php echo($currentTimezone); ?></label>
+            <button id="tz-btn" class="dropdown-btn">
             <i class="fa fa-caret-down"></i>
             </button>
             <div id="container" class="dropdown-container">
@@ -44,40 +46,21 @@ $displayTimezones = execPrintTimezones();
 <?php include("../../../private/html/admin-pageSelectMenu.html");?>
 
 <script type='text/javascript'>
-//Refreshes the file-table and organizes files for display when called.
+//Refreshes the timezones and organizes for display when called.
 function displayTimezones(){
     var container = document.getElementById("container");
-    //If files are found, start processing them into the table.
-    //Establishes table content variables.
     for (i in jArray){
-        container.insertAdjacentHTML('beforeEnd', "<button class='dropdownItem'> "+jArray[i]+".</button>");
-/*
-        if (jArray[i]['name'] == 'lo'){
-            checkboxes.setAttribute("disabled", "disabled");
-            checkboxes.setAttribute("checked", "true");
-        }
-        if (jArray[i]['status'] == 'UP'){
-            checkboxes.setAttribute("checked", "true");
-        }
-        //Sets cell 0 as a checkbox.
-        cell0.appendChild(checkboxes);
-        cell0.setAttribute("class", "checks");
-        //Sets cell content.
-        cell0.insertAdjacentHTML('beforeEnd', "<text> "+jArray[i]['number']+".</text>");
-        cell1.insertAdjacentHTML('beforeEnd', "<text>"+jArray[i]['name']+"</text>");
-        cell2.insertAdjacentHTML('beforeEnd', "<text>"+jArray[i]['status']+"</text>");
-        cell3.insertAdjacentHTML('beforeEnd', "<text>"+jArray[i]['ip']+"</text>");
-        //Sets netmask cell.
-        if (jArray[i]['netmask'] == "EMPTY"){
-            cell4.insertAdjacentHTML('beforeEnd', "<text>"+jArray[i]['netmask']+"</text>");
-        }else {
-            cell4.insertAdjacentHTML('beforeEnd', "<text>/"+jArray[i]['netmask']+"</text>");
-        }
-        cell5.insertAdjacentHTML('beforeEnd', "<text>"+jArray[i]['gateway']+"</text>");
-*/    }
+        container.insertAdjacentHTML('beforeEnd', "<button class='dropdownItem' value="+jArray[i]+" onclick='selectTZ(this)'>"+jArray[i]+"</button>");
+    }
 }
 
 
+function selectTZ(tz){
+    var newTZ = tz.value;
+    var currentTZ = document.getElementById('tz-btn-label');
+    currentTZ.innerHTML = "";
+    currentTZ.innerHTML = newTZ;
+}
 
 let jArray = <?php echo json_encode($displayTimezones); ?>;
 displayTimezones();
