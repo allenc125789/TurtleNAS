@@ -42,6 +42,8 @@ form {display: inline;}
   position: absolute;
   left: 21%;
   right: 0%;
+  bottom: 50%;
+  top: 0%;
 }
 
 #console{
@@ -64,8 +66,8 @@ form {display: inline;}
     position: absolute;
     width: 20%;
     display: inline;
-    top: 62%
 }
+
 
 #console-output{
     position: absolute;
