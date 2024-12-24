@@ -29,6 +29,11 @@ form {display: inline;}
   opacity: 0.30;
 }
 
+#saveMenu{
+    width: 30%;
+    height: 30%;
+}
+
 #loadingTxt{
   position: fixed;
   right: 35%;
