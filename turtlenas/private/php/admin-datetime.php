@@ -28,6 +28,12 @@ $currentTimezone = shell_exec("timedatectl | awk '/Time zone: / {print $3}'");
         <hr>
         <br>
     </div>
+        <div id="saveMenu">
+            <!--Button to save the new timezone.-->
+            <label for="save-btn" id="save-label" class="buttonTxt">Save</label>
+            <input class="buttons" id="save-btn" onclick="#">
+        </div>
+
         <text><b>Time Zone: </b></text>
         <!--Dropdown button for timezones.-->
         <div id='timezone-menu'>
@@ -58,7 +64,6 @@ function displayTimezones(){
 function selectTZ(tz){
     var newTZ = tz.value;
     var currentTZ = document.getElementById('tz-btn-label');
-    currentTZ.innerHTML = "";
     currentTZ.innerHTML = newTZ;
 }
 
