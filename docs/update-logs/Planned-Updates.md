@@ -1,3 +1,5 @@
+~ Research software raid methods (probably just mdadm), and think of if implementing it would be feasible for this project...
+
 ~ Need to create the base page layout for the admin pages.
 
 ~ need to create js based timeout function.
