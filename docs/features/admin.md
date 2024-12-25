@@ -10,7 +10,7 @@ For the default admin user (created during setup), and other's placed in Debian'
 + Backup Options
 + and more...
 
-# Accessing the Admin Menu
+# Accessing the Admin Menu:
 
 ![Button for admin menu](https://github.com/allenc125789/TurtleNAS/blob/main/docs/images/screenshots/admin-button.png)
 
