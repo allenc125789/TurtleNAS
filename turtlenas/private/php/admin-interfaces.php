@@ -248,6 +248,8 @@ async function requestInterfaceRefresh(){
         xhttp.open("POST", "/admin/network/requestInterfaceRefresh.php", true);
         xhttp.send();
     }
+    windowBlockOFF();
+
 }
 
 function windowBlockOFF(){
