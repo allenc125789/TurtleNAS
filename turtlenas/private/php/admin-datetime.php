@@ -64,7 +64,9 @@ function displayTimezones(){
 function selectTZ(tz){
     var newTZ = tz.value;
     var currentTZ = document.getElementById('tz-btn-label');
+    var saveTZ = document.getElementById(save-btn);
     currentTZ.innerHTML = newTZ;
+    saveTZ.value = newTZ;
     enableButton();
 }
 
