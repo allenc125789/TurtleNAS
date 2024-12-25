@@ -33,6 +33,7 @@ $currentTimezone = shell_exec("timedatectl | awk '/Time zone: / {print $3}'");
             <label for="save-btn" id="save-label" class="buttonTxt">Save</label>
             <input class="buttons" id="save-btn" onclick="#">
         </div>
+        <br>
 
         <text><b>Time Zone: </b></text>
         <!--Dropdown button for timezones.-->
@@ -64,13 +65,20 @@ function displayTimezones(){
 function selectTZ(tz){
     var newTZ = tz.value;
     var currentTZ = document.getElementById('tz-btn-label');
-    var saveTZ = document.getElementById(save-btn);
+    var saveTZ = document.getElementById("save-btn");
     currentTZ.innerHTML = newTZ;
-    saveTZ.value = newTZ;
+    saveTZ.setAttribute("value", newTZ);
     enableButton();
+    window.addEventListener('beforeunload', (event) => {
+        event.preventDefault();
+        // Chrome requires returnValue to be set.
+        event.returnValue = '';
+    });
 }
 
-//Disables buttons by ID, or "ALL" for all buttons.
+
+
+//Disables buttons.
 function disableButton(){
     document.getElementById("save-btn").disabled = true;
     document.getElementById("save-label").style.background = "darkgrey";
