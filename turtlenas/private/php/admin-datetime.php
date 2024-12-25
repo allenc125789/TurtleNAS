@@ -65,10 +65,25 @@ function selectTZ(tz){
     var newTZ = tz.value;
     var currentTZ = document.getElementById('tz-btn-label');
     currentTZ.innerHTML = newTZ;
+    enableButton();
 }
+
+//Disables buttons by ID, or "ALL" for all buttons.
+function disableButton(){
+    document.getElementById("save-btn").disabled = true;
+    document.getElementById("save-label").style.background = "darkgrey";
+    document.getElementById("save-label").style.cursor = "default";
+}
+
+function enableButton(){
+    document.getElementById("save-btn").disabled = false;
+    document.getElementById("save-label").style.background = "";
+    document.getElementById("save-label").style.cursor = "";
+}
+
 
 let jArray = <?php echo json_encode($displayTimezones); ?>;
 displayTimezones();
-
+disableButton();
 </script>
 </html>
