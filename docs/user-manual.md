@@ -20,7 +20,7 @@
 
 > (/etc/php/8.2/fpm/php.ini) 
 
-+ Contains a hardcap filesize limit for what can be uploaded to the server. "max_file_uploads;", "upload_max_filesize;", "post_max_size;", "max_file_uploads;"
++ Contains a hardcap filesize limit for what can be uploaded to the server. "max_file_uploads;", "upload_max_filesize;", "post_max_size;"
 
 + After this number of seconds, stored php sessions will be seen as 'garbage' and cleaned up by the garbage collection process. Will stop a download mid upload if set too short. "session.gc_maxlifetime = 43200;"
 
