@@ -1,5 +1,3 @@
-~ Research software raid methods (probably just mdadm), and think of if implementing it would be feasible for this project...
-
 ~ need to create js based timeout function.
 
 ~ lots of unused code needs to be trimmed. might need to reuse the hashing system to provide a more unique hash when downloading a compressed folder.
@@ -13,6 +11,8 @@
 ~ notifications for `login.html`. Currently it does not tell you if you got a password wrong, or if something else is happpening to the server.
 
 ~ Need to create an IP based-blacklist logging and banning system. Probably by a bash or php based function logging into mariadb
+
+~ Research software raid methods (probably just mdadm), and think of if implementing it would be feasible for this project... (after some research, it seems to need input beyond what a webgui is capable of, or at the very least would require a lot of time on it's own to work out a functional script)
 
 ~ Create a dockerfile for easier deployment
 
