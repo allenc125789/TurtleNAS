@@ -1,6 +1,6 @@
-# Client Compatibility
+# Browser Compatibility
 
-Working status for tested browsers and OS's that can use TurtleNAS's webpage, post setup.
+Working status for tested browsers and OS's that can use TurtleNAS's server webpages, post-setup.
 
 While you may be able to use TurtleNAS with other browsers/OSs, I have only confirmed compatibility with the following software.
 
