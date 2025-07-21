@@ -15,7 +15,7 @@ vUUID=$(/usr/sbin/blkid -s UUID -o value "$vFILESYSTEM")
 
 #: Dependancies.
 aDEPENDS=("gpg" "zip" "sudo" "rsync" "sshfs" "git" "nginx" "libnginx-mod-http-js" "libjs-jquery"\
-    "python3-pam" "ufw" "default-mysql-server" "php8.2" "php8.2-fpm" "php8.2-mysql" "rsyslog")
+    "python3-pam" "ufw" "default-mysql-server" "php8.2" "php8.2-fpm" "php8.2-mysql" "rsyslog" "python3.11-venv")
     #: Dependancy Check
 apt-get install ${aDEPENDS[*]}
 if [[ $? > 0 ]]; then
