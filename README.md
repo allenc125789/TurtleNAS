@@ -1,7 +1,5 @@
 > [!NOTE]
-> **Current Status:** Under Development. Doing the admin pages.
->
-> See the current progress on the dev branch [here](https://github.com/allenc125789/TurtleNAS/tree/dev).
+> **Current Status:** Archived. This was a big learning project that introduced me to many aspects of web development, however i've had to move on to other projects.
 >
 [Update-logs](https://github.com/allenc125789/TurtleNAS/blob/dev/docs/update-logs/Change-Logs.md),
 [Planned Updates](https://github.com/allenc125789/TurtleNAS/blob/main/docs/update-logs/Planned-Updates.md),
